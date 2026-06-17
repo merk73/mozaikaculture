@@ -1,0 +1,15 @@
+{
+  "name": "mozaika-kultur",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Образовательный статический сайт о коренных народах Хабаровского края.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node server.mjs",
+    "preview": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

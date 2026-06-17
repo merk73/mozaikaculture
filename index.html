@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мозаика культур</title>
+    <meta
+      name="description"
+      content="Образовательный атлас Мозаика культур о коренных народах Хабаровского края."
+    />
+    <link rel="stylesheet" href="styles.css?v=20260618-github-prep-1" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Мозаика культур">
+        <img src="assets/logo-mozaika.svg" alt="Мозаика культур" />
+      </a>
+      <nav class="main-nav" aria-label="Навигация">
+        <a href="#atlas">Атлас</a>
+        <a href="#learn">Изучение</a>
+        <a href="#events">Мероприятия</a>
+        <a href="#feedback">Связь</a>
+        <a href="#sources">Источники</a>
+      </nav>
+      <button class="nav-cta" type="button" data-auth-open hidden>Войти</button>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-art" aria-hidden="true">
+          <img src="assets/hero-people.png" alt="" />
+        </div>
+        <div class="hero-copy">
+          <p class="overline">образовательный атлас · хабаровский край</p>
+          <h1 id="hero-title">Мозаика культур</h1>
+          <p>
+            Современный сайт о коренных народах Дальнего Востока: коротко,
+            бережно и визуально чисто. После мероприятий здесь можно изучить
+            культуру, язык, территории и живые традиции народов края.
+          </p>
+          <div class="hero-links">
+            <a class="button button-primary" href="#atlas">Смотреть атлас</a>
+            <a class="button button-ghost" href="quiz.html">Пройти квиз</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="statement">
+        <div class="statement-inner statement-grid">
+          <div class="statement-copy">
+            <p class="overline">миссия</p>
+            <h2>Сохранять культуру живой.</h2>
+            <p>
+              Проект соединяет встречи, образовательные материалы и цифровой
+              архив, чтобы молодежь могла изучать наследие коренных народов
+              Хабаровского края ясно, уважительно и современно.
+            </p>
+          </div>
+          <div class="statement-visual" aria-hidden="true">
+            <img src="assets/red-symbol.png" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section class="atlas" id="atlas" aria-labelledby="atlas-title">
+        <div class="section-shell">
+          <div class="section-head">
+            <p class="overline">атлас</p>
+            <h2 id="atlas-title">Народы Хабаровского края</h2>
+            <p>
+              Каталог знакомит с народами края через территорию, язык,
+              традиции и современную культурную жизнь. Каждая карточка ведет
+              на отдельную страницу с подробным материалом.
+            </p>
+          </div>
+
+          <div class="atlas-tools" role="tablist" aria-label="Фильтр по среде">
+            <button class="filter-button is-active" type="button" data-filter="all">Все</button>
+            <button class="filter-button" type="button" data-filter="amur">Амур</button>
+            <button class="filter-button" type="button" data-filter="taiga">Тайга</button>
+            <button class="filter-button" type="button" data-filter="coast">Море</button>
+            <button class="filter-button" type="button" data-filter="north">Север</button>
+          </div>
+
+          <div class="people-grid" data-people-grid></div>
+        </div>
+      </section>
+
+      <section class="learn" id="learn" aria-labelledby="learn-title">
+        <div class="section-shell learn-grid">
+          <div class="learn-aside">
+            <p class="overline">изучение</p>
+            <h2 id="learn-title">Выбери народ и собери первое представление.</h2>
+            <p>
+              Формат рассчитан на молодежь: быстро выбрать тему, увидеть
+              ключевые факты и проверить себя. Материалы помогают продолжить
+              знакомство после лекций, встреч и мастер-классов.
+            </p>
+            <div class="people-tabs" data-people-tabs aria-label="Выбор народа"></div>
+          </div>
+
+          <article class="knowledge-panel" data-knowledge-panel>
+            <div class="panel-meta">
+              <span data-panel-region>Амур и его притоки</span>
+              <span data-panel-type>язык · традиции · современность</span>
+            </div>
+            <h3 data-panel-title>Нанайцы</h3>
+            <p data-panel-text></p>
+            <div class="fact-list" data-panel-facts></div>
+            <div class="quiz-block">
+              <p class="quiz-question" data-quiz-question></p>
+              <div class="quiz-options" data-quiz-options></div>
+              <p class="quiz-result" data-quiz-result></p>
+            </div>
+          </article>
+        </div>
+        <div class="section-shell quiz-cta-shell">
+          <a class="online-quiz-cta" href="quiz.html">
+            <span>Пройти онлайн квиз</span>
+            <strong>15 сложных вопросов по всем народам атласа</strong>
+          </a>
+        </div>
+      </section>
+
+      <section class="events" id="events" aria-labelledby="events-title">
+        <div class="section-shell">
+          <div class="section-head compact">
+            <p class="overline">мероприятия</p>
+            <h2 id="events-title">Мозаика культур в формате живой встречи.</h2>
+          </div>
+          <div class="event-feature">
+            <div class="event-story">
+              <p class="event-date">29 апреля</p>
+              <h3>Мозаика культур</h3>
+              <p>
+                Участники знакомились с культурой коренных народов через
+                лекцию, мастер-класс, командные задания и квиз. Такой формат
+                помогает не только услышать факты, но и обсудить их в группе.
+              </p>
+              <div class="event-program" aria-label="Программа мероприятия">
+                <article>
+                  <span>01</span>
+                  <strong>Лекция</strong>
+                  <p>Разговор о народах Дальнего Востока, территориях, языках и культурной памяти.</p>
+                </article>
+                <article>
+                  <span>02</span>
+                  <strong>Бубен</strong>
+                  <p>Практическое знакомство со звучанием традиции и ритмом совместной работы.</p>
+                </article>
+                <article>
+                  <span>03</span>
+                  <strong>Танец</strong>
+                  <p>Изучение движений как телесного языка культуры и способа запоминания.</p>
+                </article>
+                <article>
+                  <span>04</span>
+                  <strong>Квиз</strong>
+                  <p>Командная игра по фактам, символам и культурным особенностям народов края.</p>
+                </article>
+              </div>
+            </div>
+            <div class="event-gallery" aria-label="Фотографии мероприятия Мозаика культур">
+              <figure class="event-photo event-photo-main">
+                <img src="assets/events/mozaika-screen.png" alt="Экран с презентацией мероприятия Мозаика культур" />
+                <figcaption>Старт лекции</figcaption>
+              </figure>
+              <figure class="event-photo">
+                <img src="assets/events/mozaika-quiz-live.jpg" alt="Участники работают над заданием квиза" />
+                <figcaption>Квиз-игра</figcaption>
+              </figure>
+              <figure class="event-photo">
+                <img src="assets/events/mozaika-exhibit.png" alt="Предметы культуры на выставочном столе" />
+                <figcaption>Предметная культура</figcaption>
+              </figure>
+              <figure class="event-photo">
+                <img src="assets/events/mozaika-team.png" alt="Участники мероприятия с баннером" />
+                <figcaption>Команда события</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="feedback" id="feedback" aria-labelledby="feedback-title">
+        <div class="section-shell feedback-grid">
+          <div>
+            <p class="overline">обратная связь</p>
+            <h2 id="feedback-title">Связаться с проектом</h2>
+            <p>
+              Вопросы по материалам, предложения для атласа и заявки на
+              сотрудничество можно отправить через форму. После публикации
+              сообщения будут приходить в Netlify Forms.
+            </p>
+          </div>
+          <form
+            class="feedback-form"
+            name="feedback"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            data-feedback-form
+          >
+            <input type="hidden" name="form-name" value="feedback" />
+            <input type="hidden" name="page" value="Главная страница" />
+            <p class="visually-hidden">
+              <label>Не заполняйте это поле <input name="bot-field" /></label>
+            </p>
+            <label>
+              Имя
+              <input type="text" name="name" placeholder="Как к вам обращаться" required />
+            </label>
+            <label>
+              Почта
+              <input type="email" name="email" placeholder="name@example.ru" required />
+            </label>
+            <label>
+              Сообщение
+              <textarea name="message" rows="5" placeholder="Напишите вопрос или предложение" required></textarea>
+            </label>
+            <button type="submit">Отправить</button>
+            <p class="feedback-message" data-feedback-message></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="sources" id="sources" aria-labelledby="sources-title">
+        <div class="section-shell sources-layout">
+          <div class="sources-heading">
+            <p class="overline">источники</p>
+            <h2 id="sources-title">Материалы сайта опираются на открытые справочные и нормативные источники.</h2>
+            <p>
+              Раздел помогает быстро перейти к документам, языковым справкам и
+              обзорным материалам, на которых основаны страницы народов.
+            </p>
+          </div>
+          <div class="sources-list" aria-label="Список источников">
+            <a href="https://www.consultant.ru/document/cons_doc_LAW_26565/" target="_blank" rel="noreferrer">
+              <span>Нормативная база</span>
+              <strong>Единый перечень коренных малочисленных народов Российской Федерации</strong>
+            </a>
+            <a href="https://culture27.ru/" target="_blank" rel="noreferrer">
+              <span>Региональный контекст</span>
+              <strong>Культурная карта Хабаровского края</strong>
+            </a>
+            <a href="https://ru.wikipedia.org/wiki/Малые_народы_Приамурья" target="_blank" rel="noreferrer">
+              <span>Историко-культурный обзор</span>
+              <strong>Малые народы Приамурья</strong>
+            </a>
+            <a href="https://ru.wikipedia.org/wiki/Коренные_малочисленные_народы_Севера,_Сибири_и_Дальнего_Востока_Российской_Федерации" target="_blank" rel="noreferrer">
+              <span>Справочный раздел</span>
+              <strong>Коренные малочисленные народы Севера, Сибири и Дальнего Востока</strong>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img src="assets/logo-mozaika.svg" alt="Мозаика культур" />
+        <p>
+          Образовательный атлас о наследии, языках и живых традициях коренных
+          народов Хабаровского края.
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="Навигация в подвале">
+        <a href="#atlas">Атлас</a>
+        <a href="#learn">Изучение</a>
+        <a href="#events">Мероприятия</a>
+        <a href="#feedback">Связь</a>
+        <a href="#sources">Источники</a>
+      </nav>
+      <p class="footer-copy">© 2026 Мозаика культур</p>
+    </footer>
+
+    <div class="auth-modal" data-auth-modal aria-hidden="true">
+      <div class="auth-backdrop" data-auth-close></div>
+      <section class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <button class="auth-close" type="button" data-auth-close aria-label="Закрыть">×</button>
+        <p class="overline">личный кабинет</p>
+        <h2 id="auth-title">Вход в Мозаику</h2>
+        <p class="auth-note">
+          Войдите по почте через Supabase Auth, чтобы сохранять материалы,
+          возвращаться к изучению и получать обновления проекта.
+        </p>
+
+        <div class="auth-switch" role="tablist" aria-label="Режим входа">
+          <button class="is-active" type="button" data-auth-mode="register">Регистрация</button>
+          <button type="button" data-auth-mode="login">Вход</button>
+        </div>
+
+        <form class="auth-form" data-auth-form>
+          <label>
+            Почта
+            <input type="email" name="email" autocomplete="email" placeholder="student@example.ru" required />
+          </label>
+          <label>
+            Пароль
+            <input type="password" name="password" autocomplete="current-password" minlength="6" placeholder="минимум 6 символов" required />
+          </label>
+          <button class="auth-submit" type="submit">Создать аккаунт</button>
+          <p class="auth-message" data-auth-message></p>
+        </form>
+
+        <p class="auth-hint">
+          Используйте действующую почту: к ней будут привязаны материалы и
+          будущие уведомления проекта.
+        </p>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="content.js"></script>
+    <script src="script.js?v=20260618-github-prep-1"></script>
+  </body>
+</html>

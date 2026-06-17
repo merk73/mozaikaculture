@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Онлайн квиз · Мозаика культур</title>
+    <meta
+      name="description"
+      content="Онлайн квиз Мозаика культур по коренным народам Хабаровского края."
+    />
+    <link rel="stylesheet" href="styles.css?v=20260618-github-prep-1" />
+  </head>
+  <body class="quiz-page">
+    <header class="site-header">
+      <a class="brand" href="index.html#top" aria-label="Мозаика культур">
+        <img src="assets/logo-mozaika.svg" alt="Мозаика культур" />
+      </a>
+      <nav class="main-nav" aria-label="Навигация">
+        <a href="index.html#atlas">Атлас</a>
+        <a href="index.html#learn">Изучение</a>
+        <a href="index.html#events">Мероприятия</a>
+        <a href="index.html#sources">Источники</a>
+      </nav>
+      <a class="nav-cta" href="index.html#learn">Назад</a>
+    </header>
+
+    <main class="online-quiz" data-online-quiz>
+      <section class="online-quiz-hero" aria-labelledby="quiz-title">
+        <div>
+          <p class="overline">онлайн квиз</p>
+          <h1 id="quiz-title">Проверь, насколько точно ты собрал мозаику.</h1>
+        </div>
+        <p>
+          15 вопросов по территориям, языкам, промыслам и культурным связям
+          народов атласа.
+        </p>
+      </section>
+
+      <section class="quiz-surface" aria-live="polite">
+        <div class="quiz-progress">
+          <span data-quiz-step>Вопрос 1 из 15</span>
+          <strong data-quiz-score>0 выбрано</strong>
+        </div>
+        <div class="quiz-progress-bar" aria-hidden="true">
+          <span data-quiz-progress></span>
+        </div>
+
+        <article class="quiz-question-card">
+          <p class="quiz-kicker" data-quiz-kicker></p>
+          <h2 data-quiz-question></h2>
+          <div class="quiz-answer-grid" data-quiz-options></div>
+        </article>
+
+        <div class="quiz-actions">
+          <button class="quiz-secondary" type="button" data-quiz-prev>Назад</button>
+          <button class="quiz-primary" type="button" data-quiz-next>Дальше</button>
+        </div>
+      </section>
+
+      <section class="quiz-results" data-quiz-results hidden>
+        <div class="quiz-result-head">
+          <p class="overline">результат</p>
+          <h2 data-result-title></h2>
+          <p data-result-summary></p>
+        </div>
+        <div class="quiz-review" data-result-list></div>
+        <div class="quiz-actions">
+          <button class="quiz-secondary" type="button" data-quiz-restart>Пройти заново</button>
+          <a class="quiz-primary quiz-link" href="index.html#atlas">Вернуться к атласу</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="quiz.js?v=20260617-audit-smooth-1"></script>
+  </body>
+</html>
