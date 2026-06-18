@@ -486,16 +486,12 @@ if (feedbackForm) {
     feedbackMessage.dataset.type = "info";
 
     try {
-      const feedbackTarget = await submitFeedback(payload);
+      await submitFeedback(payload);
       feedbackForm.reset();
-      const successMessages = {
-        netlify: "Сообщение отправлено. Оно появится в Netlify Forms.",
-        supabase: "Сообщение отправлено. Оно сохранено в Supabase.",
-      };
-      feedbackMessage.textContent = successMessages[feedbackTarget] || "Сообщение отправлено.";
+      feedbackMessage.textContent = "Сообщение отправлено. Спасибо за обращение.";
       feedbackMessage.dataset.type = "success";
     } catch (error) {
-      feedbackMessage.textContent = error.message || "Сообщение не отправилось. Проверьте настройки Supabase.";
+      feedbackMessage.textContent = error.message || "Сообщение не отправилось. Попробуйте позже.";
       feedbackMessage.dataset.type = "error";
     }
   });
