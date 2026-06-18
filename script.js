@@ -288,6 +288,7 @@ const supabaseClient =
 let authMode = "register";
 let currentUserEmail = "";
 let currentUserId = null;
+let authRequestPending = false;
 const netlifyFormEndpoint = "/";
 
 async function requestAuth(mode, email, password) {
@@ -316,6 +317,24 @@ function setAuthMessage(text, type = "info") {
   if (!authMessage) return;
   authMessage.textContent = text;
   authMessage.dataset.type = type;
+}
+
+function getFriendlyAuthError(error) {
+  const message = String(error?.message || "").toLowerCase();
+
+  if (message.includes("rate limit") || message.includes("too many") || message.includes("email")) {
+    return "Слишком много попыток регистрации. Подождите немного и попробуйте снова.";
+  }
+
+  if (message.includes("invalid login") || message.includes("invalid credentials")) {
+    return "Неверная почта или пароль.";
+  }
+
+  if (message.includes("failed to fetch") || message.includes("network")) {
+    return "Не удалось подключиться к серверу регистрации. Проверьте интернет или попробуйте позже.";
+  }
+
+  return error?.message || "Не удалось выполнить вход.";
 }
 
 function openAuth() {
@@ -434,6 +453,8 @@ authModeButtons.forEach((button) => {
 if (authForm) {
   authForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (authRequestPending) return;
+
     const formData = new FormData(authForm);
     const email = String(formData.get("email")).trim().toLowerCase();
     const password = String(formData.get("password"));
@@ -449,6 +470,12 @@ if (authForm) {
     }
 
     try {
+      authRequestPending = true;
+      if (authSubmit) {
+        authSubmit.disabled = true;
+        authSubmit.textContent = authMode === "register" ? "Создаю аккаунт..." : "Вхожу...";
+      }
+
       const result = await requestAuth(authMode, email, password);
 
       if (authMode === "register" && !result.session) {
@@ -465,7 +492,13 @@ if (authForm) {
       setAuthMessage(authMode === "register" ? "Аккаунт создан. Вход выполнен." : "Готово. Вы вошли в личный кабинет.", "success");
       setTimeout(closeAuth, 700);
     } catch (error) {
-      setAuthMessage(error.message || "Не удалось выполнить вход.", "error");
+      setAuthMessage(getFriendlyAuthError(error), "error");
+    } finally {
+      authRequestPending = false;
+      if (authSubmit) {
+        authSubmit.disabled = false;
+        authSubmit.textContent = authMode === "register" ? "Создать аккаунт" : "Войти";
+      }
     }
   });
 }
