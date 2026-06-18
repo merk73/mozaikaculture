@@ -90,7 +90,7 @@ function initRevealAnimation() {
         }
       });
     },
-    { rootMargin: "0px 0px -12% 0px", threshold: 0.18 },
+    { rootMargin: "0px 0px 38% 0px", threshold: 0.02 },
   );
 
   items.forEach((item) => observer.observe(item));

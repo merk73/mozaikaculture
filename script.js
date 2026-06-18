@@ -23,14 +23,21 @@ function addMotionTargets(root = document) {
     ".statement-visual",
     ".section-head",
     ".atlas-tools",
+    ".people-grid",
+    ".learn-grid",
     ".learn-aside",
     ".knowledge-panel",
+    ".quiz-cta-shell",
     ".online-quiz-cta",
+    ".event-feature",
     ".event-story",
+    ".event-gallery",
     ".event-program article",
     ".event-photo",
+    ".feedback-grid",
     ".feedback-grid > div",
     ".feedback-form",
+    ".sources-layout",
     ".sources-heading",
     ".sources-list a",
     ".site-footer",
@@ -41,7 +48,7 @@ function addMotionTargets(root = document) {
   root.querySelectorAll(targets.join(",")).forEach((node, index) => {
     node.classList.add("motion-reveal");
     if (!node.style.getPropertyValue("--motion-delay")) {
-      node.style.setProperty("--motion-delay", `${Math.min(index * 28, 220)}ms`);
+      node.style.setProperty("--motion-delay", `${Math.min(index * 18, 140)}ms`);
     }
   });
 }
@@ -119,7 +126,7 @@ function initMotion() {
           }
         });
       },
-      { rootMargin: "0px 0px 30% 0px", threshold: 0.02 },
+      { rootMargin: "0px 0px 42% 0px", threshold: 0.01 },
     );
   }
 
@@ -135,7 +142,7 @@ function renderCards(filter = "all") {
   grid.innerHTML = visible
     .map(
       (person, index) => `
-        <a class="people-card motion-reveal tilt-card" href="peoples/${person.slug}.html" style="--motion-delay: ${index * 34}ms">
+        <a class="people-card motion-reveal tilt-card" href="peoples/${person.slug}.html" style="--motion-delay: ${Math.min(index * 24, 168)}ms">
           <div class="card-meta">
             <span>${person.areaLabel}</span>
             <span>${person.region}</span>

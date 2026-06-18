@@ -138,14 +138,14 @@ button {
 }
 
 .motion-ready .site-header {
-  animation: header-arrive 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: header-arrive 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .motion-ready .hero-copy .overline,
 .motion-ready .hero h1,
 .motion-ready .hero-copy p:not(.overline),
 .motion-ready .hero-links {
-  animation: hero-copy-arrive 820ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-copy-arrive 640ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .motion-ready .hero h1 {
@@ -162,12 +162,12 @@ button {
 
 .motion-ready .motion-reveal {
   opacity: 0;
-  filter: blur(6px);
-  transform: translate3d(0, 18px, 0) scale(0.996);
+  filter: blur(4px);
+  transform: translate3d(0, 14px, 0) scale(0.998);
   transition:
-    opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 720ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--motion-delay, 0ms);
   will-change: opacity, filter, transform;
 }
@@ -316,7 +316,7 @@ button {
 }
 
 .motion-ready .hero-art {
-  animation: hero-art-arrive 1050ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-art-arrive 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-art img {
@@ -1132,10 +1132,11 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   filter: saturate(0.96) contrast(1.04);
   transition:
-    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 500ms ease;
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 360ms ease;
 }
 
 .event-photo:hover img {
@@ -1783,12 +1784,12 @@ button {
 
 .reveal-on-scroll {
   opacity: 0;
-  filter: blur(12px);
-  transform: translateY(34px) scale(0.985);
+  filter: blur(5px);
+  transform: translateY(18px) scale(0.996);
   transition:
-    opacity 820ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 820ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 820ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-on-scroll.is-visible {
@@ -2433,9 +2434,11 @@ button {
   }
 
   .hero-art {
-    right: -28vw;
-    width: 118vw;
-    opacity: 0.56;
+    right: -34vw;
+    bottom: -5vw;
+    width: 132vw;
+    max-width: none;
+    opacity: 0.58;
   }
 
   .hero-copy {
@@ -2571,11 +2574,22 @@ button {
 
   .hero {
     min-height: 100svh;
-    padding-top: 150px;
+    padding-top: 138px;
+    padding-bottom: 42px;
+    align-items: end;
+  }
+
+  .hero::before {
+    background:
+      linear-gradient(180deg, rgba(3, 3, 3, 0.68) 0%, rgba(3, 3, 3, 0.24) 36%, rgba(3, 3, 3, 0.8) 78%, var(--black) 100%),
+      linear-gradient(90deg, rgba(3, 3, 3, 0.98) 0%, rgba(3, 3, 3, 0.74) 46%, rgba(3, 3, 3, 0.18) 100%);
   }
 
   .hero-copy {
-    padding-bottom: 86px;
+    position: relative;
+    z-index: 1;
+    align-self: end;
+    padding-bottom: 38px;
   }
 
   .hero-copy p:not(.overline) {
@@ -2587,7 +2601,34 @@ button {
   }
 
   .hero-art {
+    right: -88vw;
+    bottom: -5svh;
+    width: 230vw;
+    max-width: none;
+    opacity: 0.46;
+    filter: saturate(1.04) contrast(1.08);
     transform: none !important;
+    transform-origin: center bottom;
+  }
+
+  .motion-ready .hero-art {
+    animation-duration: 620ms;
+  }
+
+  .hero-art img {
+    width: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: 68% bottom;
+    transform: scale(1.04);
+  }
+
+  .hero-art::after {
+    inset: -2px;
+    background:
+      linear-gradient(180deg, rgba(3, 3, 3, 0.82) 0%, transparent 23%, transparent 58%, var(--black) 100%),
+      linear-gradient(90deg, var(--black) 0%, rgba(3, 3, 3, 0.78) 26%, transparent 64%),
+      linear-gradient(270deg, rgba(3, 3, 3, 0.5) 0%, transparent 22%);
   }
 
   .hero-art img,
@@ -2630,6 +2671,24 @@ button {
   .event-photo-main,
   .event-photo:not(.event-photo-main) {
     aspect-ratio: 4 / 5;
+  }
+
+  .event-photo-main {
+    aspect-ratio: 16 / 10;
+  }
+
+  .event-photo {
+    border-radius: 20px;
+  }
+
+  .event-photo img {
+    min-height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .event-photo:nth-child(2) img {
+    object-position: center top;
   }
 
   .auth-steps article {
