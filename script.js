@@ -359,6 +359,7 @@ async function submitFeedback(payload) {
       email: payload.email,
       message: payload.message,
       page: payload.page,
+      "bot-field": payload.botField,
     });
 
     const response = await fetch(netlifyFormEndpoint, {
@@ -371,7 +372,7 @@ async function submitFeedback(payload) {
       throw new Error("Сообщение не отправилось. На Netlify форма начнет работать после публикации сайта.");
     }
 
-    return;
+    return "netlify";
   }
 
   const { error } = await supabaseClient.from("feedback_messages").insert({
@@ -383,6 +384,7 @@ async function submitFeedback(payload) {
   });
 
   if (error) throw error;
+  return "supabase";
 }
 
 authOpenButtons.forEach((button) => button.addEventListener("click", openAuth));
@@ -439,17 +441,20 @@ if (feedbackForm) {
       email: String(formData.get("email")).trim(),
       message: String(formData.get("message")).trim(),
       page: location.href,
+      botField: String(formData.get("bot-field") || "").trim(),
     };
 
     feedbackMessage.textContent = "Отправляю сообщение...";
     feedbackMessage.dataset.type = "info";
 
     try {
-      await submitFeedback(payload);
+      const feedbackTarget = await submitFeedback(payload);
       feedbackForm.reset();
-      feedbackMessage.textContent = supabaseClient
-        ? "Сообщение отправлено. Оно сохранено в Supabase."
-        : "Сообщение отправлено. Оно появится в Netlify Forms.";
+      const successMessages = {
+        netlify: "Сообщение отправлено. Оно появится в Netlify Forms.",
+        supabase: "Сообщение отправлено. Оно сохранено в Supabase.",
+      };
+      feedbackMessage.textContent = successMessages[feedbackTarget] || "Сообщение отправлено.";
       feedbackMessage.dataset.type = "success";
     } catch (error) {
       feedbackMessage.textContent = error.message || "Сообщение не отправилось. Проверьте настройки Supabase.";
