@@ -48,7 +48,7 @@ function addMotionTargets(root = document) {
   root.querySelectorAll(targets.join(",")).forEach((node, index) => {
     node.classList.add("motion-reveal");
     if (!node.style.getPropertyValue("--motion-delay")) {
-      node.style.setProperty("--motion-delay", `${Math.min(index * 18, 140)}ms`);
+      node.style.setProperty("--motion-delay", `${Math.min(index * 24, 180)}ms`);
     }
   });
 }
@@ -73,16 +73,32 @@ function initTiltCards(root = document) {
 
   cards.forEach((card) => {
     card.dataset.tiltBound = "true";
+    let tiltFrame = 0;
+
     card.addEventListener("pointermove", (event) => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      card.style.setProperty("--tilt-x", `${x * 8}deg`);
-      card.style.setProperty("--tilt-y", `${y * -8}deg`);
-      card.style.setProperty("--glow-x", `${(x + 0.5) * 100}%`);
-      card.style.setProperty("--glow-y", `${(y + 0.5) * 100}%`);
+      const { clientX, clientY } = event;
+
+      if (tiltFrame) {
+        cancelAnimationFrame(tiltFrame);
+      }
+
+      tiltFrame = requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const x = (clientX - rect.left) / rect.width - 0.5;
+        const y = (clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty("--tilt-x", `${x * 5.6}deg`);
+        card.style.setProperty("--tilt-y", `${y * -5.6}deg`);
+        card.style.setProperty("--glow-x", `${(x + 0.5) * 100}%`);
+        card.style.setProperty("--glow-y", `${(y + 0.5) * 100}%`);
+        tiltFrame = 0;
+      });
     });
     card.addEventListener("pointerleave", () => {
+      if (tiltFrame) {
+        cancelAnimationFrame(tiltFrame);
+        tiltFrame = 0;
+      }
+
       card.style.setProperty("--tilt-x", "0deg");
       card.style.setProperty("--tilt-y", "0deg");
       card.style.setProperty("--glow-x", "50%");
@@ -94,18 +110,33 @@ function initTiltCards(root = document) {
 function initHeroParallax() {
   const hero = document.querySelector(".hero");
   if (!hero || prefersReducedMotion.matches) return;
+  let heroFrame = 0;
 
   hero.addEventListener("pointermove", (event) => {
-    const rect = hero.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    hero.style.setProperty("--hero-shift-x", `${x * -34}px`);
-    hero.style.setProperty("--hero-shift-y", `${y * -22}px`);
-    hero.style.setProperty("--hero-tilt-x", `${y * 4}deg`);
-    hero.style.setProperty("--hero-tilt-y", `${x * -6}deg`);
+    const { clientX, clientY } = event;
+
+    if (heroFrame) {
+      cancelAnimationFrame(heroFrame);
+    }
+
+    heroFrame = requestAnimationFrame(() => {
+      const rect = hero.getBoundingClientRect();
+      const x = (clientX - rect.left) / rect.width - 0.5;
+      const y = (clientY - rect.top) / rect.height - 0.5;
+      hero.style.setProperty("--hero-shift-x", `${x * -38}px`);
+      hero.style.setProperty("--hero-shift-y", `${y * -26}px`);
+      hero.style.setProperty("--hero-tilt-x", `${y * 4.6}deg`);
+      hero.style.setProperty("--hero-tilt-y", `${x * -6.4}deg`);
+      heroFrame = 0;
+    });
   });
 
   hero.addEventListener("pointerleave", () => {
+    if (heroFrame) {
+      cancelAnimationFrame(heroFrame);
+      heroFrame = 0;
+    }
+
     hero.style.setProperty("--hero-shift-x", "0px");
     hero.style.setProperty("--hero-shift-y", "0px");
     hero.style.setProperty("--hero-tilt-x", "0deg");
@@ -126,7 +157,7 @@ function initMotion() {
           }
         });
       },
-      { rootMargin: "0px 0px 42% 0px", threshold: 0.01 },
+      { rootMargin: "0px 0px 48% 0px", threshold: 0.01 },
     );
   }
 
@@ -142,7 +173,7 @@ function renderCards(filter = "all") {
   grid.innerHTML = visible
     .map(
       (person, index) => `
-        <a class="people-card motion-reveal tilt-card" href="peoples/${person.slug}.html" style="--motion-delay: ${Math.min(index * 24, 168)}ms">
+        <a class="people-card motion-reveal tilt-card" href="peoples/${person.slug}.html" style="--motion-delay: ${Math.min(index * 30, 210)}ms">
           <div class="card-meta">
             <span>${person.areaLabel}</span>
             <span>${person.region}</span>

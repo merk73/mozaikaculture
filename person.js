@@ -72,7 +72,30 @@ function renderImmersion(personData) {
   );
 }
 
+function prepareRevealAnimation() {
+  const revealGroups = [
+    [".person-copy", 0, 1],
+    [".photo-placeholder", 90, 1],
+    [".person-info aside", 0, 1],
+    [".person-info > div > h2", 40, 1],
+    [".person-info > div > p", 90, 1],
+    [".person-section-grid article", 140, 70],
+    [".immersion-head", 0, 1],
+    [".immersion-step", 70, 90],
+    [".person-sources", 40, 1],
+  ];
+
+  revealGroups.forEach(([selector, startDelay, stepDelay]) => {
+    document.querySelectorAll(selector).forEach((node, index) => {
+      node.classList.add("reveal-on-scroll");
+      node.style.setProperty("--reveal-delay", `${startDelay + index * stepDelay}ms`);
+    });
+  });
+}
+
 function initRevealAnimation() {
+  prepareRevealAnimation();
+
   const items = document.querySelectorAll(".reveal-on-scroll");
   if (!items.length) return;
 
@@ -90,7 +113,7 @@ function initRevealAnimation() {
         }
       });
     },
-    { rootMargin: "0px 0px 38% 0px", threshold: 0.02 },
+    { rootMargin: "0px 0px 44% 0px", threshold: 0.02 },
   );
 
   items.forEach((item) => observer.observe(item));
