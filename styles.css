@@ -600,6 +600,7 @@ button {
 .atlas .section-head .overline {
   grid-column: 1;
   grid-row: 1;
+  transform: translateY(20px);
 }
 
 .atlas .section-head h2 {
