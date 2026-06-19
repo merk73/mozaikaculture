@@ -9,6 +9,7 @@ const files = [
   "quiz.html",
   "styles.css",
   "content.js",
+  "far-east-peoples.js",
   "script.js",
   "person.js",
   "quiz.js",

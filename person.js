@@ -140,6 +140,9 @@ if (person) {
   if (imageSlot && person.image) {
     imageSlot.innerHTML = `<img src="${person.image}" alt="${person.name}" />`;
     imageSlot.classList.add("has-image");
+  } else if (imageSlot) {
+    imageSlot.remove();
+    document.body.classList.add("person-no-image");
   }
 
   const facts = document.querySelector("[data-person-facts]");

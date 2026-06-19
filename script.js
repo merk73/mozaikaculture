@@ -178,9 +178,9 @@ function renderCards(filter = "all") {
             <span>${person.areaLabel}</span>
             <span>${person.region}</span>
           </div>
-          <div>
+          <div class="card-body">
             <h3>${person.name}</h3>
-            <p>${person.summary}</p>
+            <p>${person.cardText || person.summary}</p>
           </div>
           <span class="card-link">Открыть страницу</span>
         </a>
@@ -277,6 +277,7 @@ const authSubmit = document.querySelector(".auth-submit");
 const authModeButtons = document.querySelectorAll("[data-auth-mode]");
 const authOpenButtons = document.querySelectorAll("[data-auth-open]");
 const authCloseButtons = document.querySelectorAll("[data-auth-close]");
+const passwordToggle = document.querySelector("[data-password-toggle]");
 const feedbackForm = document.querySelector("[data-feedback-form]");
 const feedbackMessage = document.querySelector("[data-feedback-message]");
 const supabaseConfig = window.MOZAIKA_CONFIG || {};
@@ -447,6 +448,16 @@ async function submitFeedback(payload) {
 
 authOpenButtons.forEach((button) => button.addEventListener("click", openAuth));
 authCloseButtons.forEach((button) => button.addEventListener("click", closeAuth));
+
+passwordToggle?.addEventListener("click", () => {
+  const passwordInput = authForm?.querySelector('input[name="password"]');
+  if (!passwordInput) return;
+
+  const shouldShow = passwordInput.type === "password";
+  passwordInput.type = shouldShow ? "text" : "password";
+  passwordToggle.setAttribute("aria-pressed", shouldShow ? "true" : "false");
+  passwordToggle.setAttribute("aria-label", shouldShow ? "Скрыть пароль" : "Показать пароль");
+});
 authModeButtons.forEach((button) => {
   button.addEventListener("click", () => setAuthMode(button.dataset.authMode));
 });
