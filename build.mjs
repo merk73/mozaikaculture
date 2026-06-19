@@ -15,7 +15,7 @@ const files = [
 ];
 
 const directories = ["assets", "peoples"];
-const optionalFiles = ["_headers", "_redirects"];
+const optionalFiles = ["_headers", "_redirects", ".nojekyll"];
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });

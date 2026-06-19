@@ -290,6 +290,7 @@ let currentUserEmail = "";
 let currentUserId = null;
 let authRequestPending = false;
 const netlifyFormEndpoint = "/";
+const authRedirectUrl = new URL("index.html", window.location.href).href;
 
 async function requestAuth(mode, email, password) {
   if (!supabaseClient) {
@@ -301,7 +302,7 @@ async function requestAuth(mode, email, password) {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/index.html`,
+        emailRedirectTo: authRedirectUrl,
       },
     });
     if (error) throw error;
