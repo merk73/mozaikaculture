@@ -2,13 +2,15 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#030303" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Мозаика культур</title>
     <meta
       name="description"
       content="Образовательный атлас Мозаика культур о коренных народах Дальнего Востока."
     />
-    <link rel="stylesheet" href="styles.css?v=20260619-atlas-label-1" />
+    <link rel="stylesheet" href="styles.css?v=20260620-polish-1" />
   </head>
   <body>
     <header class="site-header">
@@ -18,6 +20,7 @@
       <nav class="main-nav" aria-label="Навигация">
         <a href="#atlas">Атлас</a>
         <a href="#learn">Изучение</a>
+        <a href="#articles">Статьи</a>
         <a href="#events">Мероприятия</a>
         <a href="#feedback">Связь</a>
         <a href="#sources">Источники</a>
@@ -36,7 +39,7 @@
           <p>
             Современный сайт о коренных народах Дальнего Востока: коротко,
             бережно и визуально чисто. После мероприятий здесь можно изучить
-            культуру, язык, территории и живые традиции народов края.
+            культуру, язык, территории и живые традиции народов региона.
           </p>
           <div class="hero-links">
             <a class="button button-primary" href="#atlas">Смотреть атлас</a>
@@ -122,6 +125,38 @@
         </div>
       </section>
 
+      <section class="articles" id="articles" aria-labelledby="articles-title">
+        <div class="section-shell">
+          <div class="section-head compact">
+            <p class="overline">статьи</p>
+            <h2 id="articles-title">Материалы для тех, кто хочет понять контекст глубже.</h2>
+            <p>
+              Здесь будут появляться большие тексты о происхождении, языках,
+              территориях и современной жизни народов Дальнего Востока.
+            </p>
+          </div>
+
+          <a class="article-preview" href="articles/origins-far-east.html">
+            <figure>
+              <img
+                src="assets/articles/origins-amur-dawn.jpg"
+                alt="Туманное утро над рекой в тайге Дальнего Востока"
+              />
+            </figure>
+            <div class="article-preview-copy">
+              <span>История территории · 12 минут чтения</span>
+              <h3>Как народы Дальнего Востока оказались на своих землях</h3>
+              <p>
+                Не легенда про один путь, а научная картина: древние миграции,
+                Амур как культурный коридор, северо-восточная Сибирь,
+                море, тайга и долгий процесс формирования народов.
+              </p>
+              <strong>Читать статью</strong>
+            </div>
+          </a>
+        </div>
+      </section>
+
       <section class="events" id="events" aria-labelledby="events-title">
         <div class="section-shell">
           <div class="section-head compact">
@@ -156,16 +191,12 @@
                 <article>
                   <span>04</span>
                   <strong>Квиз</strong>
-                  <p>Командная игра по фактам, символам и культурным особенностям народов края.</p>
+                  <p>Командная игра по фактам, символам и культурным особенностям народов Дальнего Востока.</p>
                 </article>
               </div>
             </div>
             <div class="event-gallery" aria-label="Фотографии мероприятия Мозаика культур">
               <figure class="event-photo event-photo-main">
-                <img src="assets/events/mozaika-screen.png" alt="Экран с презентацией мероприятия Мозаика культур" />
-                <figcaption>Старт лекции</figcaption>
-              </figure>
-              <figure class="event-photo">
                 <img src="assets/events/mozaika-quiz-live.jpg" alt="Участники работают над заданием квиза" />
                 <figcaption>Квиз-игра</figcaption>
               </figure>
@@ -235,7 +266,7 @@
             </p>
           </div>
           <div class="sources-list" aria-label="Список источников">
-            <a href="https://www.consultant.ru/document/cons_doc_LAW_26565/" target="_blank" rel="noreferrer">
+            <a href="https://www.consultant.ru/document/cons_doc_LAW_26631/" target="_blank" rel="noreferrer">
               <span>Нормативная база</span>
               <strong>Единый перечень коренных малочисленных народов Российской Федерации</strong>
             </a>
@@ -247,9 +278,9 @@
               <span>Статистика</span>
               <strong>Итоги ВПН-2020: численность коренных малочисленных народов</strong>
             </a>
-            <a href="https://ru.wikipedia.org/wiki/Коренные_малочисленные_народы_Севера,_Сибири_и_Дальнего_Востока_Российской_Федерации" target="_blank" rel="noreferrer">
-              <span>Справочный раздел</span>
-              <strong>Коренные малочисленные народы Севера, Сибири и Дальнего Востока</strong>
+            <a href="https://arhiiv.eki.ee/books/redbook/index1.shtml" target="_blank" rel="noreferrer">
+              <span>Этнографический справочник</span>
+              <strong>The Red Book of the Peoples of the Russian Empire</strong>
             </a>
           </div>
         </div>
@@ -267,6 +298,7 @@
       <nav class="footer-nav" aria-label="Навигация в подвале">
         <a href="#atlas">Атлас</a>
         <a href="#learn">Изучение</a>
+        <a href="#articles">Статьи</a>
         <a href="#events">Мероприятия</a>
         <a href="#feedback">Связь</a>
         <a href="#sources">Источники</a>
@@ -322,6 +354,6 @@
     <script src="config.js"></script>
     <script src="content.js?v=20260619-far-east-quiz-1"></script>
     <script src="far-east-peoples.js?v=20260619-far-east-quiz-1"></script>
-    <script src="script.js?v=20260619-card-align-1"></script>
+    <script src="script.js?v=20260620-polish-1"></script>
   </body>
 </html>

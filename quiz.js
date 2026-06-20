@@ -174,6 +174,7 @@ const questions = [
 const state = {
   index: 0,
   answers: Array(questions.length).fill(null),
+  optionOrders: questions.map((item) => shuffleOptions(item.options)),
 };
 
 const root = document.querySelector("[data-online-quiz]");
@@ -191,6 +192,15 @@ const resultSummary = document.querySelector("[data-result-summary]");
 const resultList = document.querySelector("[data-result-list]");
 const restartButton = document.querySelector("[data-quiz-restart]");
 
+function shuffleOptions(options) {
+  const shuffled = [...options];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled;
+}
+
 function answeredCount() {
   return state.answers.filter(Boolean).length;
 }
@@ -206,7 +216,7 @@ function renderQuestion() {
   kickerNode.textContent = item.topic;
   questionNode.textContent = item.question;
 
-  optionsNode.innerHTML = item.options
+  optionsNode.innerHTML = state.optionOrders[state.index]
     .map(
       (option) => `
         <button class="${selected === option ? "is-selected" : ""}" type="button" data-answer="${option}">
@@ -280,6 +290,7 @@ nextButton.addEventListener("click", () => {
 restartButton.addEventListener("click", () => {
   state.index = 0;
   state.answers = Array(questions.length).fill(null);
+  state.optionOrders = questions.map((item) => shuffleOptions(item.options));
   resultsNode.hidden = true;
   document.querySelector(".quiz-surface").hidden = false;
   renderQuestion();

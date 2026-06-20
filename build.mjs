@@ -15,7 +15,7 @@ const files = [
   "quiz.js",
 ];
 
-const directories = ["assets", "peoples"];
+const directories = ["assets", "peoples", "articles"];
 const optionalFiles = ["_headers", "_redirects", ".nojekyll"];
 
 await rm(dist, { recursive: true, force: true });

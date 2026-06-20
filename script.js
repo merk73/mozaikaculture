@@ -17,6 +17,15 @@ const panel = {
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let motionObserver = null;
 
+function shuffleOptions(options) {
+  const shuffled = [...options];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled;
+}
+
 function addMotionTargets(root = document) {
   const targets = [
     ".statement-copy",
@@ -29,6 +38,16 @@ function addMotionTargets(root = document) {
     ".knowledge-panel",
     ".quiz-cta-shell",
     ".online-quiz-cta",
+    ".articles .section-head",
+    ".article-preview",
+    ".article-hero-copy",
+    ".article-body > p",
+    ".article-body h2",
+    ".article-image",
+    ".article-image-grid",
+    ".article-note",
+    ".article-sources",
+    ".article-source-list a",
     ".event-feature",
     ".event-story",
     ".event-gallery",
@@ -223,7 +242,7 @@ function setKnowledge(personName) {
 
   panel.quizQuestion.textContent = person.quiz.question;
   panel.quizResult.textContent = "";
-  panel.quizOptions.innerHTML = person.quiz.options
+  panel.quizOptions.innerHTML = shuffleOptions(person.quiz.options)
     .map((option) => `<button type="button" data-answer="${option}">${option}</button>`)
     .join("");
 

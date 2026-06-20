@@ -45,9 +45,9 @@ window.MOZAIKA_PEOPLES = [
     ],
     timeline: ["Амур как центр жизни", "Промысел и ремесло", "Сохранение языка и памяти"],
     sourceLinks: [
-      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26565/"],
-      ["Нанайский язык", "https://ru.wikipedia.org/wiki/Нанайский_язык"],
-      ["Малые народы Приамурья", "https://ru.wikipedia.org/wiki/Малые_народы_Приамурья"],
+      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26631/"],
+      ["Численность по ВПН-2020", "https://raipon.info/press-tsentr/novosti/rezultaty-vserossiyskoy-perepisi-naseleniya-2020-po-natsionalnomu-sostavu-sredi-korennykh-malochisle/"],
+      ["Справочник по народам", "https://arhiiv.eki.ee/books/redbook/index1.shtml"],
     ],
     quiz: {
       question: "Какая связка точнее всего отличает нанайскую тему в атласе?",
@@ -101,9 +101,9 @@ window.MOZAIKA_PEOPLES = [
     ],
     timeline: ["Нижний Амур", "Сезонный промысел", "Передача семейной памяти"],
     sourceLinks: [
-      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26565/"],
-      ["Ульчи", "https://ru.wikipedia.org/wiki/Ульчи"],
-      ["Малые народы Приамурья", "https://ru.wikipedia.org/wiki/Малые_народы_Приамурья"],
+      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26631/"],
+      ["Численность по ВПН-2020", "https://raipon.info/press-tsentr/novosti/rezultaty-vserossiyskoy-perepisi-naseleniya-2020-po-natsionalnomu-sostavu-sredi-korennykh-malochisle/"],
+      ["Справочник по народам", "https://arhiiv.eki.ee/books/redbook/index1.shtml"],
     ],
     quiz: {
       question: "Что точнее всего отделяет ульчскую страницу от нанайской при общей амурской среде?",
@@ -157,9 +157,9 @@ window.MOZAIKA_PEOPLES = [
     ],
     timeline: ["Амурский лиман", "Морской промысел", "Язык и родовая память"],
     sourceLinks: [
-      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26565/"],
-      ["Нивхи", "https://ru.wikipedia.org/wiki/Нивхи"],
-      ["Малые народы Приамурья", "https://ru.wikipedia.org/wiki/Малые_народы_Приамурья"],
+      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26631/"],
+      ["Численность по ВПН-2020", "https://raipon.info/press-tsentr/novosti/rezultaty-vserossiyskoy-perepisi-naseleniya-2020-po-natsionalnomu-sostavu-sredi-korennykh-malochisle/"],
+      ["Справочник по народам", "https://arhiiv.eki.ee/books/redbook/index1.shtml"],
     ],
     quiz: {
       question: "Почему нивхская страница требует отдельного языкового акцента?",
@@ -213,9 +213,9 @@ window.MOZAIKA_PEOPLES = [
     ],
     timeline: ["Побережье", "Тайга и реки", "Сохранение малочисленной культуры"],
     sourceLinks: [
-      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26565/"],
-      ["Орочи", "https://ru.wikipedia.org/wiki/Орочи"],
-      ["Орочский язык", "https://ru.wikipedia.org/wiki/Орочский_язык"],
+      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26631/"],
+      ["Численность по ВПН-2020", "https://raipon.info/press-tsentr/novosti/rezultaty-vserossiyskoy-perepisi-naseleniya-2020-po-natsionalnomu-sostavu-sredi-korennykh-malochisle/"],
+      ["Справочник по народам", "https://arhiiv.eki.ee/books/redbook/index1.shtml"],
     ],
     quiz: {
       question: "Какая формула точнее всего описывает орочский культурный маршрут?",
@@ -229,7 +229,7 @@ window.MOZAIKA_PEOPLES = [
     image: "../assets/people/udege.png",
     titleMax: 96,
     population: "1 328 человек в РФ по ВПН-2020 (проведена в 2021 году)",
-    region: "Сихотэ-Алинь и бассейны рек",
+    region: "Сихотэ-Алинь и реки",
     area: "taiga",
     areaLabel: "Тайга",
     language: "удэгейский язык · тунгусо-маньчжурская семья",
@@ -269,9 +269,9 @@ window.MOZAIKA_PEOPLES = [
     ],
     timeline: ["Тайга", "Реки Хор и Анюй", "Ремесла и знания о природе"],
     sourceLinks: [
-      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26565/"],
-      ["Удэгейцы", "https://ru.wikipedia.org/wiki/Удэгейцы"],
-      ["Малые народы Приамурья", "https://ru.wikipedia.org/wiki/Малые_народы_Приамурья"],
+      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26631/"],
+      ["Численность по ВПН-2020", "https://raipon.info/press-tsentr/novosti/rezultaty-vserossiyskoy-perepisi-naseleniya-2020-po-natsionalnomu-sostavu-sredi-korennykh-malochisle/"],
+      ["Справочник по народам", "https://arhiiv.eki.ee/books/redbook/index1.shtml"],
     ],
     quiz: {
       question: "Какая пара лучше всего раскрывает удэгейскую тему на сайте?",
@@ -325,9 +325,9 @@ window.MOZAIKA_PEOPLES = [
     ],
     timeline: ["Амгунь", "Речной уклад", "Хрупкость языковой памяти"],
     sourceLinks: [
-      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26565/"],
-      ["Негидальцы", "https://ru.wikipedia.org/wiki/Негидальцы"],
-      ["Негидальский язык", "https://ru.wikipedia.org/wiki/Негидальский_язык"],
+      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26631/"],
+      ["Численность по ВПН-2020", "https://raipon.info/press-tsentr/novosti/rezultaty-vserossiyskoy-perepisi-naseleniya-2020-po-natsionalnomu-sostavu-sredi-korennykh-malochisle/"],
+      ["Справочник по народам", "https://arhiiv.eki.ee/books/redbook/index1.shtml"],
     ],
     quiz: {
       question: "Какой нюанс важен при описании негидальцев?",
@@ -341,7 +341,7 @@ window.MOZAIKA_PEOPLES = [
     image: "../assets/people/evenki.png",
     titleMax: 118,
     population: "39 420 человек в РФ по ВПН-2020 (проведена в 2021 году)",
-    region: "Таежный север края",
+    region: "Таежный север ДВ",
     area: "north",
     areaLabel: "Север",
     language: "эвенкийский язык · тунгусо-маньчжурская семья",
@@ -381,9 +381,9 @@ window.MOZAIKA_PEOPLES = [
     ],
     timeline: ["Северная тайга", "Оленеводство", "Маршруты и современность"],
     sourceLinks: [
-      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26565/"],
-      ["Эвенки", "https://ru.wikipedia.org/wiki/Эвенки"],
-      ["Коренные малочисленные народы Севера", "https://ru.wikipedia.org/wiki/Коренные_малочисленные_народы_Севера,_Сибири_и_Дальнего_Востока_Российской_Федерации"],
+      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26631/"],
+      ["Численность по ВПН-2020", "https://raipon.info/press-tsentr/novosti/rezultaty-vserossiyskoy-perepisi-naseleniya-2020-po-natsionalnomu-sostavu-sredi-korennykh-malochisle/"],
+      ["Справочник по народам", "https://arhiiv.eki.ee/books/redbook/index1.shtml"],
     ],
     quiz: {
       question: "Какой признак лучше всего раскрывает эвенкийскую культуру движения?",
@@ -437,9 +437,9 @@ window.MOZAIKA_PEOPLES = [
     ],
     timeline: ["Охотское побережье", "Северные маршруты", "Оленеводство и язык"],
     sourceLinks: [
-      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26565/"],
-      ["Эвены", "https://ru.wikipedia.org/wiki/Эвены"],
-      ["Коренные малочисленные народы Севера", "https://ru.wikipedia.org/wiki/Коренные_малочисленные_народы_Севера,_Сибири_и_Дальнего_Востока_Российской_Федерации"],
+      ["Единый перечень КМН РФ", "https://www.consultant.ru/document/cons_doc_LAW_26631/"],
+      ["Численность по ВПН-2020", "https://raipon.info/press-tsentr/novosti/rezultaty-vserossiyskoy-perepisi-naseleniya-2020-po-natsionalnomu-sostavu-sredi-korennykh-malochisle/"],
+      ["Справочник по народам", "https://arhiiv.eki.ee/books/redbook/index1.shtml"],
     ],
     quiz: {
       question: "Что точнее всего связывает эвенскую страницу с Охотским побережьем?",

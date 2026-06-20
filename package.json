@@ -2,7 +2,7 @@
   "name": "mozaika-kultur",
   "version": "1.0.0",
   "private": true,
-  "description": "Образовательный статический сайт о коренных народах Хабаровского края.",
+  "description": "Образовательный статический сайт о коренных народах Дальнего Востока.",
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
