@@ -3107,7 +3107,14 @@ button {
     grid-row: auto;
   }
 
+  .atlas .section-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
   .atlas .section-head p:not(.overline) {
+    width: 100%;
+    max-width: none;
     margin: 0;
     padding-left: 0;
     border-left: 0;
