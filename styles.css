@@ -131,7 +131,7 @@ button {
   }
 
   to {
-    opacity: 0.9;
+    opacity: 0.8;
     filter: saturate(1.04) contrast(1.05) blur(0);
   }
 }
@@ -360,7 +360,7 @@ button {
   bottom: -3vw;
   z-index: -2;
   width: min(1220px, 76vw);
-  opacity: 0.9;
+  opacity: 0.8;
   filter: saturate(1.04) contrast(1.05);
   transform:
     translate3d(var(--hero-shift-x), var(--hero-shift-y), 0)
@@ -426,7 +426,7 @@ button {
 .hero-copy p:not(.overline) {
   max-width: 620px;
   margin: 30px 0 0;
-  color: var(--muted);
+  color: var(--white);
   font-size: clamp(18px, 2vw, 24px);
   line-height: 1.45;
   text-wrap: pretty;
@@ -3526,6 +3526,7 @@ button {
   .people-card p {
     font-size: 13px;
     line-height: 1.32;
+    max-height: calc(13px * 1.32 * 4);
     overflow: hidden;
     -webkit-line-clamp: 4;
   }
@@ -3555,8 +3556,8 @@ button {
   }
 
   .card-body {
-    grid-template-rows: 52px 78px;
-    min-height: 142px;
+    grid-template-rows: 52px calc(13px * 1.32 * 4);
+    min-height: 130px;
   }
 
   .article-preview {
@@ -3765,8 +3766,7 @@ button {
     transform: translate(-50%, -50%) rotate(-5deg);
   }
 
-  html::before,
-  html::after {
+  html::before {
     position: fixed;
     left: 0;
     z-index: 12;
@@ -3779,12 +3779,6 @@ button {
     top: 0;
     height: calc(132px + env(safe-area-inset-top, 0px));
     background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.88) 34%, rgba(0, 0, 0, 0) 100%);
-  }
-
-  html::after {
-    bottom: -1px;
-    height: calc(118px + env(safe-area-inset-bottom, 0px));
-    background: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.78) 30%, rgba(0, 0, 0, 0) 100%);
   }
 
   .atlas::after {
