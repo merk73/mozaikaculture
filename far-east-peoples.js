@@ -4,6 +4,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "chukchi",
     name: "Чукчи",
+    image: "../assets/people/chukchi.png",
     titleMax: 118,
     population: "16 228 человек в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Чукотка и арктическое побережье",
@@ -58,6 +59,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "koryaks",
     name: "Коряки",
+    image: "../assets/people/koryaks.png",
     titleMax: 118,
     population: "7 498 человек в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Север Камчатки и Корякское нагорье",
@@ -112,6 +114,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "itelmens",
     name: "Ительмены",
+    image: "../assets/people/itelmens.png",
     titleMax: 104,
     population: "2 622 человека в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Реки Камчатки",
@@ -166,6 +169,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "aleuts",
     name: "Алеуты",
+    image: "../assets/people/aleuts.png",
     titleMax: 104,
     population: "399 человек в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Командорские острова",
@@ -220,6 +224,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "eskimos",
     name: "Эскимосы",
+    image: "../assets/people/eskimos.png",
     titleMax: 104,
     population: "1 659 человек в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Чукотка и Берингов пролив",
@@ -274,6 +279,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "yukaghirs",
     name: "Юкагиры",
+    image: "../assets/people/yukaghirs.png",
     titleMax: 104,
     population: "1 813 человек в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Колыма и Индигирка",
@@ -328,6 +334,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "chuvans",
     name: "Чуванцы",
+    image: "../assets/people/chuvans.png",
     titleMax: 104,
     population: "903 человека в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Анадырь и Чукотка",
@@ -382,6 +389,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "kereks",
     name: "Кереки",
+    image: "../assets/people/kereks.png",
     titleMax: 104,
     population: "23 человека в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Южная Чукотка",
@@ -436,6 +444,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "tazy",
     name: "Тазы",
+    image: "../assets/people/tazy.png",
     titleMax: 104,
     population: "236 человек в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Приморье и Уссури",
@@ -490,6 +499,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "oroks",
     name: "Ороки (ульта)",
+    image: "../assets/people/oroks.png",
     titleMax: 92,
     population: "269 человек в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Сахалин",
