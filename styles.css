@@ -33,7 +33,7 @@
 
 html {
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   background: var(--black);
 }
 
@@ -944,8 +944,7 @@ button {
 }
 
 .learn-aside {
-  position: sticky;
-  top: 118px;
+  position: relative;
   min-height: 560px;
   padding: 24px;
   background: rgba(255, 255, 255, 0.045);
@@ -2717,8 +2716,7 @@ button {
 }
 
 .sources-heading {
-  position: sticky;
-  top: 120px;
+  position: relative;
 }
 
 .sources-heading h2 {
