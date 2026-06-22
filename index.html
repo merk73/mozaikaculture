@@ -10,7 +10,7 @@
       name="description"
       content="Образовательный атлас Мозаика культур о коренных народах Дальнего Востока."
     />
-    <link rel="stylesheet" href="styles.css?v=20260620-polish-1" />
+    <link rel="stylesheet" href="styles.css?v=20260623-profile-1" />
   </head>
   <body>
     <header class="site-header">
@@ -323,6 +323,10 @@
         </div>
 
         <form class="auth-form" data-auth-form>
+          <label data-auth-name-field>
+            Имя
+            <input type="text" name="name" autocomplete="given-name" placeholder="Как к вам обращаться" minlength="2" maxlength="40" required />
+          </label>
           <label>
             Почта
             <input type="email" name="email" autocomplete="email" placeholder="student@example.ru" required />
@@ -350,10 +354,36 @@
       </section>
     </div>
 
+    <div class="profile-modal" data-profile-modal aria-hidden="true" hidden>
+      <div class="auth-backdrop" data-profile-close></div>
+      <section class="profile-card" role="dialog" aria-modal="true" aria-labelledby="profile-title">
+        <button class="auth-close" type="button" data-profile-close aria-label="Закрыть">×</button>
+        <div class="profile-head">
+          <div class="profile-avatar" data-profile-avatar>М</div>
+          <p class="overline">личный кабинет</p>
+          <h2 id="profile-title" data-profile-name>Мозаика</h2>
+          <p data-profile-email></p>
+        </div>
+
+        <div class="profile-quiz">
+          <div>
+            <span>Первый квиз</span>
+            <h3>Насколько точно ты собрал мозаику?</h3>
+          </div>
+          <div class="profile-result" data-profile-quiz-result>
+            <strong>Пока нет результата</strong>
+            <p>После прохождения квиза здесь появятся баллы и процент.</p>
+          </div>
+        </div>
+
+        <button class="profile-logout" type="button" data-profile-logout>Выйти из аккаунта</button>
+      </section>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
     <script src="content.js?v=20260619-far-east-quiz-1"></script>
     <script src="far-east-peoples.js?v=20260619-far-east-quiz-1"></script>
-    <script src="script.js?v=20260620-polish-1"></script>
+    <script src="script.js?v=20260623-profile-1"></script>
   </body>
 </html>

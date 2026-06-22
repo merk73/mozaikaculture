@@ -337,6 +337,14 @@ const authSubmit = document.querySelector(".auth-submit");
 const authModeButtons = document.querySelectorAll("[data-auth-mode]");
 const authOpenButtons = document.querySelectorAll("[data-auth-open]");
 const authCloseButtons = document.querySelectorAll("[data-auth-close]");
+const authNameField = document.querySelector("[data-auth-name-field]");
+const profileModal = document.querySelector("[data-profile-modal]");
+const profileCloseButtons = document.querySelectorAll("[data-profile-close]");
+const profileAvatar = document.querySelector("[data-profile-avatar]");
+const profileName = document.querySelector("[data-profile-name]");
+const profileEmail = document.querySelector("[data-profile-email]");
+const profileQuizResult = document.querySelector("[data-profile-quiz-result]");
+const profileLogout = document.querySelector("[data-profile-logout]");
 const quizGateLinks = document.querySelectorAll("[data-quiz-gate]");
 const passwordToggle = document.querySelector("[data-password-toggle]");
 const feedbackForm = document.querySelector("[data-feedback-form]");
@@ -350,6 +358,7 @@ const supabaseClient =
 let authMode = "register";
 let currentUserEmail = "";
 let currentUserId = null;
+let currentUserName = "";
 let authRequestPending = false;
 const netlifyFormEndpoint = "/";
 const authRedirectPath = window.location.pathname.startsWith("/mozaikaculture/") ? "/mozaikaculture/" : "/";
@@ -387,7 +396,34 @@ function redirectToQuizIfRequested() {
   return true;
 }
 
-async function requestAuth(mode, email, password) {
+function getUserDisplayName(user) {
+  const metadata = user?.user_metadata || {};
+  const name = metadata.display_name || metadata.full_name || metadata.name || "";
+  return String(name).trim();
+}
+
+function getFallbackName(email) {
+  return String(email || "").split("@")[0] || "Пользователь";
+}
+
+function setCurrentUser(user) {
+  if (!user) {
+    currentUserEmail = "";
+    currentUserId = null;
+    currentUserName = "";
+    return;
+  }
+
+  currentUserEmail = user?.email || "";
+  currentUserId = user?.id || null;
+  currentUserName = getUserDisplayName(user) || getFallbackName(currentUserEmail);
+}
+
+function getProfileLetter() {
+  return (currentUserName || currentUserEmail || "М").trim().charAt(0).toUpperCase();
+}
+
+async function requestAuth(mode, email, password, name = "") {
   if (!supabaseClient) {
     throw new Error("Supabase не настроен. Добавьте SUPABASE_URL и SUPABASE_ANON_KEY.");
   }
@@ -398,6 +434,10 @@ async function requestAuth(mode, email, password) {
       password,
       options: {
         emailRedirectTo: authRedirectUrl,
+        data: {
+          display_name: name,
+          full_name: name,
+        },
       },
     });
     if (error) throw error;
@@ -435,9 +475,16 @@ function getFriendlyAuthError(error) {
 
 function openAuth() {
   if (!supabaseClient || !authModal || !authForm) return;
+  if (currentUserId) {
+    openProfile();
+    return;
+  }
   authModal.classList.add("is-open");
   authModal.setAttribute("aria-hidden", "false");
-  setTimeout(() => authForm.email.focus(), 30);
+  const firstInput = authMode === "register"
+    ? authForm.querySelector('input[name="name"]')
+    : authForm.querySelector('input[name="email"]');
+  setTimeout(() => firstInput?.focus(), 30);
 }
 
 function closeAuth() {
@@ -446,12 +493,35 @@ function closeAuth() {
   authModal.setAttribute("aria-hidden", "true");
 }
 
+function openProfile() {
+  if (!profileModal || !currentUserId) return;
+  closeAuth();
+  profileModal.hidden = false;
+  profileModal.classList.add("is-open");
+  profileModal.setAttribute("aria-hidden", "false");
+  renderProfile();
+  loadProfileQuizResult();
+}
+
+function closeProfile() {
+  if (!profileModal) return;
+  profileModal.classList.remove("is-open");
+  profileModal.setAttribute("aria-hidden", "true");
+  profileModal.hidden = true;
+}
+
 function setAuthMode(mode) {
   authMode = mode;
   authModeButtons.forEach((button) => {
     button.classList.toggle("is-active", button.dataset.authMode === mode);
   });
   if (authSubmit) authSubmit.textContent = mode === "register" ? "Создать аккаунт" : "Войти";
+  if (authNameField) {
+    const input = authNameField.querySelector("input");
+    const isRegister = mode === "register";
+    authNameField.hidden = !isRegister;
+    if (input) input.required = isRegister;
+  }
   const passwordInput = authForm?.querySelector('input[name="password"]');
   if (passwordInput) {
     passwordInput.autocomplete = mode === "register" ? "new-password" : "current-password";
@@ -468,6 +538,58 @@ function updateAuthState() {
     button.textContent = signedIn ? currentUserEmail : isHeroButton ? "Зарегистрироваться" : "Войти";
     button.classList.toggle("is-signed", signedIn);
   });
+}
+
+function renderProfile() {
+  if (profileAvatar) profileAvatar.textContent = getProfileLetter();
+  if (profileName) profileName.textContent = currentUserName || getFallbackName(currentUserEmail);
+  if (profileEmail) profileEmail.textContent = currentUserEmail;
+  if (profileQuizResult) {
+    profileQuizResult.innerHTML = `
+      <strong>Загружаю...</strong>
+      <p>Проверяю сохраненный результат квиза.</p>
+    `;
+  }
+}
+
+function renderProfileQuizEmpty(text = "После прохождения квиза здесь появятся баллы и процент.") {
+  if (!profileQuizResult) return;
+  profileQuizResult.innerHTML = `
+    <strong>Пока нет результата</strong>
+    <p>${text}</p>
+  `;
+}
+
+async function loadProfileQuizResult() {
+  if (!supabaseClient || !currentUserId || !profileQuizResult) return;
+
+  const { data, error } = await supabaseClient
+    .from("quiz_results")
+    .select("score,total,percent,created_at")
+    .eq("user_id", currentUserId)
+    .maybeSingle();
+
+  if (error) {
+    renderProfileQuizEmpty("Результат появится здесь после настройки таблицы quiz_results и прохождения квиза.");
+    return;
+  }
+
+  if (!data) {
+    renderProfileQuizEmpty();
+    return;
+  }
+
+  const total = Number(data.total) || 15;
+  const score = Number(data.score) || 0;
+  const percent = Number(data.percent) || Math.round((score / total) * 100);
+  const date = data.created_at ? new Date(data.created_at).toLocaleDateString("ru-RU") : "";
+
+  profileQuizResult.style.setProperty("--profile-percent", `${Math.max(0, Math.min(percent, 100))}%`);
+  profileQuizResult.innerHTML = `
+    <strong>${score} из ${total} · ${percent}%</strong>
+    <div class="profile-result-meter" aria-hidden="true"><span></span></div>
+    <p>${date ? `Пройдено: ${date}. ` : ""}Повторное прохождение закрыто, результат сохранен в Supabase.</p>
+  `;
 }
 
 function updateAuthAvailability() {
@@ -510,9 +632,9 @@ async function loadAuthSession() {
   if (error) {
     currentUserEmail = "";
     currentUserId = null;
+    currentUserName = "";
   } else {
-    currentUserEmail = data.session?.user?.email || "";
-    currentUserId = data.session?.user?.id || null;
+    setCurrentUser(data.session?.user);
   }
   updateAuthState();
 }
@@ -563,6 +685,21 @@ quizGateLinks.forEach((link) => {
 
 authOpenButtons.forEach((button) => button.addEventListener("click", openAuth));
 authCloseButtons.forEach((button) => button.addEventListener("click", closeAuth));
+profileCloseButtons.forEach((button) => button.addEventListener("click", closeProfile));
+
+profileLogout?.addEventListener("click", async () => {
+  if (!supabaseClient) return;
+  profileLogout.disabled = true;
+  profileLogout.textContent = "Выхожу...";
+  await supabaseClient.auth.signOut();
+  currentUserEmail = "";
+  currentUserId = null;
+  currentUserName = "";
+  updateAuthState();
+  closeProfile();
+  profileLogout.disabled = false;
+  profileLogout.textContent = "Выйти из аккаунта";
+});
 
 passwordToggle?.addEventListener("click", () => {
   const passwordInput = authForm?.querySelector('input[name="password"]');
@@ -583,8 +720,14 @@ if (authForm) {
     if (authRequestPending) return;
 
     const formData = new FormData(authForm);
+    const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email")).trim().toLowerCase();
     const password = String(formData.get("password"));
+
+    if (authMode === "register" && name.length < 2) {
+      setAuthMessage("Укажите имя, чтобы создать личный кабинет.", "error");
+      return;
+    }
 
     if (password.length < 6) {
       setAuthMessage("Пароль должен быть не короче 6 символов.", "error");
@@ -603,22 +746,22 @@ if (authForm) {
         authSubmit.textContent = authMode === "register" ? "Создаю аккаунт..." : "Вхожу...";
       }
 
-      const result = await requestAuth(authMode, email, password);
+      const result = await requestAuth(authMode, email, password, name);
 
       if (authMode === "register" && !result.session) {
         currentUserEmail = "";
         currentUserId = null;
+        currentUserName = "";
         updateAuthState();
         setAuthMessage("Аккаунт создан. Проверьте почту и подтвердите регистрацию.", "success");
         return;
       }
 
-      currentUserEmail = result.session?.user?.email || "";
-      currentUserId = result.session?.user?.id || null;
+      setCurrentUser(result.session?.user);
       updateAuthState();
       setAuthMessage(authMode === "register" ? "Аккаунт создан. Вход выполнен." : "Готово. Вы вошли в личный кабинет.", "success");
       if (!redirectToQuizIfRequested()) {
-        setTimeout(closeAuth, 700);
+        setTimeout(openProfile, 700);
       }
     } catch (error) {
       setAuthMessage(getFriendlyAuthError(error), "error");
@@ -660,7 +803,10 @@ if (feedbackForm) {
 }
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeAuth();
+  if (event.key === "Escape") {
+    closeAuth();
+    closeProfile();
+  }
 });
 
 setAuthMode("register");
@@ -668,8 +814,7 @@ updateAuthAvailability();
 
 if (supabaseClient) {
   supabaseClient.auth.onAuthStateChange((_event, session) => {
-    currentUserEmail = session?.user?.email || "";
-    currentUserId = session?.user?.id || null;
+    setCurrentUser(session?.user);
     updateAuthState();
     redirectToQuizIfRequested();
   });
