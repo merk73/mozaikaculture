@@ -319,7 +319,8 @@ let currentUserEmail = "";
 let currentUserId = null;
 let authRequestPending = false;
 const netlifyFormEndpoint = "/";
-const authRedirectUrl = new URL("index.html", window.location.href).href;
+const authRedirectPath = window.location.pathname.startsWith("/mozaikaculture/") ? "/mozaikaculture/" : "/";
+const authRedirectUrl = new URL(authRedirectPath, window.location.origin).href;
 
 async function requestAuth(mode, email, password) {
   if (!supabaseClient) {
