@@ -172,6 +172,37 @@ function initHeroParallax() {
   });
 }
 
+function initMobileHeaderCollapse() {
+  const mobileQuery = window.matchMedia("(max-width: 640px)");
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  const updateHeader = () => {
+    const currentY = window.scrollY;
+    const scrollingDown = currentY > lastScrollY + 4;
+    const scrollingUp = currentY < lastScrollY - 4;
+
+    if (!mobileQuery.matches || currentY < 72 || scrollingUp) {
+      document.documentElement.classList.remove("mobile-header-condensed");
+    } else if (scrollingDown && currentY > 118) {
+      document.documentElement.classList.add("mobile-header-condensed");
+    }
+
+    lastScrollY = currentY;
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateHeader);
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  mobileQuery.addEventListener?.("change", requestUpdate);
+  requestUpdate();
+}
+
 function initMotion() {
   document.documentElement.classList.add("motion-ready");
 
@@ -192,6 +223,7 @@ function initMotion() {
   hydrateMotion(document);
   initTiltCards(document);
   initHeroParallax();
+  initMobileHeaderCollapse();
 }
 
 function renderCards(filter = "all") {
@@ -305,6 +337,7 @@ const authSubmit = document.querySelector(".auth-submit");
 const authModeButtons = document.querySelectorAll("[data-auth-mode]");
 const authOpenButtons = document.querySelectorAll("[data-auth-open]");
 const authCloseButtons = document.querySelectorAll("[data-auth-close]");
+const quizGateLinks = document.querySelectorAll("[data-quiz-gate]");
 const passwordToggle = document.querySelector("[data-password-toggle]");
 const feedbackForm = document.querySelector("[data-feedback-form]");
 const feedbackMessage = document.querySelector("[data-feedback-message]");
@@ -321,6 +354,38 @@ let authRequestPending = false;
 const netlifyFormEndpoint = "/";
 const authRedirectPath = window.location.pathname.startsWith("/mozaikaculture/") ? "/mozaikaculture/" : "/";
 const authRedirectUrl = new URL(authRedirectPath, window.location.origin).href;
+const quizIntentKey = "mozaikaQuizAfterAuth";
+
+function markQuizIntent() {
+  try {
+    sessionStorage.setItem(quizIntentKey, "1");
+  } catch (_error) {
+    // Session storage can be unavailable in strict privacy modes.
+  }
+}
+
+function hasQuizIntent() {
+  try {
+    return sessionStorage.getItem(quizIntentKey) === "1";
+  } catch (_error) {
+    return false;
+  }
+}
+
+function clearQuizIntent() {
+  try {
+    sessionStorage.removeItem(quizIntentKey);
+  } catch (_error) {
+    // No-op.
+  }
+}
+
+function redirectToQuizIfRequested() {
+  if (!currentUserId || !hasQuizIntent()) return false;
+  clearQuizIntent();
+  window.location.href = "quiz.html";
+  return true;
+}
 
 async function requestAuth(mode, email, password) {
   if (!supabaseClient) {
@@ -422,6 +487,19 @@ function updateAuthAvailability() {
   }
 }
 
+function openQuizAuthGate() {
+  markQuizIntent();
+
+  if (!supabaseClient) {
+    window.location.href = "quiz.html";
+    return;
+  }
+
+  setAuthMode("register");
+  openAuth();
+  setAuthMessage("Квиз доступен после регистрации. Создайте аккаунт или войдите, чтобы пройти его один раз.", "info");
+}
+
 async function loadAuthSession() {
   if (!supabaseClient) {
     updateAuthState();
@@ -474,6 +552,14 @@ async function submitFeedback(payload) {
   if (error) throw error;
   return "supabase";
 }
+
+quizGateLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (!supabaseClient || currentUserId) return;
+    event.preventDefault();
+    openQuizAuthGate();
+  });
+});
 
 authOpenButtons.forEach((button) => button.addEventListener("click", openAuth));
 authCloseButtons.forEach((button) => button.addEventListener("click", closeAuth));
@@ -531,7 +617,9 @@ if (authForm) {
       currentUserId = result.session?.user?.id || null;
       updateAuthState();
       setAuthMessage(authMode === "register" ? "Аккаунт создан. Вход выполнен." : "Готово. Вы вошли в личный кабинет.", "success");
-      setTimeout(closeAuth, 700);
+      if (!redirectToQuizIfRequested()) {
+        setTimeout(closeAuth, 700);
+      }
     } catch (error) {
       setAuthMessage(getFriendlyAuthError(error), "error");
     } finally {
@@ -583,7 +671,15 @@ if (supabaseClient) {
     currentUserEmail = session?.user?.email || "";
     currentUserId = session?.user?.id || null;
     updateAuthState();
+    redirectToQuizIfRequested();
   });
 }
 
-loadAuthSession();
+loadAuthSession().then(() => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("auth") === "quiz" && !currentUserId) {
+    openQuizAuthGate();
+  } else {
+    redirectToQuizIfRequested();
+  }
+});
