@@ -554,6 +554,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "alyutors",
     name: "Алюторцы",
+    image: "../assets/people/alyutors.png",
     titleMax: 104,
     population: "97 человек в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Олюторский район",
@@ -608,6 +609,7 @@ window.MOZAIKA_PEOPLES.push(
   {
     slug: "kamchadals",
     name: "Камчадалы",
+    image: "../assets/people/kamchadals.png",
     titleMax: 104,
     population: "1 564 человека в РФ по ВПН-2020 (проведена в 2021 году)",
     region: "Камчатка и северо-восток России",
