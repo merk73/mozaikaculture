@@ -1939,8 +1939,9 @@ button {
 
 .photo-placeholder.has-image {
   background:
-    radial-gradient(circle at 50% 22%, rgba(241, 18, 34, 0.22), transparent 25rem),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    radial-gradient(circle at 50% 64%, rgba(241, 18, 34, 0.16), transparent 21rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.008));
+  border-color: rgba(255, 255, 255, 0.075);
 }
 
 .photo-placeholder::before {
@@ -2882,7 +2883,8 @@ button {
 }
 
 .quiz-surface,
-.quiz-results {
+.quiz-results,
+.quiz-lock {
   position: relative;
   overflow: hidden;
   padding: clamp(22px, 3.5vw, 42px);
@@ -2891,6 +2893,33 @@ button {
     rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 32px;
+}
+
+.quiz-lock[hidden],
+.quiz-surface[hidden],
+.quiz-results[hidden] {
+  display: none;
+}
+
+.quiz-lock {
+  display: grid;
+  gap: 18px;
+  max-width: 860px;
+}
+
+.quiz-lock h2 {
+  max-width: 780px;
+  margin: 0;
+  font-size: clamp(34px, 5vw, 72px);
+  line-height: 1.02;
+}
+
+.quiz-lock p:not(.overline) {
+  max-width: 680px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.5;
 }
 
 .quiz-progress {
@@ -3034,10 +3063,6 @@ button {
 .quiz-link {
   display: inline-flex;
   align-items: center;
-}
-
-.quiz-results[hidden] {
-  display: none;
 }
 
 .quiz-results {
@@ -3740,26 +3765,26 @@ button {
     transform: translate(-50%, -50%) rotate(-5deg);
   }
 
-  body::before,
-  body::after {
+  html::before,
+  html::after {
     position: fixed;
     left: 0;
-    z-index: 14;
+    z-index: 12;
     width: 100%;
     content: "";
     pointer-events: none;
   }
 
-  body::before {
+  html::before {
     top: 0;
-    height: 150px;
-    background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.92) 34%, rgba(0, 0, 0, 0) 100%);
+    height: calc(132px + env(safe-area-inset-top, 0px));
+    background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.88) 34%, rgba(0, 0, 0, 0) 100%);
   }
 
-  body::after {
-    bottom: 0;
-    height: 132px;
-    background: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.82) 30%, rgba(0, 0, 0, 0) 100%);
+  html::after {
+    bottom: -1px;
+    height: calc(118px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.78) 30%, rgba(0, 0, 0, 0) 100%);
   }
 
   .atlas::after {

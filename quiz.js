@@ -191,6 +191,18 @@ const resultTitle = document.querySelector("[data-result-title]");
 const resultSummary = document.querySelector("[data-result-summary]");
 const resultList = document.querySelector("[data-result-list]");
 const restartButton = document.querySelector("[data-quiz-restart]");
+const quizSurface = document.querySelector(".quiz-surface");
+const quizLock = document.querySelector("[data-quiz-lock]");
+const quizLockTitle = document.querySelector("[data-quiz-lock-title]");
+const quizLockText = document.querySelector("[data-quiz-lock-text]");
+const supabaseConfig = window.MOZAIKA_CONFIG || {};
+const hasSupabaseConfig = Boolean(supabaseConfig.SUPABASE_URL && supabaseConfig.SUPABASE_ANON_KEY);
+const supabaseClient =
+  window.supabase && window.supabase.createClient && hasSupabaseConfig
+    ? window.supabase.createClient(supabaseConfig.SUPABASE_URL, supabaseConfig.SUPABASE_ANON_KEY)
+    : null;
+let currentUser = null;
+let quizSaving = false;
 
 function shuffleOptions(options) {
   const shuffled = [...options];
@@ -231,7 +243,7 @@ function renderQuestion() {
   nextButton.disabled = !selected;
 }
 
-function showResults() {
+function showResultsLegacy() {
   const correct = questions.filter((item, index) => state.answers[index] === item.answer).length;
   const percent = Math.round((correct / questions.length) * 100);
 
@@ -264,6 +276,191 @@ function showResults() {
   resultsNode.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function buildResultDetails() {
+  const correct = questions.filter((item, index) => state.answers[index] === item.answer).length;
+  const percent = Math.round((correct / questions.length) * 100);
+  const details = questions.map((item, index) => ({
+    topic: item.topic,
+    question: item.question,
+    answer: state.answers[index],
+    correctAnswer: item.answer,
+    isCorrect: state.answers[index] === item.answer,
+  }));
+
+  return { correct, percent, details };
+}
+
+function renderSavedResults({ correct, percent, details, savedAt, alreadyPassed = false }) {
+  quizSurface.hidden = true;
+  if (quizLock) quizLock.hidden = true;
+  resultsNode.hidden = false;
+  resultTitle.textContent = `${correct} из ${questions.length}`;
+  resultSummary.textContent =
+    (alreadyPassed
+      ? "Вы уже проходили этот квиз. Повторная попытка закрыта, ниже сохранённый разбор ответов."
+      : percent >= 80
+        ? "Сильный результат: вы уверенно различаете территории, языки и культурные акценты."
+        : percent >= 55
+          ? "Хорошая база есть. Разбор ниже покажет, где стоит перечитать материалы."
+          : "Квиз оказался сложным. Разбор поможет быстро увидеть основные связки атласа.") +
+    (savedAt ? ` Результат сохранён: ${new Date(savedAt).toLocaleString("ru-RU")}.` : "");
+
+  resultList.innerHTML = questions
+    .map((item, index) => {
+      const detail = details[index] || {};
+      const userAnswer = detail.answer;
+      const isCorrect = Boolean(detail.isCorrect);
+      return `
+        <article class="${isCorrect ? "is-correct" : "is-wrong"}">
+          <span>${String(index + 1).padStart(2, "0")} · ${item.topic}</span>
+          <h3>${item.question}</h3>
+          <p><strong>Ваш ответ:</strong> ${userAnswer || "Нет ответа"}</p>
+          <p><strong>Правильный ответ:</strong> ${detail.correctAnswer || item.answer}</p>
+          <p>${item.note}</p>
+        </article>
+      `;
+    })
+    .join("");
+
+  restartButton.hidden = true;
+  resultsNode.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+async function saveQuizResult(result) {
+  if (!supabaseClient || !currentUser) {
+    throw new Error("Для сохранения результата нужно войти в аккаунт.");
+  }
+
+  const { error } = await supabaseClient.from("quiz_results").insert({
+    user_id: currentUser.id,
+    email: currentUser.email,
+    score: result.correct,
+    total: questions.length,
+    percent: result.percent,
+    answers: state.answers,
+    details: result.details,
+  });
+
+  if (error) throw error;
+}
+
+async function showResults() {
+  const result = buildResultDetails();
+  renderSavedResults(result);
+
+  try {
+    await saveQuizResult(result);
+  } catch (error) {
+    if (String(error?.code) === "23505") {
+      resultSummary.textContent += " Результат уже был сохранён ранее, повторная попытка не записана.";
+      return;
+    }
+
+    resultSummary.textContent += " Результат показан на экране, но не сохранился. Проверьте таблицу quiz_results в Supabase.";
+  }
+}
+
+function showQuizLock(title, text) {
+  quizSurface.hidden = true;
+  resultsNode.hidden = true;
+  if (!quizLock) return;
+  quizLock.hidden = false;
+  quizLockTitle.textContent = title;
+  quizLockText.textContent = text;
+}
+
+async function loadExistingResult() {
+  const { data, error } = await supabaseClient
+    .from("quiz_results")
+    .select("score,total,percent,answers,details,created_at")
+    .eq("user_id", currentUser.id)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+}
+
+function initMobileHeaderCollapse() {
+  const mobileQuery = window.matchMedia("(max-width: 640px)");
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  const updateHeader = () => {
+    const currentY = window.scrollY;
+    const scrollingDown = currentY > lastScrollY + 4;
+    const scrollingUp = currentY < lastScrollY - 4;
+
+    if (!mobileQuery.matches || currentY < 72 || scrollingUp) {
+      document.documentElement.classList.remove("mobile-header-condensed");
+    } else if (scrollingDown && currentY > 118) {
+      document.documentElement.classList.add("mobile-header-condensed");
+    }
+
+    lastScrollY = currentY;
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateHeader);
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  mobileQuery.addEventListener?.("change", requestUpdate);
+  requestUpdate();
+}
+
+async function initQuiz() {
+  initMobileHeaderCollapse();
+  quizSurface.hidden = true;
+  resultsNode.hidden = true;
+
+  if (!supabaseClient) {
+    showQuizLock(
+      "Регистрация временно недоступна",
+      "Для квиза нужна авторизация через Supabase. Проверьте, что SUPABASE_URL и SUPABASE_ANON_KEY указаны в config.js.",
+    );
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.getSession();
+  if (error || !data.session?.user) {
+    showQuizLock(
+      "Квиз доступен после входа",
+      "Зарегистрируйтесь или войдите в аккаунт, чтобы пройти квиз. Результат сохраняется один раз.",
+    );
+    return;
+  }
+
+  currentUser = data.session.user;
+
+  try {
+    const existing = await loadExistingResult();
+    if (existing) {
+      state.answers = Array.isArray(existing.answers) ? existing.answers : state.answers;
+      renderSavedResults({
+        correct: existing.score,
+        percent: existing.percent,
+        details: Array.isArray(existing.details) ? existing.details : buildResultDetails().details,
+        savedAt: existing.created_at,
+        alreadyPassed: true,
+      });
+      return;
+    }
+  } catch (_error) {
+    showQuizLock(
+      "Нужна таблица результатов",
+      "Создайте таблицу quiz_results в Supabase по инструкции. После этого квиз начнёт сохранять результаты.",
+    );
+    return;
+  }
+
+  if (quizLock) quizLock.hidden = true;
+  quizSurface.hidden = false;
+  renderQuestion();
+}
+
 optionsNode.addEventListener("click", (event) => {
   const button = event.target.closest("[data-answer]");
   if (!button) return;
@@ -277,10 +474,14 @@ prevButton.addEventListener("click", () => {
   renderQuestion();
 });
 
-nextButton.addEventListener("click", () => {
-  if (!state.answers[state.index]) return;
+nextButton.addEventListener("click", async () => {
+  if (!state.answers[state.index] || quizSaving) return;
   if (state.index === questions.length - 1) {
-    showResults();
+    quizSaving = true;
+    nextButton.disabled = true;
+    nextButton.textContent = "Сохраняю...";
+    await showResults();
+    quizSaving = false;
     return;
   }
   state.index += 1;
@@ -297,4 +498,4 @@ restartButton.addEventListener("click", () => {
   root.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
-renderQuestion();
+initQuiz();

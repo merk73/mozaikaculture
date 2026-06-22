@@ -38,6 +38,15 @@
         </p>
       </section>
 
+      <section class="quiz-lock" data-quiz-lock hidden>
+        <p class="overline">доступ по регистрации</p>
+        <h2 data-quiz-lock-title>Квиз доступен после входа</h2>
+        <p data-quiz-lock-text>
+          Зарегистрируйтесь или войдите в аккаунт, чтобы пройти квиз. Результат сохраняется один раз.
+        </p>
+        <a class="quiz-primary quiz-link" href="index.html?auth=quiz#learn">Войти или зарегистрироваться</a>
+      </section>
+
       <section class="quiz-surface" aria-live="polite">
         <div class="quiz-progress">
           <span data-quiz-step>Вопрос 1 из 15</span>
@@ -73,6 +82,8 @@
       </section>
     </main>
 
-    <script src="quiz.js?v=20260619-card-align-1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="quiz.js?v=20260622-results-1"></script>
   </body>
 </html>
