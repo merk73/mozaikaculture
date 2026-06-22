@@ -119,6 +119,41 @@ function initRevealAnimation() {
   items.forEach((item) => observer.observe(item));
 }
 
+function initPersonTilt() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  document
+    .querySelectorAll(".photo-placeholder.has-image, .person-section-grid article, .immersion-step, .immersion-media")
+    .forEach((card) => {
+      let frame = 0;
+      card.style.setProperty("--tilt-x", "0deg");
+      card.style.setProperty("--tilt-y", "0deg");
+
+      card.addEventListener("pointermove", (event) => {
+        if (frame) cancelAnimationFrame(frame);
+
+        frame = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - 0.5;
+          const y = (event.clientY - rect.top) / rect.height - 0.5;
+          card.style.setProperty("--tilt-x", `${x * 3.8}deg`);
+          card.style.setProperty("--tilt-y", `${y * -3.8}deg`);
+          frame = 0;
+        });
+      });
+
+      card.addEventListener("pointerleave", () => {
+        if (frame) {
+          cancelAnimationFrame(frame);
+          frame = 0;
+        }
+
+        card.style.setProperty("--tilt-x", "0deg");
+        card.style.setProperty("--tilt-y", "0deg");
+      });
+    });
+}
+
 if (person) {
   document.title = `${person.name} · Мозаика культур`;
   document.body.style.setProperty("--person-title-max", `${person.titleMax || 118}px`);
@@ -167,4 +202,5 @@ if (person) {
   renderInfoAside(person);
   renderImmersion(person);
   initRevealAnimation();
+  initPersonTilt();
 }

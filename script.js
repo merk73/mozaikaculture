@@ -74,6 +74,17 @@ function addMotionTargets(root = document) {
 
 function hydrateMotion(root = document) {
   addMotionTargets(root);
+  root.querySelectorAll([
+    ".article-preview",
+    ".online-quiz-cta",
+    ".knowledge-panel",
+    ".event-program article",
+    ".event-photo",
+    ".photo-placeholder.has-image",
+  ].join(",")).forEach((node) => {
+    node.classList.add("tilt-card");
+  });
+
   const items = root.querySelectorAll(".motion-reveal:not([data-motion-bound])");
 
   items.forEach((item) => {
@@ -92,6 +103,8 @@ function initTiltCards(root = document) {
 
   cards.forEach((card) => {
     card.dataset.tiltBound = "true";
+    card.style.setProperty("--tilt-x", "0deg");
+    card.style.setProperty("--tilt-y", "0deg");
     let tiltFrame = 0;
 
     card.addEventListener("pointermove", (event) => {
@@ -105,10 +118,8 @@ function initTiltCards(root = document) {
         const rect = card.getBoundingClientRect();
         const x = (clientX - rect.left) / rect.width - 0.5;
         const y = (clientY - rect.top) / rect.height - 0.5;
-        card.style.setProperty("--tilt-x", `${x * 5.6}deg`);
-        card.style.setProperty("--tilt-y", `${y * -5.6}deg`);
-        card.style.setProperty("--glow-x", `${(x + 0.5) * 100}%`);
-        card.style.setProperty("--glow-y", `${(y + 0.5) * 100}%`);
+        card.style.setProperty("--tilt-x", `${x * 4.4}deg`);
+        card.style.setProperty("--tilt-y", `${y * -4.4}deg`);
         tiltFrame = 0;
       });
     });
@@ -120,8 +131,6 @@ function initTiltCards(root = document) {
 
       card.style.setProperty("--tilt-x", "0deg");
       card.style.setProperty("--tilt-y", "0deg");
-      card.style.setProperty("--glow-x", "50%");
-      card.style.setProperty("--glow-y", "50%");
     });
   });
 }
@@ -142,10 +151,10 @@ function initHeroParallax() {
       const rect = hero.getBoundingClientRect();
       const x = (clientX - rect.left) / rect.width - 0.5;
       const y = (clientY - rect.top) / rect.height - 0.5;
-      hero.style.setProperty("--hero-shift-x", `${x * -38}px`);
-      hero.style.setProperty("--hero-shift-y", `${y * -26}px`);
-      hero.style.setProperty("--hero-tilt-x", `${y * 4.6}deg`);
-      hero.style.setProperty("--hero-tilt-y", `${x * -6.4}deg`);
+      hero.style.setProperty("--hero-shift-x", `${x * -28}px`);
+      hero.style.setProperty("--hero-shift-y", `${y * -18}px`);
+      hero.style.setProperty("--hero-tilt-x", `${y * 3.4}deg`);
+      hero.style.setProperty("--hero-tilt-y", `${x * -4.8}deg`);
       heroFrame = 0;
     });
   });
