@@ -164,14 +164,14 @@ button {
   0% {
     opacity: 0;
     filter: blur(0.8px) saturate(0.98);
-    transform: perspective(1200px) translate3d(0, 74px, 0) rotateX(2.2deg) scale(0.982);
+    transform: perspective(1200px) translate3d(0, 86px, 0) rotateX(3.2deg) scale(0.976);
     transform-origin: center bottom;
   }
 
-  72% {
+  66% {
     opacity: 1;
     filter: blur(0.1px) saturate(1);
-    transform: perspective(1200px) translate3d(0, -2px, 0) rotateX(0deg) scale(1.001);
+    transform: perspective(1200px) translate3d(0, -3px, 0) rotateX(0deg) scale(1.002);
   }
 
   100% {
@@ -207,12 +207,12 @@ button {
 .motion-ready .motion-reveal {
   opacity: 0;
   filter: blur(0.8px) saturate(0.98);
-  transform: perspective(1200px) translate3d(0, 74px, 0) rotateX(2.2deg) scale(0.982);
+  transform: perspective(1200px) translate3d(0, 86px, 0) rotateX(3.2deg) scale(0.976);
   transform-origin: center bottom;
   transition:
-    opacity 900ms var(--ease-out),
-    filter 900ms var(--ease-out),
-    transform 900ms var(--ease-out);
+    opacity 780ms var(--ease-out),
+    filter 780ms var(--ease-out),
+    transform 780ms var(--ease-out);
   transition-delay: var(--motion-delay, 0ms);
   will-change: opacity, filter, transform;
 }
@@ -225,7 +225,7 @@ button {
 
 @media (min-width: 641px) {
   .motion-ready .motion-reveal.is-visible {
-    animation: reveal-smooth-up 900ms var(--ease-out) both;
+    animation: reveal-smooth-up 780ms var(--ease-out) both;
     animation-delay: var(--motion-delay, 0ms);
   }
 
@@ -727,8 +727,8 @@ button {
     rgba(255, 255, 255, 0.055);
   transform: translate(-50%, -50%) rotate(-4deg);
   opacity: 0.48;
-  -webkit-mask: url("assets/khabarovsk-outline.svg") center / contain no-repeat;
-  mask: url("assets/khabarovsk-outline.svg") center / contain no-repeat;
+  -webkit-mask: url("assets/far-east-outline.svg") center / contain no-repeat;
+  mask: url("assets/far-east-outline.svg") center / contain no-repeat;
   pointer-events: none;
 }
 
@@ -2420,12 +2420,12 @@ button {
 .reveal-on-scroll {
   opacity: 0;
   filter: blur(0.8px) saturate(0.98);
-  transform: perspective(1200px) translate3d(0, 70px, 0) rotateX(2deg) scale(0.982);
+  transform: perspective(1200px) translate3d(0, 84px, 0) rotateX(3deg) scale(0.977);
   transform-origin: center bottom;
   transition:
-    opacity 900ms var(--ease-out),
-    filter 900ms var(--ease-out),
-    transform 900ms var(--ease-out);
+    opacity 780ms var(--ease-out),
+    filter 780ms var(--ease-out),
+    transform 780ms var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, filter, transform;
 }
@@ -3281,8 +3281,13 @@ button {
   }
 
   .brand {
-    width: 118px;
+    width: clamp(132px, 45vw, 178px);
     height: 44px;
+    background: url("assets/logo-mobile.svg") left center / contain no-repeat;
+  }
+
+  .brand img {
+    opacity: 0;
   }
 
   .nav-cta {
@@ -3431,8 +3436,8 @@ button {
 
   .motion-ready .motion-reveal {
     filter: none;
-    transform: translate3d(0, 34px, 0) scale(0.99);
-    transition-duration: 680ms;
+    transform: translate3d(0, 48px, 0) scale(0.985);
+    transition-duration: 620ms;
   }
 
   .motion-ready .motion-reveal.is-visible {
@@ -3441,8 +3446,8 @@ button {
 
   .reveal-on-scroll {
     filter: none;
-    transform: translate3d(0, 34px, 0) scale(0.99);
-    transition-duration: 680ms;
+    transform: translate3d(0, 48px, 0) scale(0.985);
+    transition-duration: 620ms;
   }
 
   .reveal-on-scroll.is-visible {
