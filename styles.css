@@ -342,6 +342,7 @@ button {
   isolation: isolate;
   perspective: 1300px;
   transform-style: preserve-3d;
+  touch-action: pan-y;
 }
 
 .hero::before {
@@ -349,6 +350,7 @@ button {
   inset: 0;
   z-index: -3;
   content: "";
+  pointer-events: none;
   background:
     linear-gradient(90deg, rgba(3, 3, 3, 0.96) 0%, rgba(3, 3, 3, 0.78) 38%, rgba(3, 3, 3, 0.2) 100%),
     linear-gradient(180deg, transparent 62%, var(--black) 100%);
@@ -370,6 +372,7 @@ button {
   transform-style: preserve-3d;
   transition: transform 520ms var(--ease-soft), filter 520ms var(--ease-soft), opacity 520ms ease;
   will-change: transform;
+  pointer-events: none;
 }
 
 .motion-ready .hero-art {
@@ -378,6 +381,7 @@ button {
 
 .hero-art img {
   animation: slow-float 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .hero-art::after {
@@ -3661,7 +3665,7 @@ button {
   }
 
   .hero {
-    min-height: 100dvh;
+    min-height: 100svh;
     padding-top: max(138px, calc(env(safe-area-inset-top) + 118px));
     padding-bottom: max(42px, calc(env(safe-area-inset-bottom) + 34px));
     align-items: end;

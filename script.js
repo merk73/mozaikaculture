@@ -15,6 +15,7 @@ const panel = {
 };
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const coarsePointer = window.matchMedia("(pointer: coarse)");
 let motionObserver = null;
 
 function shuffleOptions(options) {
@@ -137,7 +138,7 @@ function initTiltCards(root = document) {
 
 function initHeroParallax() {
   const hero = document.querySelector(".hero");
-  if (!hero || prefersReducedMotion.matches) return;
+  if (!hero || prefersReducedMotion.matches || coarsePointer.matches) return;
   let heroFrame = 0;
 
   hero.addEventListener("pointermove", (event) => {
@@ -157,7 +158,7 @@ function initHeroParallax() {
       hero.style.setProperty("--hero-tilt-y", `${x * -4.8}deg`);
       heroFrame = 0;
     });
-  });
+  }, { passive: true });
 
   hero.addEventListener("pointerleave", () => {
     if (heroFrame) {
