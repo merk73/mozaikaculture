@@ -2706,12 +2706,18 @@ button {
   text-align: center;
 }
 
+.profile-avatar-wrap {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  margin-bottom: 18px;
+}
+
 .profile-avatar {
   display: grid;
   place-items: center;
   width: 92px;
   height: 92px;
-  margin-bottom: 18px;
   color: var(--white);
   font-size: 42px;
   font-weight: 800;
@@ -2721,6 +2727,33 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 50%;
   box-shadow: 0 24px 70px rgba(241, 18, 34, 0.24);
+}
+
+.profile-role-badge {
+  position: absolute;
+  right: -12px;
+  bottom: 8px;
+  display: inline-grid;
+  place-items: center;
+  min-width: 46px;
+  min-height: 24px;
+  padding: 0 10px;
+  color: #321f00;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background:
+    linear-gradient(135deg, #fff2a8 0%, #f0bf3d 45%, #b67808 100%);
+  border: 1px solid rgba(255, 245, 188, 0.72);
+  border-radius: 999px;
+  box-shadow:
+    0 10px 26px rgba(240, 191, 61, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.58);
+}
+
+.profile-role-badge[hidden] {
+  display: none;
 }
 
 .profile-head .overline {
@@ -3478,6 +3511,119 @@ button {
     min-height: 34px;
     padding: 0 10px;
     font-size: 13px;
+  }
+
+  .profile-modal {
+    place-items: stretch;
+    width: 100vw;
+    height: 100dvh;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      10px
+      max(10px, env(safe-area-inset-bottom));
+    overflow: hidden;
+  }
+
+  .profile-card {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 12px;
+    width: 100%;
+    min-height: 0;
+    height: calc(100dvh - max(10px, env(safe-area-inset-top)) - max(10px, env(safe-area-inset-bottom)));
+    max-height: none;
+    padding: 18px 16px 16px;
+    overflow: hidden;
+    border-radius: 22px;
+  }
+
+  .profile-card .auth-close {
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .profile-head {
+    padding: 2px 38px 8px;
+  }
+
+  .profile-avatar-wrap,
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .profile-avatar-wrap {
+    margin-bottom: 10px;
+  }
+
+  .profile-avatar {
+    font-size: 32px;
+  }
+
+  .profile-role-badge {
+    right: -10px;
+    bottom: 2px;
+    min-width: 40px;
+    min-height: 22px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+
+  .profile-card h2 {
+    font-size: clamp(28px, 8vw, 36px);
+    line-height: 1;
+  }
+
+  .profile-head .overline {
+    margin-bottom: 6px;
+  }
+
+  .profile-head p:last-child {
+    max-width: 100%;
+    margin-top: 8px;
+    overflow: hidden;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .profile-quiz {
+    align-self: stretch;
+    min-height: 0;
+    padding: 14px;
+    overflow: hidden;
+    border-radius: 18px;
+  }
+
+  .profile-quiz h3 {
+    font-size: clamp(17px, 5.1vw, 20px);
+    line-height: 1.15;
+  }
+
+  .profile-result {
+    gap: 8px;
+    padding: 13px;
+    border-radius: 15px;
+  }
+
+  .profile-result strong {
+    font-size: clamp(20px, 6vw, 24px);
+  }
+
+  .profile-result p {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.38;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .profile-logout {
+    min-height: 46px;
+    margin-top: 0;
   }
 
   .mobile-header-condensed .site-header {

@@ -341,6 +341,7 @@ const authNameField = document.querySelector("[data-auth-name-field]");
 const profileModal = document.querySelector("[data-profile-modal]");
 const profileCloseButtons = document.querySelectorAll("[data-profile-close]");
 const profileAvatar = document.querySelector("[data-profile-avatar]");
+const profileRole = document.querySelector("[data-profile-role]");
 const profileName = document.querySelector("[data-profile-name]");
 const profileEmail = document.querySelector("[data-profile-email]");
 const profileQuizResult = document.querySelector("[data-profile-quiz-result]");
@@ -364,6 +365,7 @@ const netlifyFormEndpoint = "/";
 const authRedirectPath = window.location.pathname.startsWith("/mozaikaculture/") ? "/mozaikaculture/" : "/";
 const authRedirectUrl = new URL(authRedirectPath, window.location.origin).href;
 const quizIntentKey = "mozaikaQuizAfterAuth";
+const ceoEmail = "habkraihistory@gmail.com";
 
 function markQuizIntent() {
   try {
@@ -542,6 +544,9 @@ function updateAuthState() {
 
 function renderProfile() {
   if (profileAvatar) profileAvatar.textContent = getProfileLetter();
+  if (profileRole) {
+    profileRole.hidden = currentUserEmail.toLowerCase() !== ceoEmail;
+  }
   if (profileName) profileName.textContent = currentUserName || getFallbackName(currentUserEmail);
   if (profileEmail) profileEmail.textContent = currentUserEmail;
   if (profileQuizResult) {
