@@ -356,7 +356,7 @@ async function showResults() {
       return;
     }
 
-    resultSummary.textContent += " Результат показан на экране, но не сохранился. Проверьте таблицу quiz_results в Supabase.";
+    resultSummary.textContent += " Результат показан на экране, но временно не сохранился. Попробуйте позже.";
   }
 }
 
@@ -419,7 +419,7 @@ async function initQuiz() {
   if (!supabaseClient) {
     showQuizLock(
       "Регистрация временно недоступна",
-      "Для квиза нужна авторизация через Supabase. Проверьте, что SUPABASE_URL и SUPABASE_ANON_KEY указаны в config.js.",
+      "Для квиза нужна авторизация. Попробуйте открыть страницу позже.",
     );
     return;
   }
@@ -450,8 +450,8 @@ async function initQuiz() {
     }
   } catch (_error) {
     showQuizLock(
-      "Нужна таблица результатов",
-      "Создайте таблицу quiz_results в Supabase по инструкции. После этого квиз начнёт сохранять результаты.",
+      "Результаты временно недоступны",
+      "Сейчас не получилось загрузить сохраненный результат. Попробуйте позже.",
     );
     return;
   }

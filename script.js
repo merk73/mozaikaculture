@@ -366,6 +366,7 @@ const authRedirectPath = window.location.pathname.startsWith("/mozaikaculture/")
 const authRedirectUrl = new URL(authRedirectPath, window.location.origin).href;
 const quizIntentKey = "mozaikaQuizAfterAuth";
 const ceoEmail = "habkraihistory@gmail.com";
+const goldRingEmails = new Set(["habkraihistory@gmail.com", "yakovenkok2000@gmail.com"]);
 
 function markQuizIntent() {
   try {
@@ -427,7 +428,7 @@ function getProfileLetter() {
 
 async function requestAuth(mode, email, password, name = "") {
   if (!supabaseClient) {
-    throw new Error("Supabase не настроен. Добавьте SUPABASE_URL и SUPABASE_ANON_KEY.");
+    throw new Error("Регистрация временно недоступна. Попробуйте позже.");
   }
 
   if (mode === "register") {
@@ -544,6 +545,9 @@ function updateAuthState() {
 
 function renderProfile() {
   if (profileAvatar) profileAvatar.textContent = getProfileLetter();
+  if (profileAvatar) {
+    profileAvatar.classList.toggle("has-gold-ring", goldRingEmails.has(currentUserEmail.toLowerCase()));
+  }
   if (profileRole) {
     profileRole.hidden = currentUserEmail.toLowerCase() !== ceoEmail;
   }
@@ -575,7 +579,7 @@ async function loadProfileQuizResult() {
     .maybeSingle();
 
   if (error) {
-    renderProfileQuizEmpty("Результат появится здесь после настройки таблицы quiz_results и прохождения квиза.");
+    renderProfileQuizEmpty("Результат появится здесь после прохождения квиза.");
     return;
   }
 
@@ -593,7 +597,7 @@ async function loadProfileQuizResult() {
   profileQuizResult.innerHTML = `
     <strong>${score} из ${total} · ${percent}%</strong>
     <div class="profile-result-meter" aria-hidden="true"><span></span></div>
-    <p>${date ? `Пройдено: ${date}. ` : ""}Повторное прохождение закрыто, результат сохранен в Supabase.</p>
+    <p>${date ? `Пройдено: ${date}. ` : ""}Повторное прохождение закрыто, результат сохранен в личном кабинете.</p>
   `;
 }
 
@@ -662,7 +666,7 @@ async function submitFeedback(payload) {
     });
 
     if (!response.ok) {
-      throw new Error("Сообщение не отправилось. На Netlify форма начнет работать после публикации сайта.");
+      throw new Error("Сообщение не отправилось. Попробуйте позже.");
     }
 
     return "netlify";
