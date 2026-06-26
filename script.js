@@ -175,6 +175,7 @@ function initHeroParallax() {
 
 function initMobileHeaderCollapse() {
   const mobileQuery = window.matchMedia("(max-width: 640px)");
+  const hero = document.querySelector(".hero");
   let lastScrollY = window.scrollY;
   let ticking = false;
 
@@ -182,10 +183,13 @@ function initMobileHeaderCollapse() {
     const currentY = window.scrollY;
     const scrollingDown = currentY > lastScrollY + 4;
     const scrollingUp = currentY < lastScrollY - 4;
+    const collapseStart = hero
+      ? Math.max(180, hero.offsetTop + hero.offsetHeight - 120)
+      : 180;
 
-    if (!mobileQuery.matches || currentY < 72 || scrollingUp) {
+    if (!mobileQuery.matches || currentY < collapseStart || scrollingUp) {
       document.documentElement.classList.remove("mobile-header-condensed");
-    } else if (scrollingDown && currentY > 118) {
+    } else if (scrollingDown) {
       document.documentElement.classList.add("mobile-header-condensed");
     }
 
@@ -503,6 +507,7 @@ function openProfile() {
   profileModal.hidden = false;
   profileModal.classList.add("is-open");
   profileModal.setAttribute("aria-hidden", "false");
+  document.documentElement.classList.add("profile-open");
   renderProfile();
   loadProfileQuizResult();
 }
@@ -512,6 +517,7 @@ function closeProfile() {
   profileModal.classList.remove("is-open");
   profileModal.setAttribute("aria-hidden", "true");
   profileModal.hidden = true;
+  document.documentElement.classList.remove("profile-open");
 }
 
 function setAuthMode(mode) {

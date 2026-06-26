@@ -253,6 +253,7 @@ button {
   transform: translateX(-50%);
   backdrop-filter: blur(24px);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  touch-action: pan-y;
 }
 
 .brand {
@@ -277,6 +278,7 @@ button {
   gap: 6px;
   min-width: 0;
   scrollbar-width: none;
+  touch-action: pan-y;
 }
 
 .main-nav::-webkit-scrollbar {
@@ -2472,6 +2474,8 @@ button {
   display: none;
   place-items: center;
   padding: 22px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .auth-modal.is-open,
@@ -2491,6 +2495,9 @@ button {
   position: relative;
   z-index: 1;
   width: min(470px, 100%);
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 28px;
   color: var(--text);
   background:
@@ -2507,6 +2514,12 @@ button {
   font-size: 42px;
   line-height: 1.04;
   text-wrap: balance;
+}
+
+.profile-card h2 {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .auth-note,
@@ -2699,6 +2712,7 @@ button {
   display: grid;
   min-height: min(620px, calc(100svh - 44px));
   max-height: calc(100svh - 44px);
+  overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
 }
@@ -2706,6 +2720,7 @@ button {
 .profile-head {
   display: grid;
   justify-items: center;
+  min-width: 0;
   padding: 10px 18px 24px;
   text-align: center;
 }
@@ -2775,9 +2790,22 @@ button {
 }
 
 .profile-head p:last-child {
+  max-width: 100%;
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.profile-card > *,
+.profile-quiz,
+.profile-result {
+  min-width: 0;
+}
+
+html.profile-open,
+html.profile-open body {
+  overflow: hidden;
 }
 
 .profile-quiz {
@@ -3529,25 +3557,33 @@ button {
 
   .profile-modal {
     place-items: center;
-    width: 100vw;
+    inset: 0;
+    width: auto;
+    max-width: 100vw;
     height: 100dvh;
     padding:
       max(16px, env(safe-area-inset-top))
-      14px
-      max(16px, env(safe-area-inset-bottom));
+      max(12px, env(safe-area-inset-right))
+      max(16px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
     overflow: hidden;
+    overscroll-behavior: contain;
   }
 
   .profile-card {
     display: grid;
     grid-template-rows: auto auto auto;
     gap: 20px;
-    width: min(100%, 430px);
+    width: min(430px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
     min-height: auto;
     height: auto;
     max-height: calc(100dvh - max(16px, env(safe-area-inset-top)) - max(16px, env(safe-area-inset-bottom)) - 16px);
     padding: 26px 22px 22px;
+    overflow-x: hidden;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
     border-radius: 26px;
   }
 
@@ -3587,6 +3623,9 @@ button {
   .profile-card h2 {
     font-size: clamp(34px, 10vw, 44px);
     line-height: 1.02;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .profile-head .overline {
