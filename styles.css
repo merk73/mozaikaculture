@@ -4102,19 +4102,20 @@ html.profile-open body {
     transform: translate(-50%, -50%) rotate(-5deg);
   }
 
-  html::before {
-    position: fixed;
-    left: 0;
-    z-index: 0;
-    width: 100%;
-    content: "";
-    pointer-events: none;
+  body::before {
+    background: transparent;
   }
 
-  html::before {
+  body::after {
+    position: fixed;
     top: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
     height: calc(176px + env(safe-area-inset-top, 0px));
+    content: "";
     background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.82) 48%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
   }
 
   .atlas::after {
