@@ -34,10 +34,12 @@
 html {
   overflow-x: hidden;
   scroll-behavior: auto;
+  overscroll-behavior-y: auto;
   background: var(--black);
 }
 
 body {
+  min-height: 100%;
   margin: 0;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -47,6 +49,8 @@ body {
     radial-gradient(circle at 82% 4%, rgba(241, 18, 34, 0.18), transparent 34rem),
     linear-gradient(180deg, #030303 0%, #0a0a0c 48%, #050505 100%);
   overflow-x: hidden;
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: touch;
   text-rendering: geometricPrecision;
 }
 
@@ -253,7 +257,6 @@ button {
   transform: translateX(-50%);
   backdrop-filter: blur(24px);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
-  touch-action: pan-y;
 }
 
 .brand {
@@ -278,7 +281,6 @@ button {
   gap: 6px;
   min-width: 0;
   scrollbar-width: none;
-  touch-action: pan-y;
 }
 
 .main-nav::-webkit-scrollbar {
@@ -344,7 +346,6 @@ button {
   isolation: isolate;
   perspective: 1300px;
   transform-style: preserve-3d;
-  touch-action: pan-y;
 }
 
 .hero::before {
@@ -3540,8 +3541,13 @@ html.profile-open body {
     gap: 4px;
     padding: 0 4px 2px;
     max-height: 38px;
+    overflow-x: hidden;
+    overscroll-behavior-x: auto;
+    scroll-snap-type: none;
     opacity: 1;
     transform: translateY(0);
+    -webkit-mask-image: none;
+    mask-image: none;
     transition:
       max-height 260ms var(--ease-soft),
       opacity 220ms ease,

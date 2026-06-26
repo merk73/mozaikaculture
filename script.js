@@ -228,7 +228,6 @@ function initMotion() {
   hydrateMotion(document);
   initTiltCards(document);
   initHeroParallax();
-  initMobileHeaderCollapse();
 }
 
 function renderCards(filter = "all") {
