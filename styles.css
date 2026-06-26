@@ -4112,9 +4112,9 @@ html.profile-open body {
   }
 
   html::before {
-    top: 0;
-    height: calc(132px + env(safe-area-inset-top, 0px));
-    background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.88) 34%, rgba(0, 0, 0, 0) 100%);
+    top: calc(116px + env(safe-area-inset-top, 0px));
+    height: 104px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0) 100%);
   }
 
   .atlas::after {
