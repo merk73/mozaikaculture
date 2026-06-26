@@ -242,7 +242,7 @@ button {
   position: fixed;
   top: 18px;
   left: 50%;
-  z-index: 30;
+  z-index: 120;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 22px;
@@ -4105,7 +4105,7 @@ html.profile-open body {
   html::before {
     position: fixed;
     left: 0;
-    z-index: 12;
+    z-index: 0;
     width: 100%;
     content: "";
     pointer-events: none;
