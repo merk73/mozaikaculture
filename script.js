@@ -68,7 +68,7 @@ function addMotionTargets(root = document) {
   root.querySelectorAll(targets.join(",")).forEach((node, index) => {
     node.classList.add("motion-reveal");
     if (!node.style.getPropertyValue("--motion-delay")) {
-      node.style.setProperty("--motion-delay", `${Math.min(index * 24, 180)}ms`);
+      node.style.setProperty("--motion-delay", `${Math.min(index * 18, 126)}ms`);
     }
   });
 }
@@ -99,7 +99,7 @@ function hydrateMotion(root = document) {
 }
 
 function initTiltCards(root = document) {
-  if (prefersReducedMotion.matches) return;
+  if (prefersReducedMotion.matches || coarsePointer.matches) return;
   const cards = root.querySelectorAll(".tilt-card:not([data-tilt-bound])");
 
   cards.forEach((card) => {
@@ -218,7 +218,7 @@ function initMotion() {
           }
         });
       },
-      { rootMargin: "0px 0px 48% 0px", threshold: 0.01 },
+      { rootMargin: "0px 0px 18% 0px", threshold: 0.04 },
     );
   }
 

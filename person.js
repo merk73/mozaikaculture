@@ -26,7 +26,7 @@ function renderImmersion(personData) {
       const visual = item.image
         ? `
           <figure class="immersion-media">
-            <img src="${item.image}" alt="${item.title}" loading="lazy" decoding="async" />
+            <img src="${item.image}" alt="${item.title}" loading="lazy" decoding="async" data-immersion-image />
           </figure>
         `
         : "";
@@ -113,14 +113,17 @@ function initRevealAnimation() {
         }
       });
     },
-    { rootMargin: "0px 0px 44% 0px", threshold: 0.02 },
+    { rootMargin: "0px 0px 18% 0px", threshold: 0.04 },
   );
 
   items.forEach((item) => observer.observe(item));
 }
 
 function initPersonTilt() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    window.matchMedia("(pointer: coarse)").matches
+  ) return;
 
   document
     .querySelectorAll(".photo-placeholder.has-image, .person-section-grid article, .immersion-step, .immersion-media")
@@ -152,6 +155,16 @@ function initPersonTilt() {
         card.style.setProperty("--tilt-y", "0deg");
       });
     });
+}
+
+function guardImmersionImages() {
+  document.querySelectorAll("[data-immersion-image]").forEach((image) => {
+    image.addEventListener("error", () => {
+      const step = image.closest(".immersion-step");
+      image.closest(".immersion-media")?.remove();
+      step?.classList.add("is-text-only");
+    }, { once: true });
+  });
 }
 
 if (person) {
@@ -201,6 +214,7 @@ if (person) {
 
   renderInfoAside(person);
   renderImmersion(person);
+  guardImmersionImages();
   initRevealAnimation();
   initPersonTilt();
 }

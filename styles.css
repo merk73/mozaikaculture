@@ -218,7 +218,6 @@ button {
     filter 780ms var(--ease-out),
     transform 780ms var(--ease-out);
   transition-delay: var(--motion-delay, 0ms);
-  will-change: opacity, filter, transform;
 }
 
 .motion-ready .motion-reveal.is-visible {
@@ -2438,7 +2437,6 @@ button {
     filter 780ms var(--ease-out),
     transform 780ms var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, filter, transform;
 }
 
 .reveal-on-scroll.is-visible {
@@ -3512,6 +3510,15 @@ html.profile-open body {
 }
 
 @media (max-width: 640px) {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  body {
+    touch-action: manipulation;
+  }
+
   .site-header {
     top: max(10px, calc(env(safe-area-inset-top) + 8px));
     width: calc(100% - 20px);
@@ -3545,9 +3552,10 @@ html.profile-open body {
     gap: 4px;
     padding: 0 4px 2px;
     max-height: 38px;
-    overflow-x: hidden;
-    overscroll-behavior-x: auto;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
     scroll-snap-type: none;
+    touch-action: pan-x;
     opacity: 1;
     transform: translateY(0);
     -webkit-mask-image: none;
@@ -3743,6 +3751,10 @@ html.profile-open body {
     overflow: hidden;
   }
 
+  .motion-ready .hero-mobile-logo {
+    animation: hero-copy-arrive 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
   .hero-mobile-logo img {
     display: block;
     width: 100%;
@@ -3879,7 +3891,8 @@ html.profile-open body {
   .people-card p {
     font-size: 13px;
     line-height: 1.32;
-    max-height: calc(13px * 1.32 * 4);
+    height: calc(13px * 1.32 * 4 - 1px);
+    max-height: calc(13px * 1.32 * 4 - 1px);
     overflow: hidden;
     -webkit-line-clamp: 4;
   }
@@ -3890,8 +3903,8 @@ html.profile-open body {
 
   .motion-ready .motion-reveal {
     filter: none;
-    transform: translate3d(0, 48px, 0) scale(0.985);
-    transition-duration: 620ms;
+    transform: translate3d(0, 56px, 0) scale(0.982);
+    transition-duration: 680ms;
   }
 
   .motion-ready .motion-reveal.is-visible {
@@ -3900,8 +3913,8 @@ html.profile-open body {
 
   .reveal-on-scroll {
     filter: none;
-    transform: translate3d(0, 48px, 0) scale(0.985);
-    transition-duration: 620ms;
+    transform: translate3d(0, 56px, 0) scale(0.982);
+    transition-duration: 680ms;
   }
 
   .reveal-on-scroll.is-visible {
