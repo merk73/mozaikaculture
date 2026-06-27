@@ -402,6 +402,10 @@ button {
   padding-bottom: 34px;
 }
 
+.hero-mobile-logo {
+  display: none;
+}
+
 .overline {
   margin: 0 0 18px;
   color: var(--red);
@@ -3731,6 +3735,26 @@ html.profile-open body {
     padding-bottom: 38px;
   }
 
+  .hero-mobile-logo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2.12;
+    margin: 0 0 26px;
+    overflow: hidden;
+  }
+
+  .hero-mobile-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform: translateY(-27%);
+  }
+
+  .hero-copy > .overline,
+  .hero h1 {
+    display: none;
+  }
+
   .hero h1 {
     max-width: 92vw;
     font-size: clamp(50px, 16vw, 74px);
@@ -3748,14 +3772,7 @@ html.profile-open body {
   }
 
   .hero-art {
-    right: -96vw;
-    bottom: -7svh;
-    width: 252vw;
-    max-width: none;
-    opacity: 0.46;
-    filter: saturate(1.04) contrast(1.08);
-    transform: none !important;
-    transform-origin: center bottom;
+    display: none;
   }
 
   .motion-ready .hero-art {
