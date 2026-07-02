@@ -99,7 +99,7 @@ function hydrateMotion(root = document) {
 }
 
 function initTiltCards(root = document) {
-  if (prefersReducedMotion.matches) return;
+  if (prefersReducedMotion.matches || coarsePointer.matches) return;
   const cards = root.querySelectorAll(".tilt-card:not([data-tilt-bound])");
 
   cards.forEach((card) => {
@@ -236,11 +236,15 @@ function renderCards(filter = "all") {
     .map(
       (person, index) => `
         <a class="people-card motion-reveal tilt-card" href="peoples/${person.slug}.html" style="--motion-delay: ${Math.min(index * 30, 210)}ms">
+          <figure class="card-portrait" aria-hidden="true">
+            <img src="${person.image}" alt="" loading="lazy" decoding="async" />
+          </figure>
           <div class="card-meta">
             <span>${person.areaLabel}</span>
             <span>${person.region}</span>
           </div>
           <div class="card-body">
+            <span class="card-number">${String(index + 1).padStart(2, "0")}</span>
             <h3>${person.name}</h3>
             <p>${person.cardText || person.summary}</p>
           </div>
