@@ -3239,6 +3239,10 @@ html.profile-open body {
     background 180ms ease;
 }
 
+.profile-beta-link[hidden] {
+  display: none;
+}
+
 .profile-beta-link > span:first-child {
   color: var(--red);
   font-size: 12px;

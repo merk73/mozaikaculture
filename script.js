@@ -351,6 +351,7 @@ const profileRole = document.querySelector("[data-profile-role]");
 const profileName = document.querySelector("[data-profile-name]");
 const profileEmail = document.querySelector("[data-profile-email]");
 const profileQuizResult = document.querySelector("[data-profile-quiz-result]");
+const profileBetaLink = document.querySelector("[data-profile-beta]");
 const profileLogout = document.querySelector("[data-profile-logout]");
 const quizGateLinks = document.querySelectorAll("[data-quiz-gate]");
 const passwordToggle = document.querySelector("[data-password-toggle]");
@@ -558,6 +559,9 @@ function renderProfile() {
   }
   if (profileRole) {
     profileRole.hidden = currentUserEmail.toLowerCase() !== ceoEmail;
+  }
+  if (profileBetaLink) {
+    profileBetaLink.hidden = currentUserEmail.toLowerCase() !== ceoEmail;
   }
   if (profileName) profileName.textContent = currentUserName || getFallbackName(currentUserEmail);
   if (profileEmail) profileEmail.textContent = currentUserEmail;
