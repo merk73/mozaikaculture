@@ -3219,6 +3219,55 @@ html.profile-open body {
     transform 220ms var(--ease-soft);
 }
 
+.profile-beta-link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px 18px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 18px 20px;
+  color: var(--text);
+  text-decoration: none;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(241, 18, 34, 0.24), transparent 58%),
+    rgba(255, 255, 255, 0.075);
+  border: 1px solid rgba(241, 18, 34, 0.42);
+  border-radius: 20px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.profile-beta-link > span:first-child {
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.profile-beta-link > strong {
+  grid-column: 1;
+  font-size: 18px;
+}
+
+.profile-beta-link > span:last-child {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 24px;
+}
+
+.profile-beta-link:hover,
+.profile-beta-link:focus-visible {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(241, 18, 34, 0.36), transparent 62%),
+    rgba(255, 255, 255, 0.1);
+  border-color: rgba(241, 18, 34, 0.78);
+  outline: none;
+  transform: translateY(-2px);
+}
+
 .profile-logout:hover,
 .profile-logout:focus-visible {
   color: var(--white);
