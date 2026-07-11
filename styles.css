@@ -5007,3 +5007,213 @@ html.profile-open body {
     grid-row: 1;
   }
 }
+
+/* Compact editorial layout for the events archive. */
+.events {
+  background:
+    radial-gradient(circle at 84% 12%, rgba(241, 18, 34, 0.1), transparent 30rem),
+    #050506;
+}
+
+.events .section-head.compact {
+  max-width: 760px;
+  margin-bottom: 42px;
+}
+
+.event-feature,
+.event-feature-youth {
+  grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+  gap: 12px;
+  margin-top: 0;
+  padding: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: var(--surface-radius);
+}
+
+.event-feature + .event-feature {
+  margin-top: 22px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.event-story {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: clamp(22px, 3vw, 38px);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(241, 18, 34, 0.14), transparent 22rem),
+    rgba(5, 5, 6, 0.72);
+  border: 0;
+  border-radius: calc(var(--surface-radius) - 6px);
+}
+
+.event-story h3 {
+  max-width: 540px;
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.01;
+}
+
+.event-story > p:not(.event-date) {
+  margin-top: 18px;
+  font-size: 17px;
+  line-height: 1.52;
+}
+
+.event-program,
+.event-feature-youth .event-program {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.event-program article,
+.event-feature-youth .event-program article {
+  min-height: 112px;
+  padding: 13px;
+  border-radius: 8px;
+}
+
+.event-program strong {
+  margin-top: 12px;
+  font-size: 17px;
+}
+
+.event-program p {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.event-gallery,
+.event-gallery-youth {
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1.25 / 1;
+  gap: 8px;
+  transform: none;
+}
+
+.event-gallery {
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.7fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.event-gallery .event-photo-main {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.event-gallery-youth {
+  grid-template-columns: minmax(0, 1.34fr) repeat(2, minmax(0, 0.68fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.event-gallery-youth .event-photo-main {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.event-photo,
+.event-photo:nth-child(2),
+.event-photo:nth-child(3) {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: auto;
+  transform: none;
+  border-radius: calc(var(--surface-radius) - 6px);
+}
+
+.event-photo img {
+  display: block;
+  min-height: 0;
+  object-fit: cover;
+}
+
+.event-gallery-youth .event-photo-main img {
+  object-position: center 28%;
+}
+
+.event-photo figcaption {
+  right: 12px;
+  bottom: 10px;
+  left: 12px;
+  font-size: 12px;
+}
+
+@media (max-width: 1120px) {
+  .event-feature,
+  .event-feature-youth {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .event-program,
+  .event-feature-youth .event-program {
+    margin-top: 10px;
+  }
+
+  .event-gallery,
+  .event-gallery-youth {
+    aspect-ratio: 1.45 / 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .events .section-head.compact {
+    margin-bottom: 26px;
+  }
+
+  .event-feature,
+  .event-feature-youth {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .event-feature + .event-feature {
+    margin-top: 16px;
+    padding-top: 8px;
+  }
+
+  .event-story {
+    padding: 20px;
+  }
+
+  .event-story h3 {
+    font-size: clamp(32px, 10vw, 42px);
+  }
+
+  .event-story > p:not(.event-date) {
+    font-size: 15px;
+  }
+
+  .event-program,
+  .event-feature-youth .event-program {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .event-program article,
+  .event-feature-youth .event-program article {
+    min-height: 0;
+  }
+
+  .event-gallery,
+  .event-gallery-youth {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 230px repeat(2, 128px);
+    aspect-ratio: auto;
+  }
+
+  .event-gallery .event-photo-main,
+  .event-gallery-youth .event-photo-main {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .event-gallery:not(.event-gallery-youth) {
+    grid-template-rows: 230px 138px;
+  }
+}

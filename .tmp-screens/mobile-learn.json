@@ -1,0 +1,26 @@
+{
+  "width": 393,
+  "height": 852,
+  "scrollWidth": 393,
+  "overflowX": 0,
+  "header": {
+    "x": 10,
+    "y": 10,
+    "width": 373,
+    "height": 70,
+    "top": 10,
+    "right": 383,
+    "bottom": 80,
+    "left": 10
+  },
+  "learnTitle": {
+    "x": 41,
+    "y": 254.75,
+    "width": 311,
+    "height": 114.609375,
+    "top": 254.75,
+    "right": 352,
+    "bottom": 369.359375,
+    "left": 41
+  }
+}

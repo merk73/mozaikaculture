@@ -1,0 +1,242 @@
+[
+  {
+    "item": "desktop-articles",
+    "audit": {
+      "name": "http://127.0.0.1:4173/?design=curated-verify-2#articles",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 10639,
+      "overflowX": 0,
+      "elements": [
+        {
+          "sel": ".article-preview",
+          "x": 160,
+          "y": 564,
+          "w": 1120,
+          "h": 723
+        },
+        {
+          "sel": ".event-feature",
+          "x": 170,
+          "y": 1828,
+          "w": 1100,
+          "h": 1036
+        },
+        {
+          "sel": ".feedback-grid",
+          "x": 170,
+          "y": 3082,
+          "w": 1100,
+          "h": 554
+        },
+        {
+          "sel": ".hero-copy",
+          "x": 192,
+          "y": -5563,
+          "w": 760,
+          "h": 552
+        },
+        {
+          "sel": ".site-header",
+          "x": 20,
+          "y": 18,
+          "w": 1400,
+          "h": 78
+        }
+      ]
+    }
+  },
+  {
+    "item": "desktop-events",
+    "audit": {
+      "name": "http://127.0.0.1:4173/?design=curated-verify-2#events",
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 10639,
+      "overflowX": 0,
+      "elements": [
+        {
+          "sel": ".article-preview",
+          "x": 160,
+          "y": -709,
+          "w": 1120,
+          "h": 723
+        },
+        {
+          "sel": ".event-feature",
+          "x": 159,
+          "y": 485,
+          "w": 1122,
+          "h": 1057
+        },
+        {
+          "sel": ".feedback-grid",
+          "x": 170,
+          "y": 1809,
+          "w": 1100,
+          "h": 554
+        },
+        {
+          "sel": ".hero-copy",
+          "x": 192,
+          "y": -6836,
+          "w": 760,
+          "h": 552
+        },
+        {
+          "sel": ".site-header",
+          "x": 20,
+          "y": 18,
+          "w": 1400,
+          "h": 78
+        }
+      ]
+    }
+  },
+  {
+    "item": "mobile-articles",
+    "audit": {
+      "name": "http://127.0.0.1:4173/?design=curated-verify-2#articles",
+      "width": 393,
+      "height": 852,
+      "scrollWidth": 393,
+      "scrollHeight": 14041,
+      "overflowX": 0,
+      "elements": [
+        {
+          "sel": ".article-preview",
+          "x": 18,
+          "y": 492,
+          "w": 357,
+          "h": 643
+        },
+        {
+          "sel": ".event-feature",
+          "x": 34,
+          "y": 1511,
+          "w": 324,
+          "h": 2292
+        },
+        {
+          "sel": ".feedback-grid",
+          "x": 34,
+          "y": 3948,
+          "w": 324,
+          "h": 876
+        },
+        {
+          "sel": ".hero-copy",
+          "x": 18,
+          "y": -7519,
+          "w": 357,
+          "h": 494
+        },
+        {
+          "sel": ".site-header",
+          "x": 10,
+          "y": 10,
+          "w": 373,
+          "h": 70
+        }
+      ]
+    }
+  },
+  {
+    "item": "mobile-events",
+    "audit": {
+      "name": "http://127.0.0.1:4173/?design=curated-verify-2#events",
+      "width": 393,
+      "height": 852,
+      "scrollWidth": 393,
+      "scrollHeight": 14041,
+      "overflowX": 0,
+      "elements": [
+        {
+          "sel": ".article-preview",
+          "x": 18,
+          "y": -591,
+          "w": 357,
+          "h": 643
+        },
+        {
+          "sel": ".event-feature",
+          "x": 32,
+          "y": 362,
+          "w": 329,
+          "h": 2325
+        },
+        {
+          "sel": ".feedback-grid",
+          "x": 34,
+          "y": 2865,
+          "w": 324,
+          "h": 876
+        },
+        {
+          "sel": ".hero-copy",
+          "x": 18,
+          "y": -8602,
+          "w": 357,
+          "h": 494
+        },
+        {
+          "sel": ".site-header",
+          "x": 10,
+          "y": 10,
+          "w": 373,
+          "h": 70
+        }
+      ]
+    }
+  },
+  {
+    "item": "mobile-top",
+    "audit": {
+      "name": "http://127.0.0.1:4173/?design=curated-verify-2#top",
+      "width": 393,
+      "height": 852,
+      "scrollWidth": 393,
+      "scrollHeight": 14041,
+      "overflowX": 0,
+      "elements": [
+        {
+          "sel": ".article-preview",
+          "x": 20,
+          "y": 8192,
+          "w": 352,
+          "h": 634
+        },
+        {
+          "sel": ".event-feature",
+          "x": 34,
+          "y": 9169,
+          "w": 324,
+          "h": 2292
+        },
+        {
+          "sel": ".feedback-grid",
+          "x": 34,
+          "y": 11605,
+          "w": 324,
+          "h": 876
+        },
+        {
+          "sel": ".hero-copy",
+          "x": 18,
+          "y": 138,
+          "w": 357,
+          "h": 494
+        },
+        {
+          "sel": ".site-header",
+          "x": 10,
+          "y": 10,
+          "w": 373,
+          "h": 110
+        }
+      ]
+    }
+  }
+]
