@@ -1,0 +1,164 @@
+{"kind":"deck","id":"pr/51m6hc","name":"Deck"}
+{"kind":"layout","layoutId":"62eec897-b9d1-4c0f-aec8-9af7ca957d87","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"bb93f602-3ae7-471d-8613-194365738153","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/byulst","slide":1,"title":"Молодёжный просветительский проект","textShapes":5}
+{"kind":"shape","id":"sh/0vu5ozil","slide":1,"bbox":[640,0,220,720]}
+{"kind":"shape","id":"sh/1w3mx4zq","slide":1,"bbox":[0,0,760,720]}
+{"kind":"shape","id":"sh/qps3ip03","slide":1,"bbox":[72,82,58,6]}
+{"kind":"textbox","id":"sh/cralkzi9","slide":1,"text":"Молодёжный просветительский проект\nо коренных народах Дальнего Востока","textPreview":"Молодёжный просветительский проект | о коренных народах Дальнего Востока","textChars":70,"textLines":2,"bbox":[72,246,590,92]}
+{"kind":"textbox","id":"sh/ds3mt4zu","slide":1,"text":"Живые события + цифровая образовательная платформа","textPreview":"Живые события + цифровая образовательная платформа","textChars":50,"textLines":1,"bbox":[72,370,550,58]}
+{"kind":"shape","id":"sh/21s3e507","slide":1,"bbox":[72,476,244,36]}
+{"kind":"textbox","id":"sh/3m14nahs","slide":1,"text":"ПРОЕКТ ДЛЯ ПАРТНЁРСТВА","textPreview":"ПРОЕКТ ДЛЯ ПАРТНЁРСТВА","textChars":22,"textLines":1,"bbox":[86,484,216,20]}
+{"kind":"textbox","id":"sh/3ap8n2pw","slide":1,"text":"Команда проекта «Мозаика культур»\nХабаровск · 2026","textPreview":"Команда проекта «Мозаика культур» | Хабаровск · 2026","textChars":50,"textLines":2,"bbox":[72,596,470,54]}
+{"kind":"textbox","id":"sh/i9g7uxob","slide":1,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1192,674,40,18]}
+{"kind":"image","id":"im/y9c7ql87","slide":1,"name":"","alt":"Участница Дня молодёжи в национальном костюме","bbox":[720,0,560,720]}
+{"kind":"image","id":"im/als7ml8b","slide":1,"name":"","alt":"Логотип Мозаика культур","bbox":[72,116,242,88]}
+{"kind":"notes","id":"nt/byulst","slide":1,"text":""}
+{"kind":"slide","id":"sl/prr4bl","slide":2,"title":"ПОЧЕМУ ПОЯВИЛСЯ ПРОЕКТ","textShapes":11}
+{"kind":"textbox","id":"sh/wj658fy5","slide":2,"text":"ПОЧЕМУ ПОЯВИЛСЯ ПРОЕКТ","textPreview":"ПОЧЕМУ ПОЯВИЛСЯ ПРОЕКТ","textChars":22,"textLines":1,"bbox":[72,50,500,20]}
+{"kind":"textbox","id":"sh/vixozahk","slide":2,"text":"Культурное наследие есть.\nСовременного входа в него мало.","textPreview":"Культурное наследие есть. | Современного входа в него мало.","textChars":57,"textLines":2,"bbox":[72,82,1136,80]}
+{"kind":"textbox","id":"sh/uxon6pgz","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1192,674,40,18]}
+{"kind":"shape","id":"sh/5oz654zm","slide":2,"bbox":[72,683,1080,1]}
+{"kind":"textbox","id":"sh/4nq5czy1","slide":2,"text":"СЛОЖНО","textPreview":"СЛОЖНО","textChars":6,"textLines":1,"bbox":[72,238,170,24]}
+{"kind":"textbox","id":"sh/jmxo3uhg","slide":2,"text":"Материалы часто написаны академично и не рассчитаны на первый контакт.","textPreview":"Материалы часто написаны академично и не рассчитаны на первый контакт.","textChars":70,"textLines":1,"bbox":[254,236,620,64]}
+{"kind":"shape","id":"sh/ilonapgv","slide":2,"bbox":[72,312,802,1]}
+{"kind":"textbox","id":"sh/lsvmt0z2","slide":2,"text":"РАЗРОЗНЕННО","textPreview":"РАЗРОЗНЕННО","textChars":11,"textLines":1,"bbox":[72,343,170,24]}
+{"kind":"textbox","id":"sh/krm50vyx","slide":2,"text":"Информация о народах, языках и традициях находится в разных источниках.","textPreview":"Информация о народах, языках и традициях находится в разных источниках.","textChars":71,"textLines":1,"bbox":[254,341,620,64]}
+{"kind":"shape","id":"sh/i1o3u9w3","slide":2,"bbox":[72,417,802,1]}
+{"kind":"textbox","id":"sh/j2xknex8","slide":2,"text":"НЕ ДЛЯ МОЛОДЁЖИ","textPreview":"НЕ ДЛЯ МОЛОДЁЖИ","textChars":15,"textLines":1,"bbox":[72,448,170,24]}
+{"kind":"textbox","id":"sh/4n6lwjet","slide":2,"text":"Мало форматов, где можно увидеть, попробовать, обсудить и продолжить самому.","textPreview":"Мало форматов, где можно увидеть, попробовать, обсудить и продолжить самому.","textChars":76,"textLines":1,"bbox":[254,446,620,64]}
+{"kind":"shape","id":"sh/5of2p4ve","slide":2,"bbox":[72,522,802,1]}
+{"kind":"shape","id":"sh/6po3y9wz","slide":2,"bbox":[930,214,278,382]}
+{"kind":"textbox","id":"sh/rqhkredk","slide":2,"text":"Наша задача","textPreview":"Наша задача","textChars":11,"textLines":1,"bbox":[962,258,210,24]}
+{"kind":"textbox","id":"sh/srql0je5","slide":2,"text":"Сделать культуры региона понятными, современными и живыми.","textPreview":"Сделать культуры региона понятными, современными и живыми.","textChars":58,"textLines":1,"bbox":[962,306,210,232]}
+{"kind":"notes","id":"nt/prr4bl","slide":2,"text":""}
+{"kind":"slide","id":"sl/3c8pg4","slide":3,"title":"МОДЕЛЬ ПРОЕКТА","textShapes":11}
+{"kind":"textbox","id":"sh/18n6p8ne","slide":3,"text":"МОДЕЛЬ ПРОЕКТА","textPreview":"МОДЕЛЬ ПРОЕКТА","textChars":14,"textLines":1,"bbox":[72,50,500,20]}
+{"kind":"textbox","id":"sh/e5c7udon","slide":3,"text":"Один проект работает\nи в событии, и после него.","textPreview":"Один проект работает | и в событии, и после него.","textChars":47,"textLines":2,"bbox":[72,82,1136,80]}
+{"kind":"textbox","id":"sh/z6lony58","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1192,674,40,18]}
+{"kind":"shape","id":"sh/ovep0n6p","slide":3,"bbox":[72,683,1080,1]}
+{"kind":"shape","id":"sh/9wnqtsna","slide":3,"bbox":[72,236,506,312]}
+{"kind":"textbox","id":"sh/mtw7ydoz","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[102,265,58,48]}
+{"kind":"textbox","id":"sh/nu5ori5k","slide":3,"text":"Живой формат","textPreview":"Живой формат","textChars":12,"textLines":1,"bbox":[180,274,330,44]}
+{"kind":"textbox","id":"sh/wzyp4n61","slide":3,"text":"Лекции · выставки · мастер-классы · командные задания · квизы","textPreview":"Лекции · выставки · мастер-классы · командные задания · квизы","textChars":61,"textLines":1,"bbox":[102,348,410,100]}
+{"kind":"textbox","id":"sh/x07qxsnm","slide":3,"text":"Первый контакт строится через участие и разговор.","textPreview":"Первый контакт строится через участие и разговор.","textChars":49,"textLines":1,"bbox":[102,472,400,46]}
+{"kind":"shape","id":"sh/l0321ofi","slide":3,"bbox":[578,391,124,4]}
+{"kind":"shape","id":"sh/0zu1sjex","slide":3,"bbox":[690,377,30,30]}
+{"kind":"shape","id":"sh/zylkzexc","slide":3,"bbox":[702,236,506,312]}
+{"kind":"textbox","id":"sh/yxcjq9wr","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[732,265,58,48]}
+{"kind":"textbox","id":"sh/94n258fe","slide":3,"text":"Цифровое продолжение","textPreview":"Цифровое продолжение","textChars":20,"textLines":1,"bbox":[810,274,350,44]}
+{"kind":"textbox","id":"sh/83elw3e9","slide":3,"text":"Онлайн-атлас · статьи · карточки · тесты · личный результат","textPreview":"Онлайн-атлас · статьи · карточки · тесты · личный результат","textChars":59,"textLines":1,"bbox":[732,348,410,100]}
+{"kind":"textbox","id":"sh/n25k3yxo","slide":3,"text":"Интерес не заканчивается вместе с мероприятием.","textPreview":"Интерес не заканчивается вместе с мероприятием.","textChars":47,"textLines":1,"bbox":[732,472,400,46]}
+{"kind":"notes","id":"nt/3c8pg4","slide":3,"text":""}
+{"kind":"slide","id":"sl/h3ps1y","slide":4,"title":"29 АПРЕЛЯ · ПЕРВОЕ МЕРОПРИЯТИЕ","textShapes":13}
+{"kind":"textbox","id":"sh/4rqpcvyh","slide":4,"text":"29 АПРЕЛЯ · ПЕРВОЕ МЕРОПРИЯТИЕ","textPreview":"29 АПРЕЛЯ · ПЕРВОЕ МЕРОПРИЯТИЕ","textChars":30,"textLines":1,"bbox":[72,50,500,20]}
+{"kind":"textbox","id":"sh/jqhojqxw","slide":4,"text":"Первый формат уже прошёл\nпроверку живой аудиторией.","textPreview":"Первый формат уже прошёл | проверку живой аудиторией.","textChars":51,"textLines":2,"bbox":[72,82,1136,80]}
+{"kind":"textbox","id":"sh/ip87algb","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1192,674,40,18]}
+{"kind":"shape","id":"sh/twjqp0fy","slide":4,"bbox":[72,683,1080,1]}
+{"kind":"textbox","id":"sh/10jqtkfu","slide":4,"text":"В одной встрече","textPreview":"В одной встрече","textChars":15,"textLines":1,"bbox":[716,228,330,28]}
+{"kind":"textbox","id":"sh/gzapkfyp","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[716,282,44,28]}
+{"kind":"textbox","id":"sh/2x4fa90j","slide":4,"text":"просветительская лекция","textPreview":"просветительская лекция","textChars":23,"textLines":1,"bbox":[774,278,390,56]}
+{"kind":"shape","id":"sh/3ydwje14","slide":4,"bbox":[774,340,390,1]}
+{"kind":"textbox","id":"sh/ozmxcjip","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[716,354,44,28]}
+{"kind":"textbox","id":"sh/p0veloja","slide":4,"text":"знакомство с культурными предметами","textPreview":"знакомство с культурными предметами","textChars":35,"textLines":1,"bbox":[774,350,390,56]}
+{"kind":"shape","id":"sh/q1ofet0v","slide":4,"bbox":[774,412,390,1]}
+{"kind":"textbox","id":"sh/b2xwny10","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[716,426,44,28]}
+{"kind":"textbox","id":"sh/c36xgjil","slide":4,"text":"практические и командные задания","textPreview":"практические и командные задания","textChars":32,"textLines":1,"bbox":[774,422,390,56]}
+{"kind":"shape","id":"sh/d4fepoj6","slide":4,"bbox":[774,484,390,1]}
+{"kind":"textbox","id":"sh/65kv2p0b","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[716,498,44,28]}
+{"kind":"textbox","id":"sh/r6twbu1w","slide":4,"text":"тематический квиз","textPreview":"тематический квиз","textChars":17,"textLines":1,"bbox":[774,494,390,56]}
+{"kind":"shape","id":"sh/vypkn6dc","slide":4,"bbox":[774,556,390,1]}
+{"kind":"textbox","id":"sh/axg3u1cr","slide":4,"text":"Формат объединяет знания, предметный опыт и командное участие.","textPreview":"Формат объединяет знания, предметный опыт и командное участие.","textChars":62,"textLines":1,"bbox":[716,580,470,42]}
+{"kind":"image","id":"im/hcfatcni","slide":4,"name":"","geometry":"roundRect","alt":"Участники квиза Мозаика культур","bbox":[72,220,350,400]}
+{"kind":"image","id":"im/u94rihor","slide":4,"name":"","geometry":"roundRect","alt":"Предметы выставки","bbox":[438,220,224,192]}
+{"kind":"image","id":"im/vadsr25c","slide":4,"name":"","geometry":"roundRect","alt":"Команда события","bbox":[438,428,224,192]}
+{"kind":"notes","id":"nt/h3ps1y","slide":4,"text":""}
+{"kind":"slide","id":"sl/3pvsau","slide":5,"title":"27 ИЮНЯ · ДЕНЬ МОЛОДЁЖИ В ХАБАРОВСКЕ","textShapes":7}
+{"kind":"shape","id":"sh/jqlsvelo","slide":5,"bbox":[420,0,150,720]}
+{"kind":"textbox","id":"sh/y5cbm9k3","slide":5,"text":"27 ИЮНЯ · ДЕНЬ МОЛОДЁЖИ В ХАБАРОВСКЕ","textPreview":"27 ИЮНЯ · ДЕНЬ МОЛОДЁЖИ В ХАБАРОВСКЕ","textChars":36,"textLines":1,"bbox":[570,52,560,20]}
+{"kind":"textbox","id":"sh/twna18jq","slide":5,"text":"Проект вышел\nв открытое городское\nпространство.","textPreview":"Проект вышел | в открытое городское | пространство.","textChars":47,"textLines":3,"bbox":[570,88,620,150]}
+{"kind":"textbox","id":"sh/8vets325","slide":5,"text":"Лекция, выставка, мастер-классы и живое общение работали как единая площадка знакомства с культурами региона.","textPreview":"Лекция, выставка, мастер-классы и живое общение работали как единая площадка знакомства с культурами региона.","textChars":109,"textLines":1,"bbox":[570,250,600,76]}
+{"kind":"textbox","id":"sh/ozatgz21","slide":5,"text":"лекция","textPreview":"лекция","textChars":6,"textLines":1,"bbox":[570,588,190,20]}
+{"kind":"textbox","id":"sh/e1kvyhkv","slide":5,"text":"участие","textPreview":"участие","textChars":7,"textLines":1,"bbox":[774,588,190,20]}
+{"kind":"textbox","id":"sh/z2tw7mlg","slide":5,"text":"мастер-класс","textPreview":"мастер-класс","textChars":12,"textLines":1,"bbox":[978,588,190,20]}
+{"kind":"textbox","id":"sh/032d0r21","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1192,674,40,18]}
+{"kind":"image","id":"im/p47614b2","slide":5,"name":"","alt":"Девушка в национальном костюме на Дне молодёжи","bbox":[0,0,520,720]}
+{"kind":"image","id":"im/q5g7a9cn","slide":5,"name":"","geometry":"roundRect","alt":"Открытая лекция","bbox":[570,352,190,220]}
+{"kind":"image","id":"im/b6po3et8","slide":5,"name":"","geometry":"roundRect","alt":"Участники площадки","bbox":[774,352,190,220]}
+{"kind":"image","id":"im/sbe50fu9","slide":5,"name":"","geometry":"roundRect","alt":"Мастер-класс","bbox":[978,352,190,220]}
+{"kind":"notes","id":"nt/3pvsau","slide":5,"text":""}
+{"kind":"slide","id":"sl/w1gkda","slide":6,"title":"ЦИФРОВАЯ ПЛАТФОРМА","textShapes":14}
+{"kind":"textbox","id":"sh/10jq5kju","slide":6,"text":"ЦИФРОВАЯ ПЛАТФОРМА","textPreview":"ЦИФРОВАЯ ПЛАТФОРМА","textChars":18,"textLines":1,"bbox":[72,50,500,20]}
+{"kind":"textbox","id":"sh/ex87a5kj","slide":6,"text":"После события интерес\nне обрывается.","textPreview":"После события интерес | не обрывается.","textChars":36,"textLines":2,"bbox":[72,82,1136,80]}
+{"kind":"textbox","id":"sh/zyho3a14","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1192,674,40,18]}
+{"kind":"shape","id":"sh/o3apgf2l","slide":6,"bbox":[72,683,1080,1]}
+{"kind":"shape","id":"sh/9ojq9kj6","slide":6,"bbox":[72,216,446,410]}
+{"kind":"textbox","id":"sh/m1s7epkf","slide":6,"text":"20","textPreview":"20","textChars":2,"textLines":1,"bbox":[104,242,130,84]}
+{"kind":"textbox","id":"sh/n2187u10","slide":6,"text":"народов\nв онлайн-атласе","textPreview":"народов | в онлайн-атласе","textChars":23,"textLines":2,"bbox":[238,255,220,66]}
+{"kind":"shape","id":"sh/wrupkz2h","slide":6,"bbox":[104,342,382,1]}
+{"kind":"shape","id":"sh/xs3qd4j2","slide":6,"bbox":[104,372,8,8]}
+{"kind":"textbox","id":"sh/1wnyx8rm","slide":6,"text":"отдельные страницы о каждом народе","textPreview":"отдельные страницы о каждом народе","textChars":34,"textLines":1,"bbox":[128,364,340,36]}
+{"kind":"shape","id":"sh/gvex43q1","slide":6,"bbox":[104,425,8,8]}
+{"kind":"textbox","id":"sh/fulgvy9g","slide":6,"text":"территории, языки и культурные традиции","textPreview":"территории, языки и культурные традиции","textChars":39,"textLines":1,"bbox":[128,417,340,36]}
+{"kind":"shape","id":"sh/etcf2t8v","slide":6,"bbox":[104,478,8,8]}
+{"kind":"textbox","id":"sh/p0ny18ri","slide":6,"text":"образовательные карточки и мини-тесты","textPreview":"образовательные карточки и мини-тесты","textChars":37,"textLines":1,"bbox":[128,470,340,36]}
+{"kind":"shape","id":"sh/ozeh83qd","slide":6,"bbox":[104,531,8,8]}
+{"kind":"textbox","id":"sh/3y5gzy9s","slide":6,"text":"статьи для углублённого изучения","textPreview":"статьи для углублённого изучения","textChars":32,"textLines":1,"bbox":[128,523,340,36]}
+{"kind":"shape","id":"sh/2xwz6d87","slide":6,"bbox":[550,216,430,410]}
+{"kind":"textbox","id":"sh/43axwjat","slide":6,"text":"15 вопросов","textPreview":"15 вопросов","textChars":11,"textLines":1,"bbox":[574,504,178,32]}
+{"kind":"textbox","id":"sh/w7excjip","slide":6,"text":"Большой квиз с сохранением результата в личном кабинете.","textPreview":"Большой квиз с сохранением результата в личном кабинете.","textChars":56,"textLines":1,"bbox":[574,545,350,56]}
+{"kind":"shape","id":"sh/x8ny5oza","slide":6,"bbox":[1012,216,196,410]}
+{"kind":"textbox","id":"sh/b65g3eh4","slide":6,"text":"Открыть сайт","textPreview":"Открыть сайт","textChars":12,"textLines":1,"bbox":[1034,420,152,28]}
+{"kind":"textbox","id":"sh/kbyhg3i1","slide":6,"text":"мозаикакультур.рф","textPreview":"мозаикакультур.рф","textChars":17,"textLines":1,"bbox":[1024,458,172,60]}
+{"kind":"textbox","id":"sh/5c7y9oz6","slide":6,"text":"Сканируйте камерой","textPreview":"Сканируйте камерой","textChars":18,"textLines":1,"bbox":[1030,570,160,22]}
+{"kind":"image","id":"im/ap47ul8j","slide":6,"name":"","geometry":"roundRect","alt":"Интерфейс цифрового квиза","bbox":[574,238,382,240]}
+{"kind":"image","id":"im/1wb6xw7m","slide":6,"name":"","alt":"QR-код сайта Мозаика культур","bbox":[1034,240,152,152]}
+{"kind":"notes","id":"nt/w1gkda","slide":6,"text":""}
+{"kind":"slide","id":"sl/53lz02","slide":7,"title":"ПОЧЕМУ ЭТА МОДЕЛЬ РАБОТАЕТ","textShapes":16}
+{"kind":"textbox","id":"sh/eponqd03","slide":7,"text":"ПОЧЕМУ ЭТА МОДЕЛЬ РАБОТАЕТ","textPreview":"ПОЧЕМУ ЭТА МОДЕЛЬ РАБОТАЕТ","textChars":26,"textLines":1,"bbox":[72,50,500,20]}
+{"kind":"textbox","id":"sh/1sz6lsze","slide":7,"text":"Проект готов к масштабу,\nпотому что не зависит от одного события.","textPreview":"Проект готов к масштабу, | потому что не зависит от одного события.","textChars":65,"textLines":2,"bbox":[72,82,1136,80]}
+{"kind":"textbox","id":"sh/gr65sni9","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1192,674,40,18]}
+{"kind":"shape","id":"sh/3uhon2hk","slide":7,"bbox":[72,683,1080,1]}
+{"kind":"textbox","id":"sh/2t8nux0z","slide":7,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,225,50,32]}
+{"kind":"textbox","id":"sh/pwz6pszq","slide":7,"text":"ЖИВОЕ + ЦИФРОВОЕ","textPreview":"ЖИВОЕ + ЦИФРОВОЕ","textChars":16,"textLines":1,"bbox":[146,225,300,32]}
+{"kind":"textbox","id":"sh/ovq5wni5","slide":7,"text":"Мероприятие создаёт интерес, сайт помогает продолжить изучение.","textPreview":"Мероприятие создаёт интерес, сайт помогает продолжить изучение.","textChars":63,"textLines":1,"bbox":[474,223,658,54]}
+{"kind":"shape","id":"sh/jyd4byhg","slide":7,"bbox":[146,287,986,1]}
+{"kind":"textbox","id":"sh/ix4nit0v","slide":7,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[72,317,50,32]}
+{"kind":"textbox","id":"sh/cz6hw361","slide":7,"text":"СОВРЕМЕННЫЙ ЯЗЫК","textPreview":"СОВРЕМЕННЫЙ ЯЗЫК","textChars":16,"textLines":1,"bbox":[146,317,300,32]}
+{"kind":"textbox","id":"sh/d0zi58nm","slide":7,"text":"Визуальная подача и интерактивные форматы понятны молодой аудитории.","textPreview":"Визуальная подача и интерактивные форматы понятны молодой аудитории.","textChars":68,"textLines":1,"bbox":[474,315,658,54]}
+{"kind":"shape","id":"sh/qxozutob","slide":7,"bbox":[146,379,986,1]}
+{"kind":"textbox","id":"sh/ryx03y5w","slide":7,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[72,409,50,32]}
+{"kind":"textbox","id":"sh/03q10nmd","slide":7,"text":"ЕДИНАЯ СИСТЕМА","textPreview":"ЕДИНАЯ СИСТЕМА","textChars":14,"textLines":1,"bbox":[146,409,300,32]}
+{"kind":"textbox","id":"sh/14zi98ny","slide":7,"text":"Культура, образование и технологии собраны в одном маршруте.","textPreview":"Культура, образование и технологии собраны в одном маршруте.","textChars":60,"textLines":1,"bbox":[474,407,658,54]}
+{"kind":"shape","id":"sh/e18zydo7","slide":7,"bbox":[146,471,986,1]}
+{"kind":"textbox","id":"sh/z2h07i5s","slide":7,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[72,501,50,32]}
+{"kind":"textbox","id":"sh/g7mhoj69","slide":7,"text":"ТИРАЖИРУЕМЫЙ ФОРМАТ","textPreview":"ТИРАЖИРУЕМЫЙ ФОРМАТ","textChars":19,"textLines":1,"bbox":[146,501,300,32]}
+{"kind":"textbox","id":"sh/h8vixone","slide":7,"text":"Лекции, выставки и мастер-классы можно проводить на новых площадках.","textPreview":"Лекции, выставки и мастер-классы можно проводить на новых площадках.","textChars":68,"textLines":1,"bbox":[474,499,658,54]}
+{"kind":"shape","id":"sh/xsn65gb6","slide":7,"bbox":[146,563,986,1]}
+{"kind":"shape","id":"sh/wrupcbul","slide":7,"bbox":[1148,225,60,338]}
+{"kind":"textbox","id":"sh/bqlo36t0","slide":7,"text":"+","textPreview":"+","textChars":1,"textLines":1,"bbox":[1155,338,46,70]}
+{"kind":"notes","id":"nt/53lz02","slide":7,"text":""}
+{"kind":"slide","id":"sl/10dg0i","slide":8,"title":"СЛЕДУЮЩИЙ ШАГ","textShapes":17}
+{"kind":"textbox","id":"sh/z6983qxc","slide":8,"text":"СЛЕДУЮЩИЙ ШАГ","textPreview":"СЛЕДУЮЩИЙ ШАГ","textChars":13,"textLines":1,"bbox":[72,50,300,20]}
+{"kind":"textbox","id":"sh/072pwvex","slide":8,"text":"Поддержка поможет сделать\nпроект региональной программой.","textPreview":"Поддержка поможет сделать | проект региональной программой.","textChars":57,"textLines":2,"bbox":[72,86,850,116]}
+{"kind":"textbox","id":"sh/l8bqp0f2","slide":8,"text":"Нам нужна поддержка правительства края","textPreview":"Нам нужна поддержка правительства края","textChars":38,"textLines":1,"bbox":[72,238,570,34]}
+{"kind":"textbox","id":"sh/qh07qlwf","slide":8,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[72,300,44,30]}
+{"kind":"textbox","id":"sh/b29ozqx0","slide":8,"text":"ОРГАНИЗАЦИОННАЯ","textPreview":"ОРГАНИЗАЦИОННАЯ","textChars":15,"textLines":1,"bbox":[132,300,210,30]}
+{"kind":"textbox","id":"sh/c3ipsvel","slide":8,"text":"площадки и включение в молодёжные и образовательные события","textPreview":"площадки и включение в молодёжные и образовательные события","textChars":59,"textLines":1,"bbox":[354,298,520,52]}
+{"kind":"shape","id":"sh/d4rq1gf6","slide":8,"bbox":[132,357,742,1]}
+{"kind":"textbox","id":"sh/axk725wz","slide":8,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[72,382,44,30]}
+{"kind":"textbox","id":"sh/vyt8vaxk","slide":8,"text":"ЭКСПЕРТНАЯ","textPreview":"ЭКСПЕРТНАЯ","textChars":10,"textLines":1,"bbox":[132,382,210,30]}
+{"kind":"textbox","id":"sh/bqpoj294","slide":8,"text":"контакт с профильными учреждениями и представителями народов","textPreview":"контакт с профильными учреждениями и представителями народов","textChars":60,"textLines":1,"bbox":[354,380,520,52]}
+{"kind":"shape","id":"sh/apg7qx8j","slide":8,"bbox":[132,439,742,1]}
+{"kind":"textbox","id":"sh/xs76lsra","slide":8,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[72,464,44,30]}
+{"kind":"textbox","id":"sh/wrypsnqp","slide":8,"text":"ИНФОРМАЦИОННАЯ","textPreview":"ИНФОРМАЦИОННАЯ","textChars":14,"textLines":1,"bbox":[132,464,210,30]}
+{"kind":"textbox","id":"sh/ju9on290","slide":8,"text":"доступ к региональной аудитории и партнёрским каналам","textPreview":"доступ к региональной аудитории и партнёрским каналам","textChars":53,"textLines":1,"bbox":[354,462,520,52]}
+{"kind":"shape","id":"sh/ytg7ux8f","slide":8,"bbox":[132,521,742,1]}
+{"kind":"shape","id":"sh/5wrqpcr6","slide":8,"bbox":[930,214,278,348]}
+{"kind":"textbox","id":"sh/kvipw7ql","slide":8,"text":"Что это даст","textPreview":"Что это даст","textChars":12,"textLines":1,"bbox":[962,246,210,28]}
+{"kind":"textbox","id":"sh/7i98rm9c","slide":8,"text":"Больше точных материалов.\nБольше живых встреч.\nБольше молодых людей в проекте.","textPreview":"Больше точных материалов. | Больше живых встреч. | Больше молодых людей в проекте.","textChars":78,"textLines":3,"bbox":[962,302,210,210]}
+{"kind":"textbox","id":"sh/6x07yh8r","slide":8,"text":"«Мозаика культур» показывает Дальний Восток как пространство множества живых культур, языков и историй.","textPreview":"«Мозаика культур» показывает Дальний Восток как пространство множества живых культур, языков и историй.","textChars":103,"textLines":1,"bbox":[72,610,970,42]}
+{"kind":"textbox","id":"sh/2d4rqlsz","slide":8,"text":"мозаикакультур.рф","textPreview":"мозаикакультур.рф","textChars":17,"textLines":1,"bbox":[1002,620,206,24]}
+{"kind":"textbox","id":"sh/3edsz6tk","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1192,674,40,18]}
+{"kind":"shape","id":"sh/4fm9sba5","slide":8,"bbox":[72,683,1080,1]}
+{"kind":"notes","id":"nt/10dg0i","slide":8,"text":""}

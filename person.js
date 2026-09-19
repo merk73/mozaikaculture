@@ -94,6 +94,7 @@ function prepareRevealAnimation() {
 }
 
 function initRevealAnimation() {
+  if (document.body.classList.contains("site-refresh")) return;
   prepareRevealAnimation();
 
   const items = document.querySelectorAll(".reveal-on-scroll");
@@ -120,6 +121,7 @@ function initRevealAnimation() {
 }
 
 function initPersonTilt() {
+  if (document.body.classList.contains("site-refresh")) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   document

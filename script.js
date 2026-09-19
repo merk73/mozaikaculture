@@ -3,6 +3,7 @@ const peoples = window.MOZAIKA_PEOPLES || [];
 const grid = document.querySelector("[data-people-grid]");
 const filterButtons = document.querySelectorAll("[data-filter]");
 const tabs = document.querySelector("[data-people-tabs]");
+const peopleSelect = document.querySelector("[data-people-select]");
 const panel = {
   region: document.querySelector("[data-panel-region]"),
   type: document.querySelector("[data-panel-type]"),
@@ -16,6 +17,7 @@ const panel = {
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const coarsePointer = window.matchMedia("(pointer: coarse)");
+const isHomePage = document.body.classList.contains("home-page");
 let motionObserver = null;
 
 function shuffleOptions(options) {
@@ -74,6 +76,8 @@ function addMotionTargets(root = document) {
 }
 
 function hydrateMotion(root = document) {
+  // Keep the home page in normal document flow without nested reveal effects.
+  if (document.body.classList.contains("site-refresh")) return;
   addMotionTargets(root);
   root.querySelectorAll([
     ".article-preview",
@@ -99,6 +103,7 @@ function hydrateMotion(root = document) {
 }
 
 function initTiltCards(root = document) {
+  if (document.body.classList.contains("site-refresh")) return;
   if (prefersReducedMotion.matches || coarsePointer.matches) return;
   const cards = root.querySelectorAll(".tilt-card:not([data-tilt-bound])");
 
@@ -174,6 +179,7 @@ function initHeroParallax() {
 }
 
 function initMobileHeaderCollapse() {
+  if (document.body.classList.contains("site-refresh")) return;
   const mobileQuery = window.matchMedia("(max-width: 640px)");
   let lastScrollY = window.scrollY;
   let ticking = false;
@@ -206,6 +212,7 @@ function initMobileHeaderCollapse() {
 }
 
 function initMotion() {
+  if (document.body.classList.contains("site-refresh")) return;
   document.documentElement.classList.add("motion-ready");
 
   if (!prefersReducedMotion.matches && "IntersectionObserver" in window) {
@@ -259,6 +266,9 @@ function renderCards(filter = "all") {
 }
 
 function renderTabs() {
+  if (peopleSelect) {
+    peopleSelect.replaceChildren(...peoples.map((person) => new Option(person.name, person.name)));
+  }
   if (!tabs) return;
   tabs.innerHTML = peoples
     .map(
@@ -272,7 +282,7 @@ function renderTabs() {
 }
 
 function setKnowledge(personName) {
-  if (!tabs || !panel.title) return;
+  if (!panel.title || !peoples.length) return;
   const person = peoples.find((item) => item.name === personName) || peoples[0];
 
   panel.region.textContent = person.region;
@@ -307,9 +317,11 @@ function setKnowledge(personName) {
     });
   });
 
-  tabs.querySelectorAll("button").forEach((button) => {
+  tabs?.querySelectorAll("button").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.person === person.name);
   });
+
+  if (peopleSelect) peopleSelect.value = person.name;
 
   hydrateMotion(panel.facts);
   hydrateMotion(panel.quizOptions);
@@ -327,6 +339,7 @@ initMotion();
 renderCards();
 renderTabs();
 setKnowledge(peoples[0]?.name);
+peopleSelect?.addEventListener("change", () => setKnowledge(peopleSelect.value));
 
 if (tabs) {
   tabs.addEventListener("click", (event) => {
@@ -841,6 +854,9 @@ loadAuthSession().then(() => {
   const params = new URLSearchParams(window.location.search);
   if (params.get("auth") === "quiz" && !currentUserId) {
     openQuizAuthGate();
+  } else if (params.get("auth") === "login") {
+    setAuthMode("login");
+    openAuth();
   } else {
     redirectToQuizIfRequested();
   }

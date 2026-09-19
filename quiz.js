@@ -381,6 +381,7 @@ async function loadExistingResult() {
 }
 
 function initMobileHeaderCollapse() {
+  if (document.body.classList.contains("site-refresh")) return;
   const mobileQuery = window.matchMedia("(max-width: 640px)");
   let lastScrollY = window.scrollY;
   let ticking = false;

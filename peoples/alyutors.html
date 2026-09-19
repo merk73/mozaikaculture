@@ -7,18 +7,35 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Алюторцы · Мозаика культур</title>
     <link rel="stylesheet" href="../styles.css?v=20260620-polish-1" />
+      <link rel="stylesheet" href="../site-shell.css?v=20260920-3" />
+    <link rel="stylesheet" href="../site-motion.css?v=20260920-3" />
   </head>
-  <body class="person-page" data-person-slug="alyutors">
+  <body class="person-page site-refresh" data-person-slug="alyutors">
     <header class="site-header">
+      <div class="header-main">
+      <button class="mobile-header-button menu-toggle" type="button" aria-label="Открыть меню" aria-controls="site-navigation" aria-expanded="false" data-menu-toggle>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
       <a class="brand" href="../index.html#top" aria-label="Мозаика культур">
         <img src="../assets/logo-mozaika.svg" alt="Мозаика культур" />
       </a>
-      <nav class="main-nav" aria-label="Навигация">
+      <nav class="main-nav" id="site-navigation" aria-label="Навигация">
         <a href="../index.html#atlas">Атлас</a>
         <a href="../index.html#learn">Изучение</a>
+        <a href="../articles/origins-far-east.html">Статьи</a>
+        <a href="../index.html#events">Мероприятия</a>
+        <a href="../index.html#materials">Наклейки</a>
         <a href="../index.html#feedback">Связь</a>
+        <a href="../index.html#sources">Источники</a>
       </nav>
-      <a class="nav-cta" href="../index.html#atlas">Назад</a>
+      </div>
+      <div class="header-account">
+        <button class="desktop-account" type="button" data-desktop-account data-auth-url="../index.html?auth=login">Войти</button>
+      </div>
+      <button class="mobile-header-button mobile-account" type="button" aria-label="Личный кабинет — вход" data-mobile-account>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg>
+      </button>
+      <p class="mobile-account-notice" role="status" data-account-notice hidden>Вход временно недоступен. Попробуйте позже.</p>
     </header>
     <main>
       <section class="person-hero">
@@ -48,6 +65,8 @@
     </main>
     <script src="../content.js?v=20260618-facts-motion-1"></script>
     <script src="../far-east-peoples.js?v=20260619-far-east-1"></script>
-    <script src="../person.js?v=20260619-card-align-1"></script>
+    <script src="../person.js?v=20260920-3"></script>
+      <script src="../home-nav.js?v=20260920-3"></script>
+    <script src="../site-motion.js?v=20260920-3"></script>
   </body>
 </html>

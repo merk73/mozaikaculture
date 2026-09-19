@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="home-page">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -11,30 +11,49 @@
       content="Образовательный атлас Мозаика культур о коренных народах Дальнего Востока."
     />
     <link rel="stylesheet" href="styles.css?v=20260711-events-compact-1" />
+    <link rel="stylesheet" href="home.css?v=20260920-3" />
+      <link rel="stylesheet" href="site-shell.css?v=20260920-3" />
+    <link rel="stylesheet" href="site-motion.css?v=20260920-3" />
   </head>
-  <body>
+  <body class="home-page site-refresh">
+    <a class="skip-link" href="#top">Перейти к содержимому</a>
     <header class="site-header">
+      <div class="header-main">
+      <button class="mobile-header-button menu-toggle" type="button" aria-label="Открыть меню" aria-controls="site-navigation" aria-expanded="false" data-menu-toggle>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
       <a class="brand" href="#top" aria-label="Мозаика культур">
         <img src="assets/logo-mozaika.svg" alt="Мозаика культур" />
       </a>
-      <nav class="main-nav" aria-label="Навигация">
+      <nav class="main-nav" id="site-navigation" aria-label="Навигация">
         <a href="#atlas">Атлас</a>
         <a href="#learn">Изучение</a>
-        <a href="#articles">Статьи</a>
+        <a href="articles/origins-far-east.html">Статьи</a>
         <a href="#events">Мероприятия</a>
+        <a href="#materials">Наклейки</a>
         <a href="#feedback">Связь</a>
         <a href="#sources">Источники</a>
       </nav>
+      </div>
+      <div class="header-account">
+        <button class="desktop-account" type="button" data-desktop-account>Войти</button>
+      </div>
       <button class="nav-cta" type="button" data-auth-open hidden>Войти</button>
+      <button class="mobile-header-button mobile-account" type="button" aria-label="Личный кабинет — вход" data-mobile-account>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg>
+      </button>
+      <p class="mobile-account-notice" role="status" data-account-notice hidden>Вход временно недоступен. Попробуйте позже.</p>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-art" aria-hidden="true">
-          <img src="assets/hero-people.png" alt="" />
-        </div>
+        <picture class="hero-portrait" aria-hidden="true" data-hero-portrait>
+          <source media="(min-width: 1024px)" srcset="assets/hero-nanai-portrait.png" />
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" width="1086" height="1448" decoding="async" />
+        </picture>
+        
         <div class="hero-copy">
-          <p class="overline">образовательный атлас · дальний восток</p>
+          <p class="overline">образовательный проект</p>
           <h1 id="hero-title">Мозаика культур</h1>
           <p>
             Современный сайт о коренных народах Дальнего Востока: коротко,
@@ -43,12 +62,12 @@
           </p>
           <div class="hero-links">
             <a class="button button-primary" href="#atlas">Смотреть атлас</a>
-            <a class="button button-ghost" href="quiz.html" data-quiz-gate>Пройти квиз</a>
+            <a class="button button-article" href="articles/origins-far-east.html">Читать статью</a>
           </div>
         </div>
       </section>
 
-      <section class="statement">
+      <section class="statement" id="statement">
         <div class="statement-inner statement-grid">
           <div class="statement-copy">
             <p class="overline">миссия</p>
@@ -65,11 +84,12 @@
               территориями и культурными практиками продолжалось и после очной встречи.
             </p>
           </div>
-          <div class="statement-visual" aria-hidden="true">
-            <img src="assets/red-symbol.png" alt="" />
-          </div>
         </div>
       </section>
+
+      <div class="culture-divider" aria-hidden="true">
+        <img src="assets/culture-divider-final.png" alt="" width="1672" height="478" loading="lazy" decoding="async" />
+      </div>
 
       <section class="atlas" id="atlas" aria-labelledby="atlas-title">
         <div class="section-shell">
@@ -92,23 +112,29 @@
           </div>
 
           <div class="people-grid" data-people-grid></div>
+          <a class="online-quiz-cta atlas-quiz-cta" href="quiz.html" data-quiz-gate>
+            <span>Пройти квиз</span>
+            <strong>15 вопросов по народам атласа</strong>
+          </a>
         </div>
       </section>
 
       <section class="learn" id="learn" aria-labelledby="learn-title">
-        <div class="section-shell learn-grid">
+        <div class="section-shell learn-grid learn-card">
           <div class="learn-aside">
-            <p class="overline">изучение</p>
-            <h2 id="learn-title">Выбери народ и собери первое представление.</h2>
+            <p class="overline">Первое знакомство</p>
+            <h2 id="learn-title">Узнайте больше<br />о каждом народе.</h2>
             <p>
-              Формат рассчитан на молодежь: быстро выбрать тему, увидеть
-              ключевые факты и проверить себя. Материалы помогают продолжить
-              знакомство после лекций, встреч и мастер-классов.
+              Выберите народ, прочитайте о его языке, территории и традициях.
+              Затем ответьте на один вопрос, чтобы проверить себя.
             </p>
-            <div class="people-tabs" data-people-tabs aria-label="Выбор народа"></div>
+            <label class="people-select-label" for="people-select">1. Выберите народ</label>
+            <select class="people-select" id="people-select" data-people-select></select>
+            <p class="learn-hint">Народ можно сменить в любой момент — факты и вопрос обновятся здесь.</p>
           </div>
 
           <article class="knowledge-panel" data-knowledge-panel>
+            <p class="knowledge-step">2. Познакомьтесь с культурой</p>
             <div class="panel-meta">
               <span data-panel-region>Амур и его притоки</span>
               <span data-panel-type>язык · традиции · современность</span>
@@ -117,68 +143,39 @@
             <p data-panel-text></p>
             <div class="fact-list" data-panel-facts></div>
             <div class="quiz-block">
+              <p class="knowledge-step">3. Проверьте себя</p>
               <p class="quiz-question" data-quiz-question></p>
               <div class="quiz-options" data-quiz-options></div>
               <p class="quiz-result" data-quiz-result></p>
             </div>
           </article>
         </div>
-        <div class="section-shell quiz-cta-shell">
-          <a class="online-quiz-cta" href="quiz.html" data-quiz-gate>
-            <span>Пройти онлайн квиз</span>
-            <strong>15 сложных вопросов по всем народам атласа</strong>
-          </a>
-        </div>
+
       </section>
 
-      <section class="articles" id="articles" aria-labelledby="articles-title">
-        <div class="section-shell">
-          <div class="section-head compact">
-            <p class="overline">статьи</p>
-            <h2 id="articles-title">Материалы для тех, кто хочет понять контекст глубже.</h2>
-            <p>
-              Здесь будут появляться большие тексты о происхождении, языках,
-              территориях и современной жизни народов Дальнего Востока.
-            </p>
-          </div>
-
-          <a class="article-preview" href="articles/origins-far-east.html">
-            <figure>
-              <img
-                src="assets/articles/origins-amur-dawn.jpg"
-                alt="Туманное утро над рекой в тайге Дальнего Востока"
-              />
-            </figure>
-            <div class="article-preview-copy">
-              <span>История территории · 12 минут чтения</span>
-              <h3>Как народы Дальнего Востока оказались на своих землях</h3>
-              <p>
-                Не легенда про один путь, а научная картина: древние миграции,
-                Амур как культурный коридор, северо-восточная Сибирь,
-                море, тайга и долгий процесс формирования народов.
-              </p>
-              <strong>Читать статью</strong>
-            </div>
-          </a>
-        </div>
-      </section>
+      
 
       <section class="events" id="events" aria-labelledby="events-title">
         <div class="section-shell">
           <div class="section-head compact">
             <p class="overline">мероприятия</p>
-            <h2 id="events-title">Мозаика культур в формате живой встречи.</h2>
+            <h2 id="events-title">Культура оживает<br />во встречах.</h2>
+            <p>Слушаем истории, знакомимся с традициями и учимся друг у друга. Вспоминаем события проекта в фотографиях и деталях.</p>
           </div>
-          <div class="event-feature">
-            <div class="event-story">
-              <p class="event-date">29 апреля</p>
-              <h3>Мозаика культур</h3>
-              <p>
-                Участники знакомились с культурой коренных народов через
+          <details class="event-card" id="event-1">
+      <summary class="event-cover">
+        <img src="assets/events/mozaika-meeting-new.png" alt="Ведущий и участники встречи Мозаика культур" width="2560" height="1920" loading="lazy" decoding="async" />
+        <div class="event-cover-copy">
+          <p class="event-cover-date"><span>01 / Встреча проекта</span><time datetime="04-29">29 апреля</time></p>
+          <h3>Мозаика культур</h3><p class="event-cover-lead">Лекция, знакомство с традициями и командная игра.</p>
+          <span class="event-expand"><span class="when-closed">Подробнее</span><span class="when-open">Свернуть</span><span aria-hidden="true">↗</span></span>
+        </div>
+      </summary>
+      <div class="event-expanded">
+        <div class="event-expanded-intro"><p class="overline">Как это было</p><p>Участники знакомились с культурой коренных народов через
                 лекцию, мастер-класс, командные задания и квиз. Такой формат
-                помогает не только услышать факты, но и обсудить их в группе.
-              </p>
-              <div class="event-program" aria-label="Программа мероприятия">
+                помогает не только услышать факты, но и обсудить их в группе.</p></div>
+        <div class="event-program" aria-label="Программа мероприятия">
                 <article>
                   <span>01</span>
                   <strong>Лекция</strong>
@@ -186,12 +183,12 @@
                 </article>
                 <article>
                   <span>02</span>
-                  <strong>Бубен</strong>
+                  <strong>Знакомство с бубном</strong>
                   <p>Практическое знакомство со звучанием традиции и ритмом совместной работы.</p>
                 </article>
                 <article>
                   <span>03</span>
-                  <strong>Танец</strong>
+                  <strong>Язык танца</strong>
                   <p>Изучение движений как телесного языка культуры и способа запоминания.</p>
                 </article>
                 <article>
@@ -200,33 +197,35 @@
                   <p>Командная игра по фактам, символам и культурным особенностям народов Дальнего Востока.</p>
                 </article>
               </div>
-            </div>
-            <div class="event-gallery" aria-label="Фотографии мероприятия Мозаика культур">
-              <figure class="event-photo event-photo-main">
-                <img src="assets/events/mozaika-quiz-live.jpg" alt="Участники работают над заданием квиза" />
-                <figcaption>Квиз-игра</figcaption>
+        <div class="event-gallery" aria-label="Фотографии мероприятия Мозаика культур">
+              
+              <figure class="event-photo">
+                <img src="assets/events/mozaika-exhibit.png" alt="Предметы культуры на выставочном столе"  width="842" height="1280" decoding="async" loading="lazy" />
+                <figcaption><span>02 / Выставка</span>Культурное наследие в предметах и деталях.</figcaption>
               </figure>
               <figure class="event-photo">
-                <img src="assets/events/mozaika-exhibit.png" alt="Предметы культуры на выставочном столе" />
-                <figcaption>Предметная культура</figcaption>
-              </figure>
-              <figure class="event-photo">
-                <img src="assets/events/mozaika-team.png" alt="Участники мероприятия с баннером" />
-                <figcaption>Команда события</figcaption>
+                <img src="assets/events/mozaika-team.png" alt="Участники мероприятия с баннером"  width="946" height="1280" decoding="async" loading="lazy" />
+                <figcaption><span>03 / Люди проекта</span>Те, кто собирает «Мозаику культур».</figcaption>
               </figure>
             </div>
-          </div>
-          <div class="event-feature event-feature-youth">
-            <div class="event-story">
-              <p class="event-date">27 июня · Хабаровск</p>
-              <h3>«Мозаика культур» на Дне молодёжи</h3>
-              <p>
-                На Дне молодёжи в Хабаровске «Мозаика культур» стала пространством
+        <button class="event-close" type="button" data-event-close>Свернуть мероприятие ↑</button>
+      </div>
+    </details>
+<details class="event-card" id="event-2">
+      <summary class="event-cover">
+        <img src="assets/events/youth-day-main.png" alt="Участница в национальном костюме на выставке Мозаики культур"  width="1920" height="2560" decoding="async" loading="lazy" />
+        <div class="event-cover-copy">
+          <p class="event-cover-date"><span>02 / Городской фестиваль</span><span><time datetime="06-27">27 июня</time> · Хабаровск</span></p>
+          <h3>«Мозаика культур» на Дне молодёжи</h3><p class="event-cover-lead">Выставка, открытая лекция и мастер-классы в Хабаровске.</p>
+          <span class="event-expand"><span class="when-closed">Подробнее</span><span class="when-open">Свернуть</span><span aria-hidden="true">↗</span></span>
+        </div>
+      </summary>
+      <div class="event-expanded">
+        <div class="event-expanded-intro"><p class="overline">Как это было</p><p>На Дне молодёжи в Хабаровске «Мозаика культур» стала пространством
                 живого знакомства с наследием коренных народов Дальнего Востока.
                 В программе прошли лекция, выставка и мастер-классы: посетители могли
-                увидеть костюмы и предметы, задать вопросы и включиться в практические занятия.
-              </p>
-              <div class="event-program" aria-label="Программа Мозаики культур на Дне молодёжи">
+                увидеть костюмы и предметы, задать вопросы и включиться в практические занятия.</p></div>
+        <div class="event-program" aria-label="Программа Мозаики культур на Дне молодёжи">
                 <article>
                   <span>01</span>
                   <strong>Лекция</strong>
@@ -243,38 +242,62 @@
                   <p>Практические занятия и непосредственное общение участников с командой проекта.</p>
                 </article>
               </div>
-            </div>
-            <div class="event-gallery event-gallery-youth" aria-label="Фотографии Мозаики культур на Дне молодёжи">
-              <figure class="event-photo event-photo-main">
-                <img src="assets/events/youth-day-main.png" alt="Участница в национальном костюме на выставке Мозаики культур" />
-                <figcaption>Выставка проекта</figcaption>
+        <div class="event-gallery event-gallery-youth" aria-label="Фотографии Мозаики культур на Дне молодёжи">
+              
+              <figure class="event-photo">
+                <img src="assets/events/youth-day-workshop.png" alt="Детский мастер-класс на Дне молодёжи"  width="1206" height="1651" decoding="async" loading="lazy" />
+                <figcaption><span>02 / Мастер-класс</span>Пробуем и создаём своими руками.</figcaption>
               </figure>
               <figure class="event-photo">
-                <img src="assets/events/youth-day-workshop.png" alt="Детский мастер-класс на Дне молодёжи" />
-                <figcaption>Мастер-класс</figcaption>
+                <img src="assets/events/youth-day-screen.png" alt="Экран площадки Мозаики культур"  width="1206" height="2017" decoding="async" loading="lazy" />
+                <figcaption><span>03 / День молодёжи</span>Место встречи с культурой Дальнего Востока.</figcaption>
               </figure>
               <figure class="event-photo">
-                <img src="assets/events/youth-day-screen.png" alt="Экран площадки Мозаики культур" />
-                <figcaption>Площадка проекта</figcaption>
+                <img src="assets/events/youth-day-participants.png" alt="Участники получают материалы мастер-класса"  width="1206" height="1716" decoding="async" loading="lazy" />
+                <figcaption><span>04 / Участники</span>От знакомства — к совместной работе.</figcaption>
               </figure>
               <figure class="event-photo">
-                <img src="assets/events/youth-day-participants.png" alt="Участники получают материалы мастер-класса" />
-                <figcaption>Работа с участниками</figcaption>
-              </figure>
-              <figure class="event-photo">
-                <img src="assets/events/youth-day-lecture.png" alt="Лекция Мозаики культур на Дне молодёжи" />
-                <figcaption>Открытая лекция</figcaption>
+                <img src="assets/events/youth-day-lecture.png" alt="Лекция Мозаики культур на Дне молодёжи"  width="1206" height="1796" decoding="async" loading="lazy" />
+                <figcaption><span>05 / Открытая лекция</span>Разговор о народах и наследии региона.</figcaption>
               </figure>
             </div>
-          </div>
+        <button class="event-close" type="button" data-event-close>Свернуть мероприятие ↑</button>
+      </div>
+    </details>
         </div>
       </section>
 
-      <section class="feedback" id="feedback" aria-labelledby="feedback-title">
+      <section class="project-materials" id="materials" aria-labelledby="materials-title">
+        <div class="section-shell materials-grid">
+          <div class="materials-copy">
+            <p class="overline">Раздаточные материалы</p>
+            <h2 id="materials-title">Маленькая наклейка. <br />Большая история.</h2>
+            <p class="materials-lead">Частичка «Мозаики культур», которую можно забрать с собой.</p>
+            <p>Наклейки помогают знакомить новых людей с проектом и продолжать разговор о культуре Дальнего Востока за пределами мероприятий. На ноутбуке, в блокноте или на телефоне они становятся поводом узнать больше.</p>
+            <div class="materials-details">
+              <div><span>01</span><div><h3>Образы Дальнего Востока</h3><p>Люди, горы, олень, ворон, бубен и орнаменты — в одной коллекции.</p></div></div>
+              <div><span>02</span><div><h3>Узнаваемый стиль</h3><p>Чёрно-белая графика, красные акценты и знак «Мозаики культур» объединяют наклейки с проектом.</p></div></div>
+              <div><span>03</span><div><h3>От наклейки — к знакомству</h3><p>Название проекта и QR-код на листе помогают заинтересоваться «Мозаикой» и сделать следующий шаг.</p></div></div>
+            </div>
+            <div class="materials-actions">
+              <a class="button materials-primary" href="assets/project-stickers.jpg" target="_blank" rel="noopener">Рассмотреть наклейки <span aria-hidden="true">↗</span></a>
+              <a class="materials-contact" href="#feedback">Обсудить материалы с командой <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <figure class="materials-preview">
+            <a href="assets/project-stickers.jpg" target="_blank" rel="noopener" aria-label="Открыть лист наклеек Мозаики культур в полном размере">
+              <img src="assets/project-stickers.jpg" alt="Лист наклеек Мозаики культур: бубен, карта Дальнего Востока, олень, портреты, ворон, горы и орнаменты в чёрном, белом и красном цветах" width="1935" height="2739" loading="lazy" decoding="async" />
+            </a>
+            <figcaption><span>Коллекция наклеек проекта</span><span>Нажмите, чтобы рассмотреть ↗</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="feedback" id="feedback" aria-labelledby="feedback-title"><details class="footer-disclosure"><summary id="feedback-title"><span>Связаться с проектом</span><span class="disclosure-plus" aria-hidden="true">+</span></summary><div class="footer-disclosure-content">
         <div class="section-shell feedback-grid">
           <div>
             <p class="overline">обратная связь</p>
-            <h2 id="feedback-title">Связаться с проектом</h2>
+            
             <p>
               Вопросы по материалам, предложения для атласа и заявки на
               сотрудничество можно отправить через форму. Сообщения будут
@@ -310,13 +333,13 @@
             <p class="feedback-message" data-feedback-message></p>
           </form>
         </div>
-      </section>
+      </div></details></section>
 
-      <section class="sources" id="sources" aria-labelledby="sources-title">
+      <section class="sources" id="sources" aria-labelledby="sources-title"><details class="footer-disclosure"><summary id="sources-title"><span>Источники и материалы</span><span class="disclosure-plus" aria-hidden="true">+</span></summary><div class="footer-disclosure-content">
         <div class="section-shell sources-layout">
           <div class="sources-heading">
             <p class="overline">источники</p>
-            <h2 id="sources-title">Материалы сайта опираются на открытые справочные и нормативные источники.</h2>
+            
             <p>
               Раздел помогает быстро перейти к документам, языковым справкам и
               обзорным материалам, на которых основаны страницы народов.
@@ -341,7 +364,8 @@
             </a>
           </div>
         </div>
-      </section>
+      </div></details></section>
+    <section class="partners" id="partners" aria-labelledby="partners-title"><div class="section-shell"><p class="overline">Вместе с проектом</p><h2 id="partners-title">Наши партнёры</h2><div class="partners-grid"><article class="partner"><img src="assets/partner-youth-committee.svg" alt="" width="100" height="100" loading="lazy" /><div><h3>Комитет по делам молодёжи Правительства Хабаровского края</h3><p>Организация и информационная поддержка</p></div></article><article class="partner"><img src="assets/partner-youth-center.svg" alt="" width="100" height="100" loading="lazy" /><div><h3>Городской молодёжный центр</h3><p>Площадки, консультации и техническая помощь</p></div></article><article class="partner"><img src="assets/partner-youth-assembly.svg" alt="" width="100" height="100" loading="lazy" /><div><h3>Молодёжная ассамблея народов Хабаровского края</h3><p>Методическая и информационная поддержка</p></div></article></div></div></section>
     </main>
 
     <footer class="site-footer">
@@ -355,7 +379,7 @@
       <nav class="footer-nav" aria-label="Навигация в подвале">
         <a href="#atlas">Атлас</a>
         <a href="#learn">Изучение</a>
-        <a href="#articles">Статьи</a>
+        <a href="articles/origins-far-east.html">Статьи</a>
         <a href="#events">Мероприятия</a>
         <a href="#feedback">Связь</a>
         <a href="#sources">Источники</a>
@@ -450,6 +474,9 @@
     <script src="config.js"></script>
     <script src="content.js?v=20260619-far-east-quiz-1"></script>
     <script src="far-east-peoples.js?v=20260619-far-east-quiz-1"></script>
-    <script src="script.js?v=20260711-youth-day-1"></script>
+    <script src="script.js?v=20260920-3"></script>
+    
+      <script src="home-nav.js?v=20260920-3"></script>
+    <script src="site-motion.js?v=20260920-3"></script>
   </body>
 </html>

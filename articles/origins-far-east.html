@@ -11,32 +11,52 @@
       content="Большая статья Мозаики культур о древних миграциях, Амуре, северо-восточной Сибири и формировании народов Дальнего Востока."
     />
     <link rel="stylesheet" href="../styles.css?v=20260620-polish-1" />
+      <link rel="stylesheet" href="../site-shell.css?v=20260920-3" />
+    <link rel="stylesheet" href="../article.css?v=20260920-3" />
+    <link rel="stylesheet" href="../site-motion.css?v=20260920-3" />
   </head>
-  <body class="article-page">
+  <body class="article-page site-refresh">
+    <a class="skip-link" href="#article-content">Перейти к статье</a>
     <header class="site-header">
+      <div class="header-main">
+      <button class="mobile-header-button menu-toggle" type="button" aria-label="Открыть меню" aria-controls="site-navigation" aria-expanded="false" data-menu-toggle>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
       <a class="brand" href="../index.html#top" aria-label="Мозаика культур">
         <img src="../assets/logo-mozaika.svg" alt="Мозаика культур" />
       </a>
-      <nav class="main-nav" aria-label="Навигация">
+      <nav class="main-nav" id="site-navigation" aria-label="Навигация">
         <a href="../index.html#atlas">Атлас</a>
         <a href="../index.html#learn">Изучение</a>
-        <a href="../index.html#articles">Статьи</a>
+        <a href="../articles/origins-far-east.html">Статьи</a>
         <a href="../index.html#events">Мероприятия</a>
+        <a href="../index.html#materials">Наклейки</a>
         <a href="../index.html#feedback">Связь</a>
+        <a href="../index.html#sources">Источники</a>
       </nav>
-      <a class="nav-cta" href="../index.html#articles">Назад</a>
+      </div>
+      <div class="header-account">
+        <button class="desktop-account" type="button" data-desktop-account data-auth-url="../index.html?auth=login">Войти</button>
+      </div>
+      <button class="mobile-header-button mobile-account" type="button" aria-label="Личный кабинет — вход" data-mobile-account>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg>
+      </button>
+      <p class="mobile-account-notice" role="status" data-account-notice hidden>Вход временно недоступен. Попробуйте позже.</p>
     </header>
 
-    <main>
+    <main id="article-top">
       <article class="longread">
         <section class="article-hero">
           <figure class="article-hero-image">
             <img
               src="../assets/articles/origins-amur-dawn.jpg"
               alt="Туманное утро над рекой в тайге Дальнего Востока"
-            />
+              fetchpriority="high"
+            width="1800" height="833" decoding="async" />
+            <figcaption>Дальний Восток · земля, реки и маршруты</figcaption>
           </figure>
           <div class="article-hero-copy">
+            <a class="article-back" href="../index.html"><span aria-hidden="true">←</span> На главную</a>
             <p class="overline">история территории</p>
             <h1>Как народы Дальнего Востока оказались на своих землях</h1>
             <p>
@@ -52,7 +72,8 @@
           </div>
         </section>
 
-        <section class="article-body">
+        <details class="article-toc" open><summary>В этой статье</summary><nav aria-label="Разделы статьи"><ol><li><a href="#routes"><span>01</span>Сеть дорог</a></li><li><a href="#amur"><span>02</span>Амур и его народы</a></li><li><a href="#north"><span>03</span>Северо-восток и Берингов мир</a></li><li><a href="#sea"><span>04</span>Морские маршруты</a></li><li><a href="#names"><span>05</span>История названий</a></li><li><a href="#conclusions"><span>06</span>Главные выводы</a></li></ol></nav></details>
+        <section class="article-body" id="article-content">
           <p class="article-lede">
             Если спросить “откуда появились народы Дальнего Востока”, хочется
             получить короткий ответ: пришли отсюда, в таком-то веке, стали
@@ -63,7 +84,7 @@
             истории северо-восточной Азии.
           </p>
 
-          <h2>Сначала была не граница, а сеть дорог</h2>
+          <h2 id="routes">Сначала была не граница, а сеть дорог</h2>
           <p>
             Сегодня мы смотрим на Дальний Восток через административные карты:
             Хабаровский край, Приморье, Сахалин, Камчатка, Чукотка, Якутия,
@@ -85,7 +106,7 @@
             <img
               src="../assets/articles/origins-field-table.jpg"
               alt="Полевой стол с камнями, фрагментами керамики и блокнотом"
-            />
+            width="1536" height="1024" decoding="async" loading="lazy" />
             <figcaption>
               Археология редко дает готовый ответ “это уже такой-то народ”.
               Чаще она показывает глубину жизни на территории: стоянки,
@@ -93,7 +114,7 @@
             </figcaption>
           </figure>
 
-          <h2>Амур: река, которая соединяла</h2>
+          <h2 id="amur">Амур: река, которая соединяла</h2>
           <p>
             Нижний Амур и его притоки — один из ключевых узлов всей истории
             региона. Для народов амурского круга река была дорогой, календарем,
@@ -131,7 +152,7 @@
             </p>
           </aside>
 
-          <h2>Северо-восток: тундра, олени и Берингов мир</h2>
+          <h2 id="north">Северо-восток: тундра, олени и Берингов мир</h2>
           <p>
             Другая часть картины связана с северо-восточной Сибирью, Чукоткой и
             Камчаткой. После ледниковых эпох люди расселялись по огромным
@@ -164,7 +185,7 @@
               <img
                 src="../assets/articles/origins-northern-coast.jpg"
                 alt="Холодное северное побережье с камнями, снегом и туманными сопками"
-              />
+              width="1535" height="1024" decoding="async" loading="lazy" />
               <figcaption>
                 На побережьях северо-востока важны были морские ресурсы и
                 сезонность. Море здесь не отделяло, а связывало.
@@ -174,7 +195,7 @@
               <img
                 src="../assets/articles/origins-tundra-tracks.jpg"
                 alt="Следы в мокрой тундре на вечернем свету"
-              />
+              width="1537" height="1023" decoding="async" loading="lazy" />
               <figcaption>
                 В тундре маршруты часто важнее постоянной точки. Память о земле
                 хранится в переходах, зимовках и местах встречи.
@@ -182,7 +203,7 @@
             </figure>
           </figure>
 
-          <h2>Море тоже было дорогой</h2>
+          <h2 id="sea">Море тоже было дорогой</h2>
           <p>
             Если смотреть только с материка, можно недооценить роль моря. Но
             для Сахалина, Курильской дуги, Камчатки, Чукотки и Алеутских
@@ -200,7 +221,7 @@
             История похожа не на одну стрелку, а на карту ветвящихся троп.
           </p>
 
-          <h2>Почему названия закрепились только недавно</h2>
+          <h2 id="names">Почему названия закрепились только недавно</h2>
           <p>
             Важно помнить: многие привычные нам названия народов закреплялись в
             документах сравнительно поздно — в имперское, советское и
@@ -216,7 +237,7 @@
             которую нельзя свести к школьной формуле.
           </p>
 
-          <h2>Что можно сказать уверенно</h2>
+          <h2 id="conclusions">Что можно сказать уверенно</h2>
           <ul class="article-list">
             <li>
               Дальний Восток заселялся и переосваивался много раз, начиная с
@@ -276,6 +297,7 @@
             </a>
           </div>
         </section>
+        <div class="article-next"><p>Продолжите знакомство: языки, территории и традиции каждого народа — в атласе проекта.</p><a href="../index.html#atlas">Открыть атлас народов</a></div>
       </article>
     </main>
 
@@ -290,7 +312,7 @@
       <nav class="footer-nav" aria-label="Навигация в подвале">
         <a href="../index.html#atlas">Атлас</a>
         <a href="../index.html#learn">Изучение</a>
-        <a href="../index.html#articles">Статьи</a>
+        <a href="../articles/origins-far-east.html">Статьи</a>
         <a href="../index.html#events">Мероприятия</a>
         <a href="../index.html#sources">Источники</a>
       </nav>
@@ -298,6 +320,8 @@
     </footer>
 
     <script src="../config.js"></script>
-    <script src="../script.js?v=20260620-polish-1"></script>
+    <script src="../script.js?v=20260920-3"></script>
+      <script src="../home-nav.js?v=20260920-3"></script>
+    <script src="../site-motion.js?v=20260920-3"></script>
   </body>
 </html>

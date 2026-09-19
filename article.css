@@ -1,0 +1,98 @@
+/* Editorial reading layout for the long-form article. */
+.article-page.site-refresh .longread { padding: 128px 0 80px; }
+.article-page.site-refresh .article-hero {
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 76px);
+  align-items: center; width: min(1320px, calc(100% - 80px)); min-height: 0;
+  margin: 0 auto; padding: 30px 0 64px; overflow: visible;
+}
+.article-page.site-refresh .article-hero::after { display: none; }
+.article-page.site-refresh .article-hero-copy { grid-column: 1; grid-row: 1; max-width: none; }
+.article-page.site-refresh .article-back { display: inline-flex; gap: 12px; margin-bottom: 40px; color: #b5b0aa; font-size: 14px; }
+.article-page.site-refresh .article-back:hover { color: #fff; }
+.article-page.site-refresh .article-hero .overline { color: #ff6570; font-size: 12px; letter-spacing: .12em; }
+.article-page.site-refresh .article-hero h1 {
+  font-family: Arial, sans-serif; font-size: clamp(38px, 4.25vw, 66px); font-weight: 700;
+  line-height: 1.06; letter-spacing: -.045em; text-wrap: balance; overflow-wrap: normal;
+}
+.article-page.site-refresh .article-hero-copy > p:not(.overline) { max-width: 600px; margin-top: 28px; color: #bbb7b1; font-size: 18px; line-height: 1.65; }
+.article-page.site-refresh .article-meta { gap: 12px 24px; margin-top: 30px; padding-top: 24px; border-top: 1px solid #ffffff24; }
+.article-page.site-refresh .article-meta span { margin: 0; padding: 0; border: 0; border-radius: 0; background: none; color: #aca8a2; font-size: 12px; line-height: 1.5; font-weight: 400; }
+.article-page.site-refresh .article-hero-image {
+  position: relative; inset: auto; z-index: auto; grid-column: 2; grid-row: 1;
+  align-self: stretch; min-height: 540px; margin: 0; border-radius: 36px; overflow: hidden;
+  background: #111; border: 1px solid #ffffff20;
+}
+.article-page.site-refresh .article-hero-image img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); }
+.article-page.site-refresh .article-hero-image::after { content: ''; position: absolute; inset: 50% 0 0; background: linear-gradient(transparent, #000b); pointer-events: none; }
+.article-page.site-refresh .article-hero-image figcaption { position: absolute; z-index: 1; bottom: 28px; left: 28px; right: 28px; color: #f7f3ec; font-size: 13px; line-height: 1.5; }
+.article-page.site-refresh .article-toc { width: min(1320px, calc(100% - 80px)); margin: 0 auto; padding: 28px 32px; border: 1px solid #ffffff26; border-radius: 28px; background: linear-gradient(120deg, #ffffff04, transparent), #0b0b0c; }
+.article-page.site-refresh .article-toc summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; list-style: none; cursor: pointer; color: #f7f3ec; font-size: 18px; font-weight: 600; }
+.article-page.site-refresh .article-toc summary::-webkit-details-marker { display: none; }
+.article-page.site-refresh .article-toc summary::after { content: '+'; color: #ff6570; font-size: 26px; font-weight: 400; }
+.article-page.site-refresh .article-toc[open] summary::after { content: '−'; }
+.article-page.site-refresh .article-toc ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 28px; list-style: none; margin: 24px 0 0; padding: 24px 0 0; border-top: 1px solid #ffffff1c; }
+.article-page.site-refresh .article-toc a { display: flex; gap: 14px; align-items: baseline; padding-block: 8px; color: #bdb8b2; font-size: 15px; line-height: 1.45; }
+.article-page.site-refresh .article-toc a:hover { color: #fff; }
+.article-page.site-refresh .article-toc a span { color: #ff6570; font-size: 11px; font-variant-numeric: tabular-nums; }
+.article-page.site-refresh .article-body { --article-wide: min(1040px, calc(100vw - 80px)); width: min(720px, calc(100% - 80px)); margin: 0 auto; padding-top: 72px; counter-reset: chapter; }
+.article-page.site-refresh .article-body p,
+.article-page.site-refresh .article-list li { color: #c4c0ba; font-size: 18px; line-height: 1.8; }
+.article-page.site-refresh .article-body .article-lede { color: #f1eee8 !important; font-size: 22px !important; line-height: 1.65 !important; }
+.article-page.site-refresh .article-body h2 { position: relative; margin: 72px 0 24px; padding-top: 30px; border-top: 1px solid #ffffff26; font-size: clamp(30px, 3vw, 42px); line-height: 1.16; letter-spacing: -.035em; text-wrap: balance; scroll-margin-top: 118px; }
+.article-page.site-refresh .article-body h2::before { counter-increment: chapter; content: counter(chapter, decimal-leading-zero) ' /'; display: block; margin-bottom: 20px; color: #ff6570; font-size: 12px; line-height: 1; letter-spacing: .06em; }
+.article-page.site-refresh .article-image,
+.article-page.site-refresh .article-image-grid { margin-top: 48px; margin-bottom: 56px; }
+.article-page.site-refresh .article-image,
+.article-page.site-refresh .article-image-grid figure { border: 0; border-radius: 0; background: none; overflow: visible; }
+.article-page.site-refresh .article-image img,
+.article-page.site-refresh .article-image-grid img { display: block; height: auto; border: 1px solid #ffffff20; border-radius: 28px; }
+.article-page.site-refresh .article-image-grid { gap: 24px; }
+.article-page.site-refresh .article-image figcaption,
+.article-page.site-refresh .article-image-grid figcaption { padding: 16px 2px 0; color: #a7a29c; font-size: 13px; line-height: 1.65; }
+.article-page.site-refresh .article-note { margin: 44px 0; padding: 32px; border: 1px solid #ff657040; border-left: 3px solid #ed2432; border-radius: 0 28px 28px 0; background: linear-gradient(120deg, #72101c20, transparent), #0d0d0e; }
+.article-page.site-refresh .article-note strong { color: #ff6570; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.article-page.site-refresh .article-note p { color: #f1eee8; font-size: 20px; line-height: 1.6; }
+.article-page.site-refresh .article-list { list-style: none; padding: 0; gap: 0; counter-reset: takeaway; }
+.article-page.site-refresh .article-list li { position: relative; padding: 22px 0 22px 42px; border-bottom: 1px solid #ffffff1c; }
+.article-page.site-refresh .article-list li::before { counter-increment: takeaway; content: counter(takeaway, decimal-leading-zero); position: absolute; left: 0; top: 27px; color: #ff6570; font-size: 12px; }
+.article-page.site-refresh .article-sources { width: min(1040px, calc(100% - 80px)); margin-top: 72px; padding: 36px; border-radius: 32px; }
+.article-page.site-refresh .article-sources h2 { font-size: clamp(28px, 3vw, 40px); }
+.article-page.site-refresh .article-source-list { gap: 12px; }
+.article-page.site-refresh .article-source-list a { min-height: 0; padding: 24px; gap: 16px; }
+.article-page.site-refresh .article-source-list strong { font-size: 17px; line-height: 1.45; font-weight: 500; }
+.article-page.site-refresh .article-source-list span { color: #bdb8b2; font-size: 11px; line-height: 1.5; letter-spacing: .04em; }
+.article-page.site-refresh .article-next { display: flex; justify-content: space-between; align-items: center; gap: 24px; width: min(1040px, calc(100% - 80px)); margin: 28px auto 0; padding: 30px 36px; border: 1px solid #ffffff26; border-radius: 28px; background: #0b0b0c; }
+.article-page.site-refresh .article-next p { margin: 0; max-width: 440px; color: #bdb8b2; font-size: 16px; line-height: 1.6; }
+.article-page.site-refresh .article-next a { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-height: 50px; padding: 12px 24px; border: 1px solid #ff647050; border-radius: 999px; color: #fff; background: #bc1422; font-size: 15px; }
+@media (max-width: 1000px) {
+  .article-page.site-refresh .article-hero { gap: 32px; grid-template-columns: 1.1fr .9fr; }
+  .article-page.site-refresh .article-hero h1 { font-size: 42px; }
+  .article-page.site-refresh .article-toc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .article-page.site-refresh .longread { padding: 110px 0 48px; }
+  .article-page.site-refresh .article-hero { width: calc(100% - 40px); grid-template-columns: minmax(0, 1fr); padding: 12px 0 32px; gap: 28px; }
+  .article-page.site-refresh .article-back { margin-bottom: 28px; }
+  .article-page.site-refresh .article-hero h1 { font-size: clamp(34px, 8.3vw, 48px); line-height: 1.1; text-wrap: initial; }
+  .article-page.site-refresh .article-hero-copy > p:not(.overline) { font-size: 16px; line-height: 1.65; margin-top: 24px; }
+  .article-page.site-refresh .article-hero-image { grid-column: 1; grid-row: 2; min-height: 0; aspect-ratio: 4 / 3; border-radius: 26px; }
+  .article-page.site-refresh .article-hero-image figcaption { left: 20px; bottom: 20px; font-size: 12px; }
+  .article-page.site-refresh .article-meta { gap: 8px 18px; margin-top: 24px; padding-top: 20px; }
+  .article-page.site-refresh .article-toc { width: calc(100% - 40px); padding: 22px; border-radius: 24px; }
+  .article-page.site-refresh .article-toc ol { grid-template-columns: minmax(0, 1fr); gap: 4px; padding-top: 16px; margin-top: 16px; }
+  .article-page.site-refresh .article-toc a { min-height: 44px; align-items: center; }
+  .article-page.site-refresh .article-body { --article-wide: 100%; width: calc(100% - 40px); padding-top: 40px; }
+  .article-page.site-refresh .article-body p,
+  .article-page.site-refresh .article-list li { font-size: 17px; line-height: 1.75; }
+  .article-page.site-refresh .article-body .article-lede { font-size: 19px !important; line-height: 1.65 !important; }
+  .article-page.site-refresh .article-body h2 { margin-top: 48px; font-size: 30px; text-wrap: initial; scroll-margin-top: 100px; }
+  .article-page.site-refresh .article-image-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .article-page.site-refresh .article-image,
+  .article-page.site-refresh .article-image-grid { margin-top: 32px; margin-bottom: 36px; }
+  .article-page.site-refresh .article-note { padding: 24px; }
+  .article-page.site-refresh .article-note p { font-size: 18px; }
+  .article-page.site-refresh .article-sources { width: calc(100% - 40px); margin-top: 48px; padding: 24px 20px; }
+  .article-page.site-refresh .article-source-list { grid-template-columns: minmax(0, 1fr); }
+  .article-page.site-refresh .article-source-list a { padding: 20px; }
+  .article-page.site-refresh .article-next { width: calc(100% - 40px); display: grid; padding: 24px; }
+}
