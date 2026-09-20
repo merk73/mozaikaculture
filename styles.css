@@ -36,7 +36,7 @@ html {
   overflow-x: hidden;
   scroll-behavior: auto;
   overscroll-behavior-y: auto;
-  background: var(--black);
+  background: #000;
 }
 
 body {
@@ -61,9 +61,9 @@ body::before {
   right: 0;
   left: 0;
   z-index: 80;
-  height: env(safe-area-inset-top);
+  height: env(safe-area-inset-top, 0px);
   content: "";
-  background: var(--black);
+  background: #000;
   pointer-events: none;
 }
 
@@ -4572,22 +4572,6 @@ html.profile-open body {
     min-height: 920px;
     opacity: 0.48;
     transform: translate(-50%, -50%) rotate(-5deg);
-  }
-
-  body::before {
-    background: transparent;
-  }
-
-  body::after {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 20;
-    height: calc(176px + env(safe-area-inset-top, 0px));
-    content: "";
-    background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.82) 48%, rgba(0, 0, 0, 0) 100%);
-    pointer-events: none;
   }
 
   .atlas::after {
