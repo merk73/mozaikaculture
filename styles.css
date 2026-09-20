@@ -468,6 +468,16 @@ button {
   outline: none;
 }
 
+/* Минималистичные векторные стрелки (кнопки и ссылки) */
+.icon-arrow {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  display: inline-block;
+  vertical-align: -0.14em;
+  transition: transform 240ms var(--ease-soft);
+}
+
 .hero-status {
   position: absolute;
   right: max(32px, calc((100vw - 1120px) / 2));
@@ -1248,15 +1258,19 @@ button {
     box-shadow 420ms var(--ease-soft);
 }
 
-.online-quiz-cta::after {
+.online-quiz-cta .cta-arrow {
   position: absolute;
   right: 28px;
   bottom: 24px;
-  content: "→";
+  width: 42px;
+  height: 42px;
   color: var(--red);
-  font-size: 42px;
-  font-weight: 900;
-  line-height: 1;
+  transition: transform 320ms var(--ease-soft);
+}
+
+.online-quiz-cta:hover .cta-arrow,
+.online-quiz-cta:focus-visible .cta-arrow {
+  transform: translateX(6px);
 }
 
 .online-quiz-cta:hover,
@@ -3875,7 +3889,10 @@ html.profile-open body {
 .profile-beta-link > span:last-child {
   grid-column: 2;
   grid-row: 1 / span 2;
-  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 24px;
 }
 
 .profile-beta-link:hover {
@@ -5135,9 +5152,11 @@ html.profile-open body {
     padding: 22px;
   }
 
-  .online-quiz-cta::after {
+  .online-quiz-cta .cta-arrow {
     right: 20px;
     bottom: 18px;
+    width: 34px;
+    height: 34px;
   }
 
   .sources-list a {
@@ -5807,5 +5826,17 @@ html.profile-open body {
 
   .event-gallery:not(.event-gallery-youth) {
     grid-template-rows: 230px 138px;
+  }
+}
+main {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .event-gallery:not(.event-gallery-youth) {
+    grid-template-rows: 230px 138px;
+  }
+}
+late-rows: 230px 138px;
   }
 }
