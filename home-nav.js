@@ -10,7 +10,36 @@
   const authButton = header.querySelector("[data-auth-open]");
   const mobile = window.matchMedia("(max-width: 760px)");
 
+  const authModal = document.querySelector('[data-auth-modal]');
+  const authHome = authModal?.parentElement;
+  const authCard = authModal?.querySelector('.auth-card');
+  if (authModal) {
+    authModal.id = 'header-auth';
+    account.setAttribute('aria-controls', 'header-auth');
+    account.setAttribute('aria-expanded', 'false');
+  }
+  function placeAuth() {
+    if (!authModal) return;
+    (mobile.matches ? header : authHome).append(authModal);
+    authCard.setAttribute('role', mobile.matches ? 'region' : 'dialog');
+    if (mobile.matches) authCard.removeAttribute('aria-modal');
+    else authCard.setAttribute('aria-modal', 'true');
+  }
+  placeAuth();
   let menuAnimation;
+  function animateHeader(before) {
+    menuAnimation?.cancel();
+    if (!mobile.matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const after = header.getBoundingClientRect().height;
+    menuAnimation = header.animate([{ height: `${before}px`, overflow: 'clip' }, { height: `${after}px`, overflow: 'clip' }], { duration: 320, easing: 'cubic-bezier(.22, 1, .36, 1)' });
+  }
+  function closeAccount() { document.dispatchEvent(new Event('mozaika:auth-close')); }
+  document.addEventListener('mozaika:auth-change', event => {
+    if (event.detail.open) setMenu(false);
+    header.classList.toggle('is-account-open', event.detail.open);
+    account.setAttribute('aria-expanded', String(event.detail.open));
+    animateHeader(event.detail.headerHeight);
+  });
   function setMenu(open) {
     if (header.classList.contains("is-menu-open") === open) return;
     const before = header.getBoundingClientRect().height;
@@ -25,6 +54,7 @@
   }
 
   toggle.addEventListener("click", () => {
+    closeAccount();
     notice.hidden = true;
     setMenu(toggle.getAttribute("aria-expanded") !== "true");
   });
@@ -39,6 +69,7 @@
   header.querySelector(".brand").addEventListener("click", () => setMenu(false));
 
   function openAccount() {
+    if (authModal?.classList.contains("is-open")) { closeAccount(); return; }
     setMenu(false);
     if (!authButton && desktopAccount.dataset.authUrl) {
       window.location.href = desktopAccount.dataset.authUrl;
@@ -66,6 +97,7 @@
   document.addEventListener("click", (event) => {
     if (!header.contains(event.target)) {
       setMenu(false);
+      if (mobile.matches) closeAccount();
       notice.hidden = true;
     }
   });
@@ -84,6 +116,8 @@
   });
 
   mobile.addEventListener("change", () => {
+    closeAccount();
+    placeAuth();
     setMenu(false);
     notice.hidden = true;
   });

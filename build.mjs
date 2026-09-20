@@ -10,7 +10,6 @@ const files = [
   "styles.css",
   "home.css",
   "home-interactions.css",
-  "learn-flow.js",
   "quiz.css",
   "article.css",
   "home-nav.js",
@@ -58,5 +57,5 @@ await writeFile(
 );
 
 if (!config.SUPABASE_URL || !config.SUPABASE_ANON_KEY) {
-  console.warn("Supabase variables are empty. Auth is hidden; feedback uses Netlify Forms.");
+  console.warn("Supabase variables are empty. Account sign-in is unavailable; guest quiz remains available. Feedback requires a configured backend on GitHub Pages.");
 }
