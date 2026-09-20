@@ -1,0 +1,58 @@
+.home-page .learn-flow { padding: clamp(24px, 4vw, 52px); border: 1px solid #ffffff26; border-radius: 36px; background: linear-gradient(135deg, #ffffff04, transparent), #0c0c0d; }
+.home-page .learn-flow-heading { max-width: 760px; }
+.home-page .learn-flow-heading h2 { margin: 0; font-size: clamp(32px, 3.5vw, 48px); line-height: 1.12; letter-spacing: -.035em; }
+.home-page .learn-flow-heading > p:last-child { color: var(--muted); font-size: 17px; line-height: 1.6; margin: 18px 0 0; }
+.home-page .learn-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0 0 26px; margin: 32px 0; border-bottom: 1px solid #ffffff20; }
+.home-page .learn-steps button { display: flex; align-items: center; gap: 12px; padding: 12px 16px; min-height: 52px; width: 100%; border: 1px solid transparent; border-radius: 18px; background: none; color: #b7b2ac; font: 15px/1.4 Arial, sans-serif; cursor: pointer; }
+.home-page .learn-steps button span { font-size: 12px; color: #aaa39d; }
+.home-page .learn-steps button[aria-current] { background: #57101945; border-color: #ba354250; color: #fff; }
+.home-page .learn-steps button[aria-current] span { color: #ff6a76; }
+.home-page .learn-steps button:disabled { opacity: .45; cursor: default; }
+.home-page .learn-stage { max-width: 900px; min-width: 0; margin: 0; }
+.home-page .learn-flow [hidden] { display: none !important; }
+.home-page .learn-stage h3 { margin: 0 0 24px; color: var(--text); font-size: clamp(28px, 3vw, 40px); line-height: 1.15; letter-spacing: -.025em; }
+.home-page .learn-stage h3:focus { outline: none; }
+.home-page .learn-stage-note { margin: 20px 0 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.home-page .learn-flow .people-select { max-width: 540px; }
+.home-page .learn-flow .knowledge-panel { padding: 0; border: 0; border-radius: 0; box-shadow: none; background: none; backdrop-filter: none; }
+.home-page .learn-flow .panel-meta { padding-bottom: 20px; margin-bottom: 24px; }
+.home-page .learn-flow .knowledge-panel > p { font-size: 18px; line-height: 1.7; max-width: 780px; }
+.home-page .learn-flow .fact-list { margin: 28px 0; }
+.home-page .learn-flow .fact-list > div { padding: 20px; min-height: 0; }
+.home-page .learn-flow .fact-list span { font-size: 15px; }
+.home-page .learn-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 28px; }
+.home-page .learn-actions button { min-height: 50px; padding: 12px 24px; border: 1px solid #ffffff30; border-radius: 999px; font: 600 15px/1.4 Arial, sans-serif; color: #fff; cursor: pointer; transition: background-color 200ms, border-color 200ms; }
+.home-page .learn-primary { background: #c51423; }
+.home-page .learn-primary:hover:not(:disabled) { background: #df1d2e; }
+.home-page .learn-primary:disabled { opacity: .4; cursor: default; }
+.home-page .learn-secondary { background: #ffffff08; }
+.home-page .learn-selected-name { margin: 0 0 12px; color: #ff6a76; font-size: 14px; }
+.home-page .learn-flow .quiz-block { margin: 0; padding: 0; border: 0; }
+.home-page .learn-flow .quiz-question { font-size: 20px; line-height: 1.5; color: var(--text); }
+.home-page .learn-flow .quiz-options { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 22px; }
+.home-page .learn-flow .quiz-options button { padding: 16px 20px; border: 1px solid #ffffff2e; border-radius: 18px; background: #161617; color: var(--text); text-align: left; font-size: 16px; line-height: 1.5; }
+.home-page .learn-flow .quiz-options button.is-correct { background: #173626; border-color: #65bb8a; }
+.home-page .learn-flow .quiz-options button.is-wrong { background: #4e121a; border-color: #f27480; }
+.home-page .learn-flow .quiz-result { min-height: 0; margin-top: 18px; color: var(--text); font-size: 16px; line-height: 1.6; }
+.home-page .atlas .people-card { isolation: isolate; }
+.home-page .atlas .card-hover-art { position: absolute; inset: 0; z-index: 0; background: url('assets/atlas-hover-landscape.png') center / cover; opacity: 0; pointer-events: none; transition: opacity 230ms ease-out; }
+.home-page .atlas .card-portrait { z-index: 1; }
+.home-page .atlas .people-card::before { inset: 0; height: auto; z-index: 2; opacity: 1; background: linear-gradient(180deg, transparent 25%, #03030355 48%, #030303f2 100%); }
+.home-page .atlas .people-card::after { display: none; }
+.home-page .atlas .people-card .card-portrait img { transform: scale(1); transform-origin: center bottom; transition: transform 540ms cubic-bezier(.2, .7, .2, 1); }
+@media (hover: hover) and (pointer: fine) {
+  .home-page .atlas .people-card:hover .card-hover-art { opacity: 1; }
+  .home-page .atlas .people-card:hover .card-portrait img { transform: scale(1.045); }
+}
+.home-page .atlas .people-card:focus-visible .card-hover-art { opacity: 1; }
+.home-page .atlas .people-card:focus-visible .card-portrait img { transform: scale(1.045); }
+@media (max-width: 760px) {
+  .home-page .learn-flow { padding: 26px 20px; border-radius: 28px; }
+  .home-page .learn-flow-heading h2 { font-size: 30px; }
+  .home-page .learn-steps { gap: 4px; margin: 26px 0; padding-bottom: 20px; }
+  .home-page .learn-steps button { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 8px; font-size: 12px; border-radius: 14px; }
+  .home-page .learn-stage h3 { font-size: 27px; }
+  .home-page .learn-actions button { flex: 1; padding-inline: 18px; }
+  .home-page .learn-flow .fact-list { grid-template-columns: 1fr; }
+  .home-page .learn-flow .knowledge-panel > p { font-size: 16px; }
+}

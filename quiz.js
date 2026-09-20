@@ -171,332 +171,173 @@ const questions = [
   },
 ];
 
-const state = {
-  index: 0,
-  answers: Array(questions.length).fill(null),
-  optionOrders: questions.map((item) => shuffleOptions(item.options)),
-};
-
-const root = document.querySelector("[data-online-quiz]");
-const stepNode = document.querySelector("[data-quiz-step]");
-const scoreNode = document.querySelector("[data-quiz-score]");
-const progressNode = document.querySelector("[data-quiz-progress]");
-const kickerNode = document.querySelector("[data-quiz-kicker]");
-const questionNode = document.querySelector("[data-quiz-question]");
-const optionsNode = document.querySelector("[data-quiz-options]");
-const prevButton = document.querySelector("[data-quiz-prev]");
-const nextButton = document.querySelector("[data-quiz-next]");
-const resultsNode = document.querySelector("[data-quiz-results]");
-const resultTitle = document.querySelector("[data-result-title]");
-const resultSummary = document.querySelector("[data-result-summary]");
-const resultList = document.querySelector("[data-result-list]");
-const restartButton = document.querySelector("[data-quiz-restart]");
-const quizSurface = document.querySelector(".quiz-surface");
-const quizLock = document.querySelector("[data-quiz-lock]");
-const quizLockTitle = document.querySelector("[data-quiz-lock-title]");
-const quizLockText = document.querySelector("[data-quiz-lock-text]");
-const supabaseConfig = window.MOZAIKA_CONFIG || {};
-const hasSupabaseConfig = Boolean(supabaseConfig.SUPABASE_URL && supabaseConfig.SUPABASE_ANON_KEY);
-const supabaseClient =
-  window.supabase && window.supabase.createClient && hasSupabaseConfig
-    ? window.supabase.createClient(supabaseConfig.SUPABASE_URL, supabaseConfig.SUPABASE_ANON_KEY)
-    : null;
+const state = { index: 0, answers: Array(questions.length).fill(null), optionOrders: questions.map(item => shuffleOptions(item.options)) };
+const root = document.querySelector('[data-online-quiz]');
+const stepNode = document.querySelector('[data-quiz-step]');
+const scoreNode = document.querySelector('[data-quiz-score]');
+const progressNode = document.querySelector('[data-quiz-progress]');
+const kickerNode = document.querySelector('[data-quiz-kicker]');
+const questionNode = document.querySelector('[data-quiz-question]');
+const optionsNode = document.querySelector('[data-quiz-options]');
+const prevButton = document.querySelector('[data-quiz-prev]');
+const nextButton = document.querySelector('[data-quiz-next]');
+const resultsNode = document.querySelector('[data-quiz-results]');
+const resultTitle = document.querySelector('[data-result-title]');
+const resultSummary = document.querySelector('[data-result-summary]');
+const resultList = document.querySelector('[data-result-list]');
+const restartButton = document.querySelector('[data-quiz-restart]');
+const quizSurface = document.querySelector('.quiz-surface');
+const quizLock = document.querySelector('[data-quiz-lock]');
+const storageNotice = document.querySelector('[data-quiz-storage]');
+const modeNode = document.querySelector('[data-quiz-mode]');
+const resultStorage = document.querySelector('[data-result-storage]');
+const config = window.MOZAIKA_CONFIG || {};
+const supabaseClient = window.supabase?.createClient && config.SUPABASE_URL && config.SUPABASE_ANON_KEY
+  ? window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY) : null;
+const GUEST_KEY = 'mozaika.quiz.guest.v1';
 let currentUser = null;
 let quizSaving = false;
-
 function shuffleOptions(options) {
-  const shuffled = [...options];
-  for (let index = shuffled.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
-  }
-  return shuffled;
+  const result = [...options];
+  for (let i = result.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [result[i], result[j]] = [result[j], result[i]]; }
+  return result;
 }
-
-function answeredCount() {
-  return state.answers.filter(Boolean).length;
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 }
-
-function renderQuestion() {
+function validAnswers(answers) {
+  return Array.isArray(answers) && answers.length === questions.length && answers.every((answer, index) => questions[index].options.includes(answer));
+}
+function readGuestResult() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(GUEST_KEY));
+    if (saved?.version !== 1 || !validAnswers(saved.answers) || !Number.isFinite(Date.parse(saved.savedAt))) return null;
+    return saved;
+  } catch { return null; }
+}
+function writeGuestResult() {
+  const savedAt = new Date().toISOString();
+  try {
+    localStorage.setItem(GUEST_KEY, JSON.stringify({version: 1, answers: state.answers, savedAt}));
+    return savedAt;
+  } catch { return null; }
+}
+function updateMode() {
+  modeNode.textContent = currentUser ? 'В аккаунте' : 'Без регистрации';
+  storageNotice.textContent = currentUser
+    ? 'Результат этой попытки сохранится в вашем аккаунте.'
+    : 'Результат сохранится только в этом браузере. При очистке данных сайта он удалится.';
+}
+function renderQuestion(moveFocus = false) {
   const item = questions[state.index];
-  const selected = state.answers[state.index];
-  const isLast = state.index === questions.length - 1;
-
   stepNode.textContent = `Вопрос ${state.index + 1} из ${questions.length}`;
-  scoreNode.textContent = `${answeredCount()} выбрано`;
+  scoreNode.textContent = `Отвечено: ${state.answers.filter(Boolean).length}`;
   progressNode.style.width = `${((state.index + 1) / questions.length) * 100}%`;
   kickerNode.textContent = item.topic;
   questionNode.textContent = item.question;
-
-  optionsNode.innerHTML = state.optionOrders[state.index]
-    .map(
-      (option) => `
-        <button class="${selected === option ? "is-selected" : ""}" type="button" data-answer="${option}">
-          ${option}
-        </button>
-      `,
-    )
-    .join("");
-
-  prevButton.disabled = state.index === 0;
-  nextButton.textContent = isLast ? "Завершить" : "Дальше";
-  nextButton.disabled = !selected;
-}
-
-function showResultsLegacy() {
-  const correct = questions.filter((item, index) => state.answers[index] === item.answer).length;
-  const percent = Math.round((correct / questions.length) * 100);
-
-  document.querySelector(".quiz-surface").hidden = true;
-  resultsNode.hidden = false;
-  resultTitle.textContent = `${correct} из ${questions.length}`;
-  resultSummary.textContent =
-    percent >= 80
-      ? "Сильный результат: ты уверенно различаешь территории, языки и культурные акценты."
-      : percent >= 55
-        ? "Хорошая база есть. Разбор ниже покажет, где стоит перечитать материалы."
-        : "Квиз оказался сложным. Разбор поможет быстро увидеть основные связки атласа.";
-
-  resultList.innerHTML = questions
-    .map((item, index) => {
-      const userAnswer = state.answers[index];
-      const isCorrect = userAnswer === item.answer;
-      return `
-        <article class="${isCorrect ? "is-correct" : "is-wrong"}">
-          <span>${String(index + 1).padStart(2, "0")} · ${item.topic}</span>
-          <h3>${item.question}</h3>
-          <p><strong>Ваш ответ:</strong> ${userAnswer || "Нет ответа"}</p>
-          <p><strong>Правильный ответ:</strong> ${item.answer}</p>
-          <p>${item.note}</p>
-        </article>
-      `;
-    })
-    .join("");
-
-  resultsNode.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function buildResultDetails() {
-  const correct = questions.filter((item, index) => state.answers[index] === item.answer).length;
-  const percent = Math.round((correct / questions.length) * 100);
-  const details = questions.map((item, index) => ({
-    topic: item.topic,
-    question: item.question,
-    answer: state.answers[index],
-    correctAnswer: item.answer,
-    isCorrect: state.answers[index] === item.answer,
+  optionsNode.replaceChildren(...state.optionOrders[state.index].map((option, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.answer = option;
+    button.setAttribute('aria-pressed', String(state.answers[state.index] === option));
+    button.classList.toggle('is-selected', state.answers[state.index] === option);
+    const number = document.createElement('span'); number.className = 'answer-number'; number.textContent = String(index + 1).padStart(2,'0'); number.setAttribute('aria-hidden','true');
+    const text = document.createElement('span'); text.textContent = option;
+    button.append(number, text);
+    return button;
   }));
-
-  return { correct, percent, details };
+  prevButton.disabled = state.index === 0;
+  nextButton.textContent = state.index === questions.length - 1 ? 'Узнать результат' : 'Следующий вопрос';
+  nextButton.disabled = !state.answers[state.index];
+  if (moveFocus) questionNode.focus({preventScroll:true});
 }
-
-function renderSavedResults({ correct, percent, details, savedAt, alreadyPassed = false }) {
-  quizSurface.hidden = true;
-  if (quizLock) quizLock.hidden = true;
-  resultsNode.hidden = false;
+function buildResultDetails() {
+  const details = questions.map((item,index) => ({topic:item.topic,question:item.question,answer:state.answers[index],correctAnswer:item.answer,isCorrect:state.answers[index]===item.answer}));
+  const correct = details.filter(item=>item.isCorrect).length;
+  return { correct, percent: Math.round(correct/questions.length*100), details };
+}
+function renderSavedResults({correct,percent,details,savedAt,alreadyPassed=false}, storage='guest') {
+  quizSurface.hidden = true; quizLock.hidden = true; resultsNode.hidden = false;
   resultTitle.textContent = `${correct} из ${questions.length}`;
-  resultSummary.textContent =
-    (alreadyPassed
-      ? "Вы уже проходили этот квиз. Повторная попытка закрыта, ниже сохранённый разбор ответов."
-      : percent >= 80
-        ? "Сильный результат: вы уверенно различаете территории, языки и культурные акценты."
-        : percent >= 55
-          ? "Хорошая база есть. Разбор ниже покажет, где стоит перечитать материалы."
-          : "Квиз оказался сложным. Разбор поможет быстро увидеть основные связки атласа.") +
-    (savedAt ? ` Результат сохранён: ${new Date(savedAt).toLocaleString("ru-RU")}.` : "");
-
-  resultList.innerHTML = questions
-    .map((item, index) => {
-      const detail = details[index] || {};
-      const userAnswer = detail.answer;
-      const isCorrect = Boolean(detail.isCorrect);
-      return `
-        <article class="${isCorrect ? "is-correct" : "is-wrong"}">
-          <span>${String(index + 1).padStart(2, "0")} · ${item.topic}</span>
-          <h3>${item.question}</h3>
-          <p><strong>Ваш ответ:</strong> ${userAnswer || "Нет ответа"}</p>
-          <p><strong>Правильный ответ:</strong> ${detail.correctAnswer || item.answer}</p>
-          <p>${item.note}</p>
-        </article>
-      `;
-    })
-    .join("");
-
-  restartButton.hidden = true;
-  resultsNode.scrollIntoView({ behavior: "smooth", block: "start" });
+  resultSummary.textContent = alreadyPassed ? 'Ваш сохранённый результат. Откройте любой вопрос, чтобы посмотреть разбор.'
+    : percent>=80 ? 'Вы хорошо знаете народы Дальнего Востока. Посмотрите, какие темы удалось разобрать точнее всего.'
+    : percent>=55 ? 'Хорошее начало. Разбор ответов поможет закрепить знания.' : 'Каждый вопрос — повод узнать больше. Посмотрите объяснения и вернитесь к атласу.';
+  resultStorage.textContent = savedAt ? `${storage==='account'?'Сохранено в аккаунте':'Сохранено только в этом браузере'} · ${new Date(savedAt).toLocaleDateString('ru-RU')}` : 'Сохраняем результат…';
+  resultList.innerHTML = questions.map((item,index)=>{
+    const detail=details[index] || {};
+    return `<details class="quiz-review-item ${detail.isCorrect?'is-correct':'is-wrong'}"><summary><span class="review-number">${String(index+1).padStart(2,'0')}</span><span>${escapeHtml(item.topic)}<strong>${escapeHtml(item.question)}</strong></span><span class="review-status">${detail.isCorrect?'Верно':'Разобрать'}</span></summary><div class="review-explanation"><p><strong>Ваш ответ:</strong> ${escapeHtml(detail.answer || 'Нет ответа')}</p><p><strong>Правильный ответ:</strong> ${escapeHtml(item.answer)}</p><p>${escapeHtml(item.note)}</p></div></details>`;
+  }).join('');
+  restartButton.hidden = Boolean(currentUser);
+  resultTitle.focus({preventScroll:true});
+  resultsNode.scrollIntoView({behavior:'auto',block:'start'});
 }
-
 async function saveQuizResult(result) {
-  if (!supabaseClient || !currentUser) {
-    throw new Error("Для сохранения результата нужно войти в аккаунт.");
-  }
-
-  const { error } = await supabaseClient.from("quiz_results").insert({
-    user_id: currentUser.id,
-    email: currentUser.email,
-    score: result.correct,
-    total: questions.length,
-    percent: result.percent,
-    answers: state.answers,
-    details: result.details,
-  });
-
-  if (error) throw error;
+  // A guest attempt never writes to Supabase, even if another tab signs in.
+  if (!currentUser) return {storage:'guest', savedAt:writeGuestResult()};
+  const {data,error:sessionError}=await supabaseClient.auth.getSession();
+  if (sessionError || data.session?.user?.id !== currentUser.id) throw new Error('Сессия изменилась. Войдите в тот же аккаунт, чтобы сохранить результат.');
+  const {error}=await supabaseClient.from('quiz_results').insert({user_id:currentUser.id,email:currentUser.email,score:result.correct,total:questions.length,percent:result.percent,answers:state.answers,details:result.details});
+  if(error) throw error;
+  return {storage:'account', savedAt:new Date().toISOString()};
 }
-
 async function showResults() {
-  const result = buildResultDetails();
+  const result=buildResultDetails();
   renderSavedResults(result);
-
   try {
-    await saveQuizResult(result);
-  } catch (error) {
-    if (String(error?.code) === "23505") {
-      resultSummary.textContent += " Результат уже был сохранён ранее, повторная попытка не записана.";
-      return;
-    }
-
-    resultSummary.textContent += " Результат показан на экране, но временно не сохранился. Попробуйте позже.";
+    const saved=await saveQuizResult(result);
+    resultStorage.textContent = saved.savedAt ? (saved.storage==='guest'?'Сохранено только в этом браузере. В аккаунт результат не отправлялся.':'Результат сохранён в аккаунте.') : 'Браузер не разрешил сохранить данные. Результат доступен до закрытия страницы.';
+  } catch(error) {
+    resultStorage.textContent = String(error?.code)==='23505' ? 'В аккаунте уже есть результат. Эта попытка его не заменяет.' : 'Результат показан, но сохранить его в аккаунте не удалось. Проверьте соединение и вход в аккаунт.';
   }
 }
-
-function showQuizLock(title, text) {
-  quizSurface.hidden = true;
-  resultsNode.hidden = true;
-  if (!quizLock) return;
-  quizLock.hidden = false;
-  quizLockTitle.textContent = title;
-  quizLockText.textContent = text;
+function startGuest() {
+  currentUser=null; updateMode(); quizLock.hidden=true;
+  const saved=readGuestResult();
+  if(saved) {
+    state.answers=saved.answers;
+    renderSavedResults({...buildResultDetails(),savedAt:saved.savedAt,alreadyPassed:true});
+  } else { quizSurface.hidden=false; resultsNode.hidden=true; renderQuestion(); }
 }
-
-async function loadExistingResult() {
-  const { data, error } = await supabaseClient
-    .from("quiz_results")
-    .select("score,total,percent,answers,details,created_at")
-    .eq("user_id", currentUser.id)
-    .maybeSingle();
-
-  if (error) throw error;
-  return data;
-}
-
-function initMobileHeaderCollapse() {
-  if (document.body.classList.contains("site-refresh")) return;
-  const mobileQuery = window.matchMedia("(max-width: 640px)");
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-
-  const updateHeader = () => {
-    const currentY = window.scrollY;
-    const scrollingDown = currentY > lastScrollY + 4;
-    const scrollingUp = currentY < lastScrollY - 4;
-
-    if (!mobileQuery.matches || currentY < 72 || scrollingUp) {
-      document.documentElement.classList.remove("mobile-header-condensed");
-    } else if (scrollingDown && currentY > 118) {
-      document.documentElement.classList.add("mobile-header-condensed");
-    }
-
-    lastScrollY = currentY;
-    ticking = false;
-  };
-
-  const requestUpdate = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(updateHeader);
-  };
-
-  window.addEventListener("scroll", requestUpdate, { passive: true });
-  mobileQuery.addEventListener?.("change", requestUpdate);
-  requestUpdate();
-}
-
 async function initQuiz() {
-  initMobileHeaderCollapse();
-  quizSurface.hidden = true;
-  resultsNode.hidden = true;
-
-  if (!supabaseClient) {
-    showQuizLock(
-      "Регистрация временно недоступна",
-      "Для квиза нужна авторизация. Попробуйте открыть страницу позже.",
-    );
-    return;
-  }
-
-  const { data, error } = await supabaseClient.auth.getSession();
-  if (error || !data.session?.user) {
-    showQuizLock(
-      "Квиз доступен после входа",
-      "Зарегистрируйтесь или войдите в аккаунт, чтобы пройти квиз. Результат сохраняется один раз.",
-    );
-    return;
-  }
-
-  currentUser = data.session.user;
-
+  quizSurface.hidden=true; resultsNode.hidden=true;
+  if(!supabaseClient) { startGuest(); return; }
   try {
-    const existing = await loadExistingResult();
-    if (existing) {
-      state.answers = Array.isArray(existing.answers) ? existing.answers : state.answers;
-      renderSavedResults({
-        correct: existing.score,
-        percent: existing.percent,
-        details: Array.isArray(existing.details) ? existing.details : buildResultDetails().details,
-        savedAt: existing.created_at,
-        alreadyPassed: true,
-      });
+    const {data,error}=await supabaseClient.auth.getSession();
+    if(error || !data.session?.user) { startGuest(); return; }
+    currentUser=data.session.user; updateMode();
+    const {data:existing,error:loadError}=await supabaseClient.from('quiz_results').select('score,total,percent,answers,details,created_at').eq('user_id',currentUser.id).maybeSingle();
+    if(loadError) {
+      quizLock.hidden=false;
+      document.querySelector('[data-quiz-lock-title]').textContent='Не удалось загрузить результат аккаунта';
+      document.querySelector('[data-quiz-lock-text]').textContent='Можно пройти квиз в гостевом режиме — результат останется в этом браузере.';
       return;
     }
-  } catch (_error) {
-    showQuizLock(
-      "Результаты временно недоступны",
-      "Сейчас не получилось загрузить сохраненный результат. Попробуйте позже.",
-    );
-    return;
-  }
-
-  if (quizLock) quizLock.hidden = true;
-  quizSurface.hidden = false;
-  renderQuestion();
+    if(existing) {
+      const details=Array.isArray(existing.details)?existing.details:[];
+      renderSavedResults({correct:existing.score,percent:existing.percent,details,savedAt:existing.created_at,alreadyPassed:true},'account');
+    } else { quizLock.hidden=true; quizSurface.hidden=false; renderQuestion(); }
+  } catch { startGuest(); }
 }
-
-optionsNode.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-answer]");
-  if (!button) return;
-  state.answers[state.index] = button.dataset.answer;
-  renderQuestion();
+optionsNode.addEventListener('click',event=>{
+  const button=event.target.closest('[data-answer]'); if(!button) return;
+  state.answers[state.index]=button.dataset.answer;
+  optionsNode.querySelectorAll('button').forEach(item=>{const selected=item===button;item.classList.toggle('is-selected',selected);item.setAttribute('aria-pressed',String(selected));});
+  scoreNode.textContent=`Отвечено: ${state.answers.filter(Boolean).length}`;
+  nextButton.disabled=false;
 });
-
-prevButton.addEventListener("click", () => {
-  if (state.index === 0) return;
-  state.index -= 1;
-  renderQuestion();
+prevButton.addEventListener('click',()=>{if(state.index>0){state.index--;renderQuestion(true);}});
+nextButton.addEventListener('click',async()=>{
+  if(!state.answers[state.index] || quizSaving)return;
+  if(state.index<questions.length-1){state.index++;renderQuestion(true);return;}
+  quizSaving=true; nextButton.disabled=true;
+  try {await showResults();} finally {quizSaving=false;}
 });
-
-nextButton.addEventListener("click", async () => {
-  if (!state.answers[state.index] || quizSaving) return;
-  if (state.index === questions.length - 1) {
-    quizSaving = true;
-    nextButton.disabled = true;
-    nextButton.textContent = "Сохраняю...";
-    await showResults();
-    quizSaving = false;
-    return;
-  }
-  state.index += 1;
-  renderQuestion();
+restartButton.addEventListener('click',()=>{
+  if(currentUser)return;
+  try{localStorage.removeItem(GUEST_KEY);}catch{}
+  state.index=0;state.answers=Array(questions.length).fill(null);state.optionOrders=questions.map(item=>shuffleOptions(item.options));
+  resultsNode.hidden=true;quizSurface.hidden=false;renderQuestion(true);
+  quizSurface.scrollIntoView({behavior:'auto',block:'start'});
 });
-
-restartButton.addEventListener("click", () => {
-  state.index = 0;
-  state.answers = Array(questions.length).fill(null);
-  state.optionOrders = questions.map((item) => shuffleOptions(item.options));
-  resultsNode.hidden = true;
-  document.querySelector(".quiz-surface").hidden = false;
-  renderQuestion();
-  root.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
+document.querySelector('[data-start-guest]').addEventListener('click',startGuest);
 initQuiz();

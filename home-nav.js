@@ -57,7 +57,7 @@
 
   function syncAccountLabel() {
     const signedIn = authButton?.classList.contains("is-signed");
-    desktopAccount.textContent = signedIn ? "Кабинет" : "Войти";
+    desktopAccount.setAttribute("aria-label", signedIn ? "Открыть личный кабинет" : "Личный кабинет — вход");
     account.setAttribute("aria-label", signedIn ? "Открыть личный кабинет" : "Личный кабинет — вход");
   }
   if (authButton) new MutationObserver(syncAccountLabel).observe(authButton, { attributes: true, attributeFilter: ["class"] });
@@ -110,26 +110,47 @@
 })();
 
 
-// Only the desktop cover image moves; the page retains native scrolling.
+// The portrait eases toward the scroll position only while the cover is visible.
 (() => {
   const portrait = document.querySelector('[data-hero-portrait]');
   if (!portrait) return;
   const hero = portrait.closest('.hero');
   const enabled = matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)');
-  let frame = 0;
-  function render() {
+  let visible = false, frame = 0, current = 0, target = 0, lastTime = 0, heroTop = 0;
+  function render(time) {
     frame = 0;
-    const y = Math.max(0, -hero.getBoundingClientRect().top);
-    portrait.style.setProperty('--portrait-shift', `${enabled.matches ? Math.min(y * .16, 100) : 0}px`);
+    const delta = lastTime ? Math.min(time - lastTime, 32) : 16;
+    lastTime = time;
+    current += (target - current) * (1 - Math.exp(-delta / 85));
+    if (Math.abs(target - current) < .05) current = target;
+    portrait.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
+    if (current !== target && visible && enabled.matches) frame = requestAnimationFrame(render);
+    else lastTime = 0;
   }
-  function schedule() {
+  function update() {
+    target = Math.min(Math.max(0, scrollY - heroTop) * .12, 80);
     if (!frame) frame = requestAnimationFrame(render);
   }
   function configure() {
-    window.removeEventListener('scroll', schedule);
-    if (enabled.matches) window.addEventListener('scroll', schedule, { passive: true });
-    schedule();
+    window.removeEventListener('scroll', update);
+    cancelAnimationFrame(frame);
+    frame = 0;
+    lastTime = 0;
+    const active = visible && enabled.matches;
+    portrait.classList.toggle('is-parallax-active', active);
+    if (active) {
+      heroTop = hero.getBoundingClientRect().top + scrollY;
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    } else if (!enabled.matches) {
+      current = target = 0;
+      portrait.style.transform = '';
+    }
   }
+  new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+    configure();
+  }).observe(hero);
   enabled.addEventListener('change', configure);
-  configure();
+  window.addEventListener('resize', configure, { passive: true });
 })();

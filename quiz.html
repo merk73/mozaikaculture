@@ -11,8 +11,9 @@
       content="Онлайн квиз Мозаика культур по коренным народам Дальнего Востока."
     />
     <link rel="stylesheet" href="styles.css?v=20260620-polish-1" />
-      <link rel="stylesheet" href="site-shell.css?v=20260920-3" />
-    <link rel="stylesheet" href="site-motion.css?v=20260920-3" />
+      <link rel="stylesheet" href="site-shell.css?v=20260920-7" />
+    <link rel="stylesheet" href="site-motion.css?v=20260920-4" />
+    <link rel="stylesheet" href="quiz.css?v=20260920-7" />
   </head>
   <body class="quiz-page site-refresh">
     <header class="site-header">
@@ -34,7 +35,7 @@
       </nav>
       </div>
       <div class="header-account">
-        <button class="desktop-account" type="button" data-desktop-account data-auth-url="index.html?auth=login">Войти</button>
+        <button class="desktop-account" type="button" data-desktop-account data-auth-url="index.html?auth=login" aria-label="Личный кабинет — вход" title="Личный кабинет"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg></button>
       </div>
       <button class="mobile-header-button mobile-account" type="button" aria-label="Личный кабинет — вход" data-mobile-account>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg>
@@ -46,7 +47,7 @@
       <section class="online-quiz-hero" aria-labelledby="quiz-title">
         <div>
           <p class="overline">онлайн квиз</p>
-          <h1 id="quiz-title">Проверь, насколько точно ты собрал мозаику.</h1>
+          <h1 id="quiz-title">Соберите свою<br />мозаику знаний.</h1>
         </div>
         <p>
           15 вопросов по территориям, языкам, промыслам и культурным связям
@@ -54,16 +55,17 @@
         </p>
       </section>
 
+      <div class="quiz-mode"><span data-quiz-mode>Подготовка квиза</span><p data-quiz-storage>Результат гостя сохраняется в этом браузере.</p></div>
       <section class="quiz-lock" data-quiz-lock hidden>
-        <p class="overline">доступ по регистрации</p>
-        <h2 data-quiz-lock-title>Квиз доступен после входа</h2>
+        <p class="overline">сохранение результата</p>
+        <h2 data-quiz-lock-title>Квиз доступен без регистрации</h2>
         <p data-quiz-lock-text>
-          Зарегистрируйтесь или войдите в аккаунт, чтобы пройти квиз. Результат сохраняется один раз.
+          Можно пройти квиз без аккаунта. Результат сохранится только в этом браузере.
         </p>
-        <a class="quiz-primary quiz-link" href="index.html?auth=quiz#learn">Войти или зарегистрироваться</a>
+        <button class="quiz-primary" type="button" data-start-guest>Продолжить без аккаунта</button>
       </section>
 
-      <section class="quiz-surface" aria-live="polite">
+      <section class="quiz-surface" hidden aria-labelledby="quiz-current-question">
         <div class="quiz-progress">
           <span data-quiz-step>Вопрос 1 из 15</span>
           <strong data-quiz-score>0 выбрано</strong>
@@ -74,8 +76,8 @@
 
         <article class="quiz-question-card">
           <p class="quiz-kicker" data-quiz-kicker></p>
-          <h2 data-quiz-question></h2>
-          <div class="quiz-answer-grid" data-quiz-options></div>
+          <h2 id="quiz-current-question" data-quiz-question tabindex="-1"></h2>
+          <div class="quiz-answer-grid" data-quiz-options role="group" aria-labelledby="quiz-current-question"></div>
         </article>
 
         <div class="quiz-actions">
@@ -87,8 +89,8 @@
       <section class="quiz-results" data-quiz-results hidden>
         <div class="quiz-result-head">
           <p class="overline">результат</p>
-          <h2 data-result-title></h2>
-          <p data-result-summary></p>
+          <h2 data-result-title tabindex="-1"></h2>
+          <p data-result-summary></p><p class="result-storage" data-result-storage role="status"></p>
         </div>
         <div class="quiz-review" data-result-list></div>
         <div class="quiz-actions">
@@ -100,8 +102,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
-    <script src="quiz.js?v=20260920-3"></script>
-      <script src="home-nav.js?v=20260920-3"></script>
-    <script src="site-motion.js?v=20260920-3"></script>
+    <script src="quiz.js?v=20260920-7"></script>
+      <script src="home-nav.js?v=20260920-5"></script>
+    <script src="site-motion.js?v=20260920-4"></script>
   </body>
 </html>

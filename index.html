@@ -11,9 +11,10 @@
       content="Образовательный атлас Мозаика культур о коренных народах Дальнего Востока."
     />
     <link rel="stylesheet" href="styles.css?v=20260711-events-compact-1" />
-    <link rel="stylesheet" href="home.css?v=20260920-3" />
-      <link rel="stylesheet" href="site-shell.css?v=20260920-3" />
-    <link rel="stylesheet" href="site-motion.css?v=20260920-3" />
+    <link rel="stylesheet" href="home.css?v=20260920-6" />
+      <link rel="stylesheet" href="site-shell.css?v=20260920-7" />
+    <link rel="stylesheet" href="site-motion.css?v=20260920-4" />
+    <link rel="stylesheet" href="home-interactions.css?v=20260920-7" />
   </head>
   <body class="home-page site-refresh">
     <a class="skip-link" href="#top">Перейти к содержимому</a>
@@ -36,7 +37,7 @@
       </nav>
       </div>
       <div class="header-account">
-        <button class="desktop-account" type="button" data-desktop-account>Войти</button>
+        <button class="desktop-account" type="button" data-desktop-account aria-label="Личный кабинет — вход" title="Личный кабинет"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg></button>
       </div>
       <button class="nav-cta" type="button" data-auth-open hidden>Войти</button>
       <button class="mobile-header-button mobile-account" type="button" aria-label="Личный кабинет — вход" data-mobile-account>
@@ -120,40 +121,32 @@
       </section>
 
       <section class="learn" id="learn" aria-labelledby="learn-title">
-        <div class="section-shell learn-grid learn-card">
-          <div class="learn-aside">
-            <p class="overline">Первое знакомство</p>
-            <h2 id="learn-title">Узнайте больше<br />о каждом народе.</h2>
-            <p>
-              Выберите народ, прочитайте о его языке, территории и традициях.
-              Затем ответьте на один вопрос, чтобы проверить себя.
-            </p>
-            <label class="people-select-label" for="people-select">1. Выберите народ</label>
+        <div class="section-shell learn-flow" data-learn-flow>
+          <div class="learn-flow-heading"><p class="overline">Первое знакомство</p><h2 id="learn-title">Один народ. Три шага.</h2><p>Выберите, узнайте, проверьте себя.</p></div>
+          <ol class="learn-steps" aria-label="Шаги знакомства">
+            <li><button type="button" data-learn-nav="0" aria-current="step"><span>01</span>Выбрать</button></li>
+            <li><button type="button" data-learn-nav="1" disabled><span>02</span>Прочитать</button></li>
+            <li><button type="button" data-learn-nav="2" disabled><span>03</span>Пройти тест</button></li>
+          </ol>
+          <div class="learn-stage" data-learn-stage="0">
+            <h3 tabindex="-1">С кем познакомимся?</h3>
+            <label class="people-select-label" for="people-select">Выберите народ</label>
             <select class="people-select" id="people-select" data-people-select></select>
-            <p class="learn-hint">Народ можно сменить в любой момент — факты и вопрос обновятся здесь.</p>
+            <p class="learn-stage-note">Впереди — короткий рассказ о культуре и один вопрос.</p>
+            <div class="learn-actions"><button class="learn-primary" type="button" data-learn-next disabled>Узнать о народе</button></div>
           </div>
-
-          <article class="knowledge-panel" data-knowledge-panel>
-            <p class="knowledge-step">2. Познакомьтесь с культурой</p>
-            <div class="panel-meta">
-              <span data-panel-region>Амур и его притоки</span>
-              <span data-panel-type>язык · традиции · современность</span>
-            </div>
-            <h3 data-panel-title>Нанайцы</h3>
-            <p data-panel-text></p>
-            <div class="fact-list" data-panel-facts></div>
-            <div class="quiz-block">
-              <p class="knowledge-step">3. Проверьте себя</p>
-              <p class="quiz-question" data-quiz-question></p>
-              <div class="quiz-options" data-quiz-options></div>
-              <p class="quiz-result" data-quiz-result></p>
-            </div>
+          <article class="learn-stage knowledge-panel" data-knowledge-panel data-learn-stage="1" hidden>
+            <div class="panel-meta"><span data-panel-region></span><span data-panel-type></span></div>
+            <h3 data-panel-title tabindex="-1"></h3><p data-panel-text></p><div class="fact-list" data-panel-facts></div>
+            <div class="learn-actions"><button class="learn-secondary" type="button" data-learn-back>Назад</button><button class="learn-primary" type="button" data-learn-next>Проверить себя</button></div>
           </article>
+          <div class="learn-stage" data-learn-stage="2" hidden>
+            <p class="learn-selected-name" data-learn-selected></p><h3 tabindex="-1">Что вы запомнили?</h3>
+            <div class="quiz-block"><p class="quiz-question" data-quiz-question></p><div class="quiz-options" data-quiz-options></div><p class="quiz-result" data-quiz-result role="status"></p></div>
+            <div class="learn-actions"><button class="learn-secondary" type="button" data-learn-back>Перечитать</button><button class="learn-primary" type="button" data-learn-restart>Выбрать другой народ</button></div>
+          </div>
         </div>
-
       </section>
-
-      
 
       <section class="events" id="events" aria-labelledby="events-title">
         <div class="section-shell">
@@ -474,9 +467,10 @@
     <script src="config.js"></script>
     <script src="content.js?v=20260619-far-east-quiz-1"></script>
     <script src="far-east-peoples.js?v=20260619-far-east-quiz-1"></script>
-    <script src="script.js?v=20260920-3"></script>
+    <script src="script.js?v=20260920-7"></script>
     
-      <script src="home-nav.js?v=20260920-3"></script>
-    <script src="site-motion.js?v=20260920-3"></script>
+      <script src="home-nav.js?v=20260920-5"></script>
+    <script src="site-motion.js?v=20260920-4"></script>
+    <script src="learn-flow.js?v=20260920-7"></script>
   </body>
 </html>

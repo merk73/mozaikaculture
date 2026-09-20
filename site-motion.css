@@ -1,26 +1,43 @@
-.site-refresh :is(.button, .desktop-account, .mobile-header-button, .filter-button, .quiz-options button, .event-expand, .article-next a) {
-  transition: background-color 240ms ease, border-color 240ms ease, color 240ms ease, box-shadow 320ms ease, transform 320ms cubic-bezier(.22, 1, .36, 1);
+/* Stable surfaces; motion is limited to small content and controls. */
+.site-refresh .hero { perspective: none; transform-style: flat; }
+.site-refresh .site-header { transition: none; }
+.site-refresh :is(.motion-reveal, .reveal-on-scroll, [data-reveal], .tilt-card) {
+  opacity: 1; transform: none; filter: none; animation: none;
+  will-change: auto; transform-style: flat;
 }
-.site-refresh :is(.people-card, .article-source-list a, .partner) { transition: border-color 320ms ease, background-color 320ms ease, box-shadow 400ms ease; }
-.site-refresh :is(.people-card img, .event-cover > img) { transition: transform 1000ms cubic-bezier(.22, 1, .36, 1); }
-.site-refresh .main-nav a { transition: background-color 220ms ease, color 220ms ease; }
-.site-refresh .menu-toggle { transition: background-color 240ms ease, border-color 240ms ease; }
-@media (hover: hover) and (pointer: fine) {
-  .site-refresh :is(.button, .desktop-account, .article-next a):hover { transform: translateY(-2px); }
-  .site-refresh .people-card:hover img { transform: scale(1.025); }
-  .site-refresh .event-cover:hover > img { transform: scale(1.015); }
+.site-refresh :is(.button, .desktop-account, .mobile-header-button, .filter-button, .quiz-options button, .event-expand, .article-next a, .main-nav a) {
+  transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease;
 }
+.site-refresh .people-card { transition: border-color 260ms ease; }
+.site-refresh .people-card .card-portrait img,
+.site-refresh .people-card:hover .card-portrait img,
+.site-refresh .people-card:focus-visible .card-portrait img {
+  filter: none; transform: none; transition: none; will-change: auto;
+}
+.site-refresh .event-cover > img,
+.site-refresh .event-cover:hover > img { transform: none; transition: none; }
+.site-refresh .button:hover,
+.site-refresh .button:focus-visible,
+.site-refresh .article-source-list a:hover { transform: none; }
+.site-refresh main .soft-enter {
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 620ms ease, transform 700ms cubic-bezier(.2, .7, .2, 1);
+}
+.site-refresh main .soft-enter.soft-entered,
+.site-refresh main .soft-enter:focus-within { opacity: 1; transform: none; }
+.site-refresh .hero-portrait.is-parallax-active { will-change: transform; }
 @keyframes soft-content-enter {
-  from { opacity: .4; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: .7; }
+  to { opacity: 1; }
 }
-.site-refresh .event-card[open] .event-expanded,
+.site-refresh .event-card[open] .event-expanded-intro,
 .site-refresh .footer-disclosure[open] .footer-disclosure-content,
-.site-refresh .article-toc[open] nav { animation: soft-content-enter 520ms cubic-bezier(.22, 1, .36, 1); }
-.site-refresh .site-header.is-menu-open .main-nav { animation: soft-content-enter 400ms cubic-bezier(.22, 1, .36, 1); }
+.site-refresh .article-toc[open] nav { animation: soft-content-enter 320ms ease; }
+.site-refresh .site-header.is-menu-open .main-nav { animation: soft-content-enter 280ms ease; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   .site-refresh *, .site-refresh *::before, .site-refresh *::after {
     animation: none !important; transition: none !important; scroll-behavior: auto !important;
   }
+  .site-refresh main .soft-enter { opacity: 1; transform: none; }
 }

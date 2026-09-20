@@ -243,7 +243,7 @@ function renderCards(filter = "all") {
     .map(
       (person, index) => `
         <a class="people-card motion-reveal tilt-card" href="peoples/${person.slug}.html" style="--motion-delay: ${Math.min(index * 30, 210)}ms">
-          <figure class="card-portrait" aria-hidden="true">
+          <span class="card-hover-art" aria-hidden="true"></span><figure class="card-portrait" aria-hidden="true">
             <img src="${person.image}" alt="" loading="lazy" decoding="async" />
           </figure>
           <div class="card-meta">
@@ -705,13 +705,7 @@ async function submitFeedback(payload) {
   return "supabase";
 }
 
-quizGateLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    if (!supabaseClient || currentUserId) return;
-    event.preventDefault();
-    openQuizAuthGate();
-  });
-});
+// Quiz links work for guests as ordinary page links.
 
 authOpenButtons.forEach((button) => button.addEventListener("click", openAuth));
 authCloseButtons.forEach((button) => button.addEventListener("click", closeAuth));
