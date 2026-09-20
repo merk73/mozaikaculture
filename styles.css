@@ -55,18 +55,6 @@ body {
   text-rendering: geometricPrecision;
 }
 
-body::before {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 80;
-  height: env(safe-area-inset-top, 0px);
-  content: "";
-  background: #000;
-  pointer-events: none;
-}
-
 [hidden] {
   display: none !important;
 }

@@ -116,19 +116,3 @@ body.site-refresh:not(.home-page) { color: var(--text); background: #030303; ove
   }
   .site-refresh .site-header.is-menu-open .main-nav { gap: 2px; }
 }
-
-/* Keep the viewport strip above the fixed header opaque during scroll and rubber-band. */
-@media (max-width: 760px) {
-  .site-refresh::before {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 200;
-    display: block;
-    height: var(--mobile-header-top);
-    content: "";
-    background: #000;
-    pointer-events: none;
-  }
-}
