@@ -10,7 +10,7 @@
       name="description"
       content="Образовательный атлас Мозаика культур о коренных народах Дальнего Востока."
     />
-    <link rel="stylesheet" href="styles.css?v=20260920-vector-arrows-1" />
+    <link rel="stylesheet" href="styles.css?v=20260920-auth-steps-1" />
     <link rel="stylesheet" href="home.css?v=20260920-vector-arrows-1" />
       <link rel="stylesheet" href="site-shell.css?v=20260920-no-top-strip-1" />
     <link rel="stylesheet" href="site-motion.css?v=20260920-4" />
@@ -385,31 +385,74 @@
       <div class="auth-backdrop" data-auth-close></div>
       <section class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-title">
         <button class="auth-close" type="button" data-auth-close aria-label="Закрыть">×</button>
+        <button class="auth-back" type="button" data-auth-back aria-label="Назад" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+        </button>
+
         <p class="overline">личный кабинет</p>
-        <h2 id="auth-title">Вход в Мозаику</h2>
-        <p class="auth-note">
-          Войдите по почте, чтобы сохранять материалы,
+        <h2 id="auth-title" data-auth-title>Мозаика зовёт</h2>
+        <p class="auth-note" data-auth-note>
+          Войдите или создайте кабинет, чтобы сохранять материалы,
           возвращаться к изучению и получать обновления проекта.
         </p>
 
-        <div class="auth-switch" role="tablist" aria-label="Режим входа">
-          <button class="is-active" type="button" data-auth-mode="register">Регистрация</button>
-          <button type="button" data-auth-mode="login">Вход</button>
+        <div class="auth-progress" data-auth-progress hidden>
+          <div class="auth-progress-dots" data-auth-progress-dots aria-hidden="true"></div>
+          <span class="auth-progress-label" data-auth-progress-label></span>
         </div>
 
-        <form class="auth-form" data-auth-form>
-          <label data-auth-name-field>
-            Имя
+        <div class="auth-step is-active" data-auth-step="choice">
+          <button class="auth-option auth-option-primary" type="button" data-auth-choose="register">
+            <span class="auth-option-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.5" /><path d="M4 20v-1.6a6 6 0 0 1 12 0V20" /><path d="M18.5 8v6M21.5 11h-6" /></svg>
+            </span>
+            <span class="auth-option-text">
+              <strong>Зарегистрироваться</strong>
+              <small>Имя, почта и пароль — в четыре коротких шага</small>
+            </span>
+            <span class="auth-option-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </span>
+          </button>
+          <button class="auth-option" type="button" data-auth-choose="login">
+            <span class="auth-option-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3.5A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5H15" /><path d="M10 17l5-5-5-5" /><path d="M15 12H3" /></svg>
+            </span>
+            <span class="auth-option-text">
+              <strong>Войти</strong>
+              <small>У меня уже есть аккаунт проекта</small>
+            </span>
+            <span class="auth-option-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </span>
+          </button>
+          <p class="auth-hint">
+            Используйте действующую почту: к ней будут привязаны материалы и
+            будущие уведомления проекта.
+          </p>
+        </div>
+
+        <form class="auth-step auth-form" data-auth-step="name" hidden novalidate>
+          <label>
+            Ваше имя
             <input type="text" name="name" autocomplete="given-name" placeholder="Как к вам обращаться" minlength="2" maxlength="40" required />
           </label>
+          <button class="auth-submit" type="submit">Продолжить</button>
+        </form>
+
+        <form class="auth-step auth-form" data-auth-step="email" hidden novalidate>
           <label>
             Почта
-            <input type="email" name="email" autocomplete="email" placeholder="student@example.ru" required />
+            <input type="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" placeholder="student@example.ru" required />
           </label>
-          <label>
-            Пароль
+          <button class="auth-submit" type="submit">Продолжить</button>
+        </form>
+
+        <form class="auth-step auth-form" data-auth-step="password" hidden novalidate>
+          <label data-password-label>
+            <span data-password-caption>Придумайте пароль</span>
             <span class="password-field">
-              <input type="password" name="password" autocomplete="current-password" minlength="6" placeholder="минимум 6 символов" required />
+              <input type="password" name="password" autocomplete="new-password" minlength="6" placeholder="Минимум 6 символов" required />
               <button class="password-toggle" type="button" data-password-toggle aria-label="Показать пароль" aria-pressed="false">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
@@ -418,14 +461,31 @@
               </button>
             </span>
           </label>
-          <button class="auth-submit" type="submit">Создать аккаунт</button>
-          <p class="auth-message" data-auth-message></p>
+          <button class="auth-submit" type="submit" data-password-submit>Создать аккаунт</button>
         </form>
 
-        <p class="auth-hint">
-          Используйте действующую почту: к ней будут привязаны материалы и
-          будущие уведомления проекта.
-        </p>
+        <form class="auth-step auth-form" data-auth-step="code" hidden novalidate>
+          <div class="auth-code" data-auth-code role="group" aria-label="Код подтверждения из письма">
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="one-time-code" aria-label="Цифра 1" />
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 2" />
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 3" />
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 4" />
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 5" />
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Цифра 6" />
+          </div>
+          <button class="auth-submit" type="submit">Подтвердить</button>
+          <button class="auth-resend" type="button" data-auth-resend>Отправить код повторно</button>
+        </form>
+
+        <div class="auth-step auth-done" data-auth-step="done" hidden role="status">
+          <span class="auth-done-check" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L20 6.5" /></svg>
+          </span>
+          <strong data-auth-done-title>Готово!</strong>
+          <p data-auth-done-text>Вы вошли в личный кабинет «Мозаики культур».</p>
+        </div>
+
+        <p class="auth-message" data-auth-message></p>
       </section>
     </div>
 
@@ -468,7 +528,7 @@
     <script src="config.js"></script>
     <script src="content.js?v=20260619-far-east-quiz-1"></script>
     <script src="far-east-peoples.js?v=20260619-far-east-quiz-1"></script>
-    <script src="script.js?v=20260920-7"></script>
+    <script src="script.js?v=20260920-auth-steps-1"></script>
     
       <script src="home-nav.js?v=20260920-5"></script>
     <script src="site-motion.js?v=20260920-4"></script>

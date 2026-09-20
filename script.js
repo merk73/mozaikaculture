@@ -350,13 +350,28 @@ if (tabs) {
 }
 
 const authModal = document.querySelector("[data-auth-modal]");
-const authForm = document.querySelector("[data-auth-form]");
+const authCard = authModal?.querySelector(".auth-card") || null;
+const authSteps = authModal ? Array.from(authModal.querySelectorAll("[data-auth-step]")) : [];
+const authTitle = authModal?.querySelector("[data-auth-title]") || null;
+const authNote = authModal?.querySelector("[data-auth-note]") || null;
+const authProgress = authModal?.querySelector("[data-auth-progress]") || null;
+const authProgressDots = authModal?.querySelector("[data-auth-progress-dots]") || null;
+const authProgressLabel = authModal?.querySelector("[data-auth-progress-label]") || null;
+const authBackButton = authModal?.querySelector("[data-auth-back]") || null;
+const authChooseButtons = document.querySelectorAll("[data-auth-choose]");
 const authMessage = document.querySelector("[data-auth-message]");
-const authSubmit = document.querySelector(".auth-submit");
-const authModeButtons = document.querySelectorAll("[data-auth-mode]");
 const authOpenButtons = document.querySelectorAll("[data-auth-open]");
 const authCloseButtons = document.querySelectorAll("[data-auth-close]");
-const authNameField = document.querySelector("[data-auth-name-field]");
+const authNameForm = authModal?.querySelector('[data-auth-step="name"]') || null;
+const authEmailForm = authModal?.querySelector('[data-auth-step="email"]') || null;
+const authPasswordForm = authModal?.querySelector('[data-auth-step="password"]') || null;
+const authCodeForm = authModal?.querySelector('[data-auth-step="code"]') || null;
+const authCodeInputs = authCodeForm ? Array.from(authCodeForm.querySelectorAll(".auth-code input")) : [];
+const authResendButton = authCodeForm?.querySelector("[data-auth-resend]") || null;
+const passwordCaption = authModal?.querySelector("[data-password-caption]") || null;
+const passwordSubmit = authModal?.querySelector("[data-password-submit]") || null;
+const authDoneTitle = authModal?.querySelector("[data-auth-done-title]") || null;
+const authDoneText = authModal?.querySelector("[data-auth-done-text]") || null;
 const profileModal = document.querySelector("[data-profile-modal]");
 const profileCloseButtons = document.querySelectorAll("[data-profile-close]");
 const profileAvatar = document.querySelector("[data-profile-avatar]");
@@ -371,15 +386,55 @@ const feedbackForm = document.querySelector("[data-feedback-form]");
 const feedbackMessage = document.querySelector("[data-feedback-message]");
 const supabaseConfig = window.MOZAIKA_CONFIG || {};
 const hasSupabaseConfig = Boolean(supabaseConfig.SUPABASE_URL && supabaseConfig.SUPABASE_ANON_KEY);
+// UI preview mode (?auth-demo=1): walks through the auth flow without a backend.
+const authDemoMode = new URLSearchParams(window.location.search).get("auth-demo") === "1";
+
+function createDemoSupabaseClient() {
+  const demoUser = () => ({
+    id: "demo-user",
+    email: authFormEmail || "student@example.ru",
+    user_metadata: { display_name: authFormName || "Студент" },
+  });
+  const emptyTable = () => ({
+    select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: null, error: null }) }) }),
+    insert: async () => ({ error: null }),
+  });
+  return {
+    from: emptyTable,
+    auth: {
+      async getSession() { return { data: { session: null }, error: null }; },
+      async onAuthStateChange() { return { data: { subscription: { unsubscribe() {} } } }; },
+      async signUp({ email }) { return { data: { session: null, user: { id: "demo-user", email } }, error: null }; },
+      async signInWithPassword() { return { data: {}, error: { message: "Email not confirmed" } }; },
+      async verifyOtp() { return { data: { session: { user: demoUser() }, user: demoUser() }, error: null }; },
+      async resend() { return { data: {}, error: null }; },
+      async signOut() { return { error: null }; },
+    },
+  };
+}
+
 const supabaseClient =
   window.supabase && window.supabase.createClient && hasSupabaseConfig
     ? window.supabase.createClient(supabaseConfig.SUPABASE_URL, supabaseConfig.SUPABASE_ANON_KEY)
-    : null;
-let authMode = "register";
+    : authDemoMode
+      ? createDemoSupabaseClient()
+      : null;
+let authMode = null;
+let authStep = "choice";
+let loginNeedsCode = false;
+let authFormEmail = "";
+let authFormName = "";
 let currentUserEmail = "";
 let currentUserId = null;
 let currentUserName = "";
 let authRequestPending = false;
+let resendAvailableAt = 0;
+let resendTimerId = 0;
+const AUTH_STEP_ORDER = {
+  register: ["name", "email", "password", "code"],
+  login: ["email", "password"],
+};
+const RESEND_COOLDOWN_SECONDS = 30;
 const netlifyFormEndpoint = "/";
 const authRedirectPath = window.location.pathname.startsWith("/mozaikaculture/") ? "/mozaikaculture/" : "/";
 const authRedirectUrl = new URL(authRedirectPath, window.location.origin).href;
@@ -495,24 +550,186 @@ function getFriendlyAuthError(error) {
   return error?.message || "Не удалось выполнить вход.";
 }
 
-function openAuth() {
-  if (!supabaseClient || !authModal || !authForm) return;
+function getAuthSteps() {
+  const steps = [...(AUTH_STEP_ORDER[authMode] || [])];
+  if (authMode === "login" && loginNeedsCode) steps.push("code");
+  return steps;
+}
+
+function getAuthStepCopy() {
+  switch (authStep) {
+    case "choice":
+      return {
+        title: "Мозаика зовёт",
+        note: "Войдите или создайте кабинет, чтобы сохранять материалы, возвращаться к изучению и получать обновления проекта.",
+      };
+    case "name":
+      return {
+        title: "Как вас зовут?",
+        note: "Представьтесь — так к вам будет обращаться личный кабинет.",
+      };
+    case "email":
+      return authMode === "register"
+        ? {
+            title: "Ваша почта",
+            note: "На неё мы отправим код подтверждения, чтобы защитить аккаунт.",
+          }
+        : {
+            title: "С возвращением!",
+            note: "Укажите почту, с которой вы регистрировались в «Мозаике».",
+          };
+    case "password":
+      return authMode === "register"
+        ? {
+            title: "Придумайте пароль",
+            note: `Минимум 6 символов. Код подтверждения прилетит на ${authFormEmail}.`,
+          }
+        : {
+            title: "Введите пароль",
+            note: `Пароль от аккаунта ${authFormEmail}.`,
+          };
+    case "code":
+      return {
+        title: "Код из письма",
+        note: `Мы отправили шестизначный код на ${authFormEmail}. Введите его, чтобы ${authMode === "register" ? "завершить регистрацию" : "подтвердить вход"}.`,
+      };
+    case "done":
+      return { title: "Готово!", note: "" };
+    default:
+      return { title: "", note: "" };
+  }
+}
+
+function updateAuthChrome() {
+  const steps = getAuthSteps();
+  const index = steps.indexOf(authStep);
+  const onFlowStep = index >= 0;
+
+  if (authBackButton) authBackButton.hidden = !onFlowStep;
+  authCard?.classList.toggle("has-back", onFlowStep);
+
+  if (authProgress && authProgressDots && authProgressLabel) {
+    authProgress.hidden = !onFlowStep;
+    if (onFlowStep) {
+      authProgressLabel.textContent = `Шаг ${index + 1} из ${steps.length}`;
+      authProgressDots.innerHTML = steps
+        .map((stepName, stepIndex) => {
+          const state = stepIndex < index ? "is-done" : stepIndex === index ? "is-current" : "";
+          return `<span class="auth-progress-dot ${state}"></span>`;
+        })
+        .join("");
+    }
+  }
+
+  const copy = getAuthStepCopy();
+  if (authTitle) authTitle.textContent = copy.title;
+  if (authNote) {
+    authNote.textContent = copy.note;
+    authNote.hidden = !copy.note;
+  }
+
+  const passwordInput = authPasswordForm?.querySelector('input[name="password"]');
+  const isRegister = authMode === "register";
+  if (passwordInput) {
+    passwordInput.autocomplete = isRegister ? "new-password" : "current-password";
+    passwordInput.placeholder = isRegister ? "Минимум 6 символов" : "Пароль от аккаунта";
+  }
+  if (passwordCaption) passwordCaption.textContent = isRegister ? "Придумайте пароль" : "Ваш пароль";
+  if (passwordSubmit) {
+    delete passwordSubmit.dataset.idleLabel;
+    passwordSubmit.textContent = isRegister ? "Создать аккаунт" : "Войти";
+  }
+}
+
+function setAuthStep(step, options = {}) {
+  if (!authModal) return;
+  authStep = step;
+  let activeStep = null;
+  authSteps.forEach((element) => {
+    const isActive = element.dataset.authStep === step;
+    element.hidden = !isActive;
+    element.classList.toggle("is-active", isActive);
+    element.classList.remove("is-entering");
+    if (isActive) {
+      activeStep = element;
+      // Restart the entrance animation for the freshly shown step.
+      void element.offsetWidth;
+      element.classList.add("is-entering");
+    }
+  });
+  updateAuthChrome();
+  if (options.message !== undefined) {
+    setAuthMessage(options.message.text || "", options.message.type || "info");
+  } else {
+    setAuthMessage("");
+  }
+  const focusTarget =
+    activeStep?.querySelector("input") ||
+    activeStep?.querySelector("button:not([data-auth-close]):not([data-auth-back])");
+  window.setTimeout(() => focusTarget?.focus({ preventScroll: true }), authModal.classList.contains("is-open") ? 60 : 430);
+}
+
+function startAuthFlow(mode) {
+  authMode = mode;
+  loginNeedsCode = false;
+  setAuthStep(getAuthSteps()[0]);
+}
+
+function resetAuthFlow() {
+  authMode = null;
+  loginNeedsCode = false;
+  authFormEmail = "";
+  authFormName = "";
+  [authNameForm, authEmailForm, authPasswordForm, authCodeForm].forEach((form) => form?.reset());
+  clearCodeInputs();
+  stopResendCooldown();
+  setAuthStep("choice");
+}
+
+function goAuthBack() {
+  const steps = getAuthSteps();
+  const index = steps.indexOf(authStep);
+  if (index > 0) {
+    setAuthStep(steps[index - 1]);
+  } else if (index === 0) {
+    authMode = null;
+    setAuthStep("choice");
+  }
+}
+
+function openAuth(startMode = null) {
+  if (!supabaseClient || !authModal) return;
   if (currentUserId) {
     openProfile();
     return;
   }
+  // The handler may be called directly as a click listener: ignore the event object.
+  const mode = startMode === "login" || startMode === "register" ? startMode : null;
+  resetAuthFlow();
+  if (mode) startAuthFlow(mode);
+  if (authDemoMode && !hasSupabaseConfig) {
+    setAuthMessage("Демо-режим предпросмотра: данные никуда не отправляются.", "info");
+  }
   authModal.classList.add("is-open");
   authModal.setAttribute("aria-hidden", "false");
-  const firstInput = authMode === "register"
-    ? authForm.querySelector('input[name="name"]')
-    : authForm.querySelector('input[name="email"]');
-  setTimeout(() => firstInput?.focus(), 30);
+  document.documentElement.classList.add("modal-open");
+  const focusTarget = authStep === "choice"
+    ? authModal.querySelector('[data-auth-step="choice"] .auth-option')
+    : authModal.querySelector(`[data-auth-step="${authStep}"] input`);
+  window.setTimeout(() => focusTarget?.focus({ preventScroll: true }), 430);
 }
 
 function closeAuth() {
   if (!authModal) return;
+  const wasOpen = authModal.classList.contains("is-open");
   authModal.classList.remove("is-open");
   authModal.setAttribute("aria-hidden", "true");
+  document.documentElement.classList.remove("modal-open");
+  if (wasOpen) {
+    window.setTimeout(() => {
+      if (!authModal.classList.contains("is-open")) resetAuthFlow();
+    }, 540);
+  }
 }
 
 function openProfile() {
@@ -522,6 +739,7 @@ function openProfile() {
   profileModal.classList.add("is-open");
   profileModal.setAttribute("aria-hidden", "false");
   document.documentElement.classList.add("profile-open");
+  document.documentElement.classList.add("modal-open");
   renderProfile();
   loadProfileQuizResult();
 }
@@ -530,27 +748,87 @@ function closeProfile() {
   if (!profileModal) return;
   profileModal.classList.remove("is-open");
   profileModal.setAttribute("aria-hidden", "true");
-  profileModal.hidden = true;
   document.documentElement.classList.remove("profile-open");
+  document.documentElement.classList.remove("modal-open");
+  window.setTimeout(() => {
+    if (!profileModal.classList.contains("is-open")) profileModal.hidden = true;
+  }, 540);
 }
 
-function setAuthMode(mode) {
-  authMode = mode;
-  authModeButtons.forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.authMode === mode);
+function getCodeValue() {
+  return authCodeInputs.map((input) => input.value).join("");
+}
+
+function clearCodeInputs() {
+  authCodeInputs.forEach((input) => {
+    input.value = "";
+    input.classList.remove("is-filled");
   });
-  if (authSubmit) authSubmit.textContent = mode === "register" ? "Создать аккаунт" : "Войти";
-  if (authNameField) {
-    const input = authNameField.querySelector("input");
-    const isRegister = mode === "register";
-    authNameField.hidden = !isRegister;
-    if (input) input.required = isRegister;
+}
+
+function updateResendButton() {
+  if (!authResendButton) return;
+  const remaining = Math.max(0, Math.ceil((resendAvailableAt - Date.now()) / 1000));
+  if (remaining > 0) {
+    authResendButton.disabled = true;
+    authResendButton.textContent = `Отправить код повторно можно через ${remaining} c`;
+  } else {
+    authResendButton.disabled = false;
+    authResendButton.textContent = "Отправить код повторно";
   }
-  const passwordInput = authForm?.querySelector('input[name="password"]');
-  if (passwordInput) {
-    passwordInput.autocomplete = mode === "register" ? "new-password" : "current-password";
+}
+
+function startResendCooldown() {
+  resendAvailableAt = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
+  window.clearInterval(resendTimerId);
+  updateResendButton();
+  resendTimerId = window.setInterval(() => {
+    updateResendButton();
+    if (Date.now() >= resendAvailableAt) {
+      window.clearInterval(resendTimerId);
+      resendTimerId = 0;
+    }
+  }, 1000);
+}
+
+function stopResendCooldown() {
+  window.clearInterval(resendTimerId);
+  resendTimerId = 0;
+  resendAvailableAt = 0;
+  updateResendButton();
+}
+
+function setAuthPending(pending, busyText = "") {
+  authRequestPending = pending;
+  if (!authModal) return;
+  const forms = [authNameForm, authEmailForm, authPasswordForm, authCodeForm];
+  forms.forEach((form) => {
+    const submit = form?.querySelector(".auth-submit");
+    if (!submit) return;
+    submit.disabled = pending;
+    if (!submit.dataset.idleLabel) submit.dataset.idleLabel = submit.textContent;
+    if (form.hidden) return;
+    submit.textContent = pending && busyText ? busyText : submit.dataset.idleLabel || submit.textContent;
+  });
+}
+
+function finishAuth(user, mode) {
+  setCurrentUser(user);
+  updateAuthState();
+  stopResendCooldown();
+  clearCodeInputs();
+  setAuthStep("done", {
+    message: { text: mode === "register" ? "Аккаунт создан. Вход выполнен." : "Готово. Вы вошли в личный кабинет.", type: "success" },
+  });
+  if (authDoneTitle) authDoneTitle.textContent = mode === "register" ? "Аккаунт создан!" : "С возвращением!";
+  if (authDoneText) {
+    authDoneText.textContent = mode === "register"
+      ? "Почта подтверждена — личный кабинет «Мозаики культур» готов к работе."
+      : "Вы вошли в личный кабинет «Мозаики культур».";
   }
-  setAuthMessage("");
+  window.setTimeout(() => {
+    if (!redirectToQuizIfRequested()) openProfile();
+  }, 1100);
 }
 
 function updateAuthState() {
@@ -647,9 +925,8 @@ function openQuizAuthGate() {
     return;
   }
 
-  setAuthMode("register");
-  openAuth();
-  setAuthMessage("Квиз доступен после регистрации. Создайте аккаунт или войдите, чтобы пройти его один раз.", "info");
+  openAuth("register");
+  setAuthMessage("Квиз доступен после регистрации. Создайте аккаунт или вернитесь назад и войдите.", "info");
 }
 
 async function loadAuthSession() {
@@ -726,7 +1003,7 @@ profileLogout?.addEventListener("click", async () => {
 });
 
 passwordToggle?.addEventListener("click", () => {
-  const passwordInput = authForm?.querySelector('input[name="password"]');
+  const passwordInput = authPasswordForm?.querySelector('input[name="password"]');
   if (!passwordInput) return;
 
   const shouldShow = passwordInput.type === "password";
@@ -734,70 +1011,179 @@ passwordToggle?.addEventListener("click", () => {
   passwordToggle.setAttribute("aria-pressed", shouldShow ? "true" : "false");
   passwordToggle.setAttribute("aria-label", shouldShow ? "Скрыть пароль" : "Показать пароль");
 });
-authModeButtons.forEach((button) => {
-  button.addEventListener("click", () => setAuthMode(button.dataset.authMode));
+
+authChooseButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const mode = button.dataset.authChoose === "login" ? "login" : "register";
+    startAuthFlow(mode);
+  });
 });
 
-if (authForm) {
-  authForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    if (authRequestPending) return;
+authBackButton?.addEventListener("click", goAuthBack);
 
-    const formData = new FormData(authForm);
-    const name = String(formData.get("name") || "").trim();
-    const email = String(formData.get("email")).trim().toLowerCase();
-    const password = String(formData.get("password"));
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
 
-    if (authMode === "register" && name.length < 2) {
-      setAuthMessage("Укажите имя, чтобы создать личный кабинет.", "error");
-      return;
-    }
+function isUnconfirmedEmailError(error) {
+  return String(error?.message || "").toLowerCase().includes("not confirmed");
+}
 
-    if (password.length < 6) {
-      setAuthMessage("Пароль должен быть не короче 6 символов.", "error");
-      return;
-    }
+authNameForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (authRequestPending) return;
+  const name = String(authNameForm.elements.name?.value || "").trim();
+  if (name.length < 2) {
+    setAuthMessage("Укажите имя, чтобы создать личный кабинет.", "error");
+    return;
+  }
+  authFormName = name;
+  setAuthStep("email");
+});
 
-    if (!email.includes("@")) {
-      setAuthMessage("Введите корректную почту.", "error");
-      return;
-    }
+authEmailForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (authRequestPending) return;
+  const email = String(authEmailForm.elements.email?.value || "").trim().toLowerCase();
+  if (!isValidEmail(email)) {
+    setAuthMessage("Введите корректную почту — на неё придёт код подтверждения.", "error");
+    return;
+  }
+  authFormEmail = email;
+  setAuthStep("password");
+});
 
-    try {
-      authRequestPending = true;
-      if (authSubmit) {
-        authSubmit.disabled = true;
-        authSubmit.textContent = authMode === "register" ? "Создаю аккаунт..." : "Вхожу...";
-      }
+authPasswordForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (authRequestPending) return;
+  const password = String(authPasswordForm.elements.password?.value || "");
 
-      const result = await requestAuth(authMode, email, password, name);
+  if (password.length < 6) {
+    setAuthMessage("Пароль должен быть не короче 6 символов.", "error");
+    return;
+  }
 
-      if (authMode === "register" && !result.session) {
-        currentUserEmail = "";
-        currentUserId = null;
-        currentUserName = "";
-        updateAuthState();
-        setAuthMessage("Аккаунт создан. Проверьте почту и подтвердите регистрацию.", "success");
+  const busyText = authMode === "register" ? "Создаю аккаунт..." : "Вхожу...";
+
+  try {
+    setAuthPending(true, busyText);
+
+    if (authMode === "register") {
+      const result = await requestAuth("register", authFormEmail, password, authFormName);
+
+      if (result.session) {
+        finishAuth(result.session.user, "register");
         return;
       }
 
-      setCurrentUser(result.session?.user);
-      updateAuthState();
-      setAuthMessage(authMode === "register" ? "Аккаунт создан. Вход выполнен." : "Готово. Вы вошли в личный кабинет.", "success");
-      if (!redirectToQuizIfRequested()) {
-        setTimeout(openProfile, 700);
+      clearCodeInputs();
+      setAuthStep("code", {
+        message: { text: "Последний шаг: код уже летит на вашу почту. Проверьте входящие и папку «Спам».", type: "info" },
+      });
+      startResendCooldown();
+      return;
+    }
+
+    const result = await requestAuth("login", authFormEmail, password);
+    finishAuth(result.session?.user || result.user, "login");
+  } catch (error) {
+    if (authMode === "login" && isUnconfirmedEmailError(error)) {
+      loginNeedsCode = true;
+      try {
+        await supabaseClient.auth.resend({ type: "signup", email: authFormEmail });
+      } catch (_resendError) {
+        // The code step will still let the user request another code.
       }
-    } catch (error) {
-      setAuthMessage(getFriendlyAuthError(error), "error");
-    } finally {
-      authRequestPending = false;
-      if (authSubmit) {
-        authSubmit.disabled = false;
-        authSubmit.textContent = authMode === "register" ? "Создать аккаунт" : "Войти";
-      }
+      clearCodeInputs();
+      setAuthStep("code", {
+        message: { text: "Почта ещё не подтверждена. Мы отправили новый код — введите его, чтобы завершить вход.", type: "info" },
+      });
+      startResendCooldown();
+      return;
+    }
+    setAuthMessage(getFriendlyAuthError(error), "error");
+  } finally {
+    setAuthPending(false);
+  }
+});
+
+authCodeInputs.forEach((input, index) => {
+  input.addEventListener("input", () => {
+    input.value = input.value.replace(/\D/g, "").slice(-1);
+    input.classList.toggle("is-filled", Boolean(input.value));
+    if (input.value && authCodeInputs[index + 1]) {
+      authCodeInputs[index + 1].focus();
     }
   });
-}
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Backspace" && !input.value && authCodeInputs[index - 1]) {
+      event.preventDefault();
+      authCodeInputs[index - 1].focus();
+      authCodeInputs[index - 1].value = "";
+      authCodeInputs[index - 1].classList.remove("is-filled");
+    }
+  });
+
+  input.addEventListener("paste", (event) => {
+    event.preventDefault();
+    const digits = (event.clipboardData?.getData("text") || "").replace(/\D/g, "").slice(0, authCodeInputs.length);
+    if (!digits) return;
+    digits.split("").forEach((digit, digitIndex) => {
+      const target = authCodeInputs[digitIndex];
+      if (!target) return;
+      target.value = digit;
+      target.classList.add("is-filled");
+    });
+    const nextTarget = authCodeInputs[Math.min(digits.length, authCodeInputs.length - 1)];
+    nextTarget?.focus();
+  });
+});
+
+authCodeForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (authRequestPending) return;
+  const code = getCodeValue();
+
+  if (code.length !== authCodeInputs.length) {
+    setAuthMessage("Введите все 6 цифр кода из письма.", "error");
+    return;
+  }
+
+  try {
+    setAuthPending(true, "Проверяю код...");
+    const { data, error } = await supabaseClient.auth.verifyOtp({
+      email: authFormEmail,
+      token: code,
+      type: "signup",
+    });
+    if (error) throw error;
+    finishAuth(data.session?.user || data.user, authMode);
+  } catch (error) {
+    const friendly = getFriendlyAuthError(error);
+    const isRawMessage = friendly === error?.message;
+    setAuthMessage(
+      isRawMessage ? "Код не подходит. Проверьте цифры или отправьте код ещё раз." : friendly,
+      "error",
+    );
+  } finally {
+    setAuthPending(false);
+  }
+});
+
+authResendButton?.addEventListener("click", async () => {
+  if (!supabaseClient || authRequestPending || Date.now() < resendAvailableAt) return;
+  authResendButton.disabled = true;
+  try {
+    const { error } = await supabaseClient.auth.resend({ type: "signup", email: authFormEmail });
+    if (error) throw error;
+    setAuthMessage("Новый код отправлен. Проверьте входящие и папку «Спам».", "success");
+    startResendCooldown();
+  } catch (error) {
+    authResendButton.disabled = false;
+    setAuthMessage(getFriendlyAuthError(error), "error");
+  }
+});
 
 if (feedbackForm) {
   feedbackForm.addEventListener("submit", async (event) => {
@@ -833,7 +1219,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-setAuthMode("register");
+resetAuthFlow();
 updateAuthAvailability();
 
 if (supabaseClient) {
@@ -849,8 +1235,7 @@ loadAuthSession().then(() => {
   if (params.get("auth") === "quiz" && !currentUserId) {
     openQuizAuthGate();
   } else if (params.get("auth") === "login") {
-    setAuthMode("login");
-    openAuth();
+    openAuth("login");
   } else {
     redirectToQuizIfRequested();
   }
