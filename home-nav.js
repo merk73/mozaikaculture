@@ -29,7 +29,7 @@
   let menuAnimation;
   function animateHeader(before) {
     menuAnimation?.cancel();
-    if (!mobile.matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!mobile.matches || !Number.isFinite(before) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const after = header.getBoundingClientRect().height;
     menuAnimation = header.animate([{ height: `${before}px`, overflow: 'clip' }, { height: `${after}px`, overflow: 'clip' }], { duration: 320, easing: 'cubic-bezier(.22, 1, .36, 1)' });
   }
@@ -66,7 +66,7 @@
     }
   });
 
-  header.querySelector(".brand").addEventListener("click", () => setMenu(false));
+  header.querySelector(".brand").addEventListener("click", () => { closeAccount(); setMenu(false); });
 
   function openAccount() {
     if (authModal?.classList.contains("is-open")) { closeAccount(); return; }

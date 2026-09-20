@@ -20,6 +20,8 @@ const files = [
   "far-east-peoples.js",
   "script.js",
   "person.js",
+  "person.css",
+  "people-research.js",
   "quiz.js",
 ];
 

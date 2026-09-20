@@ -479,9 +479,24 @@ function setAuthMessage(text, type = "info") {
 }
 
 function getFriendlyAuthError(error) {
+  const messages = {
+    invalid_credentials: "Неверная почта или пароль.",
+    email_not_confirmed: "Подтвердите почту по ссылке из письма, затем войдите в аккаунт.",
+    user_already_exists: "Аккаунт с такой почтой уже существует. Переключитесь на вход.",
+    email_exists: "Аккаунт с такой почтой уже существует. Переключитесь на вход.",
+    email_address_invalid: "Проверьте адрес почты и попробуйте ещё раз.",
+    weak_password: "Выберите более надёжный пароль: используйте буквы, цифры и знаки.",
+    signup_disabled: "Регистрация временно недоступна. Если у вас уже есть аккаунт, попробуйте войти.",
+    email_provider_disabled: "Вход по почте временно недоступен.",
+    email_address_not_authorized: "Сервис пока не может отправить письмо подтверждения. Попробуйте позже.",
+    over_email_send_rate_limit: "Слишком много запросов писем. Подождите немного и попробуйте снова.",
+    over_request_rate_limit: "Слишком много попыток. Подождите немного и попробуйте снова.",
+    request_timeout: "Сервер не ответил вовремя. Попробуйте ещё раз."
+  };
+  if (messages[error?.code]) return messages[error.code];
   const message = String(error?.message || "").toLowerCase();
 
-  if (message.includes("rate limit") || message.includes("too many") || message.includes("email")) {
+  if (error?.status === 429 || message.includes("rate limit") || message.includes("too many")) {
     return "Слишком много попыток регистрации. Подождите немного и попробуйте снова.";
   }
 
@@ -493,7 +508,7 @@ function getFriendlyAuthError(error) {
     return "Не удалось подключиться к серверу регистрации. Проверьте интернет или попробуйте позже.";
   }
 
-  return error?.message || "Не удалось выполнить вход.";
+  return "Не удалось выполнить запрос. Попробуйте позже.";
 }
 
 function openAuth() {
@@ -507,6 +522,7 @@ function openAuth() {
   authModal.hidden = false;
   authModal.classList.add("is-open");
   authModal.setAttribute("aria-hidden", "false");
+  document.documentElement.classList.toggle('auth-modal-open', !matchMedia('(max-width: 760px)').matches);
   const firstInput = authMode === "register"
     ? authForm.querySelector('input[name="name"]')
     : authForm.querySelector('input[name="email"]');
@@ -519,6 +535,8 @@ function closeAuth() {
   const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height;
   authModal.classList.remove("is-open");
   authModal.setAttribute("aria-hidden", "true");
+  authModal.hidden = true;
+  document.documentElement.classList.remove('auth-modal-open');
   document.dispatchEvent(new CustomEvent('mozaika:auth-change', { detail: { open: false, headerHeight } }));
   const trigger = matchMedia('(max-width: 760px)').matches ? document.querySelector('[data-mobile-account]') : document.querySelector('[data-desktop-account]');
   (trigger || authReturnFocus)?.focus({ preventScroll: true });
@@ -544,12 +562,18 @@ function closeProfile() {
 }
 
 function setAuthMode(mode) {
+  if (authRequestPending) return;
+  const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height;
   authMode = mode;
   authModeButtons.forEach((button) => {
     button.classList.toggle("is-active", button.dataset.authMode === mode);
     button.setAttribute("aria-pressed", String(button.dataset.authMode === mode));
   });
   if (authSubmit) authSubmit.textContent = mode === "register" ? "Создать аккаунт" : "Войти";
+  const title = document.getElementById('auth-title');
+  if (title) title.textContent = mode === 'register' ? 'Создайте аккаунт' : 'Вход в Мозаику';
+  const note = authModal?.querySelector('.auth-note');
+  if (note) note.textContent = mode === 'register' ? 'Сохраняйте результат квиза и возвращайтесь к нему в личном кабинете.' : 'Войдите, чтобы результат квиза сохранился в вашем аккаунте.';
   if (authNameField) {
     const input = authNameField.querySelector("input");
     const isRegister = mode === "register";
@@ -561,6 +585,7 @@ function setAuthMode(mode) {
     passwordInput.autocomplete = mode === "register" ? "new-password" : "current-password";
   }
   setAuthMessage(supabaseClient ? "" : "Вход временно недоступен. Квиз можно пройти без аккаунта.", "info");
+  if (authModal?.classList.contains('is-open')) document.dispatchEvent(new CustomEvent('mozaika:auth-change', { detail: { open: true, headerHeight } }));
 }
 
 function updateAuthState() {
@@ -640,7 +665,7 @@ function updateAuthAvailability() {
     button.hidden = false;
   });
 
-  if (authModal) authModal.hidden = false;
+  if (authModal && !authModal.classList.contains('is-open')) authModal.hidden = true;
   if (authSubmit) authSubmit.disabled = !supabaseClient;
 }
 
@@ -663,7 +688,9 @@ async function loadAuthSession() {
     return;
   }
 
-  const { data, error } = await supabaseClient.auth.getSession();
+  let data, error;
+  try { ({ data, error } = await supabaseClient.auth.getSession()); }
+  catch (failure) { error = failure; }
   if (error) {
     currentUserEmail = "";
     currentUserId = null;
@@ -772,6 +799,8 @@ if (authForm) {
 
     try {
       authRequestPending = true;
+      authForm.setAttribute('aria-busy', 'true');
+      authModeButtons.forEach(button => { button.disabled = true; });
       if (authSubmit) {
         authSubmit.disabled = true;
         authSubmit.textContent = authMode === "register" ? "Создаю аккаунт..." : "Вхожу...";
@@ -784,7 +813,7 @@ if (authForm) {
         currentUserId = null;
         currentUserName = "";
         updateAuthState();
-        setAuthMessage("Аккаунт создан. Проверьте почту и подтвердите регистрацию.", "success");
+        setAuthMessage("Проверьте почту: если регистрация доступна для этого адреса, придёт письмо с подтверждением. Если аккаунт уже есть, перейдите во «Вход».", "success");
         return;
       }
 
@@ -798,6 +827,8 @@ if (authForm) {
       setAuthMessage(getFriendlyAuthError(error), "error");
     } finally {
       authRequestPending = false;
+      authForm.removeAttribute('aria-busy');
+      authModeButtons.forEach(button => { button.disabled = false; });
       if (authSubmit) {
         authSubmit.disabled = false;
         authSubmit.textContent = authMode === "register" ? "Создать аккаунт" : "Войти";
