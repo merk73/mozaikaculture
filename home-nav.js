@@ -26,12 +26,34 @@
     else authCard.setAttribute('aria-modal', 'true');
   }
   placeAuth();
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const links = [...nav.querySelectorAll('a')];
+  const closeIcon = toggle.querySelector('svg').cloneNode(true);
+  closeIcon.classList.add('menu-close-icon');
+  closeIcon.querySelector('path').setAttribute('d', 'M6 6l12 12M6 18L18 6');
+  toggle.append(closeIcon);
   let menuAnimation;
-  function animateHeader(before) {
+  let linkAnimations = [];
+
+  function cancelMenuMotion() {
     menuAnimation?.cancel();
-    if (!mobile.matches || !Number.isFinite(before) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    menuAnimation = null;
+    linkAnimations.forEach(animation => animation.cancel());
+    linkAnimations = [];
+    header.classList.remove('is-menu-closing');
+  }
+  function syncNavAccess() {
+    nav.inert = mobile.matches && !header.classList.contains('is-menu-open');
+  }
+  syncNavAccess();
+  function animateHeader(before, duration = 360) {
+    cancelMenuMotion();
+    if (!mobile.matches || !Number.isFinite(before) || reducedMotion.matches) return;
     const after = header.getBoundingClientRect().height;
-    menuAnimation = header.animate([{ height: `${before}px`, overflow: 'clip' }, { height: `${after}px`, overflow: 'clip' }], { duration: 320, easing: 'cubic-bezier(.22, 1, .36, 1)' });
+    menuAnimation = header.animate(
+      [{ height: before + 'px', overflow: 'clip' }, { height: after + 'px', overflow: 'clip' }],
+      { duration, easing: 'cubic-bezier(.22, 1, .36, 1)' }
+    );
   }
   function closeAccount() { document.dispatchEvent(new Event('mozaika:auth-close')); }
   document.addEventListener('mozaika:auth-change', event => {
@@ -41,17 +63,43 @@
     animateHeader(event.detail.headerHeight);
   });
   function setMenu(open) {
-    if (header.classList.contains("is-menu-open") === open) return;
+    if (header.classList.contains('is-menu-open') === open) return;
     const before = header.getBoundingClientRect().height;
-    menuAnimation?.cancel();
-    header.classList.toggle("is-menu-open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
-    if (mobile.matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const after = header.getBoundingClientRect().height;
-      menuAnimation = header.animate([{ height: `${before}px`, overflow: 'clip' }, { height: `${after}px`, overflow: 'clip' }], { duration: 380, easing: 'cubic-bezier(.22, 1, .36, 1)' });
-    }
+    const wasVisible = getComputedStyle(nav).display !== 'none';
+    const previous = links.map(link => {
+      const style = getComputedStyle(link);
+      return { opacity: style.opacity, transform: style.transform };
+    });
+    cancelMenuMotion();
+    header.classList.toggle('is-menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+    syncNavAccess();
+    if (!mobile.matches || reducedMotion.matches) return;
+    const after = header.getBoundingClientRect().height;
+    // Retain the closing content for its exit; inert removes it from interaction immediately.
+    header.classList.toggle('is-menu-closing', !open);
+    const animation = header.animate(
+      [{ height: before + 'px', overflow: 'clip' }, { height: after + 'px', overflow: 'clip' }],
+      { duration: open ? 440 : 260, easing: 'cubic-bezier(.22, 1, .36, 1)' }
+    );
+    menuAnimation = animation;
+    linkAnimations = links.map((link, index) => link.animate([
+      open && !wasVisible ? { opacity: 0, transform: 'translateY(8px)' } : previous[index],
+      { opacity: open ? 1 : 0, transform: open ? 'translateY(0)' : 'translateY(-4px)' }
+    ], {
+      duration: open ? 260 : 140,
+      delay: open && !wasVisible ? 55 + index * 25 : 0,
+      easing: 'cubic-bezier(.2, 0, 0, 1)', fill: 'both'
+    }));
+    animation.onfinish = () => {
+      if (menuAnimation === animation) cancelMenuMotion();
+    };
   }
+  reducedMotion.addEventListener('change', () => {
+    cancelMenuMotion();
+    syncNavAccess();
+  });
 
   toggle.addEventListener("click", () => {
     closeAccount();
@@ -119,6 +167,8 @@
     closeAccount();
     placeAuth();
     setMenu(false);
+    cancelMenuMotion();
+    syncNavAccess();
     notice.hidden = true;
   });
 
