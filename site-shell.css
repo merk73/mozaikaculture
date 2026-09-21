@@ -169,9 +169,3 @@ body.site-refresh:not(.home-page) { color: var(--text); background: #030303; ove
   .site-refresh .site-header .auth-form { margin-top: 20px; gap: 14px; }
   .site-refresh .mobile-account[aria-expanded="true"] { background: #70101a; border-color: #a12b35; }
 }
-
-/* Keep the iOS safe area opaque without a fade below navigation. */
-@media (max-width: 760px) {
-  html { background: #000; }
-  body.site-refresh::after { content: ""; position: fixed; z-index: 121; inset: 0 0 auto; height: max(10px, env(safe-area-inset-top, 0px)); background: #000; pointer-events: none; }
-}
