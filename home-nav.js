@@ -175,6 +175,10 @@
   document.querySelectorAll("[data-event-close]").forEach((button) => {
     button.addEventListener("click", () => {
       const card = button.closest("details");
+      if (window.mozaikaToggleEvent && matchMedia("(min-width: 1024px)").matches) {
+        window.mozaikaToggleEvent(card, false).then(() => { card.querySelector("summary").focus({preventScroll:true}); card.scrollIntoView({block:"nearest",behavior:"smooth"}); });
+        return;
+      }
       card.open = false;
       card.querySelector("summary").focus({ preventScroll: true });
       card.scrollIntoView({ block: "nearest", behavior: "instant" });
@@ -245,26 +249,90 @@ document.querySelectorAll('.event-card').forEach(card => {
   enabled.addEventListener('change', configure);
   window.addEventListener('resize', configure, { passive: true });
 })();
-
-// Decorative poster motion is optional and only runs while visible.
+// A draggable, continuous poster strip. Hover keeps the motion running.
 (() => {
   const fan = document.querySelector('.poster-fan');
-  const button = document.querySelector('.poster-fan-pause');
-  if (!fan || !button) return;
+  if (!fan) return;
+  const group = fan.querySelector('.poster-fan-group');
+  const viewport = fan.querySelector('.poster-fan-viewport');
+  // An extra copy keeps the viewport filled even when it is wider than one cycle.
+  const extra = group.cloneNode(true);
+  extra.setAttribute('aria-hidden', 'true');
+  extra.querySelectorAll('a').forEach(link => { link.tabIndex = -1; });
+  group.parentElement.append(extra);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let paused = false, visible = false;
-  function sync() {
-    fan.classList.toggle('is-moving', visible && !paused && !reduced.matches && !document.hidden);
-    button.hidden = reduced.matches;
-    button.textContent = paused ? 'Продолжить' : 'Пауза';
-    button.setAttribute('aria-pressed', String(paused));
-    button.setAttribute('aria-label', paused ? 'Продолжить движение афиш' : 'Приостановить движение афиш');
+  let position = 0, cycle = 0, frame = 0, last = 0, visible = false;
+  let pointer = null, dragged = false, suppressClick = false, focused = false;
+  function draw() {
+    if (!cycle) return;
+    position = ((position % cycle) + cycle) % cycle;
+    viewport.scrollLeft = position;
   }
-  button.addEventListener('click', () => { paused = !paused; sync(); });
+  function tick(time) {
+    frame = 0;
+    if (last && !pointer) { position += Math.min(time - last, 40) * cycle / 65000; draw(); }
+    last = time;
+    frame = requestAnimationFrame(tick);
+  }
+  function sync() {
+    cancelAnimationFrame(frame); frame = 0; last = 0;
+    if (visible && !document.hidden && !reduced.matches && !focused) frame = requestAnimationFrame(tick);
+  }
+  new ResizeObserver(() => { cycle = group.getBoundingClientRect().width; draw(); }).observe(group);
+  new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }).observe(fan);
   reduced.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }).observe(fan);
+  fan.addEventListener('pointerdown', event => {
+    if (event.button !== 0) return;
+    pointer = {id:event.pointerId,x:event.clientX,y:event.clientY,start:position};
+    dragged = false; suppressClick = false;
+  });
+  fan.addEventListener('pointermove', event => {
+    if (!pointer || pointer.id !== event.pointerId) return;
+    const dx = event.clientX - pointer.x, dy = event.clientY - pointer.y;
+    if (!dragged && Math.abs(dx) > 7 && Math.abs(dx) > Math.abs(dy)) {
+      dragged = true; fan.setPointerCapture(event.pointerId); fan.classList.add('is-dragging');
+    }
+    if (dragged) { event.preventDefault(); position = pointer.start - dx; draw(); }
+  });
+  function end() {
+    suppressClick = dragged; pointer = null; fan.classList.remove('is-dragging');
   }
-  sync();
+  fan.addEventListener('pointerup', end);
+  fan.addEventListener('pointercancel', end);
+  fan.addEventListener('lostpointercapture', () => { if (pointer) end(); });
+  fan.addEventListener('pointerleave', () => { if (pointer && !dragged) end(); });
+  fan.addEventListener('dragstart', event => event.preventDefault());
+  fan.addEventListener('wheel', event => {
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) {
+      event.preventDefault(); position += event.deltaX || event.deltaY; draw();
+    }
+  }, {passive:false});
+  fan.addEventListener('keydown', event => {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+      event.preventDefault(); position += event.key === 'ArrowRight' ? 160 : -160; draw();
+    }
+  });
+  fan.addEventListener('focusin', event => {
+    focused = event.target.matches(':focus-visible'); position = viewport.scrollLeft; sync();
+  });
+  fan.addEventListener('focusout', () => { focused = false; sync(); });
+  fan.addEventListener('click', async event => {
+    const link = event.target.closest('.poster-fan-link');
+    if (suppressClick) { event.preventDefault(); suppressClick = false; return; }
+    if (!link) return;
+    const card = document.getElementById(link.hash.slice(1));
+    if (!card) return;
+    event.preventDefault();
+    if (window.mozaikaToggleEvent) await window.mozaikaToggleEvent(card, true);
+    else card.open = true;
+    history.replaceState(null, '', link.hash);
+    requestAnimationFrame(() => {
+      const detail = card.querySelector('.event-expanded');
+      detail.setAttribute('tabindex', '-1');
+      detail.focus({preventScroll:true});
+      const headerBottom = document.querySelector('.site-header').getBoundingClientRect().bottom;
+      window.scrollTo({top:scrollY + detail.getBoundingClientRect().top - headerBottom - 20,behavior:reduced.matches ? 'instant' : 'smooth'});
+    });
+  });
 })();

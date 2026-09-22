@@ -2,7 +2,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   if (!('IntersectionObserver' in window)) return;
   // Reveal small groups before they enter view. Large photos stay stationary.
-  const selector = '.statement-copy,.section-head,.people-card,.learn-aside,.partner,.article-toc,.article-body h2,.article-note,.person-info aside,.person-section-grid article,.immersion-head,.section-heading,.library-copy';
+  const selector = '.statement-copy,.section-head,.people-card,.learn-aside,.partner,.article-toc,.article-body h2,.article-body p,.article-note,.person-info aside,.person-section-grid article,.person-copy,.immersion-head,.section-heading,.library-copy,.event-card,.materials-copy,.materials-preview,.gallery-tile,.gallery-heading,.footer-brand,.footer-nav,.sources-list>a,.feedback-form,.quiz-surface';
   const seen = new WeakSet();
   const pending = new Set();
   const observer = new IntersectionObserver(entries => {
@@ -28,8 +28,19 @@
     });
   }
   bind(document);
-  const atlas = document.querySelector('[data-people-grid]');
-  if (atlas) new MutationObserver(() => bind(atlas)).observe(atlas, { childList: true });
+  document.querySelectorAll('[data-people-grid],.quiz-options,.quiz-answers').forEach(container => {
+    new MutationObserver(() => bind(container)).observe(container, { childList: true });
+  });
+  document.querySelectorAll('.event-card,.footer-disclosure,.article-toc').forEach(disclosure => {
+    let animation;
+    disclosure.addEventListener('toggle', () => {
+      animation?.cancel();
+      if (!disclosure.open || reduced.matches) return;
+      if (disclosure.matches(".event-card") && matchMedia("(min-width:1024px)").matches) return;
+      const content = disclosure.querySelector('.event-expanded,.footer-disclosure-content,nav');
+      if (content) animation = content.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:300,easing:'cubic-bezier(.22,1,.36,1)'});
+    });
+  });
   reduced.addEventListener('change', () => {
     if (!reduced.matches) return;
     observer.disconnect();
@@ -37,3 +48,5 @@
     pending.clear();
   });
 })();
+// Shared entry point for poster links and close controls.
+window.mozaikaToggleEvent = async (card, open) => { card.open = open; };

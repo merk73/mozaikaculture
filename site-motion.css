@@ -62,3 +62,27 @@
   }
   .site-refresh main .soft-enter { opacity: 1; transform: none; }
 }
+
+/* One motion rhythm across controls, images, cards and dialogs. */
+@media(prefers-reduced-motion:no-preference) {
+  .site-refresh :is(button,.button,.photo-download,.event-expand,.article-source-list a,.footer-nav a,.gallery-tile,.people-card) { transition:background-color 220ms ease,border-color 220ms ease,color 180ms ease,box-shadow 260ms ease,scale 200ms cubic-bezier(.22,1,.36,1); }
+  .site-refresh :is(button,.button,.photo-download):active { scale:.98; }
+  .site-refresh :is(input,textarea,select) { transition:border-color 220ms ease,box-shadow 220ms ease,background-color 220ms ease; }
+  .site-refresh :is(.event-cover>img,.gallery-tile img,.event-photo img,.materials-preview img) { transition:transform 650ms cubic-bezier(.22,1,.36,1); }
+  .site-refresh .photo-dialog[open] .photo-view { animation:photo-view-enter 280ms cubic-bezier(.22,1,.36,1); }
+  .site-refresh .photo-dialog[open]::backdrop { animation:photo-backdrop-enter 220ms ease-out; }
+  .site-refresh .icon-arrow { transition:translate 240ms cubic-bezier(.22,1,.36,1); }
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .site-refresh .event-cover:hover>img { transform:scale(1.025); }
+  .site-refresh .gallery-tile:hover img { transform:scale(1.035); }
+  .site-refresh :is(.button,.event-cover,.online-quiz-cta):hover .icon-arrow { translate:3px 0; }
+  .site-refresh .gallery-tile:hover { box-shadow:0 0 0 1px #ffffff50; }
+  .site-refresh .people-card:hover { border-color:#ffffff55; }
+}
+@keyframes photo-view-enter { from { opacity:0; transform:translateY(10px) scale(.985); } to { opacity:1; transform:none; } }
+@keyframes photo-backdrop-enter { from { background-color:transparent; } to { background-color:rgba(0,0,0,.9); } }
+
+
+
+@media(min-width:1024px) { .site-refresh .event-card[open] .event-expanded-intro { animation:none; } }

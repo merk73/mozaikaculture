@@ -7,12 +7,12 @@
   let stopped = false;
   let timer;
   let regions = [];
-  function release(reveal = false) {
-    if (reveal) {
-      root.classList.add('loader-menu-reveal');
-      setTimeout(() => root.classList.remove('loader-menu-reveal'), 400);
-    }
-    root.classList.remove('site-loading');
+  let animations = [];
+  let movingStatus;
+  function release() {
+    root.classList.remove('site-loading', 'loader-morphing');
+    animations.forEach(animation => animation.cancel());
+    movingStatus?.remove();
     regions.forEach(([node, previous]) => { node.inert = previous; });
     document.querySelector('.site-loader')?.remove();
   }
@@ -28,24 +28,56 @@
     if (!overlay || !target || !animate || !mobile.matches) { release(); return; }
     try {
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        await overlay.animate([{opacity:1},{opacity:0}],{duration:160}).finished;
+        animations = [overlay.animate([{opacity:1},{opacity:0}],{duration:160})];
       } else {
-        const a = logo.getBoundingClientRect(), b = target.getBoundingClientRect(), h = header.getBoundingClientRect();
-        const options = {duration:480,easing:'cubic-bezier(.65,0,.2,1)',fill:'forwards'};
-        overlay.querySelector('p').animate([{opacity:1},{opacity:0}],{duration:180,fill:'forwards'});
-        await Promise.all([
-          logo.animate([{transform:'translate(0,0) scale(1)'},{transform:`translate(${b.x-a.x}px,${b.y-a.y}px) scale(${b.width/a.width})`}],options).finished,
-          overlay.querySelector('.site-loader-surface').animate([
-            {clipPath:'inset(0px 0px 0px 0px round 0px)'},
-            {clipPath:`inset(${h.top}px ${innerWidth-h.right}px ${innerHeight-h.bottom}px ${h.left}px round 30px)`}
-          ],options).finished
-        ]);
+        const source = logo.getBoundingClientRect();
+        const destination = target.getBoundingClientRect();
+        const bounds = header.getBoundingClientRect();
+        const finalStyle = getComputedStyle(header);
+        const final = {top:bounds.top+'px',left:bounds.left+'px',width:bounds.width+'px',height:bounds.height+'px',borderRadius:finalStyle.borderRadius,backgroundColor:finalStyle.backgroundColor,borderColor:finalStyle.borderColor,boxShadow:finalStyle.boxShadow,backdropFilter:finalStyle.backdropFilter};
+        const duration = 560;
+        const motion = {duration,easing:'cubic-bezier(.22,.9,.3,1)',fill:'both'};
+        // The real header is the loading surface: there is no replacement at landing.
+        root.classList.add('loader-morphing');
+        movingStatus = overlay.querySelector('p').cloneNode(true);
+        movingStatus.className = 'loader-moving-status';
+        movingStatus.style.marginTop = (source.height / 2 + 26) + 'px';
+        movingStatus.setAttribute('aria-hidden', 'true');
+        header.append(movingStatus);
+        animations = [
+          movingStatus.animate([{opacity:1,offset:0},{opacity:0,offset:.2},{opacity:0,offset:1}],{duration,fill:'both'}),
+          header.animate([
+            {top:'0px',left:'0px',width:innerWidth+'px',height:innerHeight+'px',borderRadius:'0px',transform:'none'},
+            {top:final.top,left:final.left,width:final.width,height:final.height,borderRadius:final.borderRadius,transform:'none'}
+          ],motion),
+          header.animate([
+            {backgroundColor:'#000',borderColor:'transparent',boxShadow:'inset 0 1px 0 transparent',backdropFilter:'blur(0px)',offset:0},
+            {backgroundColor:'#000',borderColor:'transparent',boxShadow:'inset 0 1px 0 transparent',backdropFilter:'blur(0px)',offset:.55},
+            {backgroundColor:final.backgroundColor,borderColor:final.borderColor,boxShadow:final.boxShadow,backdropFilter:final.backdropFilter,offset:1}
+          ],{duration,easing:'linear',fill:'both'}),
+          target.animate([{transform:'scale('+source.width/destination.width+')'},{transform:'scale(1)'}],motion),
+          ...[...header.querySelectorAll('.mobile-header-button')].map(button => button.animate([
+            {opacity:0,offset:0},
+            {opacity:0,offset:.4,easing:'cubic-bezier(.22,1,.36,1)'},
+            {opacity:1,offset:.9},
+            {opacity:1,offset:1}
+          ],{duration,easing:'linear',fill:'both'}))
+        ];
+        // Keep all pieces on exactly the same animation clock.
+        const start = document.timeline.currentTime;
+        animations.forEach(animation => { animation.startTime = start; });
       }
-    } finally { release(true); }
+      await Promise.all(animations.map(animation => animation.finished));
+    } catch (error) {
+      if (error.name !== 'AbortError') throw error;
+    } finally { release(); }
   }
   // A failed script, stalled connection or missing image must never lock the page.
   timer = setTimeout(() => finish(false), 45000);
   mobile.addEventListener('change', () => { if (!mobile.matches) finish(false); });
+  window.addEventListener('resize', () => {
+    if (root.classList.contains('loader-morphing')) release();
+  });
   document.addEventListener('DOMContentLoaded', async () => {
     if (finished) return;
     regions = [...document.querySelectorAll('body > :not(.site-loader):not(script)')].map(node => [node,node.inert]);

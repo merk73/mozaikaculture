@@ -8,11 +8,19 @@
   const count = dialog.querySelector('.photo-count');
   let current = 0;
   let opener;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let closing = false, photoAnimation, photoVersion = 0;
   function show(index) {
     current = (index + tiles.length) % tiles.length;
     const tile = tiles[current];
     const image = tile.querySelector('img');
     full.src = image.src;
+    const version = ++photoVersion;
+    full.decode().then(() => {
+      if (version !== photoVersion || reduced.matches || !dialog.open) return;
+      photoAnimation?.cancel();
+      photoAnimation = full.animate([{opacity:.35},{opacity:1}],{duration:240,easing:'ease-out'});
+    }).catch(() => {});
     full.alt = image.alt;
     caption.textContent = tile.dataset.caption;
     event.textContent = tile.dataset.event;
@@ -26,7 +34,17 @@
     dialog.showModal();
     document.body.classList.add('has-photo-open');
   }));
-  dialog.querySelector('.photo-close').addEventListener('click', () => dialog.close());
+  async function closePhoto() {
+    if (closing) return;
+    closing = true;
+    if (!reduced.matches) {
+      const animation = dialog.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(6px)'}],{duration:160,easing:'ease-in'});
+      await animation.finished;
+    }
+    dialog.close(); closing = false;
+  }
+  dialog.querySelector('.photo-close').addEventListener('click', closePhoto);
+  dialog.addEventListener('cancel', event => { event.preventDefault(); closePhoto(); });
   dialog.querySelector('[data-photo-prev]').addEventListener('click', () => show(current - 1));
   dialog.querySelector('[data-photo-next]').addEventListener('click', () => show(current + 1));
   dialog.addEventListener('keydown', e => {
@@ -35,10 +53,11 @@
       show(current + (e.key === 'ArrowLeft' ? -1 : 1));
     }
   });
-  dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+  dialog.addEventListener('click', e => { if (e.target === dialog) closePhoto(); });
   dialog.addEventListener('close', () => {
     document.body.classList.remove('has-photo-open');
     full.removeAttribute('src');
+    photoVersion++; photoAnimation?.cancel();
     opener?.focus({preventScroll:true});
   });
 })();
