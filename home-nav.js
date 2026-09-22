@@ -136,8 +136,8 @@
 
   function syncAccountLabel() {
     const signedIn = authButton?.classList.contains("is-signed");
-    desktopAccount.setAttribute("aria-label", signedIn ? "Открыть личный кабинет" : "Личный кабинет — вход");
-    account.setAttribute("aria-label", signedIn ? "Открыть личный кабинет" : "Личный кабинет — вход");
+    desktopAccount.setAttribute("aria-label", signedIn ? "Открыть личный кабинет" : "Личный кабинет - вход");
+    account.setAttribute("aria-label", signedIn ? "Открыть личный кабинет" : "Личный кабинет - вход");
   }
   if (authButton) new MutationObserver(syncAccountLabel).observe(authButton, { attributes: true, attributeFilter: ["class"] });
   syncAccountLabel();
@@ -194,6 +194,13 @@
 })();
 
 
+// Collapsing an event also stops media hidden inside it.
+document.querySelectorAll('.event-card').forEach(card => {
+  card.addEventListener('toggle', () => {
+    if (!card.open) card.querySelectorAll('video').forEach(video => video.pause());
+  });
+});
+
 // The portrait eases toward the scroll position only while the cover is visible.
 (() => {
   const portrait = document.querySelector('[data-hero-portrait]');
@@ -237,4 +244,27 @@
   }).observe(hero);
   enabled.addEventListener('change', configure);
   window.addEventListener('resize', configure, { passive: true });
+})();
+
+// Decorative poster motion is optional and only runs while visible.
+(() => {
+  const fan = document.querySelector('.poster-fan');
+  const button = document.querySelector('.poster-fan-pause');
+  if (!fan || !button) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let paused = false, visible = false;
+  function sync() {
+    fan.classList.toggle('is-moving', visible && !paused && !reduced.matches && !document.hidden);
+    button.hidden = reduced.matches;
+    button.textContent = paused ? 'Продолжить' : 'Пауза';
+    button.setAttribute('aria-pressed', String(paused));
+    button.setAttribute('aria-label', paused ? 'Продолжить движение афиш' : 'Приостановить движение афиш');
+  }
+  button.addEventListener('click', () => { paused = !paused; sync(); });
+  reduced.addEventListener('change', sync);
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }).observe(fan);
+  }
+  sync();
 })();

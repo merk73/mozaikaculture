@@ -7,6 +7,11 @@ const dist = path.join(root, "dist");
 const files = [
   "index.html",
   "quiz.html",
+  "gallery.html",
+  "gallery.css",
+  "gallery.js",
+  "mobile-loader.js",
+  "mobile-loader.css",
   "styles.css",
   "home.css",
   "home-interactions.css",

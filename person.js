@@ -46,7 +46,7 @@
         </section>
         ${sections}
         <section class="people-references" id="people-sources" aria-labelledby="sources-title"><p class="overline">Читать дальше</p><h2 id="sources-title">Источники и материалы</h2>
-          <p class="people-source-note">Исторические описания относятся к указанным в источниках эпохам. Переписная численность народа и число говорящих на его языке — разные показатели.</p>
+          <p class="people-source-note">Исторические описания относятся к указанным в источниках эпохам. Переписная численность народа и число говорящих на его языке - разные показатели.</p>
           <ol>${sourceKeys.map(key => `<li id="source-${key}"><a href="${sources[key].url}" target="_blank" rel="noopener noreferrer"><span><strong>${escape(sources[key].title)}</strong><small>${escape(sources[key].publisher)}</small></span>${arrow}<span class="visually-hidden"> (в новой вкладке)</span></a></li>`).join('')}</ol>
           <p class="people-reviewed">Сверено по указанным материалам · 20 сентября 2026</p>
         </section>

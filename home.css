@@ -703,7 +703,7 @@ body.home-page {
 .home-page .event-cover { position: relative; display: flex; align-items: flex-end; min-height: 600px; padding: 48px; cursor: pointer; isolation: isolate; list-style: none; overflow: hidden; }
 .home-page .event-cover::-webkit-details-marker { display: none; }
 .home-page .event-cover > img { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 58%; }
-.home-page .event-card:nth-of-type(2) .event-cover > img { object-position: center 30%; }
+.home-page #event-2 .event-cover > img { object-position: center 30%; }
 .home-page .event-cover::after { position: absolute; inset: 0; z-index: 1; pointer-events: none; content: ""; background: linear-gradient(180deg, #0001 20%, #0007 55%, #000e); }
 .home-page .event-cover-copy { position: relative; z-index: 2; max-width: 840px; }
 .home-page .event-cover-date { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 0 0 20px; color: #fff; font-size: 12px; line-height: 1.5; letter-spacing: .06em; text-transform: uppercase; }
@@ -842,3 +842,108 @@ body.home-page {
 .icon-arrow { display: inline-block; width: 22px; height: 22px; flex: none; vertical-align: middle; }
 .home-page .online-quiz-cta::after { content: none; }
 .home-page .online-quiz-cta > .icon-arrow { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; }
+
+/* Museum event: full poster first, photographs with captions below. */
+.home-page .event-card-ornaments .event-cover > img { object-position: center 43%; }
+.home-page .event-overview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 340px); gap: 40px; align-items: start; }
+.home-page .event-overview h4,
+.home-page .event-report h4 { margin: 0 0 24px; font-size: clamp(25px, 3vw, 36px); line-height: 1.2; text-wrap: balance; }
+.home-page .event-overview-copy > p:not(.overline),
+.home-page .event-report > p:not(.overline) { margin: 20px 0 0; color: var(--muted); font-size: 18px; line-height: 1.7; }
+.home-page .event-facts { display: grid; gap: 16px; margin: 0 0 28px; }
+.home-page .event-facts div { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 16px; }
+.home-page .event-facts dt { color: var(--muted); }
+.home-page .event-facts dd { margin: 0; color: var(--text); }
+.home-page .event-poster { margin: 0; }
+.home-page .event-poster a { display: block; border-radius: 14px; }
+.home-page .event-poster img { display: block; width: 100%; height: auto; border-radius: 14px; outline: 1px solid oklch(1 0 0 / 0.1); }
+.home-page .event-poster figcaption { margin-top: 12px; color: var(--muted); font-size: 14px; }
+.home-page .event-report { max-width: 840px; margin: 44px 0 28px; }
+.home-page .event-expanded :is(.event-gallery-ornaments, .event-gallery-portrait, .event-gallery-code) .event-photo { margin: 0; aspect-ratio: auto; overflow: hidden; background: #151516; }
+.home-page :is(.event-gallery-ornaments, .event-gallery-portrait, .event-gallery-code) .event-photo::after { display: none; }
+.home-page :is(.event-gallery-ornaments, .event-gallery-portrait, .event-gallery-code) .event-photo img { position: static; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
+.home-page :is(.event-gallery-ornaments, .event-gallery-portrait, .event-gallery-code) .event-photo figcaption { position: static; padding: 18px; color: var(--text); font-size: 15px; line-height: 1.6; background: none; }
+.home-page :is(.event-gallery-ornaments, .event-gallery-portrait, .event-gallery-code) .event-photo figcaption span { display: block; margin-bottom: 8px; color: var(--muted); }
+.home-page .event-poster a:focus-visible,
+.home-page .event-close:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+@media (max-width: 760px) {
+  .home-page .event-overview { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .home-page .event-poster { width: min(100%, 340px); justify-self: center; }
+  .home-page .event-overview-copy > p:not(.overline),
+  .home-page .event-report > p:not(.overline) { font-size: 16px; }
+  .home-page .event-facts div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+
+/* Portrait media retains its full frame inside the event report. */
+.home-page .event-card-liki .event-cover > img { object-position: center 35%; }
+.home-page .event-expanded .event-gallery-portrait { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.home-page .event-gallery-portrait .event-photo img,
+.home-page .event-gallery-portrait .event-video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: contain; background: #000; }
+.home-page .event-video:focus-visible { outline: 3px solid #fff; outline-offset: -3px; }
+@media (max-width: 1000px) {
+  .home-page .event-expanded .event-gallery-portrait { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .home-page .event-expanded .event-gallery-portrait { grid-template-columns: minmax(0, 1fr); }
+}
+
+.home-page .event-card-code .event-cover > img { object-position: center 55%; }
+.home-page .event-film { margin: 0 0 28px; overflow: hidden; border-radius: 24px; background: #151516; }
+.home-page .event-film video { display: block; width: 100%; height: auto; aspect-ratio: 20 / 11; object-fit: contain; background: #000; }
+.home-page .event-film figcaption { padding: 18px; font-size: 15px; line-height: 1.6; }
+.home-page .event-film figcaption span { display: block; margin-bottom: 8px; color: var(--muted); }
+.home-page .event-gallery-code { align-items: start; }
+.home-page .event-gallery-code .event-photo img { aspect-ratio: auto; }
+.home-page .event-expanded .event-gallery-code .event-photo-portrait { grid-column: 2; grid-row: 1 / span 2; }
+@media (max-width: 760px) {
+  .home-page .event-expanded .event-gallery-code .event-photo-portrait { grid-column: auto; grid-row: auto; }
+}
+
+.home-page .event-card-indigenous .event-cover-copy { max-width: 1000px; }
+
+.home-page .event-card-rgup .event-cover > img { object-position: center 58%; }
+
+/* Event archive: one column at every viewport size. */
+.home-page .event-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 28px; align-items: start; }
+.home-page .event-list > .event-card { min-width: 0; margin-top: 0; }
+
+/* Let each photograph define its own height, without letterboxing or cropping. */
+.home-page .event-expanded .event-gallery { display: block; columns: 2; column-gap: 20px; }
+.home-page .event-expanded .event-gallery-portrait { columns: 3; }
+.home-page .event-expanded .event-gallery .event-photo { display: block; width: 100%; height: auto; min-height: 0; margin: 0 0 20px; padding: 0; aspect-ratio: auto; break-inside: avoid; overflow: hidden; background: #151516; }
+.home-page .event-expanded .event-gallery .event-photo::before,
+.home-page .event-expanded .event-gallery .event-photo::after { display: none; }
+.home-page .event-expanded .event-gallery .event-photo img { position: static; display: block; width: 100%; height: auto; min-height: 0; max-height: none; aspect-ratio: auto; object-fit: cover; margin: 0; padding: 0; }
+.home-page .event-expanded .event-gallery .event-photo figcaption { position: static; padding: 18px; color: var(--text); font-size: 15px; line-height: 1.6; background: none; }
+.home-page .event-expanded .event-gallery .event-photo figcaption span { display: block; margin-bottom: 8px; color: var(--muted); }
+@media (max-width: 1000px) {
+  .home-page .event-expanded .event-gallery-portrait { columns: 2; }
+}
+@media (max-width: 760px) {
+  .home-page .event-expanded .event-gallery { columns: 1; }
+}
+
+/* A continuous fan of all six posters introduces the event archive. */
+.home-page .events-intro { position: relative; margin-bottom: 44px; }
+.home-page .poster-fan { --fan-cycle: max(840px, min(1240px, calc(100vw - 64px))); position: relative; height: clamp(290px, 32vw, 430px); margin-inline: -12px; overflow: hidden; isolation: isolate; }
+.home-page .poster-fan-track { display: flex; width: max-content; }
+.home-page .poster-fan-group { display: flex; flex: 0 0 var(--fan-cycle); width: var(--fan-cycle); justify-content: center; align-items: flex-start; gap: 16px; padding: 40px 8px; }
+.home-page .poster-fan-group img { display: block; flex: 0 0 calc((var(--fan-cycle) - 96px) / 6); width: calc((var(--fan-cycle) - 96px) / 6); height: auto; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 8px; transform: perspective(900px) translateY(var(--fan-rise)) rotateY(-14deg) rotateZ(var(--fan-angle)); box-shadow: 0 12px 30px #0009; outline: 1px solid #ffffff1a; }
+.home-page .poster-fan::after { position: absolute; inset: 0; z-index: 1; content: ''; pointer-events: none; background: linear-gradient(180deg, #030303aa, #03030318 25%, #03030330 55%, #030303 100%), linear-gradient(90deg, #030303, transparent 9%, transparent 91%, #030303); }
+.home-page .events-intro .section-head.compact { position: relative; z-index: 2; margin-top: -36px; margin-bottom: 0; }
+.home-page .poster-fan-pause { position: absolute; top: 12px; right: 0; z-index: 3; min-height: 44px; padding: 10px 18px; border: 1px solid #ffffff50; border-radius: 999px; background: #080808db; color: #fff; font: inherit; font-size: 14px; cursor: pointer; }
+.home-page .poster-fan-pause[hidden] { display: none; }
+.home-page .poster-fan-pause:hover { background: #242424; }
+.home-page .poster-fan-pause:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+@keyframes event-poster-flow { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: no-preference) {
+  .home-page .poster-fan-track { animation: event-poster-flow 65s linear infinite; animation-play-state: paused; }
+  .home-page .poster-fan.is-moving .poster-fan-track { animation-play-state: running; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .poster-fan { --fan-cycle: 100%; height: clamp(160px, 32vw, 400px); }
+  .home-page .poster-fan-track { width: 100%; }
+  .home-page .poster-fan-group { gap: 8px; }
+  .home-page .poster-fan-group img { flex-basis: calc((100% - 40px) / 6); width: calc((100% - 40px) / 6); }
+  .home-page .poster-fan-group + .poster-fan-group { display: none; }
+}

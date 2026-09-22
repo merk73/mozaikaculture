@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="mobile-loader.css?v=3" />
+    <script src="mobile-loader.js?v=3"></script>
     <title>Мозаика культур</title>
     <meta
       name="description"
       content="Образовательный атлас Мозаика культур о коренных народах Дальнего Востока."
     />
     <link rel="stylesheet" href="styles.css?v=20260711-events-compact-1" />
-    <link rel="stylesheet" href="home.css?v=20260920-10" />
+    <link rel="stylesheet" href="home.css?v=20260922-fan-1" />
       <link rel="stylesheet" href="site-shell.css?v=20260921-2" />
     <link rel="stylesheet" href="site-motion.css?v=20260921-3" />
     <link rel="stylesheet" href="home-interactions.css?v=20260920-9" />
   </head>
   <body class="home-page site-refresh">
+    <div class="site-loader" role="status" aria-live="polite"><div class="site-loader-surface"></div><div class="site-loader-content"><img src="assets/logo-mozaika.svg" alt="Мозаика культур" width="190" /><p>Загружаем сайт</p></div></div>
     <a class="skip-link" href="#top">Перейти к содержимому</a>
     <header class="site-header">
       <div class="header-main">
@@ -30,16 +33,17 @@
         <a href="#atlas">Атлас</a>
         <a href="articles/origins-far-east.html">Статьи</a>
         <a href="#events">Мероприятия</a>
+        <a href="gallery.html">Галерея</a>
         <a href="#materials">Наклейки</a>
         <a href="#feedback">Связь</a>
         <a href="#sources">Источники</a>
       </nav>
       </div>
       <div class="header-account">
-        <button class="desktop-account" type="button" data-desktop-account aria-label="Личный кабинет — вход" title="Личный кабинет"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg></button>
+        <button class="desktop-account" type="button" data-desktop-account aria-label="Личный кабинет - вход" title="Личный кабинет"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg></button>
       </div>
       <button class="nav-cta" type="button" data-auth-open hidden>Войти</button>
-      <button class="mobile-header-button mobile-account" type="button" aria-label="Личный кабинет — вход" data-mobile-account>
+      <button class="mobile-header-button mobile-account" type="button" aria-label="Личный кабинет - вход" data-mobile-account>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 21v-2a7 7 0 0 1 14 0v2" /></svg>
       </button>
       <p class="mobile-account-notice" role="status" data-account-notice hidden>Вход временно недоступен. Попробуйте позже.</p>
@@ -51,14 +55,12 @@
           <source media="(min-width: 1024px)" srcset="assets/hero-nanai-portrait.png" />
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" width="1086" height="1448" decoding="async" />
         </picture>
-        
+
         <div class="hero-copy">
           <p class="overline">образовательный проект</p>
           <h1 id="hero-title">Мозаика культур</h1>
           <p>
-            Современный сайт о коренных народах Дальнего Востока: коротко,
-            бережно и визуально чисто. После мероприятий здесь можно изучить
-            культуру, язык, территории и живые традиции народов региона.
+            Знакомимся с коренными народами Дальнего Востока, их историей, языками и традициями. Здесь собраны рассказы о народах региона и фотографии наших встреч.
           </p>
           <div class="hero-links">
             <a class="button button-article" href="articles/origins-far-east.html">Читать статью</a>
@@ -71,17 +73,12 @@
         <div class="statement-inner statement-grid">
           <div class="statement-copy">
             <p class="overline">миссия</p>
-            <h2>Сохранять культуру живой.</h2>
+            <h2>Знакомиться с культурой через людей.</h2>
             <p>
-              Проект соединяет встречи, образовательные материалы и цифровой
-              архив, чтобы молодежь могла изучать наследие коренных народов
-              Дальнего Востока ясно, уважительно и современно.
+              Мы хотим, чтобы о коренных народах Дальнего Востока знали больше. Поэтому устраиваем встречи, на которых можно услышать истории, рассмотреть традиционные вещи и задать вопросы тем, кто знаком с этой культурой с детства.
             </p>
             <p class="statement-about">
-              «Мозаика культур» — молодежный просветительский проект о коренных народах
-              Дальнего Востока. Он объединяет живые мероприятия, выставки, лекции,
-              мастер-классы и открытый онлайн-атлас, чтобы знакомство с языками,
-              территориями и культурными практиками продолжалось и после очной встречи.
+              На наших лекциях, выставках и мастер-классах мы учимся друг у друга и знакомимся с традициями региона. А на сайте собираем материалы, к которым можно вернуться после встречи или с которых начать знакомство.
             </p>
           </div>
         </div>
@@ -121,57 +118,275 @@
 
 <section class="events" id="events" aria-labelledby="events-title">
         <div class="section-shell">
-          <div class="section-head compact">
+          <div class="events-intro">
+            <div class="poster-fan" aria-hidden="true"><div class="poster-fan-track"><div class="poster-fan-group"><img src="assets/events/ornaments/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: -12deg; --fan-rise: 32px" /><img src="assets/events/liki-vostoka/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: -7deg; --fan-rise: 12px" /><img src="assets/events/cultural-code/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: -2deg; --fan-rise: 0px" /><img src="assets/events/indigenous-day/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: 3deg; --fan-rise: 0px" /><img src="assets/events/rgup-lecture/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: 8deg; --fan-rise: 12px" /><img src="assets/events/unity/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: 13deg; --fan-rise: 32px" /></div><div class="poster-fan-group"><img src="assets/events/ornaments/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: -12deg; --fan-rise: 32px" /><img src="assets/events/liki-vostoka/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: -7deg; --fan-rise: 12px" /><img src="assets/events/cultural-code/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: -2deg; --fan-rise: 0px" /><img src="assets/events/indigenous-day/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: 3deg; --fan-rise: 0px" /><img src="assets/events/rgup-lecture/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: 8deg; --fan-rise: 12px" /><img src="assets/events/unity/poster.webp" alt="" width="180" height="320" loading="lazy" decoding="async" style="--fan-angle: 13deg; --fan-rise: 32px" /></div></div></div>
+            <div class="section-head compact">
             <p class="overline">мероприятия</p>
             <h2 id="events-title">Культура оживает<br />во встречах.</h2>
             <p>Слушаем истории, знакомимся с традициями и учимся друг у друга. Вспоминаем события проекта в фотографиях и деталях.</p>
           </div>
-          <details class="event-card" id="event-1">
+          <button class="poster-fan-pause" type="button" aria-label="Приостановить движение афиш" aria-pressed="false" hidden>Пауза</button>
+          </div>
+          <div class="event-list">
+<details class="event-card event-card-ornaments" id="event-ornaments">
       <summary class="event-cover">
-        <img src="assets/events/mozaika-meeting-new.png" alt="Ведущий и участники встречи Мозаика культур" width="2560" height="1920" loading="lazy" decoding="async" />
+        <img src="assets/events/ornaments/lecture.webp" alt="Лектор показывает орнамент на экране перед слушателями в музейном зале" width="2560" height="1920" loading="lazy" decoding="async" />
         <div class="event-cover-copy">
-          <p class="event-cover-date"><span>01 / Встреча проекта</span><time datetime="04-29">29 апреля</time></p>
-          <h3>Мозаика культур</h3><p class="event-cover-lead">Лекция, знакомство с традициями и командная игра.</p>
+          <p class="event-cover-date"><span>01 / Лекция в музее</span><time datetime="2026-03-30">30 марта 2026</time></p>
+          <h3>О чём говорят орнаменты?</h3>
+          <p class="event-cover-lead">Лекция об узорах на одежде и предметах быта народов Дальнего Востока.</p>
           <span class="event-expand"><span class="when-closed">Подробнее</span><span class="when-open">Свернуть</span><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </summary>
       <div class="event-expanded">
-        <div class="event-expanded-intro"><p class="overline">Как это было</p><p>Участники знакомились с культурой коренных народов через
-                лекцию, мастер-класс, командные задания и квиз. Такой формат
-                помогает не только услышать факты, но и обсудить их в группе.</p></div>
-        <div class="event-program" aria-label="Программа мероприятия">
-                <article>
-                  <span>01</span>
-                  <strong>Лекция</strong>
-                  <p>Разговор о народах Дальнего Востока, территориях, языках и культурной памяти.</p>
-                </article>
-                <article>
-                  <span>02</span>
-                  <strong>Знакомство с бубном</strong>
-                  <p>Практическое знакомство со звучанием традиции и ритмом совместной работы.</p>
-                </article>
-                <article>
-                  <span>03</span>
-                  <strong>Язык танца</strong>
-                  <p>Изучение движений как телесного языка культуры и способа запоминания.</p>
-                </article>
-                <article>
-                  <span>04</span>
-                  <strong>Квиз</strong>
-                  <p>Командная игра по фактам, символам и культурным особенностям народов Дальнего Востока.</p>
-                </article>
-              </div>
-        <div class="event-gallery" aria-label="Фотографии мероприятия Мозаика культур">
-              
+        <div class="event-overview">
+          <div class="event-overview-copy">
+            <p class="overline">О встрече</p>
+            <h4>Узоры в музейной коллекции</h4>
+            <dl class="event-facts">
+              <div><dt>Когда</dt><dd><time datetime="2026-03-30T17:00">30 марта 2026 · 17:00</time></dd></div>
+              <div><dt>Где</dt><dd>Краевой краеведческий музей имени Гродекова</dd></div>
+              <div><dt>Тема</dt><dd>Орнаментальная культура народов Дальнего Востока</dd></div>
+            </dl>
+            <p>В музее имени Гродекова прошла лекция об орнаментальной культуре народов Дальнего Востока. Студенты и другие гости рассматривали узоры на экране и знакомились с предметами музейной коллекции.</p>
+            <p>Встреча продолжилась у витрин. Здесь можно было увидеть орнаменты на одежде и изделиях из рыбьей кожи, рассмотреть линии, завитки и повторяющиеся мотивы вблизи.</p>
+          </div>
+          <figure class="event-poster">
+            <a href="assets/events/ornaments/poster.webp" target="_blank" rel="noopener" aria-label="Открыть афишу «О чём говорят орнаменты?» в полном размере, в новой вкладке">
+              <img src="assets/events/ornaments/poster.webp" alt="Афиша лекции «О чём говорят орнаменты?»: 30 марта, 17:00, музей имени Гродекова" width="1206" height="2142" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Афиша встречи · открыть целиком ↗</figcaption>
+          </figure>
+        </div>
+        <div class="event-report">
+          <p class="overline">Как это было</p>
+          <h4>Лекция среди экспонатов</h4>
+          <p>Рассказ сопровождали изображения орнаментов на экране. Затем внимание перешло к самим вещам: их материалам, форме и украшению. Фотографии сохранили оба момента встречи: общий разговор в зале и знакомство с экспозицией.</p>
+        </div>
+        <div class="event-gallery event-gallery-ornaments" aria-label="Фотографии встречи «О чём говорят орнаменты?»">
+          <figure class="event-photo">
+            <img src="assets/events/ornaments/lecture.webp" alt="Общий вид лекции: слушатели, лектор и орнамент на экране" width="2560" height="1920" loading="lazy" decoding="async" />
+            <figcaption><span>01 / Лекция</span>Разбираем узоры вместе с лектором.</figcaption>
+          </figure>
+          <figure class="event-photo">
+            <img src="assets/events/ornaments/exhibition.webp" alt="Лектор у витрины с орнаментированной одеждой и изделиями из рыбьей кожи" width="2560" height="1920" loading="lazy" decoding="async" />
+            <figcaption><span>02 / В музейном зале</span>Орнаментированная одежда и изделия из рыбьей кожи в музейной витрине.</figcaption>
+          </figure>
+          <figure class="event-photo">
+            <img src="assets/events/ornaments/project.webp" alt="Экран с названием проекта «Народы Дальнего Востока. Мозаика культур» в музейном зале" width="1448" height="1086" loading="lazy" decoding="async" />
+            <figcaption><span>03 / Мозаика культур</span>«Мозаика культур» в музее имени Гродекова.</figcaption>
+          </figure>
+        </div>
+        <button class="event-close" type="button" data-event-close>Свернуть мероприятие ↑</button>
+      </div>
+    </details>
+<details class="event-card event-card-liki" id="event-liki-vostoka">
+      <summary class="event-cover">
+        <img src="assets/events/liki-vostoka/cover.webp" alt="Участницы культурного вечера «Лики Востока» знакомятся с игрой на бубнах" width="940" height="768" loading="lazy" decoding="async" />
+        <div class="event-cover-copy">
+          <p class="event-cover-date"><span>02 / Культурный вечер</span><time datetime="2026-04-04">4 апреля 2026</time></p>
+          <h3>Лики Востока</h3>
+          <p class="event-cover-lead">Бубны и мастер-класс по тряпичной кукле в библиотеке.</p>
+          <span class="event-expand"><span class="when-closed">Подробнее</span><span class="when-open">Свернуть</span><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </summary>
+      <div class="event-expanded">
+        <div class="event-overview">
+          <div class="event-overview-copy">
+            <p class="overline">О встрече</p>
+            <h4>Культурный вечер в библиотеке</h4>
+            <dl class="event-facts">
+              <div><dt>Когда</dt><dd><time datetime="2026-04-04T18:00">4 апреля 2026 · 18:00</time></dd></div>
+              <div><dt>Где</dt><dd>Дальневосточная государственная научная библиотека</dd></div>
+              <div><dt>Формат</dt><dd>Межнациональный культурный вечер</dd></div>
+            </dl>
+            <p>В Дальневосточной государственной научной библиотеке прошёл межнациональный вечер «Лики Востока». Студенты и молодые участники проекта знакомились с традициями, пробовали играть на бубне и делали тряпичных кукол.</p>
+          </div>
+          <figure class="event-poster">
+            <a href="assets/events/liki-vostoka/poster.webp" target="_blank" rel="noopener" aria-label="Открыть афишу «Лики Востока» в полном размере, в новой вкладке">
+              <img src="assets/events/liki-vostoka/poster.webp" alt="Афиша межнационального культурного вечера «Лики Востока»: 4 апреля, 18:00, Дальневосточная государственная научная библиотека" width="1206" height="2142" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Афиша вечера · открыть целиком ↗</figcaption>
+          </figure>
+        </div>
+        <div class="event-report">
+          <p class="overline">Как это было</p>
+          <h4>Пробуем вместе</h4>
+          <p>Ведущая мастер-класса показывала, как сделать основу куклы: сложить ткань и закрепить её нитью. Участники повторяли движения за общим столом, постепенно придавая заготовкам форму.</p>
+          <p>В другой части вечера звучали бубны. Гости пробовали держать инструмент и отбивать ритм. В видеозапись также вошли танцевальные движения и аплодисменты зрителей.</p>
+        </div>
+        <div class="event-gallery event-gallery-portrait" aria-label="Видео и фотографии культурного вечера «Лики Востока»">
+          <figure class="event-photo">
+            <video class="event-video" controls playsinline preload="none" poster="assets/events/liki-vostoka/workshop.webp" width="720" height="1280" aria-label="Видео культурного вечера «Лики Востока»" aria-describedby="liki-video-caption">
+              <source src="assets/events/liki-vostoka/evening.mp4" type="video/mp4" />
+              Ваш браузер не поддерживает видео. <a href="assets/events/liki-vostoka/evening.mp4">Открыть видеозапись</a>.
+            </video>
+            <figcaption id="liki-video-caption"><span>01 / Видео вечера · 29 секунд</span>Несколько моментов вечера: мастер-класс, бубны, танцы и зрители.</figcaption>
+          </figure>
+          <figure class="event-photo"><img src="assets/events/liki-vostoka/drums.webp" alt="Участницы пробуют играть на бубнах; одна из них в традиционном костюме" width="720" height="1280" loading="lazy" decoding="async" /><figcaption><span>02 / Знакомство с бубном</span>Первые удары и знакомство с ритмом.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/liki-vostoka/workshop.webp" alt="Ведущая показывает, как сделать основу тряпичной куклы; участники повторяют за столом" width="720" height="1280" loading="lazy" decoding="async" /><figcaption><span>03 / Традиция своими руками</span>Ведущая показывает, как сделать основу куклы.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/liki-vostoka/handwork.webp" alt="Участницы складывают белую ткань и закрепляют её красной нитью" width="720" height="1280" loading="lazy" decoding="async" /><figcaption><span>04 / Внимание к деталям</span>Ткань и красная нить постепенно превращаются в куклу.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/liki-vostoka/audience.webp" alt="Участники культурного вечера аплодируют, сидя за столами в библиотеке" width="719" height="1280" loading="lazy" decoding="async" /><figcaption><span>05 / Люди и общение</span>Поддержка выступающих и аплодисменты.</figcaption></figure>
+        </div>
+        <button class="event-close" type="button" data-event-close>Свернуть мероприятие ↑</button>
+      </div>
+    </details>
+<details class="event-card event-card-code" id="event-cultural-code">
+      <summary class="event-cover">
+        <img src="assets/events/cultural-code/cover.webp" alt="Участники исторического квиза поднимают руки, отвечая на вопросы" width="986" height="638" loading="lazy" decoding="async" />
+        <div class="event-cover-copy">
+          <p class="event-cover-date"><span>03 / Исторический квиз</span><time datetime="2026-04-15">15 апреля 2026</time></p>
+          <h3>Культурный код</h3>
+          <p class="event-cover-lead">Командная игра об истории и культуре в Городском молодёжном центре.</p>
+          <span class="event-expand"><span class="when-closed">Подробнее</span><span class="when-open">Свернуть</span><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </summary>
+      <div class="event-expanded">
+        <div class="event-overview">
+          <div class="event-overview-copy">
+            <p class="overline">О встрече</p>
+            <h4>Проверяем знания в команде</h4>
+            <dl class="event-facts">
+              <div><dt>Когда</dt><dd><time datetime="2026-04-15T19:00">15 апреля 2026 · 19:00</time></dd></div>
+              <div><dt>Где</dt><dd>Городской молодёжный центр</dd></div>
+              <div><dt>Формат</dt><dd>Исторический квиз</dd></div>
+            </dl>
+            <p>В Городском молодёжном центре состоялся исторический квиз «Культурный код». Студенты и молодёжь собрались, чтобы проверить знания и вместе поискать ответы на вопросы об истории и культуре.</p>
+            <p>Игроки обсуждали задания в небольших группах, записывали ответы и делились своими версиями. На экране появлялись темы и вопросы, а в зале то и дело поднимались руки.</p>
+          </div>
+          <figure class="event-poster">
+            <a href="assets/events/cultural-code/poster.webp" target="_blank" rel="noopener" aria-label="Открыть афишу квиза «Культурный код» в полном размере, в новой вкладке">
+              <img src="assets/events/cultural-code/poster.webp" alt="Афиша исторического квиза «Культурный код»: 15 апреля, 19:00, Городской молодёжный центр" width="941" height="1672" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Афиша квиза · открыть целиком ↗</figcaption>
+          </figure>
+        </div>
+        <div class="event-report">
+          <p class="overline">Как это было</p>
+          <h4>От первого вопроса до итогов</h4>
+          <p>На записи видно, как команды советуются перед ответом: кто-то предлагает версию, кто-то делает пометки. Фотографии передают и эти рабочие моменты, и внимание зрителей.</p>
+          <p>В завершение участники вышли перед залом. Вручение грамоты сопровождалось аплодисментами.</p>
+        </div>
+        <figure class="event-film">
+          <video class="event-video" controls playsinline preload="none" poster="assets/events/cultural-code/participants.webp" width="1280" height="704" aria-label="Видео исторического квиза «Культурный код»" aria-describedby="code-video-caption">
+            <source src="assets/events/cultural-code/quiz.mp4" type="video/mp4" />
+            Ваш браузер не поддерживает видео. <a href="assets/events/cultural-code/quiz.mp4">Открыть видеозапись</a>.
+          </video>
+          <figcaption id="code-video-caption"><span>01 / Видео квиза · 29 секунд</span>Обсуждение заданий, ответы команд и финал игры.</figcaption>
+        </figure>
+        <div class="event-gallery event-gallery-code" aria-label="Фотографии исторического квиза «Культурный код»">
+          <figure class="event-photo"><img src="assets/events/cultural-code/participants.webp" alt="Участники квиза стоят перед зрителями в Городском молодёжном центре" width="1033" height="648" loading="lazy" decoding="async" /><figcaption><span>02 / Участники игры</span>Участники квиза перед залом.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/cultural-code/certificate.webp" alt="Вручение грамоты участнику квиза перед залом" width="951" height="635" loading="lazy" decoding="async" /><figcaption><span>03 / Итоги встречи</span>Вручение грамоты в финале встречи.</figcaption></figure>
+          <figure class="event-photo event-photo-portrait"><img src="assets/events/cultural-code/audience.webp" alt="Молодые участники сидят в зале и аплодируют" width="1206" height="1911" loading="lazy" decoding="async" /><figcaption><span>04 / Атмосфера квиза</span>Зрители поддерживают участников.</figcaption></figure>
+        </div>
+        <button class="event-close" type="button" data-event-close>Свернуть мероприятие ↑</button>
+      </div>
+    </details>
+<details class="event-card event-card-indigenous" id="event-1">
+      <summary class="event-cover">
+        <img src="assets/events/mozaika-meeting-new.png" alt="Ведущий и участники встречи Мозаика культур" width="2560" height="1920" loading="lazy" decoding="async" />
+        <div class="event-cover-copy">
+          <p class="event-cover-date"><span>04 / Встреча в молодёжном центре</span><time datetime="2026-04-27">27 апреля 2026</time></p>
+          <h3>День коренных малочисленных народов России</h3><p class="event-cover-lead">Выставка, бубны, танцы и квиз на встрече «Мозаики культур».</p>
+          <span class="event-expand"><span class="when-closed">Подробнее</span><span class="when-open">Свернуть</span><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </summary>
+      <div class="event-expanded">
+        <div class="event-overview">
+          <div class="event-overview-copy">
+            <p class="overline">О встрече</p>
+            <h4>Знакомимся с традициями Дальнего Востока</h4>
+            <dl class="event-facts">
+              <div><dt>Когда</dt><dd><time datetime="2026-04-27T18:00">27 апреля 2026 · 18:00</time></dd></div>
+              <div><dt>Где</dt><dd>ММЦ «Моя территория», Фрунзе, 119</dd></div>
+              <div><dt>Повод</dt><dd>День коренных малочисленных народов России</dd></div>
+            </dl>
+            <p>В молодёжном центре «Моя территория» прошла встреча «Мозаики культур», посвящённая коренным малочисленным народам России. Среди гостей были студенты и участники разных возрастов. В программе были лекция, выставка, знакомство с бубном, танцевальные движения и квиз.</p>
+            <p>На выставочном столе можно было рассмотреть украшения, изделия и материалы о народах Дальнего Востока. После рассказа гости переходили к совместным занятиям: вставали в круг, повторяли движения и обсуждали задания.</p>
+          </div>
+          <figure class="event-poster">
+            <a href="assets/events/indigenous-day/poster.webp" target="_blank" rel="noopener" aria-label="Открыть афишу Дня коренных малочисленных народов России в полном размере, в новой вкладке">
+              <img src="assets/events/indigenous-day/poster.webp" alt="Афиша встречи «Мозаика культур»: 27 апреля, 18:00, ММЦ «Моя территория», Фрунзе, 119" width="1206" height="2113" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Афиша встречи · открыть целиком ↗</figcaption>
+          </figure>
+        </div>
+        <div class="event-report">
+          <p class="overline">Как это было</p>
+          <h4>Выставка, общий круг и игра</h4>
+          <p>Видеозапись начинается с деталей выставки. Дальше гости пробуют движения в общем кругу, знакомятся с бубном и работают в небольших группах. В кадре остались разговоры, улыбки и фотографии у баннера проекта.</p>
+          <p>В конце встречи участники собрались для командных заданий. На фотографиях остались выставочный стол и гости у баннера проекта.</p>
+        </div>
+        <div class="event-gallery event-gallery-portrait" aria-label="Видео и фотографии Дня коренных малочисленных народов России">
+          <figure class="event-photo">
+            <video class="event-video" controls playsinline preload="none" poster="assets/events/indigenous-day/video-poster.jpg" width="720" height="1280" aria-label="Видео Дня коренных малочисленных народов России" aria-describedby="indigenous-video-caption">
+              <source src="assets/events/indigenous-day/meeting.mp4" type="video/mp4" />
+              Ваш браузер не поддерживает видео. <a href="assets/events/indigenous-day/meeting.mp4">Открыть видеозапись</a>.
+            </video>
+            <figcaption id="indigenous-video-caption"><span>01 / Видео встречи · 1:12</span>Выставочные предметы, общий танец и командные задания.</figcaption>
+          </figure>
+
               <figure class="event-photo">
                 <img src="assets/events/mozaika-exhibit.png" alt="Предметы культуры на выставочном столе"  width="842" height="1280" decoding="async" loading="lazy" />
-                <figcaption><span>02 / Выставка</span>Культурное наследие в предметах и деталях.</figcaption>
+                <figcaption><span>02 / Выставка</span>Украшения, изделия и материалы на выставочном столе.</figcaption>
               </figure>
               <figure class="event-photo">
                 <img src="assets/events/mozaika-team.png" alt="Участники мероприятия с баннером"  width="946" height="1280" decoding="async" loading="lazy" />
-                <figcaption><span>03 / Люди проекта</span>Те, кто собирает «Мозаику культур».</figcaption>
+                <figcaption><span>03 / Люди проекта</span>Участники встречи у баннера проекта.</figcaption>
               </figure>
             </div>
+        <button class="event-close" type="button" data-event-close>Свернуть мероприятие ↑</button>
+      </div>
+    </details>
+<details class="event-card event-card-rgup" id="event-rgup-lecture">
+      <summary class="event-cover">
+        <img src="assets/events/rgup-lecture/lecture.webp" alt="Лектор в традиционном костюме проводит встречу «Мозаика культур» в РГУП" width="752" height="1280" loading="lazy" decoding="async" />
+        <div class="event-cover-copy">
+          <p class="event-cover-date"><span>05 / Лекция в РГУП</span><time datetime="2026-05-15">15 мая 2026</time></p>
+          <h3>Лекция «Мозаика культур»</h3>
+          <p class="event-cover-lead">Знакомство с коренными народами Дальнего Востока: рассказ, выставочные предметы и звучание бубна.</p>
+          <span class="event-expand"><span class="when-closed">Подробнее</span><span class="when-open">Свернуть</span><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </summary>
+      <div class="event-expanded">
+        <div class="event-overview">
+          <div class="event-overview-copy">
+            <p class="overline">О встрече</p>
+            <h4>Культура в университетской аудитории</h4>
+            <dl class="event-facts">
+              <div><dt>Когда</dt><dd><time datetime="2026-05-15T11:00">15 мая 2026 · 11:00</time></dd></div>
+              <div><dt>Где</dt><dd>РГУП, Хабаровск</dd></div>
+              <div><dt>Тема</dt><dd>Коренные народы Дальнего Востока</dd></div>
+            </dl>
+            <p>В РГУП прошла лекция «Мозаика культур» о коренных народах Дальнего Востока. Студенты слушали рассказ о традициях и знакомились с небольшой выставкой: перед аудиторией разложили украшения, изделия с орнаментами и печатные материалы.</p>
+            <p>Лектор выступала в традиционном костюме, показывала предметы и сопровождала рассказ слайдами. Отдельная часть встречи была посвящена бубну: его можно было увидеть и услышать прямо в аудитории.</p>
+          </div>
+          <figure class="event-poster">
+            <a href="assets/events/rgup-lecture/poster.webp" target="_blank" rel="noopener" aria-label="Открыть афишу лекции «Мозаика культур» в полном размере, в новой вкладке">
+              <img src="assets/events/rgup-lecture/poster.webp" alt="Афиша лекции «Мозаика культур»: 15 мая, 11:00, РГУП, Хабаровск" width="941" height="1672" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Афиша лекции · открыть целиком ↗</figcaption>
+          </figure>
+        </div>
+        <div class="event-report">
+          <p class="overline">Как это было</p>
+          <h4>Рассказ, вопросы и живой звук</h4>
+          <p>На экране сменялись слайды о традиционных представлениях и музыкальных инструментах. Рядом на столе лежали предметы, которые помогали связать рассказ с конкретными деталями: узорами, отделкой и формой изделий.</p>
+          <p>Слушатели поднимали руки и включались в разговор. В фотографиях и видео сохранились демонстрация бубнов, знакомство с выставкой и реакции аудитории.</p>
+        </div>
+        <div class="event-gallery event-gallery-portrait" aria-label="Видео и фотографии лекции «Мозаика культур» в РГУП">
+          <figure class="event-photo">
+            <video class="event-video" controls playsinline preload="none" poster="assets/events/rgup-lecture/drums.webp" width="720" height="1280" aria-label="Видео лекции «Мозаика культур» в РГУП" aria-describedby="rgup-video-caption">
+              <source src="assets/events/rgup-lecture/lecture.mp4" type="video/mp4" />
+              Ваш браузер не поддерживает видео. <a href="assets/events/rgup-lecture/lecture.mp4">Открыть видеозапись</a>.
+            </video>
+            <figcaption id="rgup-video-caption"><span>01 / Видео лекции · 46 секунд</span>Выступление, выставочные предметы, бубны и разговор со слушателями.</figcaption>
+          </figure>
+          <figure class="event-photo"><img src="assets/events/rgup-lecture/lecture.webp" alt="Лектор в традиционном костюме у стола с украшениями и изделиями" width="752" height="1280" loading="lazy" decoding="async" /><figcaption><span>02 / Лекция</span>Рассказ сопровождают слайды и предметы выставки.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/rgup-lecture/audience.webp" alt="Студенты поднимают руки в аудитории" width="788" height="1280" loading="lazy" decoding="async" /><figcaption><span>03 / Разговор с аудиторией</span>Слушатели включаются в обсуждение.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/rgup-lecture/drums.webp" alt="Две участницы демонстрируют игру на бубнах перед аудиторией" width="758" height="1280" loading="lazy" decoding="async" /><figcaption><span>04 / Звучание бубна</span>Знакомство с инструментом во время лекции.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/rgup-lecture/details.webp" alt="Лектор показывает украшенный орнаментом предмет из выставочной коллекции" width="769" height="1280" loading="lazy" decoding="async" /><figcaption><span>05 / Рассматриваем детали</span>Орнамент и отделка крупным планом.</figcaption></figure>
+        </div>
         <button class="event-close" type="button" data-event-close>Свернуть мероприятие ↑</button>
       </div>
     </details>
@@ -179,55 +394,59 @@
       <summary class="event-cover">
         <img src="assets/events/youth-day-main.png" alt="Участница в национальном костюме на выставке Мозаики культур"  width="1920" height="2560" decoding="async" loading="lazy" />
         <div class="event-cover-copy">
-          <p class="event-cover-date"><span>02 / Городской фестиваль</span><span><time datetime="06-27">27 июня</time> · Хабаровск</span></p>
-          <h3>«Мозаика культур» на Дне молодёжи</h3><p class="event-cover-lead">Выставка, открытая лекция и мастер-классы в Хабаровске.</p>
+          <p class="event-cover-date"><span>06 / Городской фестиваль</span><span><time datetime="2026-06-27">27 июня 2026</time> · Хабаровск</span></p>
+          <h3>Площадка «Единство» на Дне молодёжи</h3><p class="event-cover-lead">Мы организовали площадку с лекторием, мастер-классами и выставкой традиционных предметов.</p>
           <span class="event-expand"><span class="when-closed">Подробнее</span><span class="when-open">Свернуть</span><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
       </summary>
       <div class="event-expanded">
-        <div class="event-expanded-intro"><p class="overline">Как это было</p><p>На Дне молодёжи в Хабаровске «Мозаика культур» стала пространством
-                живого знакомства с наследием коренных народов Дальнего Востока.
-                В программе прошли лекция, выставка и мастер-классы: посетители могли
-                увидеть костюмы и предметы, задать вопросы и включиться в практические занятия.</p></div>
-        <div class="event-program" aria-label="Программа Мозаики культур на Дне молодёжи">
-                <article>
-                  <span>01</span>
-                  <strong>Лекция</strong>
-                  <p>Разговор о народах, территориях, языках и культурном наследии Дальнего Востока.</p>
-                </article>
-                <article>
-                  <span>02</span>
-                  <strong>Выставка</strong>
-                  <p>Костюмы, предметы и визуальные материалы, с которыми можно было познакомиться вживую.</p>
-                </article>
-                <article>
-                  <span>03</span>
-                  <strong>Мастер-классы</strong>
-                  <p>Практические занятия и непосредственное общение участников с командой проекта.</p>
-                </article>
-              </div>
-        <div class="event-gallery event-gallery-youth" aria-label="Фотографии Мозаики культур на Дне молодёжи">
-              
-              <figure class="event-photo">
-                <img src="assets/events/youth-day-workshop.png" alt="Детский мастер-класс на Дне молодёжи"  width="1206" height="1651" decoding="async" loading="lazy" />
-                <figcaption><span>02 / Мастер-класс</span>Пробуем и создаём своими руками.</figcaption>
-              </figure>
-              <figure class="event-photo">
-                <img src="assets/events/youth-day-screen.png" alt="Экран площадки Мозаики культур"  width="1206" height="2017" decoding="async" loading="lazy" />
-                <figcaption><span>03 / День молодёжи</span>Место встречи с культурой Дальнего Востока.</figcaption>
-              </figure>
-              <figure class="event-photo">
-                <img src="assets/events/youth-day-participants.png" alt="Участники получают материалы мастер-класса"  width="1206" height="1716" decoding="async" loading="lazy" />
-                <figcaption><span>04 / Участники</span>От знакомства — к совместной работе.</figcaption>
-              </figure>
-              <figure class="event-photo">
-                <img src="assets/events/youth-day-lecture.png" alt="Лекция Мозаики культур на Дне молодёжи"  width="1206" height="1796" decoding="async" loading="lazy" />
-                <figcaption><span>05 / Открытая лекция</span>Разговор о народах и наследии региона.</figcaption>
-              </figure>
-            </div>
+        <div class="event-overview">
+          <div class="event-overview-copy">
+            <p class="overline">О площадке</p>
+            <h4>«Единство» на набережной</h4>
+            <dl class="event-facts">
+              <div><dt>Когда</dt><dd><time datetime="2026-06-27">27 июня 2026</time> · 10:00-18:00</dd></div>
+              <div><dt>Где</dt><dd>Центральная набережная Хабаровска</dd></div>
+              <div><dt>Команда</dt><dd>«Мозаика культур» - организаторы площадки «Единство»</dd></div>
+            </dl>
+            <p>На Дне молодёжи мы, команда «Мозаики культур», организовали площадку «Единство». На протяжении дня здесь работал лекторий, проходили мастер-классы и была открыта выставка традиционных предметов.</p>
+            <p>На площадку приходили студенты, молодые горожане и семьи с детьми. Можно было послушать рассказ о народах Дальнего Востока, рассмотреть одежду и орнаментированные изделия, а затем присоединиться к творческому занятию.</p>
+          </div>
+          <figure class="event-poster">
+            <a href="assets/events/unity/poster.webp" target="_blank" rel="noopener" aria-label="Открыть афишу площадки «Единство» в полном размере, в новой вкладке">
+              <img src="assets/events/unity/poster.webp" alt="Афиша площадки «Единство»: 27 июня 2026, 10:00-18:00, центральная набережная Хабаровска" width="1206" height="2142" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Афиша площадки · открыть целиком ↗</figcaption>
+          </figure>
+        </div>
+        <div class="event-report">
+          <p class="overline">Как это было</p>
+          <h4>Целый день встреч и занятий</h4>
+          <p>У большого экрана собирались слушатели лектория. Рядом гости рассматривали выставочные предметы и костюмы, а за столами шли мастер-классы. Ведущие помогали с материалами и показывали приёмы работы.</p>
+          <p>В фотографиях и видео сохранились лекции под открытым небом, изготовление браслетов, разговоры с посетителями и детали выставки.</p>
+        </div>
+        <div class="event-gallery event-gallery-portrait" aria-label="Видео и фотографии площадки «Единство» на Дне молодёжи">
+          <figure class="event-photo">
+            <video class="event-video" controls playsinline preload="none" poster="assets/events/unity/workshops.webp" width="720" height="1280" aria-label="Видео площадки «Единство» на Дне молодёжи" aria-describedby="unity-video-caption">
+              <source src="assets/events/unity/day.mp4" type="video/mp4" />
+              Ваш браузер не поддерживает видео. <a href="assets/events/unity/day.mp4">Открыть видеозапись</a>.
+            </video>
+            <figcaption id="unity-video-caption"><span>01 / Видео дня · 39 секунд</span>Лекторий, мастер-классы, выставка и гости праздника.</figcaption>
+          </figure>
+          <figure class="event-photo"><img src="assets/events/unity/costume.webp" alt="Участница в ярком традиционном костюме у выставочных полок" width="1206" height="1133" loading="lazy" decoding="async" /><figcaption><span>02 / Костюмы и орнаменты</span>Знакомство с традиционной одеждой на выставке.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/unity/workshops.webp" alt="Посетители за столами мастер-классов рядом с выставочным павильоном" width="1206" height="833" loading="lazy" decoding="async" /><figcaption><span>03 / Мастер-классы</span>За столами собирались участники разных возрастов.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/unity/interview.webp" alt="Участница в традиционном костюме рассказывает о картине перед камерой" width="1206" height="1799" loading="lazy" decoding="async" /><figcaption><span>04 / Разговор на площадке</span>О культурных традициях рассказывали и гостям, и съёмочной группе.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/unity/materials.webp" alt="Ведущая передаёт печатные материалы участникам на креслах-мешках" width="1206" height="880" loading="lazy" decoding="async" /><figcaption><span>05 / Материалы проекта</span>Знакомство с проектом продолжалось после лекции.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/unity/lecture-map.webp" alt="Лектор рассказывает о народах Дальнего Востока у экрана с картой" width="1197" height="1548" loading="lazy" decoding="async" /><figcaption><span>06 / Лекторий</span>На экране появлялись карты, изображения и темы для обсуждения.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/unity/bracelets.webp" alt="Ребёнок и ведущая за столом мастер-класса по браслетам" width="1206" height="1912" loading="lazy" decoding="async" /><figcaption><span>07 / Работа своими руками</span>На мастер-классе можно было сделать браслет.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/unity/screen.webp" alt="Экран лектория с названием «Коренные народы Дальнего Востока»" width="1206" height="1406" loading="lazy" decoding="async" /><figcaption><span>08 / Программа лектория</span>Рассказ о культуре и традициях народов региона.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/unity/exhibition.webp" alt="Выставочный стол с традиционными предметами, рядом одежда на вешалках" width="1206" height="1548" loading="lazy" decoding="async" /><figcaption><span>09 / Выставка предметов</span>Орнаментированные изделия, одежда и печатные материалы.</figcaption></figure>
+          <figure class="event-photo"><img src="assets/events/unity/lecture-audience.webp" alt="Лектор обращается к слушателям на открытой площадке" width="1206" height="1714" loading="lazy" decoding="async" /><figcaption><span>10 / Встреча со слушателями</span>Лекторий работал на протяжении дня.</figcaption></figure>
+        </div>
         <button class="event-close" type="button" data-event-close>Свернуть мероприятие ↑</button>
       </div>
     </details>
+          </div>
         </div>
       </section>
 
@@ -239,9 +458,9 @@
             <p class="materials-lead">Частичка «Мозаики культур», которую можно забрать с собой.</p>
             <p>Наклейки помогают знакомить новых людей с проектом и продолжать разговор о культуре Дальнего Востока за пределами мероприятий. На ноутбуке, в блокноте или на телефоне они становятся поводом узнать больше.</p>
             <div class="materials-details">
-              <div><span>01</span><div><h3>Образы Дальнего Востока</h3><p>Люди, горы, олень, ворон, бубен и орнаменты — в одной коллекции.</p></div></div>
+              <div><span>01</span><div><h3>Образы Дальнего Востока</h3><p>Люди, горы, олень, ворон, бубен и орнаменты - в одной коллекции.</p></div></div>
               <div><span>02</span><div><h3>Узнаваемый стиль</h3><p>Чёрно-белая графика, красные акценты и знак «Мозаики культур» объединяют наклейки с проектом.</p></div></div>
-              <div><span>03</span><div><h3>От наклейки — к знакомству</h3><p>Название проекта и QR-код на листе помогают заинтересоваться «Мозаикой» и сделать следующий шаг.</p></div></div>
+              <div><span>03</span><div><h3>От наклейки - к знакомству</h3><p>Название проекта и QR-код на листе помогают заинтересоваться «Мозаикой» и сделать следующий шаг.</p></div></div>
             </div>
             <div class="materials-actions">
               <a class="button materials-primary" href="assets/project-stickers.jpg" target="_blank" rel="noopener">Рассмотреть наклейки <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
@@ -261,7 +480,7 @@
         <div class="section-shell feedback-grid">
           <div>
             <p class="overline">обратная связь</p>
-            
+
             <p>
               Вопросы по материалам, предложения для атласа и заявки на
               сотрудничество можно отправить через форму. Сообщения будут
@@ -303,7 +522,7 @@
         <div class="section-shell sources-layout">
           <div class="sources-heading">
             <p class="overline">источники</p>
-            
+
             <p>
               Раздел помогает быстро перейти к документам, языковым справкам и
               обзорным материалам, на которых основаны страницы народов.
@@ -433,11 +652,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
-    <script src="content.js?v=20260619-far-east-quiz-1"></script>
-    <script src="far-east-peoples.js?v=20260619-far-east-quiz-1"></script>
+    <script src="content.js?v=20260922-copy-1"></script>
+    <script src="far-east-peoples.js?v=20260922-copy-1"></script>
     <script src="script.js?v=20260920-11"></script>
-    
-      <script src="home-nav.js?v=20260921-3"></script>
+
+      <script src="home-nav.js?v=20260922-fan-1"></script>
     <script src="site-motion.js?v=20260920-4"></script>
   </body>
 </html>

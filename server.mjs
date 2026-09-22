@@ -16,6 +16,8 @@ const mimeTypes = {
   ".json": "application/json; charset=utf-8",
   ".svg": "image/svg+xml",
   ".png": "image/png",
+  ".webp": "image/webp",
+  ".mp4": "video/mp4",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".otf": "font/otf",
@@ -28,21 +30,43 @@ async function handleStatic(request, response) {
   let filePath = join(root, safePath === "/" ? "index.html" : safePath);
 
   try {
-    const fileStat = await stat(filePath);
+    let fileStat = await stat(filePath);
     if (fileStat.isDirectory()) {
       filePath = join(filePath, "index.html");
+      fileStat = await stat(filePath);
     }
 
-    response.writeHead(200, {
+    const headers = {
       "Content-Type": mimeTypes[extname(filePath).toLowerCase()] || "application/octet-stream",
-    });
+      "Accept-Ranges": "bytes",
+      "Content-Length": fileStat.size,
+    };
+    let start = 0;
+    let end = fileStat.size - 1;
+    let status = 200;
+    if (request.headers.range && request.method === "GET") {
+      const match = /^bytes=(\d*)-(\d*)$/.exec(request.headers.range);
+      if (match && (match[1] || match[2])) {
+        start = match[1] ? Number(match[1]) : Math.max(0, fileStat.size - Number(match[2]));
+        end = match[1] && match[2] ? Math.min(Number(match[2]), end) : end;
+        if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start > end || start >= fileStat.size) {
+          response.writeHead(416, { "Content-Range": `bytes */${fileStat.size}` });
+          response.end();
+          return;
+        }
+        status = 206;
+        headers["Content-Range"] = `bytes ${start}-${end}/${fileStat.size}`;
+        headers["Content-Length"] = end - start + 1;
+      }
+    }
+    response.writeHead(status, headers);
 
     if (request.method === "HEAD") {
       response.end();
       return;
     }
 
-    createReadStream(filePath).pipe(response);
+    createReadStream(filePath, status === 206 ? { start, end } : {}).pipe(response);
   } catch {
     response.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
     response.end("Страница не найдена");
