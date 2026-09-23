@@ -189,7 +189,7 @@
     const id = window.location.hash.slice(1);
     const target = document.getElementById(id);
     const disclosure = target?.querySelector(".footer-disclosure");
-    if (disclosure) disclosure.open = true;
+    if (disclosure && id !== "feedback") disclosure.open = true;
   }
   window.addEventListener("hashchange", revealAnchor);
   revealAnchor();
@@ -254,7 +254,7 @@ document.querySelectorAll('.event-card').forEach(card => {
   const fan = document.querySelector('.poster-fan');
   if (!fan) return;
   const group = fan.querySelector('.poster-fan-group');
-  const viewport = fan.querySelector('.poster-fan-viewport');
+  const track = fan.querySelector('.poster-fan-track');
   // An extra copy keeps the viewport filled even when it is wider than one cycle.
   const extra = group.cloneNode(true);
   extra.setAttribute('aria-hidden', 'true');
@@ -266,7 +266,7 @@ document.querySelectorAll('.event-card').forEach(card => {
   function draw() {
     if (!cycle) return;
     position = ((position % cycle) + cycle) % cycle;
-    viewport.scrollLeft = position;
+    track.style.transform = `translate3d(${-position}px, 0, 0)`;
   }
   function tick(time) {
     frame = 0;
@@ -278,14 +278,20 @@ document.querySelectorAll('.event-card').forEach(card => {
     cancelAnimationFrame(frame); frame = 0; last = 0;
     if (visible && !document.hidden && !reduced.matches && !focused) frame = requestAnimationFrame(tick);
   }
-  new ResizeObserver(() => { cycle = group.getBoundingClientRect().width; draw(); }).observe(group);
+  new ResizeObserver(() => {
+    const width = group.getBoundingClientRect().width;
+    if (cycle && width !== cycle) position *= width / cycle;
+    cycle = width;
+    draw();
+  }).observe(group);
   new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }).observe(fan);
   reduced.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
   fan.addEventListener('pointerdown', event => {
-    if (event.button !== 0) return;
-    pointer = {id:event.pointerId,x:event.clientX,y:event.clientY,start:position};
+    if (!event.isPrimary || event.button !== 0) return;
+    pointer = {id:event.pointerId,x:event.clientX,y:event.clientY,start:position,link:event.target.closest('.poster-fan-link')};
     dragged = false; suppressClick = false;
+    last = 0;
   });
   fan.addEventListener('pointermove', event => {
     if (!pointer || pointer.id !== event.pointerId) return;
@@ -296,11 +302,25 @@ document.querySelectorAll('.event-card').forEach(card => {
     if (dragged) { event.preventDefault(); position = pointer.start - dx; draw(); }
   });
   function end() {
-    suppressClick = dragged; pointer = null; fan.classList.remove('is-dragging');
+    suppressClick = dragged; pointer = null; last = 0; fan.classList.remove('is-dragging');
   }
-  fan.addEventListener('pointerup', end);
-  fan.addEventListener('pointercancel', end);
-  fan.addEventListener('lostpointercapture', () => { if (pointer) end(); });
+  fan.addEventListener('pointerup', event => {
+    if (pointer?.id !== event.pointerId) return;
+    const tappedLink = event.pointerType === 'touch' && !dragged && pointer.link;
+    end();
+    if (tappedLink) {
+      // Transformed links do not always receive a synthetic click on mobile.
+      event.preventDefault();
+      suppressClick = true;
+      void openPoster(tappedLink);
+    }
+  });
+  fan.addEventListener('pointercancel', event => {
+    if (pointer?.id === event.pointerId) end();
+  });
+  fan.addEventListener('lostpointercapture', event => {
+    if (event.target === fan && pointer?.id === event.pointerId) end();
+  });
   fan.addEventListener('pointerleave', () => { if (pointer && !dragged) end(); });
   fan.addEventListener('dragstart', event => event.preventDefault());
   fan.addEventListener('wheel', event => {
@@ -314,16 +334,14 @@ document.querySelectorAll('.event-card').forEach(card => {
     }
   });
   fan.addEventListener('focusin', event => {
-    focused = event.target.matches(':focus-visible'); position = viewport.scrollLeft; sync();
+    focused = event.target.matches(':focus-visible'); sync();
   });
-  fan.addEventListener('focusout', () => { focused = false; sync(); });
-  fan.addEventListener('click', async event => {
-    const link = event.target.closest('.poster-fan-link');
-    if (suppressClick) { event.preventDefault(); suppressClick = false; return; }
-    if (!link) return;
+  fan.addEventListener('focusout', () => {
+    queueMicrotask(() => { focused = fan.contains(document.activeElement); sync(); });
+  });
+  async function openPoster(link) {
     const card = document.getElementById(link.hash.slice(1));
     if (!card) return;
-    event.preventDefault();
     if (window.mozaikaToggleEvent) await window.mozaikaToggleEvent(card, true);
     else card.open = true;
     history.replaceState(null, '', link.hash);
@@ -334,5 +352,12 @@ document.querySelectorAll('.event-card').forEach(card => {
       const headerBottom = document.querySelector('.site-header').getBoundingClientRect().bottom;
       window.scrollTo({top:scrollY + detail.getBoundingClientRect().top - headerBottom - 20,behavior:reduced.matches ? 'instant' : 'smooth'});
     });
+  }
+  fan.addEventListener('click', event => {
+    const link = event.target.closest('.poster-fan-link');
+    if (suppressClick) { event.preventDefault(); suppressClick = false; return; }
+    if (!link) return;
+    event.preventDefault();
+    void openPoster(link);
   });
 })();

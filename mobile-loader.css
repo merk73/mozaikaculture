@@ -7,6 +7,35 @@
   .site-loader-content { position:absolute; top:50%; left:50%; width:190px; transform:translate(-50%,-50%); }
   .site-loader-content img { display:block; width:190px; height:auto; }
   .site-loader-content p { position:absolute; top:100%; width:260px; left:50%; transform:translateX(-50%); margin:26px 0 0; color:#b8b5af; text-align:center; font:14px/1.5 Arial,sans-serif; }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (mask-image: url("assets/logo-mozaika.svg")) or (-webkit-mask-image: url("assets/logo-mozaika.svg")) {
+      .site-loader-content::before {
+        position:absolute;
+        inset:0 auto auto 0;
+        z-index:1;
+        width:190px;
+        aspect-ratio:344 / 125;
+        content:"";
+        pointer-events:none;
+        background:linear-gradient(100deg,#8b8783 24%,#c9c7c5 43%,#fff 50%,#c9c7c5 57%,#8b8783 76%) 100% 0 / 240% 100%;
+        mask:url("assets/logo-mozaika.svg") center / contain no-repeat;
+        -webkit-mask:url("assets/logo-mozaika.svg") center / contain no-repeat;
+        animation:loader-text-shimmer 2.4s ease-in-out infinite;
+      }
+    }
+    @supports (background-clip: text) {
+      .site-loader-content p, .site-header .loader-moving-status {
+        background:linear-gradient(100deg,#aaa6a0 15%,#eee9e2 48%,#aaa6a0 81%) 100% 0 / 240% 100%;
+        background-clip:text;
+        -webkit-text-fill-color:transparent;
+        animation:loader-text-shimmer 2.4s ease-in-out infinite;
+      }
+    }
+  }
+  @keyframes loader-text-shimmer {
+    from { background-position:100% 0; }
+    to { background-position:-100% 0; }
+  }
   .site-loading.loader-morphing .site-header { visibility:visible; z-index:10001; align-content:center; transition:none; }
   .loader-morphing .site-loader { visibility:hidden; }
   .loader-morphing .site-header .brand img { transform-origin:center; }
