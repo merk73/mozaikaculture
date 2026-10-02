@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <link rel="stylesheet" href="mobile-loader.css?v=10" />
-    <script src="mobile-loader.js?v=7"></script>
+    <link rel="stylesheet" href="mobile-loader.css?v=20261002-polish-1" />
+    <script src="mobile-loader.js?v=20261002-polish-1"></script>
     <title>Мозаика культур</title>
     <meta
       name="description"
       content="Образовательный атлас Мозаика культур о коренных народах Дальнего Востока."
     />
-    <link rel="stylesheet" href="styles.css?v=20260711-events-compact-1" />
-    <link rel="stylesheet" href="home.css?v=20260923-materials-4" />
-      <link rel="stylesheet" href="site-shell.css?v=20260921-2" />
-    <link rel="stylesheet" href="site-motion.css?v=20260923-motion-2" />
+    <link rel="stylesheet" href="styles.css?v=20261002-polish-1" />
+    <link rel="stylesheet" href="home.css?v=20261002-polish-1" />
+      <link rel="stylesheet" href="site-shell.css?v=20261002-polish-1" />
+    <link rel="stylesheet" href="site-motion.css?v=20261002-polish-1" />
     <link rel="stylesheet" href="home-interactions.css?v=20260920-9" />
   </head>
   <body class="home-page site-refresh">
@@ -100,15 +100,16 @@
             </p>
           </div>
 
-          <div class="atlas-tools" role="tablist" aria-label="Фильтр по среде">
-            <button class="filter-button is-active" type="button" data-filter="all">Все</button>
-            <button class="filter-button" type="button" data-filter="amur">Амур</button>
-            <button class="filter-button" type="button" data-filter="taiga">Тайга</button>
-            <button class="filter-button" type="button" data-filter="coast">Море</button>
-            <button class="filter-button" type="button" data-filter="north">Север</button>
+          <div class="atlas-tools" role="group" aria-label="Фильтр по среде">
+            <button class="filter-button is-active" type="button" data-filter="all" aria-controls="atlas-people" aria-pressed="true">Все</button>
+            <button class="filter-button" type="button" data-filter="amur" aria-controls="atlas-people" aria-pressed="false">Амур</button>
+            <button class="filter-button" type="button" data-filter="taiga" aria-controls="atlas-people" aria-pressed="false">Тайга</button>
+            <button class="filter-button" type="button" data-filter="coast" aria-controls="atlas-people" aria-pressed="false">Море</button>
+            <button class="filter-button" type="button" data-filter="north" aria-controls="atlas-people" aria-pressed="false">Север</button>
           </div>
 
-          <div class="people-grid" data-people-grid></div>
+          <p class="atlas-count" data-atlas-count role="status"></p>
+          <div class="people-grid" id="atlas-people" data-people-grid></div>
           <a class="online-quiz-cta atlas-quiz-cta" href="quiz.html" data-quiz-gate>
             <span>Пройти квиз</span>
             <strong>15 вопросов по народам атласа</strong><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -494,23 +495,23 @@
           >
             <input type="hidden" name="form-name" value="feedback" />
             <input type="hidden" name="page" value="Главная страница" />
-            <p class="visually-hidden">
-              <label>Не заполняйте это поле <input name="bot-field" /></label>
+            <p hidden aria-hidden="true">
+              <label>Не заполняйте это поле <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
             </p>
             <label>
               Имя
-              <input type="text" name="name" placeholder="Как к вам обращаться" required />
+              <input type="text" name="name" autocomplete="name" maxlength="120" placeholder="Как к вам обращаться" required />
             </label>
             <label>
               Почта
-              <input type="email" name="email" placeholder="name@example.ru" required />
+              <input type="email" name="email" autocomplete="email" maxlength="254" placeholder="name@example.ru" required />
             </label>
             <label>
               Сообщение
-              <textarea name="message" rows="5" placeholder="Напишите вопрос или предложение" required></textarea>
+              <textarea name="message" maxlength="4000" rows="5" placeholder="Напишите вопрос или предложение" required></textarea>
             </label>
             <button type="submit">Отправить</button>
-            <p class="feedback-message" data-feedback-message></p>
+            <p class="feedback-message" data-feedback-message role="status" aria-live="polite"></p>
           </form>
         </div>
       </div></details></section>
@@ -678,6 +679,7 @@
         </a>
 
         <button class="profile-logout" type="button" data-profile-logout>Выйти из аккаунта</button>
+        <p class="auth-message" data-profile-message role="status"></p>
       </section>
     </div>
 
@@ -685,9 +687,9 @@
     <script src="config.js"></script>
     <script src="content.js?v=20260922-copy-1"></script>
     <script src="far-east-peoples.js?v=20260922-copy-1"></script>
-    <script src="script.js?v=20260920-11"></script>
+    <script src="script.js?v=20261002-polish-1"></script>
 
-      <script src="home-nav.js?v=20260923-fan-8"></script>
-    <script src="site-motion.js?v=20260923-motion-2"></script>
+      <script src="home-nav.js?v=20261002-polish-1"></script>
+    <script src="site-motion.js?v=20261002-polish-1"></script>
   </body>
 </html>

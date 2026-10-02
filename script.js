@@ -263,6 +263,9 @@ function renderCards(filter = "all") {
 
   hydrateMotion(grid);
   initTiltCards(grid);
+  filterButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === filter)));
+  const count = document.querySelector('[data-atlas-count]');
+  if (count) count.textContent = `Показано ${visible.length} из ${peoples.length} народов`;
 }
 
 function renderTabs() {
@@ -377,6 +380,19 @@ const supabaseClient =
     : null;
 let authMode = "login";
 let authReturnFocus = null;
+let profileReturnFocus = null;
+const modalRegions = new Map();
+function isolateModal(modal, open) {
+  if (!open) {
+    modalRegions.get(modal)?.forEach(([node, previous]) => { node.inert = previous; });
+    modalRegions.delete(modal);
+    return;
+  }
+  if (modalRegions.has(modal)) return;
+  const regions = [...document.body.children].filter(node => !node.contains(modal) && !node.matches('script,style')).map(node => [node,node.inert]);
+  modalRegions.set(modal, regions);
+  regions.forEach(([node]) => { node.inert = true; });
+}
 let currentUserEmail = "";
 let currentUserId = null;
 let currentUserName = "";
@@ -523,11 +539,13 @@ function openAuth() {
   authModal.classList.add("is-open");
   authModal.setAttribute("aria-hidden", "false");
   document.documentElement.classList.toggle('auth-modal-open', !matchMedia('(max-width: 760px)').matches);
+  if (!matchMedia('(max-width: 760px)').matches) isolateModal(authModal, true);
   const firstInput = authMode === "register"
     ? authForm.querySelector('input[name="name"]')
     : authForm.querySelector('input[name="email"]');
   document.dispatchEvent(new CustomEvent('mozaika:auth-change', { detail: { open: true, headerHeight } }));
-  if (!matchMedia('(max-width: 760px)').matches) setTimeout(() => firstInput?.focus(), 30);
+  if (!matchMedia('(max-width: 760px)').matches) firstInput?.focus({preventScroll:true});
+  else authModal.querySelector('.auth-close')?.focus({preventScroll:true});
 }
 
 function closeAuth() {
@@ -536,6 +554,7 @@ function closeAuth() {
   authModal.classList.remove("is-open");
   authModal.setAttribute("aria-hidden", "true");
   authModal.hidden = true;
+  isolateModal(authModal, false);
   document.documentElement.classList.remove('auth-modal-open');
   document.dispatchEvent(new CustomEvent('mozaika:auth-change', { detail: { open: false, headerHeight } }));
   const trigger = matchMedia('(max-width: 760px)').matches ? document.querySelector('[data-mobile-account]') : document.querySelector('[data-desktop-account]');
@@ -545,20 +564,25 @@ function closeAuth() {
 function openProfile() {
   if (!profileModal || !currentUserId) return;
   closeAuth();
+  profileReturnFocus = document.activeElement;
   profileModal.hidden = false;
   profileModal.classList.add("is-open");
   profileModal.setAttribute("aria-hidden", "false");
   document.documentElement.classList.add("profile-open");
+  isolateModal(profileModal, true);
+  profileModal.querySelector('.auth-close')?.focus({preventScroll:true});
   renderProfile();
   loadProfileQuizResult();
 }
 
 function closeProfile() {
-  if (!profileModal) return;
+  if (!profileModal?.classList.contains('is-open')) return;
   profileModal.classList.remove("is-open");
   profileModal.setAttribute("aria-hidden", "true");
   profileModal.hidden = true;
+  isolateModal(profileModal, false);
   document.documentElement.classList.remove("profile-open");
+  profileReturnFocus?.focus({preventScroll:true});
 }
 
 function setAuthMode(mode) {
@@ -745,17 +769,22 @@ document.addEventListener("mozaika:auth-close", closeAuth);
 profileCloseButtons.forEach((button) => button.addEventListener("click", closeProfile));
 
 profileLogout?.addEventListener("click", async () => {
-  if (!supabaseClient) return;
+  if (!supabaseClient || profileLogout.disabled) return;
+  const status = document.querySelector('[data-profile-message]');
+  if (status) status.textContent = '';
   profileLogout.disabled = true;
   profileLogout.textContent = "Выхожу...";
-  await supabaseClient.auth.signOut();
-  currentUserEmail = "";
-  currentUserId = null;
-  currentUserName = "";
-  updateAuthState();
-  closeProfile();
-  profileLogout.disabled = false;
-  profileLogout.textContent = "Выйти из аккаунта";
+  try {
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) throw error;
+    currentUserEmail = ""; currentUserId = null; currentUserName = "";
+    updateAuthState(); closeProfile();
+  } catch {
+    if (status) status.textContent = 'Не удалось выйти. Проверьте соединение и попробуйте ещё раз.';
+  } finally {
+    profileLogout.disabled = false;
+    profileLogout.textContent = "Выйти из аккаунта";
+  }
 });
 
 passwordToggle?.addEventListener("click", () => {
@@ -838,8 +867,10 @@ if (authForm) {
 }
 
 if (feedbackForm) {
+  let sendingFeedback = false;
   feedbackForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (sendingFeedback) return;
     const formData = new FormData(feedbackForm);
     const payload = {
       name: String(formData.get("name")).trim(),
@@ -848,6 +879,20 @@ if (feedbackForm) {
       page: location.href,
       botField: String(formData.get("bot-field") || "").trim(),
     };
+
+    if (payload.botField) return;
+    const empty = ['name','email','message'].find(name => !payload[name]);
+    if (empty) {
+      const input = feedbackForm.elements.namedItem(empty);
+      input.setCustomValidity('Заполните поле: одного пробела недостаточно.');
+      input.reportValidity();
+      input.addEventListener('input', () => input.setCustomValidity(''), {once:true});
+      return;
+    }
+    const submit = feedbackForm.querySelector('[type="submit"]');
+    sendingFeedback = true; submit.disabled = true;
+    feedbackForm.setAttribute('aria-busy','true');
+    submit.textContent = 'Отправляем…';
 
     feedbackMessage.textContent = "Отправляю сообщение...";
     feedbackMessage.dataset.type = "info";
@@ -858,13 +903,26 @@ if (feedbackForm) {
       feedbackMessage.textContent = "Сообщение отправлено. Спасибо за обращение.";
       feedbackMessage.dataset.type = "success";
     } catch (error) {
-      feedbackMessage.textContent = error.message || "Сообщение не отправилось. Попробуйте позже.";
+      feedbackMessage.textContent = "Сообщение не отправилось. Проверьте соединение и попробуйте позже.";
       feedbackMessage.dataset.type = "error";
+    } finally {
+      sendingFeedback = false; submit.disabled = false;
+      submit.textContent = 'Отправить'; feedbackForm.removeAttribute('aria-busy');
     }
   });
 }
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === 'Tab') {
+    const modal = profileModal?.classList.contains('is-open') ? profileModal : authModal?.classList.contains('is-open') && !matchMedia('(max-width:760px)').matches ? authModal : null;
+    if (modal) {
+      const controls = [...modal.querySelectorAll('a[href],button:not(:disabled),input:not(:disabled),[tabindex="0"]')].filter(node => node.getClientRects().length && !node.closest('[hidden]'));
+      const first = controls[0], last = controls.at(-1);
+      if (first && (event.shiftKey && document.activeElement === first || !event.shiftKey && document.activeElement === last || !modal.contains(document.activeElement))) {
+        event.preventDefault(); (event.shiftKey ? last : first).focus();
+      }
+    }
+  }
   if (event.key === "Escape") {
     closeAuth();
     closeProfile();

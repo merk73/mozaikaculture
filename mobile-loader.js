@@ -73,7 +73,7 @@
     } finally { release(); }
   }
   // A failed script, stalled connection or missing image must never lock the page.
-  timer = setTimeout(() => finish(false), 45000);
+  timer = setTimeout(() => finish(false), 3500);
   mobile.addEventListener('change', () => { if (!mobile.matches) finish(false); });
   window.addEventListener('resize', () => {
     if (root.classList.contains('loader-morphing')) release();
@@ -82,16 +82,13 @@
     if (finished) return;
     regions = [...document.querySelectorAll('body > :not(.site-loader):not(script)')].map(node => [node,node.inert]);
     regions.forEach(([node]) => { node.inert = true; });
-    const images = [...document.images];
-    const ordered = [
-      ...images.filter(img => img.closest('[data-people-grid]') || /\/poster\./.test(img.src)),
-      ...images
-    ];
+    // Only the first screen can delay entry; lazy galleries keep loading normally.
+    const ordered = [...document.querySelectorAll('.site-loader img,.site-header .brand img,.hero img')];
     const urls = [...new Set(ordered.map(img => img.currentSrc || img.src).filter(src => src && !src.startsWith('data:')))];
     let next = 0;
     const preload = src => new Promise(resolve => {
       const image = new Image();
-      const timeout = setTimeout(done, 20000);
+      const timeout = setTimeout(done, 1800);
       function done() { clearTimeout(timeout); image.onload = image.onerror = null; resolve(); }
       image.onload = () => { image.decode().catch(() => {}).finally(done); };
       image.onerror = done;

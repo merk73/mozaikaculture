@@ -30,9 +30,6 @@
   from { opacity: .7; }
   to { opacity: 1; }
 }
-.site-refresh .event-card[open] .event-expanded-intro,
-.site-refresh .footer-disclosure[open] .footer-disclosure-content,
-.site-refresh .article-toc[open] nav { animation: soft-content-enter 320ms ease; }
 /* Navigation motion: reversible icon transitions and brief control feedback. */
 .site-refresh .site-header { transition: border-color 180ms ease; }
 .site-refresh .site-header:is(.is-menu-open, .is-account-open) { border-color: #ffffff40; }
@@ -66,7 +63,7 @@
 /* One motion rhythm across controls, images, cards and dialogs. */
 @media(prefers-reduced-motion:no-preference) {
   .site-refresh :is(button,.button,.photo-download,.event-expand,.article-source-list a,.footer-nav a,.gallery-tile,.people-card) { transition:background-color 220ms ease,border-color 220ms ease,color 180ms ease,box-shadow 260ms ease,scale 200ms cubic-bezier(.22,1,.36,1); }
-  .site-refresh :is(button,.button,.photo-download):active { scale:.98; }
+  .site-refresh :is(button,.button,.photo-download):active { scale:.96; }
   .site-refresh :is(input,textarea,select) { transition:border-color 220ms ease,box-shadow 220ms ease,background-color 220ms ease; }
   .site-refresh :is(.event-cover>img,.gallery-tile img,.event-photo img,.materials-preview img) { transition:transform 650ms cubic-bezier(.22,1,.36,1); }
   .site-refresh .photo-dialog[open] .photo-view { animation:photo-view-enter 280ms cubic-bezier(.22,1,.36,1); }

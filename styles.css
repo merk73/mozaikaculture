@@ -3063,7 +3063,7 @@ html.profile-open body {
   font-weight: 750;
   background: rgba(255, 255, 255, 0.1);
   color: var(--muted);
-  transition: all 0.25s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .auth-step-item.is-active .auth-step-num {
@@ -3801,7 +3801,7 @@ html.profile-open body {
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .profile-quiz-link-btn svg {

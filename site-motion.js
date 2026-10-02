@@ -33,12 +33,12 @@
   });
   document.querySelectorAll('.event-card,.footer-disclosure,.article-toc').forEach(disclosure => {
     let animation;
+    reduced.addEventListener('change', () => { if (reduced.matches) animation?.cancel(); });
     disclosure.addEventListener('toggle', () => {
       animation?.cancel();
       if (!disclosure.open || reduced.matches) return;
-      if (disclosure.matches(".event-card") && matchMedia("(min-width:1024px)").matches) return;
       const content = disclosure.querySelector('.event-expanded,.footer-disclosure-content,nav');
-      if (content) animation = content.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:300,easing:'cubic-bezier(.22,1,.36,1)'});
+      if (content) animation = content.animate([{opacity:.45,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,easing:'cubic-bezier(.22,1,.36,1)'});
     });
   });
   reduced.addEventListener('change', () => {

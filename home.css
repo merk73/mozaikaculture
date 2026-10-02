@@ -1028,6 +1028,12 @@ body.home-page {
 
 .home-page .poster-fan-link { flex:1 1 0; width:auto; min-width:0; }
 
+.home-page .atlas-count { margin:0 0 18px; color:var(--muted); font-size:13px; font-variant-numeric:tabular-nums; }
+.home-page .events .event-card { transition:border-color 180ms ease,box-shadow 180ms ease; }
+.home-page .events .event-card[open] { border-color:#ffffff45; box-shadow:0 12px 48px #0005; }
+.home-page .disclosure-plus { transition:transform 200ms ease-out; }
+.home-page .poster-fan-link img { outline:1px solid #ffffff1a; outline-offset:-1px; }
+
 /* Desktop keeps the full handouts section; mobile leads with the sticker sheet. */
 .home-page .materials-mobile-visual,
 .home-page .materials-description-short { display:none; }

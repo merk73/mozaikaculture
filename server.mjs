@@ -24,8 +24,15 @@ const mimeTypes = {
 };
 
 async function handleStatic(request, response) {
-  const url = new URL(request.url, `http://${request.headers.host}`);
-  const decodedPath = decodeURIComponent(url.pathname);
+  let decodedPath;
+  try {
+    const url = new URL(request.url, `http://${request.headers.host}`);
+    decodedPath = decodeURIComponent(url.pathname);
+  } catch {
+    response.writeHead(400, { "Content-Type": "text/plain; charset=utf-8" });
+    response.end("Некорректный адрес страницы");
+    return;
+  }
   const safePath = normalize(decodedPath).replace(/^(\.\.[/\\])+/, "");
   let filePath = join(root, safePath === "/" ? "index.html" : safePath);
 
@@ -66,7 +73,9 @@ async function handleStatic(request, response) {
       return;
     }
 
-    createReadStream(filePath, status === 206 ? { start, end } : {}).pipe(response);
+    const stream = createReadStream(filePath, status === 206 ? { start, end } : {});
+    stream.on('error', () => response.destroy());
+    stream.pipe(response);
   } catch {
     response.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
     response.end("Страница не найдена");

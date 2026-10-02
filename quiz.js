@@ -195,6 +195,7 @@ const config = window.MOZAIKA_CONFIG || {};
 const supabaseClient = window.supabase?.createClient && config.SUPABASE_URL && config.SUPABASE_ANON_KEY
   ? window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY) : null;
 const GUEST_KEY = 'mozaika.quiz.guest.v1';
+const DRAFT_KEY = 'mozaika.quiz.draft.v1';
 let currentUser = null;
 let quizSaving = false;
 function shuffleOptions(options) {
@@ -219,14 +220,28 @@ function writeGuestResult() {
   const savedAt = new Date().toISOString();
   try {
     localStorage.setItem(GUEST_KEY, JSON.stringify({version: 1, answers: state.answers, savedAt}));
+    localStorage.removeItem(DRAFT_KEY);
     return savedAt;
   } catch { return null; }
+}
+function saveGuestProgress() {
+  if (currentUser) return;
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify({version:1,index:state.index,answers:state.answers,optionOrders:state.optionOrders})); } catch {}
+}
+function restoreGuestProgress() {
+  try {
+    const draft = JSON.parse(localStorage.getItem(DRAFT_KEY));
+    if (draft?.version !== 1 || !Number.isInteger(draft.index) || draft.index < 0 || draft.index >= questions.length) return;
+    if (!Array.isArray(draft.answers) || draft.answers.length !== questions.length || !draft.answers.every((answer,i) => answer === null || questions[i].options.includes(answer))) return;
+    state.index = draft.index; state.answers = draft.answers;
+    if (Array.isArray(draft.optionOrders) && draft.optionOrders.length === questions.length && draft.optionOrders.every((options,i) => Array.isArray(options) && options.length === questions[i].options.length && new Set(options).size === options.length && options.every(option => questions[i].options.includes(option)))) state.optionOrders = draft.optionOrders;
+  } catch {}
 }
 function updateMode() {
   modeNode.textContent = currentUser ? 'В аккаунте' : 'Без регистрации';
   storageNotice.textContent = currentUser
     ? 'Результат этой попытки сохранится в вашем аккаунте.'
-    : 'Результат сохранится только в этом браузере. При очистке данных сайта он удалится.';
+    : 'Прогресс и результат сохранятся в этом браузере. При очистке данных сайта они удалятся.';
 }
 function renderQuestion(moveFocus = false) {
   const item = questions[state.index];
@@ -249,7 +264,11 @@ function renderQuestion(moveFocus = false) {
   prevButton.disabled = state.index === 0;
   nextButton.textContent = state.index === questions.length - 1 ? 'Узнать результат' : 'Следующий вопрос';
   nextButton.disabled = !state.answers[state.index];
-  if (moveFocus) questionNode.focus({preventScroll:true});
+  saveGuestProgress();
+  if (moveFocus) {
+    questionNode.focus({preventScroll:true});
+    quizSurface.scrollIntoView({behavior:'auto',block:'start'});
+  }
 }
 function buildResultDetails() {
   const details = questions.map((item,index) => ({topic:item.topic,question:item.question,answer:state.answers[index],correctAnswer:item.answer,isCorrect:state.answers[index]===item.answer}));
@@ -296,7 +315,7 @@ function startGuest() {
   if(saved) {
     state.answers=saved.answers;
     renderSavedResults({...buildResultDetails(),savedAt:saved.savedAt,alreadyPassed:true});
-  } else { quizSurface.hidden=false; resultsNode.hidden=true; renderQuestion(); }
+  } else { restoreGuestProgress(); quizSurface.hidden=false; resultsNode.hidden=true; renderQuestion(); }
 }
 async function initQuiz() {
   quizSurface.hidden=true; resultsNode.hidden=true;
@@ -321,6 +340,7 @@ async function initQuiz() {
 optionsNode.addEventListener('click',event=>{
   const button=event.target.closest('[data-answer]'); if(!button) return;
   state.answers[state.index]=button.dataset.answer;
+  saveGuestProgress();
   optionsNode.querySelectorAll('button').forEach(item=>{const selected=item===button;item.classList.toggle('is-selected',selected);item.setAttribute('aria-pressed',String(selected));});
   scoreNode.textContent=`Отвечено: ${state.answers.filter(Boolean).length}`;
   nextButton.disabled=false;
@@ -334,7 +354,7 @@ nextButton.addEventListener('click',async()=>{
 });
 restartButton.addEventListener('click',()=>{
   if(currentUser)return;
-  try{localStorage.removeItem(GUEST_KEY);}catch{}
+  try{localStorage.removeItem(GUEST_KEY);localStorage.removeItem(DRAFT_KEY);}catch{}
   state.index=0;state.answers=Array(questions.length).fill(null);state.optionOrders=questions.map(item=>shuffleOptions(item.options));
   resultsNode.hidden=true;quizSurface.hidden=false;renderQuestion(true);
   quizSurface.scrollIntoView({behavior:'auto',block:'start'});

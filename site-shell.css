@@ -1,4 +1,5 @@
 /* Shared site navigation and dark surfaces. */
+.site-refresh [hidden] { display:none !important; }
 .site-refresh {
   --text: #f7f3ec;
   --muted: #b5b0aa;
@@ -36,6 +37,9 @@
 }
 .site-refresh .header-main .main-nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 10px; border-radius: 12px; color: #c9c4be; font: 14px/1.4 Arial, sans-serif; white-space: nowrap; text-decoration: none; }
 .site-refresh .header-main .main-nav a:hover { background: #ffffff0a; color: #fff; }
+.site-refresh main { scroll-margin-top:112px; }
+.site-refresh main:focus { outline:none; }
+@media(forced-colors:active) { .site-refresh :focus-visible { outline:2px solid Highlight !important; } }
 .site-refresh .header-account { display: grid; align-items: center; justify-items: end; grid-column: 3; grid-row: 1; width: var(--header-unit); height: 100%; padding-right: 20px; box-sizing: border-box; }
 .site-refresh .desktop-account { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; width: 44px; min-width: 44px; height: 44px; padding: 10px; margin: 0; color: var(--text); background: #ffffff08; border: 1px solid #ffffff20; border-radius: 999px; font: 600 16px/1 Arial, sans-serif; cursor: pointer; }
 .site-refresh .desktop-account svg { width: 24px; height: 24px; flex: none; }

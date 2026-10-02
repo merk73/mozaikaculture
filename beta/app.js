@@ -18,6 +18,8 @@ const detailNumber = document.querySelector(".detail-number");
 const peopleGrid = document.querySelector("[data-people-grid]");
 const peopleSearch = document.querySelector("[data-people-search]");
 const emptyState = document.querySelector("[data-empty-state]");
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let mapAnimation;
 
 function pageLink(slug) {
   return `../peoples/${slug}.html`;
@@ -30,8 +32,10 @@ function renderMapDetail(person, index) {
   mapText.textContent = person.cardText || person.summary || "Откройте страницу народа, чтобы узнать больше.";
   mapLink.href = pageLink(person.slug);
   mapImage.src = person.image;
+  mapImage.alt = `Иллюстрация: ${person.name}`;
   detailNumber.textContent = String(index + 1).padStart(2, "0");
-  mapDetail.animate(
+  mapAnimation?.cancel();
+  if (!reducedMotion.matches) mapAnimation = mapDetail.animate(
     [{ opacity: 0.55, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }],
     { duration: 280, easing: "cubic-bezier(.2,.78,.2,1)" },
   );
@@ -47,16 +51,19 @@ function renderMap() {
     button.style.top = `${position[1]}%`;
     button.setAttribute("aria-label", person.name);
     button.addEventListener("click", () => {
-      mapPoints.querySelectorAll(".map-point").forEach((point) => point.classList.remove("is-active"));
+      mapPoints.querySelectorAll(".map-point").forEach((point) => { point.classList.remove("is-active"); point.setAttribute('aria-pressed','false'); });
       button.classList.add("is-active");
+      button.setAttribute('aria-pressed','true');
       renderMapDetail(person, index);
     });
     mapPoints.append(button);
+    button.setAttribute('aria-pressed','false');
   });
 
   const first = people[0];
   const firstPoint = mapPoints.querySelector(".map-point");
   firstPoint?.classList.add("is-active");
+  firstPoint?.setAttribute('aria-pressed','true');
   renderMapDetail(first, 0);
 }
 
@@ -130,12 +137,15 @@ window.addEventListener("scroll", () => {
 
 const heroVisual = document.querySelector(".hero-visual img");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+reducedMotion.addEventListener('change', () => {
+  if (reducedMotion.matches) { mapAnimation?.cancel(); if (heroVisual) heroVisual.style.transform = ''; }
+});
 
 if (heroVisual && finePointer.matches) {
   document.querySelector(".beta-hero")?.addEventListener("pointermove", (event) => {
     const x = (event.clientX / window.innerWidth - 0.5) * 12;
     const y = (event.clientY / window.innerHeight - 0.5) * 8;
-    heroVisual.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    heroVisual.style.transform = reducedMotion.matches ? '' : `translate3d(${x}px, ${y}px, 0)`;
   });
   document.querySelector(".beta-hero")?.addEventListener("pointerleave", () => {
     heroVisual.style.transform = "translate3d(0, 0, 0)";

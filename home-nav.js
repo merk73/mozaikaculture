@@ -28,6 +28,29 @@
   placeAuth();
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const links = [...nav.querySelectorAll('a')];
+  const main = document.querySelector('main');
+  if (main) {
+    main.id ||= 'main-content';
+    main.tabIndex = -1;
+    let skip = document.querySelector('.skip-link');
+    if (!skip) { skip = document.createElement('a'); skip.className = 'skip-link'; skip.textContent = 'Перейти к содержимому'; document.body.prepend(skip); }
+    skip.href = '#' + main.id;
+  }
+  const pagePath = path => path.replace(/index\.html$/, '');
+  const localLinks = links.map(link => ({link,url:new URL(link.href)})).filter(item => pagePath(item.url.pathname) === pagePath(location.pathname));
+  const sections = localLinks.map(item => ({...item,target:document.getElementById(item.url.hash.slice(1))})).filter(item => item.target);
+  let navFrame = 0;
+  function updateCurrentSection() {
+    navFrame = 0;
+    const boundary = header.getBoundingClientRect().bottom + 80;
+    const active = sections.map(item => ({...item,top:item.target.getBoundingClientRect().top})).filter(item => item.top <= boundary).sort((a,b) => b.top-a.top)[0];
+    links.forEach(link => link.removeAttribute('aria-current'));
+    if (active) active.link.setAttribute('aria-current','location');
+    else localLinks.find(item => !item.url.hash)?.link.setAttribute('aria-current','page');
+  }
+  window.addEventListener('scroll', () => { if (!navFrame) navFrame = requestAnimationFrame(updateCurrentSection); }, {passive:true});
+  window.addEventListener('resize', updateCurrentSection, {passive:true});
+  updateCurrentSection();
   const closeIcon = toggle.querySelector('svg').cloneNode(true);
   closeIcon.classList.add('menu-close-icon');
   closeIcon.querySelector('path').setAttribute('d', 'M6 6l12 12M6 18L18 6');
@@ -186,10 +209,14 @@
   });
 
   function revealAnchor() {
-    const id = window.location.hash.slice(1);
+    let id;
+    try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
     const target = document.getElementById(id);
     const disclosure = target?.querySelector(".footer-disclosure");
-    if (disclosure && id !== "feedback") disclosure.open = true;
+    const card = target?.closest('.event-card');
+    if (disclosure) disclosure.open = true;
+    if (card) card.open = true;
+    if (disclosure || card) requestAnimationFrame(() => target.scrollIntoView({block:'start',behavior:'instant'}));
   }
   window.addEventListener("hashchange", revealAnchor);
   revealAnchor();
@@ -255,6 +282,7 @@ document.querySelectorAll('.event-card').forEach(card => {
   if (!fan) return;
   const group = fan.querySelector('.poster-fan-group');
   const track = fan.querySelector('.poster-fan-track');
+  const viewport = fan.querySelector('.poster-fan-viewport');
   // An extra copy keeps the viewport filled even when it is wider than one cycle.
   const extra = group.cloneNode(true);
   extra.setAttribute('aria-hidden', 'true');
@@ -335,6 +363,13 @@ document.querySelectorAll('.event-card').forEach(card => {
   });
   fan.addEventListener('focusin', event => {
     focused = event.target.matches(':focus-visible'); sync();
+    if (focused && event.target.matches('.poster-fan-link')) {
+      // Browser focus scrolling must not fight the translated track.
+      viewport.scrollLeft = 0; fan.scrollLeft = 0;
+      const left = event.target.getBoundingClientRect().left - viewport.getBoundingClientRect().left;
+      position = Math.max(0, position + left - 30);
+      draw();
+    }
   });
   fan.addEventListener('focusout', () => {
     queueMicrotask(() => { focused = fan.contains(document.activeElement); sync(); });
@@ -355,6 +390,7 @@ document.querySelectorAll('.event-card').forEach(card => {
   }
   fan.addEventListener('click', event => {
     const link = event.target.closest('.poster-fan-link');
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
     if (suppressClick) { event.preventDefault(); suppressClick = false; return; }
     if (!link) return;
     event.preventDefault();
