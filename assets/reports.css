@@ -1,0 +1,58 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #f7f3ec;
+  background: #000;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; }
+
+main {
+  width: min(100%, 48rem);
+  margin-inline: auto;
+  padding: clamp(2rem, 8vw, 6rem) 1.5rem;
+}
+
+.brand {
+  margin: 0 0 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.period {
+  margin: 1rem 0 2.5rem;
+  color: #b8b5af;
+  line-height: 1.6;
+}
+
+.files { margin: 0; padding: 0; list-style: none; }
+.files li + li { margin-top: 1rem; }
+
+.files a {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid #454545;
+  border-radius: 1rem;
+  color: inherit;
+  background: #111;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.files a:hover { border-color: #b8b5af; }
+.files a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.file-title { display: block; font-weight: 600; line-height: 1.5; text-decoration: underline; text-underline-offset: 0.2em; }
+.file-details { display: block; margin-top: 0.5rem; color: #b8b5af; font-size: 0.875rem; line-height: 1.5; }
+
+@media (forced-colors: active) {
+  .files a:focus-visible { outline-color: Highlight; }
+}
