@@ -75,6 +75,19 @@
 @media (max-width: 1199px) { .home-page .upcoming-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
 @media (max-width: 760px) {
   /* Portrait, title and description share the cover; actions follow below. */
+  /* Safari's browser chrome samples the page canvas, rather than theme-color
+     on newer iOS versions. Keep the cover's neutral tone under its safe area. */
+  html.home-page {
+    --browser-top-color: #353535;
+    --home-safe-top: env(safe-area-inset-top, 0px);
+    --home-safe-bottom: env(safe-area-inset-bottom, 0px);
+    background-color: var(--browser-top-color);
+  }
+  body.home-page { background-color: var(--browser-top-color); }
+  html.home-page.is-cover-scrolled { --browser-top-color: #030303; }
+  html.home-page.site-loading { --browser-top-color: #000; }
+  .home-page main, .home-page .site-footer { background-color: var(--black); }
+  .home-page .site-header { top: max(10px, var(--home-safe-top)); }
   .home-page .hero {
     display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 100svh auto;
     min-height: 100svh; padding: 0; background: var(--black); align-items: stretch;
@@ -105,13 +118,13 @@
   .home-page .hero-heading {
     position: relative; z-index: 1; grid-column: 1; grid-row: 1;
     display: flex; flex-direction: column; justify-content: flex-end; min-width: 0;
-    padding: 112px 20px max(28px, calc(env(safe-area-inset-bottom) + 20px));
+    padding: max(112px, calc(var(--home-safe-top) + 90px)) 20px max(28px, calc(var(--home-safe-bottom) + 20px));
   }
   .home-page .hero-heading .overline { margin-bottom: 16px; font-size: 11px; }
   .home-page .hero-heading-content { position: relative; isolation: isolate; }
   .home-page .hero-heading-content::before {
     content: ''; position: absolute; z-index: -1; pointer-events: none;
-    top: -96px; right: -20px; bottom: calc(-28px - env(safe-area-inset-bottom)); left: -20px;
+    top: -96px; right: -20px; bottom: calc(-28px - var(--home-safe-bottom)); left: -20px;
     background: linear-gradient(to bottom, transparent, #030303c9 88px, #030303ed 160px, #030303 100%);
   }
   .home-page .hero-heading h1 {
@@ -148,7 +161,7 @@
   .home-page .atlas .people-card .card-portrait img.media-pending { opacity: 1; }
 }
 @media (max-width: 760px) and (max-height: 520px) {
-  .home-page .hero-heading { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+  .home-page .hero-heading { padding-bottom: max(24px, var(--home-safe-bottom)); }
   .home-page .hero-heading h1 { font-size: clamp(44px, 16svh, 64px); }
   .home-page .hero-heading .overline { margin-bottom: 12px; }
   .home-page .hero-copy .hero-description { max-width: 62ch; margin-top: 16px; font-size: 15px; }

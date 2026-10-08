@@ -4,6 +4,8 @@
   const root = document.documentElement;
   const waitForAtlas = root.classList.contains('home-page');
   root.classList.add('site-loading');
+  const mobileTheme = document.querySelector('[data-mobile-theme-color]');
+  if (mobileTheme) mobileTheme.content = '#000000';
   let finished = false;
   let timer;
   let regions = [];
@@ -11,6 +13,7 @@
   let movingStatus;
   function release() {
     root.classList.remove('site-loading', 'loader-morphing');
+    if (mobileTheme) mobileTheme.content = getComputedStyle(root).backgroundColor;
     animations.forEach(animation => animation.cancel());
     movingStatus?.remove();
     regions.forEach(([node, previous]) => { node.inert = previous; });
