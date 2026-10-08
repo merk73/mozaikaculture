@@ -233,22 +233,6 @@ document.querySelectorAll('.event-card').forEach(card => {
 });
 
 // The portrait eases toward the scroll position only while the cover is visible.
-// Match Safari's top canvas to the cover while it reaches the viewport edge.
-(() => {
-  const cover = document.querySelector('.home-page .hero-landscape');
-  if (!cover) return;
-  const root = document.documentElement;
-  const theme = document.querySelector('[data-mobile-theme-color]');
-  const mobile = matchMedia('(max-width: 760px)');
-  function sync(visible) {
-    root.classList.toggle('is-cover-scrolled', mobile.matches && !visible);
-    if (theme && !root.classList.contains('site-loading')) theme.content = getComputedStyle(root).backgroundColor;
-  }
-  const observer = new IntersectionObserver(entries => sync(entries[0].isIntersecting));
-  observer.observe(cover);
-  mobile.addEventListener('change', () => sync(cover.getBoundingClientRect().bottom > 0));
-})();
-
 (() => {
   const portrait = document.querySelector('[data-hero-portrait]');
   if (!portrait) return;

@@ -76,15 +76,14 @@
 @media (max-width: 760px) {
   /* Portrait, title and description share the cover; actions follow below. */
   /* Safari's browser chrome samples the page canvas, rather than theme-color
-     on newer iOS versions. Keep the cover's neutral tone under its safe area. */
+     on newer iOS versions. Match that canvas to the site's black background. */
   html.home-page {
-    --browser-top-color: #353535;
+    --browser-top-color: #030303;
     --home-safe-top: env(safe-area-inset-top, 0px);
     --home-safe-bottom: env(safe-area-inset-bottom, 0px);
     background-color: var(--browser-top-color);
   }
   body.home-page { background-color: var(--browser-top-color); }
-  html.home-page.is-cover-scrolled { --browser-top-color: #030303; }
   html.home-page.site-loading { --browser-top-color: #000; }
   .home-page main, .home-page .site-footer { background-color: var(--black); }
   .home-page .site-header { top: max(10px, var(--home-safe-top)); }
