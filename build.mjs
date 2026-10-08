@@ -1,5 +1,6 @@
 import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { generateHomeData } from './scripts/generate-home-data.mjs';
 
 const root = process.cwd();
 const dist = path.join(root, "dist");
@@ -18,6 +19,9 @@ const files = [
   "quiz.css",
   "article.css",
   "home-nav.js",
+  "home-peoples.js",
+  "home-atlas.js",
+  "home-media.js",
   "site-shell.css",
   "site-motion.css",
   "site-motion.js",
@@ -33,6 +37,7 @@ const files = [
 const directories = ["assets", "peoples", "articles", "beta", "results", "forms", "events-results", "media"];
 const optionalFiles = ["_headers", "_redirects", ".nojekyll"];
 
+await generateHomeData();
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 

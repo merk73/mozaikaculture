@@ -236,7 +236,7 @@ function initMotion() {
 }
 
 function renderCards(filter = "all") {
-  if (!grid) return;
+  if (!grid || grid.dataset.atlasReady) return;
   const visible = filter === "all" ? peoples : peoples.filter((item) => item.area === filter);
 
   grid.innerHTML = visible
@@ -330,7 +330,7 @@ function setKnowledge(personName) {
   hydrateMotion(panel.quizOptions);
 }
 
-filterButtons.forEach((button) => {
+(grid?.dataset.atlasReady ? [] : filterButtons).forEach((button) => {
   button.addEventListener("click", () => {
     filterButtons.forEach((item) => item.classList.remove("is-active"));
     button.classList.add("is-active");

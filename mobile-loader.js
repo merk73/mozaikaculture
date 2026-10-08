@@ -2,9 +2,9 @@
   const mobile = matchMedia('(max-width: 760px)');
   if (!mobile.matches) return;
   const root = document.documentElement;
+  const waitForAtlas = root.classList.contains('home-page');
   root.classList.add('site-loading');
   let finished = false;
-  let stopped = false;
   let timer;
   let regions = [];
   let animations = [];
@@ -19,7 +19,6 @@
   async function finish(animate = true) {
     if (finished) return;
     finished = true;
-    stopped = true;
     clearTimeout(timer);
     const overlay = document.querySelector('.site-loader');
     const logo = overlay?.querySelector('img');
@@ -72,31 +71,43 @@
       if (error.name !== 'AbortError') throw error;
     } finally { release(); }
   }
-  // A failed script, stalled connection or missing image must never lock the page.
-  timer = setTimeout(() => finish(false), 3500);
+  // The homepage waits for every atlas portrait, even on a slow connection.
+  // Other pages keep their existing timeout. Failed atlas scripts release the page.
+  if (!waitForAtlas) timer = setTimeout(() => finish(false), 3500);
+  else window.addEventListener('error', event => {
+    const source = event.filename || event.target?.src || '';
+    if (/\/(?:home-peoples|home-atlas)\.js(?:\?|$)/.test(source)) finish(false);
+  }, true);
   mobile.addEventListener('change', () => { if (!mobile.matches) finish(false); });
   window.addEventListener('resize', () => {
     if (root.classList.contains('loader-morphing')) release();
   });
-  document.addEventListener('DOMContentLoaded', async () => {
+  async function ready() {
     if (finished) return;
     regions = [...document.querySelectorAll('body > :not(.site-loader):not(script)')].map(node => [node,node.inert]);
     regions.forEach(([node]) => { node.inert = true; });
-    // Only the first screen can delay entry; lazy galleries keep loading normally.
-    const ordered = [...document.querySelectorAll('.site-loader img,.site-header .brand img,.hero img')];
-    const urls = [...new Set(ordered.map(img => img.currentSrc || img.src).filter(src => src && !src.startsWith('data:')))];
-    let next = 0;
-    const preload = src => new Promise(resolve => {
-      const image = new Image();
-      const timeout = setTimeout(done, 1800);
-      function done() { clearTimeout(timeout); image.onload = image.onerror = null; resolve(); }
-      image.onload = () => { image.decode().catch(() => {}).finally(done); };
-      image.onerror = done;
-      image.src = src;
-    });
-    await Promise.all(Array.from({length:6}, async () => {
-      while (!stopped && next < urls.length) await preload(urls[next++]);
-    }));
+    const logosReady = Promise.race([
+      Promise.all([...document.querySelectorAll('.site-loader img,.site-header .brand img')].map(img => img.decode().catch(() => {}))),
+      new Promise(resolve => setTimeout(resolve, 250)),
+    ]);
+    const atlas = document.querySelector('[data-people-grid]');
+    if (waitForAtlas && atlas) {
+      if (!atlas.dataset.atlasReady) await new Promise(resolve => {
+        document.addEventListener('mozaika:atlas-ready', resolve, {once:true});
+      });
+      if (finished) return;
+      // Eager loading avoids waiting for a scroll behind the overlay. Decoding
+      // ensures all responsive pictures can be painted before the page opens.
+      await Promise.all([...atlas.querySelectorAll('.card-portrait img')].map(img => {
+        img.loading = 'eager';
+        return img.decode().catch(() => {});
+      }));
+    }
+    await logosReady;
     await finish();
+  }
+  if (document.readyState !== 'loading') ready();
+  else document.addEventListener('readystatechange', () => {
+    if (document.readyState === 'interactive') ready();
   }, {once:true});
 })();
