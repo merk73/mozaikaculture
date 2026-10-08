@@ -1,0 +1,156 @@
+/* Shared rhythm for the homepage, including the new event programme. */
+.home-page { font-family: var(--font-body); }
+.home-page .atlas .card-title { position: relative; isolation: isolate; }
+.home-page .atlas .card-title h3 { position: relative; z-index: 1; }
+.home-page .atlas .people-card .card-number {
+  position: absolute;
+  top: -.78em;
+  left: -.025em;
+  z-index: 0;
+  color: var(--red);
+  font-family: "Leporid", sans-serif;
+  font-size: clamp(72px, 7vw, 112px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.025em;
+  opacity: .72;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, #0009 64%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 35%, #0009 64%, transparent 100%);
+}
+@media (max-width: 760px) {
+  .home-page .atlas .people-card .card-number { font-size: clamp(64px, 16vw, 88px); }
+}
+.home-page .hero-landscape { display: none; }
+.home-page :is(.statement-copy h2, .section-head h2, .materials-copy h2, .partners h2, .upcoming-heading h2) {
+  margin-top: 0; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.12;
+  letter-spacing: -.04em; text-wrap: balance;
+}
+.home-page :is(.section-head, .upcoming-heading) > p:not(.overline) {
+  max-width: 65ch; color: var(--muted); font-size: clamp(16px, 1.4vw, 18px); line-height: 1.65;
+}
+.home-page .overline { font-weight: 700; }
+.home-page :is(.button, .filter-button, .event-expand, .event-close) { font-family: inherit; }
+.home-page :is(.people-card, .event-card, .upcoming-card, .materials-preview) { border-radius: var(--radius-card); }
+.home-page :is(a,button,input,textarea):focus-visible { outline: 2px solid #ff7882; outline-offset: 4px; }
+.home-page :is(.statement, .atlas, .events, .partners, .upcoming-events) { padding-block: clamp(56px, 6.6vw, 96px); }
+.home-page .atlas .section-head { gap: 20px 48px; }
+.home-page .statement-copy { gap: 24px 48px; }
+.home-page .events-intro { margin-bottom: 32px; }
+.home-page .upcoming-events { padding-inline: clamp(20px, 4.4vw, 64px); background: var(--near); }
+.home-page .upcoming-heading { margin-bottom: 36px; }
+.home-page .upcoming-heading h2 { max-width: 18ch; margin-bottom: 20px; }
+.home-page .upcoming-archive { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 12px; color: var(--text); text-decoration: none; font-size: 14px; }
+.home-page .upcoming-archive:hover { text-decoration: underline; text-underline-offset: 4px; }
+.home-page .upcoming-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.home-page .upcoming-card { min-width: 0; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+.home-page .upcoming-poster { display: block; position: relative; overflow: hidden; background: #efeeea; }
+.home-page .upcoming-poster img { display: block; width: 100%; height: auto; aspect-ratio: 9/16; object-fit: contain; }
+.home-page .upcoming-poster-link {
+  position: absolute; bottom: 14px; right: 14px; left: 14px; display: flex; align-items: center;
+  justify-content: space-between; gap: 12px; min-height: 44px; padding: 10px 14px;
+  border: 1px solid #ffffff26; border-radius: 16px; color: #fff; background: #090909ee;
+  font-size: 13px; line-height: 1.4;
+}
+.home-page .upcoming-poster-link svg { flex: 0 0 18px; width: 18px; height: 18px; }
+.home-page .upcoming-copy { padding: 24px; }
+.home-page .upcoming-date { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; margin: 0 0 16px; color: var(--red); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.home-page .upcoming-copy h3 { margin: 0; font-size: clamp(22px, 2vw, 28px); letter-spacing: -.025em; line-height: 1.15; text-wrap: balance; }
+.home-page .upcoming-description { margin: 16px 0 0; color: var(--text); font-size: 15px; line-height: 1.55; }
+.home-page .upcoming-place { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.55; }
+/* Photographs fade after decode, without a second reveal on their container. */
+.home-page :is(.atlas .card-portrait, .event-cover, .event-photo, .materials-preview) img.media-image {
+  transition: opacity 380ms ease, transform 540ms var(--ease-soft);
+}
+.home-page .atlas .people-card .card-portrait img.media-pending { opacity: 0; }
+/* Reuse the event light-leak above the cutout and below all card text. */
+.home-page .atlas .people-card::before {
+  background: linear-gradient(180deg, transparent 25%, #03030355 48%, #030303f2 100%), url('assets/site-images-v1/events/card-overlay-1225.webp');
+  background-size: 100% 100%; background-position: center, center clamp(56px, 6vw, 92px); background-repeat: no-repeat;
+}
+.home-page .atlas-quiz-cta { background-image: linear-gradient(90deg, #000b, #0005 65%, #0003); }
+.home-page .atlas-quiz-cta.is-media-near { background-image: linear-gradient(90deg, #000b, #0005 65%, #0003), url('assets/site-images-v1/quiz-landscape-1254.webp'); }
+.home-page .events .event-cover::after { background-image: linear-gradient(180deg,#00000008 15%,#00000055 50%,#00000070 100%); }
+.home-page .events .event-card.is-media-near .event-cover::after { background-image: linear-gradient(180deg,#00000008 15%,#00000055 50%,#00000070 100%), url('assets/site-images-v1/events/card-overlay-1225.webp'); }
+@media (max-width: 1199px) { .home-page .upcoming-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
+@media (max-width: 760px) {
+  /* Portrait, title and description share the cover; actions follow below. */
+  .home-page .hero {
+    display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 100svh auto;
+    min-height: 100svh; padding: 0; background: var(--black); align-items: stretch;
+  }
+  .home-page .hero-copy { display: contents; }
+  .home-page .hero-landscape {
+    display: block; position: absolute; top: 0; left: 0; z-index: 0;
+    width: 100%; height: 100svh; overflow: hidden; pointer-events: none;
+    mask-image: linear-gradient(#000 64%, transparent 100%);
+    -webkit-mask-image: linear-gradient(#000 64%, transparent 100%);
+  }
+  .home-page .hero-landscape-art {
+    position: absolute; inset: -48px 0; background: linear-gradient(180deg, #03030330, #03030350 65%, #030303a0), url('assets/home-mobile-v1/hero-landscape-1280.webp') 63% center / cover no-repeat;
+  }
+  .home-page .hero-landscape-art.is-parallax-active { will-change: transform; }
+  .home-page .hero-portrait {
+    display: block; position: absolute; top: 0; right: 0; bottom: auto; left: 0; z-index: 0;
+    width: 100%; height: 100svh; overflow: hidden; pointer-events: none;
+    transform: none; will-change: auto;
+    mask-image: linear-gradient(to bottom, #000 0%, #000 46%, #000d 60%, #0006 75%, transparent 96%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 46%, #000d 60%, #0006 75%, transparent 96%);
+  }
+  .home-page .hero-portrait img {
+    display: block; width: 100%; height: 100%; max-width: none;
+    object-fit: cover; object-position: center top;
+  }
+  .home-page .hero-portrait.is-parallax-active img { will-change: transform; }
+  .home-page .hero-heading {
+    position: relative; z-index: 1; grid-column: 1; grid-row: 1;
+    display: flex; flex-direction: column; justify-content: flex-end; min-width: 0;
+    padding: 112px 20px max(28px, calc(env(safe-area-inset-bottom) + 20px));
+  }
+  .home-page .hero-heading .overline { margin-bottom: 16px; font-size: 11px; }
+  .home-page .hero-heading-content { position: relative; isolation: isolate; }
+  .home-page .hero-heading-content::before {
+    content: ''; position: absolute; z-index: -1; pointer-events: none;
+    top: -96px; right: -20px; bottom: calc(-28px - env(safe-area-inset-bottom)); left: -20px;
+    background: linear-gradient(to bottom, transparent, #030303c9 88px, #030303ed 160px, #030303 100%);
+  }
+  .home-page .hero-heading h1 {
+    width: 100%; max-width: 100%; margin: 0; color: var(--text);
+    font-size: clamp(64px, 18vw, 120px); font-weight: 400; line-height: .9; text-wrap: balance;
+  }
+  .home-page .hero-introduction {
+    position: relative; z-index: 1; grid-column: 1; grid-row: 2;
+    padding: 24px 20px 48px; background: var(--black);
+  }
+  .home-page .hero-copy .hero-description {
+    max-width: 42ch; margin: 20px 0 0; color: #d5d0ca;
+    font-size: clamp(15px, 4vw, 18px); line-height: 1.5;
+  }
+  .home-page .hero-introduction .hero-links { margin-top: 0; gap: 12px; }
+  .home-page .hero-introduction .button { width: 100%; }
+  .home-page .atlas .people-card::before {
+    background-image: linear-gradient(180deg, transparent 25%, #03030355 48%, #030303f2 100%), url('assets/home-mobile-v1/events/card-overlay-640.webp');
+  }
+  .home-page .upcoming-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .home-page .upcoming-card { border-radius: 20px; }
+  .home-page .upcoming-copy { padding: 16px 12px; }
+  .home-page .upcoming-heading { margin-bottom: 28px; }
+  .home-page .upcoming-poster-link { right: 8px; bottom: 8px; left: auto; width: 36px; min-height: 36px; padding: 8px; border-radius: 50%; font-size: 0; gap: 0; justify-content: center; }
+  .home-page .upcoming-copy h3 { font-size: clamp(18px, 4.8vw, 26px); overflow-wrap: anywhere; }
+  .home-page .upcoming-date { flex-direction: column; align-items: flex-start; margin-bottom: 12px; font-size: 12px; }
+  .home-page .upcoming-description { margin-top: 12px; font-size: 13px; line-height: 1.5; }
+  .home-page .upcoming-place { margin-top: 16px; padding-top: 12px; font-size: 12px; overflow-wrap: anywhere; }
+  .home-page .atlas-quiz-cta.is-media-near { background-image: linear-gradient(90deg,#000b,#0005 65%,#0003),url('assets/home-mobile-v1/quiz-landscape-960.webp'); }
+  .home-page .events .event-card.is-media-near .event-cover::after { background-image: linear-gradient(180deg,#00000008 15%,#00000055 50%,#00000070 100%),url('assets/home-mobile-v1/events/card-overlay-640.webp'); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page :is(.atlas .card-portrait, .event-cover, .event-photo, .materials-preview) img.media-image { transition: none; }
+  .home-page .atlas .people-card .card-portrait img.media-pending { opacity: 1; }
+}
+@media (max-width: 760px) and (max-height: 520px) {
+  .home-page .hero-heading { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+  .home-page .hero-heading h1 { font-size: clamp(44px, 16svh, 64px); }
+  .home-page .hero-heading .overline { margin-bottom: 12px; }
+  .home-page .hero-copy .hero-description { max-width: 62ch; margin-top: 16px; font-size: 15px; }
+  .home-page .hero-portrait img { object-fit: contain; object-position: 75% top; }
+}

@@ -1,25 +1,28 @@
 .home-page .atlas .people-card { isolation: isolate; }
-.home-page .atlas .card-hover-art { position: absolute; inset: 0; z-index: 0; background-position: center; background-size: cover; opacity: 0; pointer-events: none; transition: opacity 230ms ease-out; }
+.home-page .atlas .card-hover-art { position: absolute; inset: 0; z-index: 0; background: linear-gradient(#0303038c, #0303038c), var(--card-background) center / cover no-repeat; opacity: 1; pointer-events: none; transform: scale(1); transform-origin: center; transition: transform 640ms cubic-bezier(.2, .7, .2, 1); }
 .home-page .atlas .card-portrait { z-index: 1; }
 .home-page .atlas .people-card::before { inset: 0; height: auto; z-index: 2; opacity: 1; background: linear-gradient(180deg, transparent 25%, #03030355 48%, #030303f2 100%); }
 .home-page .atlas .people-card::after { display: none; }
 .home-page .atlas .people-card .card-portrait img { transform: scale(1); transform-origin: center bottom; transition: transform 540ms cubic-bezier(.2, .7, .2, 1); }
 @media (hover: hover) and (pointer: fine) {
-  .home-page .atlas .card-hover-art { background-image: url('assets/atlas-hover-landscape.png?v=2'); }
-  .home-page .atlas .people-card:hover .card-hover-art { opacity: 1; }
   .home-page .atlas .people-card:hover .card-portrait img { transform: scale(1.045); }
+  .home-page .atlas .people-card:hover .card-hover-art { transform: scale(1.075); }
 }
-.home-page .atlas .people-card:focus-visible .card-hover-art { opacity: 1; }
+.home-page .atlas .people-card:focus-visible .card-hover-art { transform: scale(1.075); }
 .home-page .atlas .people-card:focus-visible .card-portrait img { transform: scale(1.045); }
 @media (max-width: 760px) {
-  .home-page .atlas .card-hover-art { background-image: none; }
+  .home-page .atlas .card-hover-art { background-image: linear-gradient(#0303038c, #0303038c), var(--card-background-mobile); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .atlas .people-card .card-hover-art,
+  .home-page .atlas .people-card:is(:hover, :focus-visible) .card-hover-art { transition: none; transform: none; }
 }
 
 .home-page .story-heading { max-width: 780px; margin-bottom: 38px; }
 .home-page .story-heading h2 { font-size: clamp(34px, 4vw, 58px); line-height: 1.1; letter-spacing: -.045em; margin: 0; }
 .home-page .story-heading > p:last-child { color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 620px; margin: 22px 0 0; }
 .home-page .people-story { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); border: 1px solid #ffffff24; border-radius: 36px; overflow: hidden; background: #0d0d0e; }
-.home-page .story-portrait { position: relative; isolation: isolate; margin: 0; min-width: 0; min-height: 460px; background: linear-gradient(180deg, #18040566, #0c0309b3), url('assets/atlas-hover-landscape.png?v=2') center / cover; }
+.home-page .story-portrait { position: relative; isolation: isolate; margin: 0; min-width: 0; min-height: 460px; background: linear-gradient(180deg, #18040566, #0c0309b3), url('assets/site-images-v1/atlas-hover-landscape-1254.webp?v=2') center / cover; }
 .home-page .story-portrait img { position: absolute; width: 100%; height: 100%; max-height: 640px; bottom: 0; object-fit: contain; object-position: center bottom; }
 .home-page .story-portrait::after { position: absolute; content: ''; inset: 55% 0 0; background: linear-gradient(transparent, #080808cc); pointer-events: none; }
 .home-page .story-portrait figcaption { position: absolute; z-index: 1; bottom: 28px; left: 28px; right: 28px; display: flex; justify-content: space-between; gap: 12px; color: #eee7e0; font-size: 12px; letter-spacing: .04em; }

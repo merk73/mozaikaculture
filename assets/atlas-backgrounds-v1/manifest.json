@@ -1,0 +1,385 @@
+{
+  "description": "20 different backgrounds supplied by the user, mapped in filename order to atlas order.",
+  "entries": [
+    {
+      "slug": "nanai",
+      "name": "Нанайцы",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_21_51-1.png",
+      "sourceBytes": 2598898,
+      "sourceSha256": "bff86eedde1b33ce58bd49661003884307e46f0909ed0a9b75fc96be1322b971",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/nanai-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 33218
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/nanai-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 115016
+      }
+    },
+    {
+      "slug": "ulchi",
+      "name": "Ульчи",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_21_52-2.png",
+      "sourceBytes": 2823341,
+      "sourceSha256": "8961f800878af5aad93b156e1fad8c1728067dbf06e9fcc7ff4b56dda5270406",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/ulchi-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 32124
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/ulchi-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 112266
+      }
+    },
+    {
+      "slug": "nivkh",
+      "name": "Нивхи",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_21_53-3.png",
+      "sourceBytes": 2195721,
+      "sourceSha256": "b872e1203b2c3c773c4b09168f45e0579952f8f6e8365d9e47748d63e29cc137",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/nivkh-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 21112
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/nivkh-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 74904
+      }
+    },
+    {
+      "slug": "orochi",
+      "name": "Орочи",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_21_57-4.png",
+      "sourceBytes": 2636092,
+      "sourceSha256": "2ebf6b759f5bc95115dc6f06c9368bbd3b702d4409b9761b01df060f94304cac",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/orochi-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 30810
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/orochi-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 107868
+      }
+    },
+    {
+      "slug": "udege",
+      "name": "Удэгейцы",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_21_58-5.png",
+      "sourceBytes": 2526394,
+      "sourceSha256": "820ebe77d6592db0965da90add94064319fea8e29a6045fbdfc3d5e54694eec6",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/udege-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 25880
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/udege-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 93100
+      }
+    },
+    {
+      "slug": "negidal",
+      "name": "Негидальцы",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_21_59-6.png",
+      "sourceBytes": 2590557,
+      "sourceSha256": "cf467c62e0a285f0ff85e6077d6dbe8970aa37f63512c0c1f0a4c67f7549da08",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/negidal-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 31770
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/negidal-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 113484
+      }
+    },
+    {
+      "slug": "evenki",
+      "name": "Эвенки",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_22_00-7.png",
+      "sourceBytes": 2671954,
+      "sourceSha256": "e09b5db98bc2751b61bb06db71fe43dab1dad8fba1699a064b9cd7b7305df1dd",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/evenki-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 34942
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/evenki-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 122820
+      }
+    },
+    {
+      "slug": "evens",
+      "name": "Эвены",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_22_01-8.png",
+      "sourceBytes": 2930707,
+      "sourceSha256": "6b48f7e0aca15d16c248e612b1fc0e2e53ebb0f45a07ee57b36e0e30a00b4f49",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/evens-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 33356
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/evens-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 125826
+      }
+    },
+    {
+      "slug": "chukchi",
+      "name": "Чукчи",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_22_02-9.png",
+      "sourceBytes": 2385543,
+      "sourceSha256": "1c6b2ed477dea2179d0a5b4c059918ad70fc60cb1660f863b0dd44988bf24a4e",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/chukchi-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 28924
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/chukchi-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 101514
+      }
+    },
+    {
+      "slug": "koryaks",
+      "name": "Коряки",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_22_03-10.png",
+      "sourceBytes": 2601457,
+      "sourceSha256": "780fed9fad2d0330446d3c166eb07e928d07d0b2ad5df37ee6a998c7a5744e81",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/koryaks-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 29830
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/koryaks-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 103418
+      }
+    },
+    {
+      "slug": "itelmens",
+      "name": "Ительмены",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_18-1.png",
+      "sourceBytes": 2808550,
+      "sourceSha256": "883188469fb53028796374ee98006e7be479a9062cdbffa05b44e0aa4f47835e",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/itelmens-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 36132
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/itelmens-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 125854
+      }
+    },
+    {
+      "slug": "aleuts",
+      "name": "Алеуты",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_19-2.png",
+      "sourceBytes": 2660078,
+      "sourceSha256": "d9ae904c70622a23fd72ce5352747e449c1b44ac9a89498d7901fe977fe84490",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/aleuts-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 29246
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/aleuts-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 102226
+      }
+    },
+    {
+      "slug": "eskimos",
+      "name": "Эскимосы",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_20-3.png",
+      "sourceBytes": 2413156,
+      "sourceSha256": "abc9f038deadd1389ea0a7f55fe184465c984995a4315feada98c33354dc548e",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/eskimos-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 29620
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/eskimos-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 98698
+      }
+    },
+    {
+      "slug": "yukaghirs",
+      "name": "Юкагиры",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_21-4.png",
+      "sourceBytes": 2548268,
+      "sourceSha256": "19aa4ffa6ce560908cbcf1435da9bbdd6bb833f79acf409b25c0d28ad7eb0b3d",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/yukaghirs-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 28246
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/yukaghirs-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 104196
+      }
+    },
+    {
+      "slug": "chuvans",
+      "name": "Чуванцы",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_22-5.png",
+      "sourceBytes": 2827937,
+      "sourceSha256": "80c81ae6f6cc08a7e0663521ced10c2ed589e347507d6457a8d519b1bd6c58ba",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/chuvans-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 34512
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/chuvans-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 121698
+      }
+    },
+    {
+      "slug": "kereks",
+      "name": "Кереки",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_24-6.png",
+      "sourceBytes": 2659185,
+      "sourceSha256": "36725ca3a03da05587a2a8366fabec6caf2e1dd2d9822cb036cdf210ff5d342b",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/kereks-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 32998
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/kereks-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 115950
+      }
+    },
+    {
+      "slug": "tazy",
+      "name": "Тазы",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_25-7.png",
+      "sourceBytes": 2931721,
+      "sourceSha256": "b426fffa1854ba6a1e4be21151cc5df36b39d4309b865956f6c3333751e4a2fb",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/tazy-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 37634
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/tazy-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 135194
+      }
+    },
+    {
+      "slug": "oroks",
+      "name": "Ороки (ульта)",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_26-8.png",
+      "sourceBytes": 2437252,
+      "sourceSha256": "abffd9787245266577102b076c242c1cc47dbe07b607db8bc7075af1eb043180",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/oroks-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 29546
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/oroks-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 98834
+      }
+    },
+    {
+      "slug": "alyutors",
+      "name": "Алюторцы",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_28-9.png",
+      "sourceBytes": 2564090,
+      "sourceSha256": "848c435e01b92898889bcb76d1d8588f370af433fa1e06d335db646efcecc569",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/alyutors-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 32288
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/alyutors-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 112022
+      }
+    },
+    {
+      "slug": "kamchadals",
+      "name": "Камчадалы",
+      "sourceName": "Изображение ChatGPT 8 окт. 2026 г., 21_45_29-10.png",
+      "sourceBytes": 2667692,
+      "sourceSha256": "17880867341c6e4591c04b69bd355ee6afd7b5c585c281253a268693c491cedf",
+      "mobile": {
+        "src": "assets/atlas-backgrounds-v1/kamchadals-384.webp",
+        "width": 384,
+        "height": 576,
+        "bytes": 30650
+      },
+      "desktop": {
+        "src": "assets/atlas-backgrounds-v1/kamchadals-768.webp",
+        "width": 768,
+        "height": 1152,
+        "bytes": 104380
+      }
+    }
+  ]
+}

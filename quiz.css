@@ -1,6 +1,6 @@
 .quiz-page.site-refresh .online-quiz { width: min(1080px, calc(100% - 64px)); margin: 0 auto; padding: 140px 0 80px; }
 .quiz-page.site-refresh [hidden] { display: none !important; }
-.quiz-page.site-refresh .online-quiz-hero { display: grid; grid-template-columns: 1.3fr .7fr; align-items: end; gap: 40px; margin: 0 0 32px; padding: 38px; border: 1px solid #ffffff26; border-radius: 32px; background: linear-gradient(90deg, #000d, #0006), url('assets/quiz-landscape.png') center 36% / cover; }
+.quiz-page.site-refresh .online-quiz-hero { display: grid; grid-template-columns: 1.3fr .7fr; align-items: end; gap: 40px; margin: 0 0 32px; padding: 38px; border: 1px solid #ffffff26; border-radius: 32px; background: linear-gradient(90deg, #000d, #0006), url('assets/site-images-v1/quiz-landscape-1254.webp') center 36% / cover; }
 .quiz-page.site-refresh .online-quiz-hero h1 { margin: 0; font: 700 clamp(34px, 4vw, 54px)/1.08 Arial, sans-serif; letter-spacing: -.04em; text-transform: none; }
 .quiz-page.site-refresh .online-quiz-hero > p { margin: 0; color: #d5d0ca; font-size: 17px; line-height: 1.65; }
 .quiz-page.site-refresh .overline { color: #ff6977; font-size: 12px; }

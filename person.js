@@ -13,12 +13,13 @@
   };
   const sourceKeys = [...new Set(research.sections.map(section => section[2]))];
   const illustrations = (person.immersion || []).filter(item => item.image);
+  const imageAttributes = (item, hero = false) => `width="${item.imageWidth || 1254}" height="${item.imageHeight || 1254}"${item.imageSrcset ? ` srcset="${escape(item.imageSrcset)}" sizes="${hero ? '(min-width: 1000px) 45vw, 100vw' : '(min-width: 1000px) 800px, 100vw'}"` : ''}`;
   const sections = research.sections.map(([title, text, source], i) => `
     <section class="people-chapter" id="chapter-${i + 1}" aria-labelledby="chapter-title-${i + 1}">
       <span class="chapter-number" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
       <div><h2 id="chapter-title-${i + 1}">${escape(title)}</h2><p>${escape(text)}</p>
       <a class="chapter-source" href="#source-${source}">Источник ${sourceKeys.indexOf(source) + 1} ${arrow}</a></div>
-    </section>${illustrations[i] ? `<figure class="people-story-image"><img src="${escape(illustrations[i].image)}" alt="${escape(illustrations[i].title)}" loading="lazy" decoding="async" /><figcaption><span>${escape(illustrations[i].title)}</span><span>Иллюстрация проекта</span></figcaption></figure>` : ''}`).join('');
+    </section>${illustrations[i] ? `<figure class="people-story-image"><img src="${escape(illustrations[i].image)}" ${imageAttributes(illustrations[i])} alt="${escape(illustrations[i].title)}" loading="lazy" decoding="async" /><figcaption><span>${escape(illustrations[i].title)}</span><span>Иллюстрация проекта</span></figcaption></figure>` : ''}`).join('');
   const next = people[(people.indexOf(person) + 1) % people.length];
   const words = research.sections.reduce((sum, [, text]) => sum + text.split(/\s+/).length, 0) + person.summary.split(/\s+/).length;
   document.title = `${person.name}: история, язык и культура · Мозаика культур`;
@@ -32,7 +33,7 @@
         <p class="people-lead">${escape(person.lead)}</p>
         <div class="people-meta"><span>История · язык · культура</span><span>${Math.max(2, Math.ceil(words / 150))} мин чтения</span></div>
       </div>
-      <figure class="people-intro-art"><img src="${escape(person.image)}" alt="Иллюстрация к материалу: ${escape(person.name)}" width="600" height="800" decoding="async" /><figcaption>Иллюстрация проекта</figcaption></figure>
+      <figure class="people-intro-art"><img src="${escape(person.image)}" ${imageAttributes(person, true)} alt="Иллюстрация к материалу: ${escape(person.name)}" decoding="async" /><figcaption>Иллюстрация проекта</figcaption></figure>
     </section>
     <div class="people-reading">
       <aside class="people-index"><nav aria-label="Содержание статьи"><p class="overline">В этой истории</p>

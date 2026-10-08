@@ -687,7 +687,7 @@ body.home-page {
 /* Photographic cover and expandable event reports. */
 .home-page .hero {
   min-height: 100svh; padding-top: 150px; padding-bottom: 80px;
-  background: linear-gradient(90deg, #0008, #0001 70%), url("assets/hero-landscape.png") center / cover no-repeat, #030303;
+  background: linear-gradient(90deg, #0008, #0001 70%), url("assets/site-images-v1/hero-landscape-1600.webp") center / cover no-repeat, #030303;
 }
 .home-page .hero::before { display: none; }
 .home-page .hero-copy { position: relative; z-index: 1; width: min(760px, 100%); }
@@ -832,7 +832,7 @@ body.home-page {
 .home-page .atlas-quiz-cta,
 .home-page .atlas-quiz-cta:hover,
 .home-page .atlas-quiz-cta:focus-visible {
-  background: linear-gradient(90deg, #000b, #0005 65%, #0003), url("assets/quiz-landscape.png") center 40% / cover no-repeat, #300609;
+  background: linear-gradient(90deg, #000b, #0005 65%, #0003), url("assets/site-images-v1/quiz-landscape-1254.webp") center 40% / cover no-repeat, #300609;
   color: #fff;
   border-color: #f16b735c;
   text-shadow: 0 1px 8px #0009;
@@ -958,7 +958,7 @@ body.home-page {
 /* Event covers share the supplied red and black print texture. */
 .home-page .events .event-card { border-radius:28px; }
 .home-page .events .event-cover { min-height:480px; padding:28px; }
-.home-page .events .event-cover::after { background:linear-gradient(180deg,#00000008 15%,#00000055 50%,#00000070 100%),url('assets/events/card-overlay.png') center / 100% 100% no-repeat; }
+.home-page .events .event-cover::after { background:linear-gradient(180deg,#00000008 15%,#00000055 50%,#00000070 100%),url('assets/site-images-v1/events/card-overlay-1225.webp') center / 100% 100% no-repeat; }
 .home-page .events .event-cover-copy { width:100%; max-width:none; }
 .home-page .events .event-cover-date { justify-content:space-between; gap:6px 14px; margin-bottom:14px; font-size:11px; line-height:1.5; letter-spacing:.04em; }
 .home-page .events .event-cover h3 { font-size:32px; line-height:1.13; letter-spacing:-.025em; text-wrap:pretty; color:#fff; }

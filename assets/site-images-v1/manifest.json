@@ -1,0 +1,2230 @@
+{
+  "assets/articles/origins-amur-dawn.jpg": {
+    "width": 1800,
+    "height": 833,
+    "originalBytes": 188048,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/articles/origins-amur-dawn-480.webp",
+        "width": 480,
+        "bytes": 6952
+      },
+      {
+        "src": "assets/site-images-v1/articles/origins-amur-dawn-960.webp",
+        "width": 960,
+        "bytes": 27104
+      },
+      {
+        "src": "assets/site-images-v1/articles/origins-amur-dawn-1600.webp",
+        "width": 1600,
+        "bytes": 66480
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/articles/origins-amur-dawn-1600.webp"
+  },
+  "assets/articles/origins-field-table.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "originalBytes": 262622,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/articles/origins-field-table-480.webp",
+        "width": 480,
+        "bytes": 21048
+      },
+      {
+        "src": "assets/site-images-v1/articles/origins-field-table-960.webp",
+        "width": 960,
+        "bytes": 68946
+      },
+      {
+        "src": "assets/site-images-v1/articles/origins-field-table-1536.webp",
+        "width": 1536,
+        "bytes": 145374
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/articles/origins-field-table-1536.webp"
+  },
+  "assets/articles/origins-northern-coast.jpg": {
+    "width": 1535,
+    "height": 1024,
+    "originalBytes": 323023,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/articles/origins-northern-coast-480.webp",
+        "width": 480,
+        "bytes": 26486
+      },
+      {
+        "src": "assets/site-images-v1/articles/origins-northern-coast-960.webp",
+        "width": 960,
+        "bytes": 92534
+      },
+      {
+        "src": "assets/site-images-v1/articles/origins-northern-coast-1535.webp",
+        "width": 1535,
+        "bytes": 188190
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/articles/origins-northern-coast-1535.webp"
+  },
+  "assets/articles/origins-tundra-tracks.jpg": {
+    "width": 1537,
+    "height": 1023,
+    "originalBytes": 257901,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/articles/origins-tundra-tracks-480.webp",
+        "width": 480,
+        "bytes": 15642
+      },
+      {
+        "src": "assets/site-images-v1/articles/origins-tundra-tracks-960.webp",
+        "width": 960,
+        "bytes": 62378
+      },
+      {
+        "src": "assets/site-images-v1/articles/origins-tundra-tracks-1537.webp",
+        "width": 1537,
+        "bytes": 129776
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/articles/origins-tundra-tracks-1537.webp"
+  },
+  "assets/culture-divider-final.png": {
+    "width": 1672,
+    "height": 478,
+    "originalBytes": 1298341,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/culture-divider-final-480.webp",
+        "width": 480,
+        "bytes": 27412
+      },
+      {
+        "src": "assets/site-images-v1/culture-divider-final-960.webp",
+        "width": 960,
+        "bytes": 79846
+      },
+      {
+        "src": "assets/site-images-v1/culture-divider-final-1600.webp",
+        "width": 1600,
+        "bytes": 175252
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/culture-divider-final-1600.webp"
+  },
+  "assets/atlas-hover-landscape.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2562525,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/atlas-hover-landscape-480.webp",
+        "width": 480,
+        "bytes": 28674
+      },
+      {
+        "src": "assets/site-images-v1/atlas-hover-landscape-960.webp",
+        "width": 960,
+        "bytes": 91372
+      },
+      {
+        "src": "assets/site-images-v1/atlas-hover-landscape-1254.webp",
+        "width": 1254,
+        "bytes": 138604
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/atlas-hover-landscape-1254.webp"
+  },
+  "assets/events/cultural-code/certificate.webp": {
+    "width": 951,
+    "height": 635,
+    "originalBytes": 54918,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/cultural-code/certificate-480.webp",
+        "width": 480,
+        "bytes": 14460
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/certificate-951.webp",
+        "width": 951,
+        "bytes": 31852
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/cultural-code/certificate-951.webp"
+  },
+  "assets/events/cultural-code/audience.webp": {
+    "width": 1206,
+    "height": 1911,
+    "originalBytes": 151938,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/cultural-code/audience-480.webp",
+        "width": 480,
+        "bytes": 27146
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/audience-960.webp",
+        "width": 960,
+        "bytes": 58932
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/audience-1206.webp",
+        "width": 1206,
+        "bytes": 81992
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/cultural-code/audience-1206.webp"
+  },
+  "assets/events/card-overlay.png": {
+    "width": 1225,
+    "height": 1225,
+    "originalBytes": 1240031,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/card-overlay-480.webp",
+        "width": 480,
+        "bytes": 31548
+      },
+      {
+        "src": "assets/site-images-v1/events/card-overlay-960.webp",
+        "width": 960,
+        "bytes": 161838
+      },
+      {
+        "src": "assets/site-images-v1/events/card-overlay-1225.webp",
+        "width": 1225,
+        "bytes": 262818
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/card-overlay-1225.webp"
+  },
+  "assets/events/cultural-code/participants.webp": {
+    "width": 1033,
+    "height": 648,
+    "originalBytes": 86614,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/cultural-code/participants-480.webp",
+        "width": 480,
+        "bytes": 19794
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/participants-960.webp",
+        "width": 960,
+        "bytes": 44208
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/participants-1033.webp",
+        "width": 1033,
+        "bytes": 52822
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/cultural-code/participants-1033.webp"
+  },
+  "assets/events/cultural-code/cover.webp": {
+    "width": 986,
+    "height": 638,
+    "originalBytes": 73508,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/cultural-code/cover-480.webp",
+        "width": 480,
+        "bytes": 18576
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/cover-960.webp",
+        "width": 960,
+        "bytes": 38924
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/cover-986.webp",
+        "width": 986,
+        "bytes": 41826
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/cultural-code/cover-986.webp"
+  },
+  "assets/events/cultural-code/cover-certificates.webp": {
+    "width": 1448,
+    "height": 1086,
+    "originalBytes": 204168,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/cultural-code/cover-certificates-480.webp",
+        "width": 480,
+        "bytes": 22440
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/cover-certificates-960.webp",
+        "width": 960,
+        "bytes": 61926
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/cover-certificates-1448.webp",
+        "width": 1448,
+        "bytes": 116346
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/cultural-code/cover-certificates-1448.webp"
+  },
+  "assets/events/indigenous-day/cover.webp": {
+    "width": 779,
+    "height": 816,
+    "originalBytes": 58328,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/indigenous-day/cover-480.webp",
+        "width": 480,
+        "bytes": 14806
+      },
+      {
+        "src": "assets/site-images-v1/events/indigenous-day/cover-779.webp",
+        "width": 779,
+        "bytes": 33782
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/indigenous-day/cover-779.webp"
+  },
+  "assets/events/cultural-code/poster.webp": {
+    "width": 941,
+    "height": 1672,
+    "originalBytes": 308622,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/cultural-code/poster-480.webp",
+        "width": 480,
+        "bytes": 51372
+      },
+      {
+        "src": "assets/site-images-v1/events/cultural-code/poster-941.webp",
+        "width": 941,
+        "bytes": 166740
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/cultural-code/poster-941.webp"
+  },
+  "assets/events/indigenous-day/poster.webp": {
+    "width": 1206,
+    "height": 2113,
+    "originalBytes": 335346,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/indigenous-day/poster-480.webp",
+        "width": 480,
+        "bytes": 49124
+      },
+      {
+        "src": "assets/site-images-v1/events/indigenous-day/poster-960.webp",
+        "width": 960,
+        "bytes": 110250
+      },
+      {
+        "src": "assets/site-images-v1/events/indigenous-day/poster-1206.webp",
+        "width": 1206,
+        "bytes": 156882
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/indigenous-day/poster-1206.webp"
+  },
+  "assets/events/liki-vostoka/cover.webp": {
+    "width": 940,
+    "height": 768,
+    "originalBytes": 112296,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/cover-480.webp",
+        "width": 480,
+        "bytes": 22164
+      },
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/cover-940.webp",
+        "width": 940,
+        "bytes": 58824
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/liki-vostoka/cover-940.webp"
+  },
+  "assets/events/indigenous-day/video-poster.jpg": {
+    "width": 720,
+    "height": 1280,
+    "originalBytes": 42824,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/indigenous-day/video-poster-480.webp",
+        "width": 480,
+        "bytes": 19062
+      },
+      {
+        "src": "assets/site-images-v1/events/indigenous-day/video-poster-720.webp",
+        "width": 720,
+        "bytes": 29106
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/indigenous-day/video-poster-720.webp"
+  },
+  "assets/events/liki-vostoka/audience.webp": {
+    "width": 719,
+    "height": 1280,
+    "originalBytes": 136314,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/audience-480.webp",
+        "width": 480,
+        "bytes": 41946
+      },
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/audience-719.webp",
+        "width": 719,
+        "bytes": 79056
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/liki-vostoka/audience-719.webp"
+  },
+  "assets/events/liki-vostoka/drums.webp": {
+    "width": 720,
+    "height": 1280,
+    "originalBytes": 137850,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/drums-480.webp",
+        "width": 480,
+        "bytes": 38872
+      },
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/drums-720.webp",
+        "width": 720,
+        "bytes": 76362
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/liki-vostoka/drums-720.webp"
+  },
+  "assets/events/liki-vostoka/handwork.webp": {
+    "width": 720,
+    "height": 1280,
+    "originalBytes": 151924,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/handwork-480.webp",
+        "width": 480,
+        "bytes": 46690
+      },
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/handwork-720.webp",
+        "width": 720,
+        "bytes": 89108
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/liki-vostoka/handwork-720.webp"
+  },
+  "assets/events/liki-vostoka/poster.webp": {
+    "width": 1206,
+    "height": 2142,
+    "originalBytes": 565588,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/poster-480.webp",
+        "width": 480,
+        "bytes": 72082
+      },
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/poster-960.webp",
+        "width": 960,
+        "bytes": 175416
+      },
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/poster-1206.webp",
+        "width": 1206,
+        "bytes": 265290
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/liki-vostoka/poster-1206.webp"
+  },
+  "assets/events/liki-vostoka/workshop.webp": {
+    "width": 720,
+    "height": 1280,
+    "originalBytes": 125226,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/workshop-480.webp",
+        "width": 480,
+        "bytes": 37746
+      },
+      {
+        "src": "assets/site-images-v1/events/liki-vostoka/workshop-720.webp",
+        "width": 720,
+        "bytes": 72096
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/liki-vostoka/workshop-720.webp"
+  },
+  "assets/events/mozaika-exhibit.png": {
+    "width": 842,
+    "height": 1280,
+    "originalBytes": 1503182,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/mozaika-exhibit-480.webp",
+        "width": 480,
+        "bytes": 47218
+      },
+      {
+        "src": "assets/site-images-v1/events/mozaika-exhibit-842.webp",
+        "width": 842,
+        "bytes": 89074
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/mozaika-exhibit-842.webp"
+  },
+  "assets/events/mozaika-meeting-new.png": {
+    "width": 2560,
+    "height": 1920,
+    "originalBytes": 5006234,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/mozaika-meeting-new-480.webp",
+        "width": 480,
+        "bytes": 25334
+      },
+      {
+        "src": "assets/site-images-v1/events/mozaika-meeting-new-960.webp",
+        "width": 960,
+        "bytes": 75774
+      },
+      {
+        "src": "assets/site-images-v1/events/mozaika-meeting-new-1600.webp",
+        "width": 1600,
+        "bytes": 167244
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/mozaika-meeting-new-1600.webp"
+  },
+  "assets/events/mozaika-team.png": {
+    "width": 946,
+    "height": 1280,
+    "originalBytes": 1017909,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/mozaika-team-480.webp",
+        "width": 480,
+        "bytes": 24366
+      },
+      {
+        "src": "assets/site-images-v1/events/mozaika-team-946.webp",
+        "width": 946,
+        "bytes": 51120
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/mozaika-team-946.webp"
+  },
+  "assets/events/ornaments/cover-lecture.webp": {
+    "width": 1280,
+    "height": 1339,
+    "originalBytes": 125850,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/ornaments/cover-lecture-480.webp",
+        "width": 480,
+        "bytes": 15136
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/cover-lecture-960.webp",
+        "width": 960,
+        "bytes": 42594
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/cover-lecture-1280.webp",
+        "width": 1280,
+        "bytes": 73790
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/ornaments/cover-lecture-1280.webp"
+  },
+  "assets/events/ornaments/exhibition.webp": {
+    "width": 2560,
+    "height": 1920,
+    "originalBytes": 822754,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/ornaments/exhibition-480.webp",
+        "width": 480,
+        "bytes": 26288
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/exhibition-960.webp",
+        "width": 960,
+        "bytes": 91736
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/exhibition-1600.webp",
+        "width": 1600,
+        "bytes": 212804
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/ornaments/exhibition-1600.webp"
+  },
+  "assets/events/ornaments/project.webp": {
+    "width": 1448,
+    "height": 1086,
+    "originalBytes": 157886,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/ornaments/project-480.webp",
+        "width": 480,
+        "bytes": 18030
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/project-960.webp",
+        "width": 960,
+        "bytes": 47210
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/project-1448.webp",
+        "width": 1448,
+        "bytes": 87192
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/ornaments/project-1448.webp"
+  },
+  "assets/events/ornaments/lecture.webp": {
+    "width": 2560,
+    "height": 1920,
+    "originalBytes": 608000,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/ornaments/lecture-480.webp",
+        "width": 480,
+        "bytes": 22026
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/lecture-960.webp",
+        "width": 960,
+        "bytes": 69518
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/lecture-1600.webp",
+        "width": 1600,
+        "bytes": 156408
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/ornaments/lecture-1600.webp"
+  },
+  "assets/events/ornaments/poster.webp": {
+    "width": 1206,
+    "height": 2142,
+    "originalBytes": 429334,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/ornaments/poster-480.webp",
+        "width": 480,
+        "bytes": 58274
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/poster-960.webp",
+        "width": 960,
+        "bytes": 128860
+      },
+      {
+        "src": "assets/site-images-v1/events/ornaments/poster-1206.webp",
+        "width": 1206,
+        "bytes": 189850
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/ornaments/poster-1206.webp"
+  },
+  "assets/events/rgup-lecture/details.webp": {
+    "width": 769,
+    "height": 1280,
+    "originalBytes": 85780,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/details-480.webp",
+        "width": 480,
+        "bytes": 25942
+      },
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/details-769.webp",
+        "width": 769,
+        "bytes": 47938
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/rgup-lecture/details-769.webp"
+  },
+  "assets/events/rgup-lecture/audience.webp": {
+    "width": 788,
+    "height": 1280,
+    "originalBytes": 141208,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/audience-480.webp",
+        "width": 480,
+        "bytes": 43636
+      },
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/audience-788.webp",
+        "width": 788,
+        "bytes": 85612
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/rgup-lecture/audience-788.webp"
+  },
+  "assets/events/rgup-lecture/cover-lecture.webp": {
+    "width": 1120,
+    "height": 811,
+    "originalBytes": 73480,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/cover-lecture-480.webp",
+        "width": 480,
+        "bytes": 16830
+      },
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/cover-lecture-960.webp",
+        "width": 960,
+        "bytes": 36944
+      },
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/cover-lecture-1120.webp",
+        "width": 1120,
+        "bytes": 43708
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/rgup-lecture/cover-lecture-1120.webp"
+  },
+  "assets/events/rgup-lecture/lecture.webp": {
+    "width": 752,
+    "height": 1280,
+    "originalBytes": 89532,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/lecture-480.webp",
+        "width": 480,
+        "bytes": 28600
+      },
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/lecture-752.webp",
+        "width": 752,
+        "bytes": 50948
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/rgup-lecture/lecture-752.webp"
+  },
+  "assets/events/rgup-lecture/drums.webp": {
+    "width": 758,
+    "height": 1280,
+    "originalBytes": 95324,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/drums-480.webp",
+        "width": 480,
+        "bytes": 30684
+      },
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/drums-758.webp",
+        "width": 758,
+        "bytes": 55670
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/rgup-lecture/drums-758.webp"
+  },
+  "assets/events/rgup-lecture/poster.webp": {
+    "width": 941,
+    "height": 1672,
+    "originalBytes": 382422,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/poster-480.webp",
+        "width": 480,
+        "bytes": 64148
+      },
+      {
+        "src": "assets/site-images-v1/events/rgup-lecture/poster-941.webp",
+        "width": 941,
+        "bytes": 199158
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/rgup-lecture/poster-941.webp"
+  },
+  "assets/events/unity/cover.webp": {
+    "width": 1280,
+    "height": 1339,
+    "originalBytes": 188490,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/cover-480.webp",
+        "width": 480,
+        "bytes": 23280
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/cover-960.webp",
+        "width": 960,
+        "bytes": 66610
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/cover-1280.webp",
+        "width": 1280,
+        "bytes": 113672
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/cover-1280.webp"
+  },
+  "assets/events/unity/costume.webp": {
+    "width": 1206,
+    "height": 1133,
+    "originalBytes": 297586,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/costume-480.webp",
+        "width": 480,
+        "bytes": 34474
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/costume-960.webp",
+        "width": 960,
+        "bytes": 107300
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/costume-1206.webp",
+        "width": 1206,
+        "bytes": 184290
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/costume-1206.webp"
+  },
+  "assets/events/unity/bracelets.webp": {
+    "width": 1206,
+    "height": 1912,
+    "originalBytes": 229812,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/bracelets-480.webp",
+        "width": 480,
+        "bytes": 45386
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/bracelets-960.webp",
+        "width": 960,
+        "bytes": 99030
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/bracelets-1206.webp",
+        "width": 1206,
+        "bytes": 138252
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/bracelets-1206.webp"
+  },
+  "assets/events/unity/interview.webp": {
+    "width": 1206,
+    "height": 1799,
+    "originalBytes": 175792,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/interview-480.webp",
+        "width": 480,
+        "bytes": 34004
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/interview-960.webp",
+        "width": 960,
+        "bytes": 72968
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/interview-1206.webp",
+        "width": 1206,
+        "bytes": 99742
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/interview-1206.webp"
+  },
+  "assets/events/unity/exhibition.webp": {
+    "width": 1206,
+    "height": 1548,
+    "originalBytes": 339842,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/exhibition-480.webp",
+        "width": 480,
+        "bytes": 46812
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/exhibition-960.webp",
+        "width": 960,
+        "bytes": 132612
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/exhibition-1206.webp",
+        "width": 1206,
+        "bytes": 211582
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/exhibition-1206.webp"
+  },
+  "assets/events/unity/lecture-audience.webp": {
+    "width": 1206,
+    "height": 1714,
+    "originalBytes": 274136,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/lecture-audience-480.webp",
+        "width": 480,
+        "bytes": 54160
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/lecture-audience-960.webp",
+        "width": 960,
+        "bytes": 120686
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/lecture-audience-1206.webp",
+        "width": 1206,
+        "bytes": 165814
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/lecture-audience-1206.webp"
+  },
+  "assets/events/unity/materials.webp": {
+    "width": 1206,
+    "height": 880,
+    "originalBytes": 118106,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/materials-480.webp",
+        "width": 480,
+        "bytes": 21198
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/materials-960.webp",
+        "width": 960,
+        "bytes": 49680
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/materials-1206.webp",
+        "width": 1206,
+        "bytes": 70278
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/materials-1206.webp"
+  },
+  "assets/events/unity/lecture-map.webp": {
+    "width": 1197,
+    "height": 1548,
+    "originalBytes": 408694,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/lecture-map-480.webp",
+        "width": 480,
+        "bytes": 64432
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/lecture-map-960.webp",
+        "width": 960,
+        "bytes": 175880
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/lecture-map-1197.webp",
+        "width": 1197,
+        "bytes": 256912
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/lecture-map-1197.webp"
+  },
+  "assets/events/unity/poster.webp": {
+    "width": 1206,
+    "height": 2142,
+    "originalBytes": 602508,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/poster-480.webp",
+        "width": 480,
+        "bytes": 66456
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/poster-960.webp",
+        "width": 960,
+        "bytes": 177244
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/poster-1206.webp",
+        "width": 1206,
+        "bytes": 283726
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/poster-1206.webp"
+  },
+  "assets/events/unity/workshops.webp": {
+    "width": 1206,
+    "height": 833,
+    "originalBytes": 221924,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/workshops-480.webp",
+        "width": 480,
+        "bytes": 28094
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/workshops-960.webp",
+        "width": 960,
+        "bytes": 83894
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/workshops-1206.webp",
+        "width": 1206,
+        "bytes": 138762
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/workshops-1206.webp"
+  },
+  "assets/events/unity/screen.webp": {
+    "width": 1206,
+    "height": 1406,
+    "originalBytes": 447882,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/unity/screen-480.webp",
+        "width": 480,
+        "bytes": 53130
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/screen-960.webp",
+        "width": 960,
+        "bytes": 171698
+      },
+      {
+        "src": "assets/site-images-v1/events/unity/screen-1206.webp",
+        "width": 1206,
+        "bytes": 280776
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/unity/screen-1206.webp"
+  },
+  "assets/events/youth-day-main.png": {
+    "width": 1920,
+    "height": 2560,
+    "originalBytes": 6698184,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/events/youth-day-main-480.webp",
+        "width": 480,
+        "bytes": 56958
+      },
+      {
+        "src": "assets/site-images-v1/events/youth-day-main-960.webp",
+        "width": 960,
+        "bytes": 192356
+      },
+      {
+        "src": "assets/site-images-v1/events/youth-day-main-1600.webp",
+        "width": 1600,
+        "bytes": 449974
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/events/youth-day-main-1600.webp"
+  },
+  "assets/hero-landscape.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 1969810,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/hero-landscape-480.webp",
+        "width": 480,
+        "bytes": 9164
+      },
+      {
+        "src": "assets/site-images-v1/hero-landscape-960.webp",
+        "width": 960,
+        "bytes": 31198
+      },
+      {
+        "src": "assets/site-images-v1/hero-landscape-1600.webp",
+        "width": 1600,
+        "bytes": 71504
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/hero-landscape-1600.webp"
+  },
+  "assets/immersion/evenki-nature.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2897062,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/evenki-nature-480.webp",
+        "width": 480,
+        "bytes": 51286
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evenki-nature-960.webp",
+        "width": 960,
+        "bytes": 155490
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evenki-nature-1254.webp",
+        "width": 1254,
+        "bytes": 220304
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/evenki-nature-1254.webp"
+  },
+  "assets/hero-nanai-portrait.png": {
+    "width": 1086,
+    "height": 1448,
+    "originalBytes": 2656611,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/hero-nanai-portrait-480.webp",
+        "width": 480,
+        "bytes": 58932
+      },
+      {
+        "src": "assets/site-images-v1/hero-nanai-portrait-960.webp",
+        "width": 960,
+        "bytes": 182304
+      },
+      {
+        "src": "assets/site-images-v1/hero-nanai-portrait-1086.webp",
+        "width": 1086,
+        "bytes": 218078
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/hero-nanai-portrait-1086.webp"
+  },
+  "assets/immersion/evenki-reindeer.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2330442,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/evenki-reindeer-480.webp",
+        "width": 480,
+        "bytes": 27100
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evenki-reindeer-960.webp",
+        "width": 960,
+        "bytes": 72310
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evenki-reindeer-1254.webp",
+        "width": 1254,
+        "bytes": 100430
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/evenki-reindeer-1254.webp"
+  },
+  "assets/immersion/evenki-route.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2393231,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/evenki-route-480.webp",
+        "width": 480,
+        "bytes": 31814
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evenki-route-960.webp",
+        "width": 960,
+        "bytes": 84842
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evenki-route-1254.webp",
+        "width": 1254,
+        "bytes": 115680
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/evenki-route-1254.webp"
+  },
+  "assets/immersion/evens-coast.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2495979,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/evens-coast-480.webp",
+        "width": 480,
+        "bytes": 34470
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evens-coast-960.webp",
+        "width": 960,
+        "bytes": 98044
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evens-coast-1254.webp",
+        "width": 1254,
+        "bytes": 136718
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/evens-coast-1254.webp"
+  },
+  "assets/immersion/evens-ornament.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2427538,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/evens-ornament-480.webp",
+        "width": 480,
+        "bytes": 30736
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evens-ornament-960.webp",
+        "width": 960,
+        "bytes": 87074
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evens-ornament-1254.webp",
+        "width": 1254,
+        "bytes": 123826
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/evens-ornament-1254.webp"
+  },
+  "assets/immersion/nanai-amur.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2338263,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/nanai-amur-480.webp",
+        "width": 480,
+        "bytes": 37250
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nanai-amur-960.webp",
+        "width": 960,
+        "bytes": 101100
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nanai-amur-1254.webp",
+        "width": 1254,
+        "bytes": 138468
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/nanai-amur-1254.webp"
+  },
+  "assets/immersion/evens-season.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2560828,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/evens-season-480.webp",
+        "width": 480,
+        "bytes": 40886
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evens-season-960.webp",
+        "width": 960,
+        "bytes": 114856
+      },
+      {
+        "src": "assets/site-images-v1/immersion/evens-season-1254.webp",
+        "width": 1254,
+        "bytes": 161212
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/evens-season-1254.webp"
+  },
+  "assets/immersion/nanai-living.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2200660,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/nanai-living-480.webp",
+        "width": 480,
+        "bytes": 26488
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nanai-living-960.webp",
+        "width": 960,
+        "bytes": 69982
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nanai-living-1254.webp",
+        "width": 1254,
+        "bytes": 99098
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/nanai-living-1254.webp"
+  },
+  "assets/immersion/nanai-ornament.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2257891,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/nanai-ornament-480.webp",
+        "width": 480,
+        "bytes": 30240
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nanai-ornament-960.webp",
+        "width": 960,
+        "bytes": 85408
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nanai-ornament-1254.webp",
+        "width": 1254,
+        "bytes": 118390
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/nanai-ornament-1254.webp"
+  },
+  "assets/immersion/negidal-groups.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2535721,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/negidal-groups-480.webp",
+        "width": 480,
+        "bytes": 32742
+      },
+      {
+        "src": "assets/site-images-v1/immersion/negidal-groups-960.webp",
+        "width": 960,
+        "bytes": 102538
+      },
+      {
+        "src": "assets/site-images-v1/immersion/negidal-groups-1254.webp",
+        "width": 1254,
+        "bytes": 147718
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/negidal-groups-1254.webp"
+  },
+  "assets/immersion/negidal-language.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 1899271,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/negidal-language-480.webp",
+        "width": 480,
+        "bytes": 17094
+      },
+      {
+        "src": "assets/site-images-v1/immersion/negidal-language-960.webp",
+        "width": 960,
+        "bytes": 43078
+      },
+      {
+        "src": "assets/site-images-v1/immersion/negidal-language-1254.webp",
+        "width": 1254,
+        "bytes": 61110
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/negidal-language-1254.webp"
+  },
+  "assets/immersion/negidal-river.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2177613,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/negidal-river-480.webp",
+        "width": 480,
+        "bytes": 26810
+      },
+      {
+        "src": "assets/site-images-v1/immersion/negidal-river-960.webp",
+        "width": 960,
+        "bytes": 70108
+      },
+      {
+        "src": "assets/site-images-v1/immersion/negidal-river-1254.webp",
+        "width": 1254,
+        "bytes": 96116
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/negidal-river-1254.webp"
+  },
+  "assets/immersion/nivkh-memory.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2611351,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-memory-480.webp",
+        "width": 480,
+        "bytes": 37520
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-memory-960.webp",
+        "width": 960,
+        "bytes": 114970
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-memory-1254.webp",
+        "width": 1254,
+        "bytes": 166004
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/nivkh-memory-1254.webp"
+  },
+  "assets/immersion/nivkh-water.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2137607,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-water-480.webp",
+        "width": 480,
+        "bytes": 23754
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-water-960.webp",
+        "width": 960,
+        "bytes": 65362
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-water-1254.webp",
+        "width": 1254,
+        "bytes": 92990
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/nivkh-water-1254.webp"
+  },
+  "assets/immersion/orochi-language.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2104306,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/orochi-language-480.webp",
+        "width": 480,
+        "bytes": 22028
+      },
+      {
+        "src": "assets/site-images-v1/immersion/orochi-language-960.webp",
+        "width": 960,
+        "bytes": 56206
+      },
+      {
+        "src": "assets/site-images-v1/immersion/orochi-language-1254.webp",
+        "width": 1254,
+        "bytes": 79196
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/orochi-language-1254.webp"
+  },
+  "assets/immersion/nivkh-shore.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2299592,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-shore-480.webp",
+        "width": 480,
+        "bytes": 28550
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-shore-960.webp",
+        "width": 960,
+        "bytes": 87174
+      },
+      {
+        "src": "assets/site-images-v1/immersion/nivkh-shore-1254.webp",
+        "width": 1254,
+        "bytes": 122028
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/nivkh-shore-1254.webp"
+  },
+  "assets/immersion/orochi-wood.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2090225,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/orochi-wood-480.webp",
+        "width": 480,
+        "bytes": 24774
+      },
+      {
+        "src": "assets/site-images-v1/immersion/orochi-wood-960.webp",
+        "width": 960,
+        "bytes": 63356
+      },
+      {
+        "src": "assets/site-images-v1/immersion/orochi-wood-1254.webp",
+        "width": 1254,
+        "bytes": 87976
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/orochi-wood-1254.webp"
+  },
+  "assets/immersion/udege-forest.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2181761,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/udege-forest-480.webp",
+        "width": 480,
+        "bytes": 23612
+      },
+      {
+        "src": "assets/site-images-v1/immersion/udege-forest-960.webp",
+        "width": 960,
+        "bytes": 73228
+      },
+      {
+        "src": "assets/site-images-v1/immersion/udege-forest-1254.webp",
+        "width": 1254,
+        "bytes": 104856
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/udege-forest-1254.webp"
+  },
+  "assets/immersion/orochi-route.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2848932,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/orochi-route-480.webp",
+        "width": 480,
+        "bytes": 61824
+      },
+      {
+        "src": "assets/site-images-v1/immersion/orochi-route-960.webp",
+        "width": 960,
+        "bytes": 171470
+      },
+      {
+        "src": "assets/site-images-v1/immersion/orochi-route-1254.webp",
+        "width": 1254,
+        "bytes": 236896
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/orochi-route-1254.webp"
+  },
+  "assets/immersion/udege-home.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 1983989,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/udege-home-480.webp",
+        "width": 480,
+        "bytes": 19194
+      },
+      {
+        "src": "assets/site-images-v1/immersion/udege-home-960.webp",
+        "width": 960,
+        "bytes": 47592
+      },
+      {
+        "src": "assets/site-images-v1/immersion/udege-home-1254.webp",
+        "width": 1254,
+        "bytes": 66838
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/udege-home-1254.webp"
+  },
+  "assets/immersion/udege-youth.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2168410,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/udege-youth-480.webp",
+        "width": 480,
+        "bytes": 21482
+      },
+      {
+        "src": "assets/site-images-v1/immersion/udege-youth-960.webp",
+        "width": 960,
+        "bytes": 58768
+      },
+      {
+        "src": "assets/site-images-v1/immersion/udege-youth-1254.webp",
+        "width": 1254,
+        "bytes": 83544
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/udege-youth-1254.webp"
+  },
+  "assets/immersion/ulchi-amur.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2242855,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-amur-480.webp",
+        "width": 480,
+        "bytes": 31546
+      },
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-amur-960.webp",
+        "width": 960,
+        "bytes": 88214
+      },
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-amur-1254.webp",
+        "width": 1254,
+        "bytes": 122906
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/ulchi-amur-1254.webp"
+  },
+  "assets/immersion/ulchi-water.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2399843,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-water-480.webp",
+        "width": 480,
+        "bytes": 23518
+      },
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-water-960.webp",
+        "width": 960,
+        "bytes": 74464
+      },
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-water-1254.webp",
+        "width": 1254,
+        "bytes": 108502
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/ulchi-water-1254.webp"
+  },
+  "assets/immersion/ulchi-fish.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2387347,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-fish-480.webp",
+        "width": 480,
+        "bytes": 27966
+      },
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-fish-960.webp",
+        "width": 960,
+        "bytes": 80040
+      },
+      {
+        "src": "assets/site-images-v1/immersion/ulchi-fish-1254.webp",
+        "width": 1254,
+        "bytes": 115970
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/immersion/ulchi-fish-1254.webp"
+  },
+  "assets/people/aleuts.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2049810,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/aleuts-320.webp",
+        "width": 320,
+        "bytes": 19836
+      },
+      {
+        "src": "assets/site-images-v1/people/aleuts-512.webp",
+        "width": 512,
+        "bytes": 43596
+      },
+      {
+        "src": "assets/site-images-v1/people/aleuts-768.webp",
+        "width": 768,
+        "bytes": 87802
+      },
+      {
+        "src": "assets/site-images-v1/people/aleuts-1024.webp",
+        "width": 1024,
+        "bytes": 138976
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/aleuts-1024.webp"
+  },
+  "assets/people/chuvans.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2151754,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/chuvans-320.webp",
+        "width": 320,
+        "bytes": 20700
+      },
+      {
+        "src": "assets/site-images-v1/people/chuvans-512.webp",
+        "width": 512,
+        "bytes": 44000
+      },
+      {
+        "src": "assets/site-images-v1/people/chuvans-768.webp",
+        "width": 768,
+        "bytes": 86742
+      },
+      {
+        "src": "assets/site-images-v1/people/chuvans-1024.webp",
+        "width": 1024,
+        "bytes": 135540
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/chuvans-1024.webp"
+  },
+  "assets/people/alyutors.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2418914,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/alyutors-320.webp",
+        "width": 320,
+        "bytes": 32808
+      },
+      {
+        "src": "assets/site-images-v1/people/alyutors-512.webp",
+        "width": 512,
+        "bytes": 68530
+      },
+      {
+        "src": "assets/site-images-v1/people/alyutors-768.webp",
+        "width": 768,
+        "bytes": 130002
+      },
+      {
+        "src": "assets/site-images-v1/people/alyutors-1024.webp",
+        "width": 1024,
+        "bytes": 193094
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/alyutors-1024.webp"
+  },
+  "assets/people/chukchi.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2180470,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/chukchi-320.webp",
+        "width": 320,
+        "bytes": 20972
+      },
+      {
+        "src": "assets/site-images-v1/people/chukchi-512.webp",
+        "width": 512,
+        "bytes": 44946
+      },
+      {
+        "src": "assets/site-images-v1/people/chukchi-768.webp",
+        "width": 768,
+        "bytes": 87916
+      },
+      {
+        "src": "assets/site-images-v1/people/chukchi-1024.webp",
+        "width": 1024,
+        "bytes": 136448
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/chukchi-1024.webp"
+  },
+  "assets/people/evens.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2158561,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/evens-320.webp",
+        "width": 320,
+        "bytes": 20320
+      },
+      {
+        "src": "assets/site-images-v1/people/evens-512.webp",
+        "width": 512,
+        "bytes": 42370
+      },
+      {
+        "src": "assets/site-images-v1/people/evens-768.webp",
+        "width": 768,
+        "bytes": 83018
+      },
+      {
+        "src": "assets/site-images-v1/people/evens-1024.webp",
+        "width": 1024,
+        "bytes": 129494
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/evens-1024.webp"
+  },
+  "assets/people/evenki.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2307137,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/evenki-320.webp",
+        "width": 320,
+        "bytes": 18240
+      },
+      {
+        "src": "assets/site-images-v1/people/evenki-512.webp",
+        "width": 512,
+        "bytes": 38678
+      },
+      {
+        "src": "assets/site-images-v1/people/evenki-768.webp",
+        "width": 768,
+        "bytes": 72994
+      },
+      {
+        "src": "assets/site-images-v1/people/evenki-1024.webp",
+        "width": 1024,
+        "bytes": 111372
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/evenki-1024.webp"
+  },
+  "assets/people/eskimos.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 1986990,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/eskimos-320.webp",
+        "width": 320,
+        "bytes": 15498
+      },
+      {
+        "src": "assets/site-images-v1/people/eskimos-512.webp",
+        "width": 512,
+        "bytes": 32964
+      },
+      {
+        "src": "assets/site-images-v1/people/eskimos-768.webp",
+        "width": 768,
+        "bytes": 66650
+      },
+      {
+        "src": "assets/site-images-v1/people/eskimos-1024.webp",
+        "width": 1024,
+        "bytes": 106992
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/eskimos-1024.webp"
+  },
+  "assets/people/itelmens.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 1950891,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/itelmens-320.webp",
+        "width": 320,
+        "bytes": 19404
+      },
+      {
+        "src": "assets/site-images-v1/people/itelmens-512.webp",
+        "width": 512,
+        "bytes": 41338
+      },
+      {
+        "src": "assets/site-images-v1/people/itelmens-768.webp",
+        "width": 768,
+        "bytes": 81982
+      },
+      {
+        "src": "assets/site-images-v1/people/itelmens-1024.webp",
+        "width": 1024,
+        "bytes": 127878
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/itelmens-1024.webp"
+  },
+  "assets/people/kamchadals.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2341449,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/kamchadals-320.webp",
+        "width": 320,
+        "bytes": 36386
+      },
+      {
+        "src": "assets/site-images-v1/people/kamchadals-512.webp",
+        "width": 512,
+        "bytes": 74138
+      },
+      {
+        "src": "assets/site-images-v1/people/kamchadals-768.webp",
+        "width": 768,
+        "bytes": 137026
+      },
+      {
+        "src": "assets/site-images-v1/people/kamchadals-1024.webp",
+        "width": 1024,
+        "bytes": 198778
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/kamchadals-1024.webp"
+  },
+  "assets/people/kereks.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2057438,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/kereks-320.webp",
+        "width": 320,
+        "bytes": 19338
+      },
+      {
+        "src": "assets/site-images-v1/people/kereks-512.webp",
+        "width": 512,
+        "bytes": 42844
+      },
+      {
+        "src": "assets/site-images-v1/people/kereks-768.webp",
+        "width": 768,
+        "bytes": 84728
+      },
+      {
+        "src": "assets/site-images-v1/people/kereks-1024.webp",
+        "width": 1024,
+        "bytes": 132924
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/kereks-1024.webp"
+  },
+  "assets/people/nanai.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2114671,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/nanai-320.webp",
+        "width": 320,
+        "bytes": 19648
+      },
+      {
+        "src": "assets/site-images-v1/people/nanai-512.webp",
+        "width": 512,
+        "bytes": 39926
+      },
+      {
+        "src": "assets/site-images-v1/people/nanai-768.webp",
+        "width": 768,
+        "bytes": 74688
+      },
+      {
+        "src": "assets/site-images-v1/people/nanai-1024.webp",
+        "width": 1024,
+        "bytes": 115288
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/nanai-1024.webp"
+  },
+  "assets/people/negidal.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2074623,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/negidal-320.webp",
+        "width": 320,
+        "bytes": 17796
+      },
+      {
+        "src": "assets/site-images-v1/people/negidal-512.webp",
+        "width": 512,
+        "bytes": 36924
+      },
+      {
+        "src": "assets/site-images-v1/people/negidal-768.webp",
+        "width": 768,
+        "bytes": 70754
+      },
+      {
+        "src": "assets/site-images-v1/people/negidal-1024.webp",
+        "width": 1024,
+        "bytes": 105690
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/negidal-1024.webp"
+  },
+  "assets/people/koryaks.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2227247,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/koryaks-320.webp",
+        "width": 320,
+        "bytes": 19268
+      },
+      {
+        "src": "assets/site-images-v1/people/koryaks-512.webp",
+        "width": 512,
+        "bytes": 41968
+      },
+      {
+        "src": "assets/site-images-v1/people/koryaks-768.webp",
+        "width": 768,
+        "bytes": 83312
+      },
+      {
+        "src": "assets/site-images-v1/people/koryaks-1024.webp",
+        "width": 1024,
+        "bytes": 130440
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/koryaks-1024.webp"
+  },
+  "assets/people/oroks.png": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 1394809,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/oroks-320.webp",
+        "width": 320,
+        "bytes": 24890
+      },
+      {
+        "src": "assets/site-images-v1/people/oroks-512.webp",
+        "width": 512,
+        "bytes": 53366
+      },
+      {
+        "src": "assets/site-images-v1/people/oroks-768.webp",
+        "width": 768,
+        "bytes": 103606
+      },
+      {
+        "src": "assets/site-images-v1/people/oroks-1024.webp",
+        "width": 1024,
+        "bytes": 157556
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/oroks-1024.webp"
+  },
+  "assets/people/orochi.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2399770,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/orochi-320.webp",
+        "width": 320,
+        "bytes": 16354
+      },
+      {
+        "src": "assets/site-images-v1/people/orochi-512.webp",
+        "width": 512,
+        "bytes": 35222
+      },
+      {
+        "src": "assets/site-images-v1/people/orochi-768.webp",
+        "width": 768,
+        "bytes": 73056
+      },
+      {
+        "src": "assets/site-images-v1/people/orochi-1024.webp",
+        "width": 1024,
+        "bytes": 119130
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/orochi-1024.webp"
+  },
+  "assets/people/nivkh.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2121201,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/nivkh-320.webp",
+        "width": 320,
+        "bytes": 15726
+      },
+      {
+        "src": "assets/site-images-v1/people/nivkh-512.webp",
+        "width": 512,
+        "bytes": 31912
+      },
+      {
+        "src": "assets/site-images-v1/people/nivkh-768.webp",
+        "width": 768,
+        "bytes": 57984
+      },
+      {
+        "src": "assets/site-images-v1/people/nivkh-1024.webp",
+        "width": 1024,
+        "bytes": 86682
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/nivkh-1024.webp"
+  },
+  "assets/people/udege.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2156249,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/udege-320.webp",
+        "width": 320,
+        "bytes": 15736
+      },
+      {
+        "src": "assets/site-images-v1/people/udege-512.webp",
+        "width": 512,
+        "bytes": 31706
+      },
+      {
+        "src": "assets/site-images-v1/people/udege-768.webp",
+        "width": 768,
+        "bytes": 62846
+      },
+      {
+        "src": "assets/site-images-v1/people/udege-1024.webp",
+        "width": 1024,
+        "bytes": 99204
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/udege-1024.webp"
+  },
+  "assets/people/ulchi.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2223616,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/ulchi-320.webp",
+        "width": 320,
+        "bytes": 16250
+      },
+      {
+        "src": "assets/site-images-v1/people/ulchi-512.webp",
+        "width": 512,
+        "bytes": 31630
+      },
+      {
+        "src": "assets/site-images-v1/people/ulchi-768.webp",
+        "width": 768,
+        "bytes": 56822
+      },
+      {
+        "src": "assets/site-images-v1/people/ulchi-1024.webp",
+        "width": 1024,
+        "bytes": 86012
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/ulchi-1024.webp"
+  },
+  "assets/people/tazy.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2256153,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/tazy-320.webp",
+        "width": 320,
+        "bytes": 20144
+      },
+      {
+        "src": "assets/site-images-v1/people/tazy-512.webp",
+        "width": 512,
+        "bytes": 44346
+      },
+      {
+        "src": "assets/site-images-v1/people/tazy-768.webp",
+        "width": 768,
+        "bytes": 90970
+      },
+      {
+        "src": "assets/site-images-v1/people/tazy-1024.webp",
+        "width": 1024,
+        "bytes": 144556
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/tazy-1024.webp"
+  },
+  "assets/quiz-landscape.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2728015,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/quiz-landscape-480.webp",
+        "width": 480,
+        "bytes": 30000
+      },
+      {
+        "src": "assets/site-images-v1/quiz-landscape-960.webp",
+        "width": 960,
+        "bytes": 106150
+      },
+      {
+        "src": "assets/site-images-v1/quiz-landscape-1254.webp",
+        "width": 1254,
+        "bytes": 157638
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/quiz-landscape-1254.webp"
+  },
+  "assets/people/yukaghirs.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 2161736,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/people/yukaghirs-320.webp",
+        "width": 320,
+        "bytes": 18460
+      },
+      {
+        "src": "assets/site-images-v1/people/yukaghirs-512.webp",
+        "width": 512,
+        "bytes": 39214
+      },
+      {
+        "src": "assets/site-images-v1/people/yukaghirs-768.webp",
+        "width": 768,
+        "bytes": 80392
+      },
+      {
+        "src": "assets/site-images-v1/people/yukaghirs-1024.webp",
+        "width": 1024,
+        "bytes": 127992
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/people/yukaghirs-1024.webp"
+  },
+  "assets/project-stickers.jpg": {
+    "width": 1935,
+    "height": 2739,
+    "originalBytes": 3168630,
+    "variants": [
+      {
+        "src": "assets/site-images-v1/project-stickers-480.webp",
+        "width": 480,
+        "bytes": 42182
+      },
+      {
+        "src": "assets/site-images-v1/project-stickers-960.webp",
+        "width": 960,
+        "bytes": 134896
+      },
+      {
+        "src": "assets/site-images-v1/project-stickers-1600.webp",
+        "width": 1600,
+        "bytes": 307044
+      }
+    ],
+    "defaultSrc": "assets/site-images-v1/project-stickers-1600.webp"
+  }
+}

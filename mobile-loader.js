@@ -98,7 +98,16 @@
       if (finished) return;
       // Eager loading avoids waiting for a scroll behind the overlay. Decoding
       // ensures all responsive pictures can be painted before the page opens.
-      await Promise.all([...atlas.querySelectorAll('.card-portrait img')].map(img => {
+      const cover = document.querySelector('[data-hero-portrait] img');
+      const landscape = document.querySelector('[data-hero-background]');
+      const background = landscape ? new Image() : null;
+      if (background) background.src = landscape.dataset.heroBackground;
+      const atlasBackgrounds = [...new Set([...atlas.querySelectorAll('[data-card-background-mobile]')].map(node => node.dataset.cardBackgroundMobile))].map(src => {
+        const image = new Image();
+        image.src = src;
+        return image;
+      });
+      await Promise.all([...atlas.querySelectorAll('.card-portrait img'), ...(cover ? [cover] : []), ...(background ? [background] : []), ...atlasBackgrounds].map(img => {
         img.loading = 'eager';
         return img.decode().catch(() => {});
       }));

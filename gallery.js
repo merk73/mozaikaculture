@@ -35,8 +35,9 @@
     full.alt = image.alt;
     caption.textContent = tile.dataset.caption;
     event.textContent = tile.dataset.event;
-    download.href = image.src;
-    download.download = image.getAttribute('src').replace('assets/events/', '').replaceAll('/', '-');
+    const original = image.dataset.originalSrc || image.getAttribute('src');
+    download.href = original;
+    download.download = original.replace('assets/events/', '').replaceAll('/', '-');
     count.textContent = `${current + 1} / ${tiles.length}`;
   }
   tiles.forEach((tile, index) => tile.addEventListener('click', () => {

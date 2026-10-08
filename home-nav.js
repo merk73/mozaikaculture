@@ -198,8 +198,8 @@
   document.querySelectorAll("[data-event-close]").forEach((button) => {
     button.addEventListener("click", () => {
       const card = button.closest("details");
-      if (window.mozaikaToggleEvent && matchMedia("(min-width: 1024px)").matches) {
-        window.mozaikaToggleEvent(card, false).then(() => { card.querySelector("summary").focus({preventScroll:true}); card.scrollIntoView({block:"nearest",behavior:"smooth"}); });
+      if (window.mozaikaToggleEvent) {
+        window.mozaikaToggleEvent(card, false).then(() => { card.querySelector("summary").focus({preventScroll:true}); card.scrollIntoView({block:"nearest",behavior:reducedMotion.matches ? "instant" : "smooth"}); });
         return;
       }
       card.open = false;
@@ -237,7 +237,10 @@ document.querySelectorAll('.event-card').forEach(card => {
   const portrait = document.querySelector('[data-hero-portrait]');
   if (!portrait) return;
   const hero = portrait.closest('.hero');
-  const enabled = matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)');
+  const image = portrait.querySelector('img');
+  const landscape = document.querySelector('[data-hero-landscape]');
+  const mobilePortrait = matchMedia('(max-width: 760px)');
+  const enabled = matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference), (max-width: 760px) and (prefers-reduced-motion: no-preference)');
   let visible = false, frame = 0, current = 0, target = 0, lastTime = 0, heroTop = 0;
   function render(time) {
     frame = 0;
@@ -245,12 +248,14 @@ document.querySelectorAll('.event-card').forEach(card => {
     lastTime = time;
     current += (target - current) * (1 - Math.exp(-delta / 85));
     if (Math.abs(target - current) < .05) current = target;
-    portrait.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
+    (mobilePortrait.matches ? image : portrait).style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
+    if (landscape) landscape.style.transform = mobilePortrait.matches ? `translate3d(0, ${(current * .45).toFixed(2)}px, 0)` : '';
     if (current !== target && visible && enabled.matches) frame = requestAnimationFrame(render);
     else lastTime = 0;
   }
   function update() {
-    target = Math.min(Math.max(0, scrollY - heroTop) * .12, 80);
+    target = Math.min(Math.max(0, scrollY - heroTop) * (mobilePortrait.matches ? .16 : .12), mobilePortrait.matches ? 110 : 80);
+    if (target === current) return;
     if (!frame) frame = requestAnimationFrame(render);
   }
   function configure() {
@@ -258,8 +263,11 @@ document.querySelectorAll('.event-card').forEach(card => {
     cancelAnimationFrame(frame);
     frame = 0;
     lastTime = 0;
+    (mobilePortrait.matches ? portrait : image).style.transform = '';
     const active = visible && enabled.matches;
     portrait.classList.toggle('is-parallax-active', active);
+    landscape?.classList.toggle('is-parallax-active', active && mobilePortrait.matches);
+    if (landscape && !mobilePortrait.matches) landscape.style.transform = '';
     if (active) {
       heroTop = hero.getBoundingClientRect().top + scrollY;
       window.addEventListener('scroll', update, { passive: true });
@@ -267,6 +275,8 @@ document.querySelectorAll('.event-card').forEach(card => {
     } else if (!enabled.matches) {
       current = target = 0;
       portrait.style.transform = '';
+      image.style.transform = '';
+      if (landscape) landscape.style.transform = '';
     }
   }
   new IntersectionObserver(entries => {
@@ -274,6 +284,7 @@ document.querySelectorAll('.event-card').forEach(card => {
     configure();
   }).observe(hero);
   enabled.addEventListener('change', configure);
+  mobilePortrait.addEventListener('change', configure);
   window.addEventListener('resize', configure, { passive: true });
 })();
 // A draggable, continuous poster strip. Hover keeps the motion running.
@@ -316,7 +327,7 @@ document.querySelectorAll('.event-card').forEach(card => {
   reduced.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
   fan.addEventListener('pointerdown', event => {
-    if (!event.isPrimary || event.button !== 0) return;
+    if (!event.isPrimary || event.button !== 0 || event.target.closest('button')) return;
     pointer = {id:event.pointerId,x:event.clientX,y:event.clientY,start:position,link:event.target.closest('.poster-fan-link')};
     dragged = false; suppressClick = false;
     last = 0;

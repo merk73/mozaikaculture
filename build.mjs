@@ -15,6 +15,7 @@ const files = [
   "mobile-loader.css",
   "styles.css",
   "home.css",
+  "home-polish.css",
   "home-interactions.css",
   "quiz.css",
   "article.css",
