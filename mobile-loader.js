@@ -7,17 +7,21 @@
   const mobileTheme = document.querySelector('[data-mobile-theme-color]');
   if (mobileTheme) mobileTheme.content = '#000000';
   let finished = false;
+  let released = false;
   let timer;
   let regions = [];
   let animations = [];
   let movingStatus;
   function release() {
+    if (released) return;
+    released = true;
     root.classList.remove('site-loading', 'loader-morphing');
     if (mobileTheme) mobileTheme.content = getComputedStyle(root).backgroundColor;
     animations.forEach(animation => animation.cancel());
     movingStatus?.remove();
     regions.forEach(([node, previous]) => { node.inert = previous; });
     document.querySelector('.site-loader')?.remove();
+    document.dispatchEvent(new Event('mozaika:page-ready'));
   }
   async function finish(animate = true) {
     if (finished) return;
@@ -79,7 +83,7 @@
   if (!waitForAtlas) timer = setTimeout(() => finish(false), 3500);
   else window.addEventListener('error', event => {
     const source = event.filename || event.target?.src || '';
-    if (/\/(?:home-peoples|home-atlas)\.js(?:\?|$)/.test(source)) finish(false);
+    if (/\/(?:home-peoples|home-atlas)(?:\.[a-f0-9]{12})?\.js(?:\?|$)/.test(source)) finish(false);
   }, true);
   mobile.addEventListener('change', () => { if (!mobile.matches) finish(false); });
   window.addEventListener('resize', () => {

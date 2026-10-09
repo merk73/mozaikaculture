@@ -1,6 +1,7 @@
 import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { generateHomeData } from './scripts/generate-home-data.mjs';
+import { optimizeBrowserAssets } from './scripts/optimize-browser-assets.mjs';
 
 const root = process.cwd();
 const dist = path.join(root, "dist");
@@ -29,6 +30,7 @@ const files = [
   "content.js",
   "far-east-peoples.js",
   "script.js",
+  "backend-loader.js",
   "person.js",
   "person.css",
   "people-research.js",
@@ -72,3 +74,4 @@ await writeFile(
 if (!config.SUPABASE_URL || !config.SUPABASE_ANON_KEY) {
   console.warn("Supabase variables are empty. Account sign-in is unavailable; guest quiz remains available. Feedback requires a configured backend on GitHub Pages.");
 }
+await optimizeBrowserAssets(dist);

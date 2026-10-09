@@ -192,12 +192,13 @@ const storageNotice = document.querySelector('[data-quiz-storage]');
 const modeNode = document.querySelector('[data-quiz-mode]');
 const resultStorage = document.querySelector('[data-result-storage]');
 const config = window.MOZAIKA_CONFIG || {};
-const supabaseClient = window.supabase?.createClient && config.SUPABASE_URL && config.SUPABASE_ANON_KEY
+let supabaseClient = window.supabase?.createClient && config.SUPABASE_URL && config.SUPABASE_ANON_KEY
   ? window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY) : null;
 const GUEST_KEY = 'mozaika.quiz.guest.v1';
 const DRAFT_KEY = 'mozaika.quiz.draft.v1';
 let currentUser = null;
 let quizSaving = false;
+let guestChosen = false;
 function shuffleOptions(options) {
   const result = [...options];
   for (let i = result.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [result[i], result[j]] = [result[j], result[i]]; }
@@ -319,12 +320,24 @@ function startGuest() {
 }
 async function initQuiz() {
   quizSurface.hidden=true; resultsNode.hidden=true;
+  if (window.mozaikaBackendLoading) {
+    quizLock.hidden = false;
+    document.querySelector('[data-quiz-lock-title]').textContent = 'Подключаем личный кабинет…';
+  }
+  if (window.mozaikaBackendReady) {
+    const sdk = await window.mozaikaBackendReady;
+    if (guestChosen) return;
+    supabaseClient = sdk?.createClient && config.SUPABASE_URL && config.SUPABASE_ANON_KEY
+      ? sdk.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY) : null;
+  }
   if(!supabaseClient) { startGuest(); return; }
   try {
     const {data,error}=await supabaseClient.auth.getSession();
+    if (guestChosen) return;
     if(error || !data.session?.user) { startGuest(); return; }
     currentUser=data.session.user; updateMode();
     const {data:existing,error:loadError}=await supabaseClient.from('quiz_results').select('score,total,percent,answers,details,created_at').eq('user_id',currentUser.id).maybeSingle();
+    if (guestChosen) return;
     if(loadError) {
       quizLock.hidden=false;
       document.querySelector('[data-quiz-lock-title]').textContent='Не удалось загрузить результат аккаунта';
@@ -335,7 +348,7 @@ async function initQuiz() {
       const details=Array.isArray(existing.details)?existing.details:[];
       renderSavedResults({correct:existing.score,percent:existing.percent,details,savedAt:existing.created_at,alreadyPassed:true},'account');
     } else { quizLock.hidden=true; quizSurface.hidden=false; renderQuestion(); }
-  } catch { startGuest(); }
+  } catch { if (!guestChosen) startGuest(); }
 }
 optionsNode.addEventListener('click',event=>{
   const button=event.target.closest('[data-answer]'); if(!button) return;
@@ -359,5 +372,5 @@ restartButton.addEventListener('click',()=>{
   resultsNode.hidden=true;quizSurface.hidden=false;renderQuestion(true);
   quizSurface.scrollIntoView({behavior:'auto',block:'start'});
 });
-document.querySelector('[data-start-guest]').addEventListener('click',startGuest);
+document.querySelector('[data-start-guest]').addEventListener('click', () => { guestChosen = true; startGuest(); });
 initQuiz();

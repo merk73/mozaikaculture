@@ -374,7 +374,7 @@ const feedbackForm = document.querySelector("[data-feedback-form]");
 const feedbackMessage = document.querySelector("[data-feedback-message]");
 const supabaseConfig = window.MOZAIKA_CONFIG || {};
 const hasSupabaseConfig = Boolean(supabaseConfig.SUPABASE_URL && supabaseConfig.SUPABASE_ANON_KEY);
-const supabaseClient =
+let supabaseClient =
   window.supabase && window.supabase.createClient && hasSupabaseConfig
     ? window.supabase.createClient(supabaseConfig.SUPABASE_URL, supabaseConfig.SUPABASE_ANON_KEY)
     : null;
@@ -608,7 +608,7 @@ function setAuthMode(mode) {
   if (passwordInput) {
     passwordInput.autocomplete = mode === "register" ? "new-password" : "current-password";
   }
-  setAuthMessage(supabaseClient ? "" : "Вход временно недоступен. Квиз можно пройти без аккаунта.", "info");
+  setAuthMessage(supabaseClient ? "" : window.mozaikaBackendLoading ? "Подключаем личный кабинет…" : "Вход временно недоступен. Квиз можно пройти без аккаунта.", "info");
   if (authModal?.classList.contains('is-open')) document.dispatchEvent(new CustomEvent('mozaika:auth-change', { detail: { open: true, headerHeight } }));
 }
 
@@ -726,6 +726,7 @@ async function loadAuthSession() {
 }
 
 async function submitFeedback(payload) {
+  await backendInitialized;
   if (!supabaseClient) {
     const body = new URLSearchParams({
       "form-name": "feedback",
@@ -932,15 +933,26 @@ document.addEventListener("keydown", (event) => {
 setAuthMode("login");
 updateAuthAvailability();
 
-if (supabaseClient) {
-  supabaseClient.auth.onAuthStateChange((_event, session) => {
-    setCurrentUser(session?.user);
-    updateAuthState();
-    redirectToQuizIfRequested();
-  });
-}
+const backendInitialized = (async () => {
+  if (window.mozaikaBackendReady) {
+    const sdk = await window.mozaikaBackendReady;
+    supabaseClient = sdk?.createClient && hasSupabaseConfig
+      ? sdk.createClient(supabaseConfig.SUPABASE_URL, supabaseConfig.SUPABASE_ANON_KEY) : null;
+  }
+  updateAuthAvailability();
+  if (authModal?.classList.contains('is-open')) setAuthMessage(supabaseClient ? '' : 'Вход временно недоступен. Квиз можно пройти без аккаунта.', 'info');
+  if (supabaseClient) {
+    supabaseClient.auth.onAuthStateChange((_event, session) => {
+      setCurrentUser(session?.user);
+      updateAuthState();
+      redirectToQuizIfRequested();
+    });
+  }
 
-loadAuthSession().then(() => {
+  await loadAuthSession();
+})();
+
+backendInitialized.then(() => {
   const params = new URLSearchParams(window.location.search);
   if (params.get("auth") === "quiz" && !currentUserId) {
     openQuizAuthGate();

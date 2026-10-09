@@ -40,36 +40,50 @@
   const localLinks = links.map(link => ({link,url:new URL(link.href)})).filter(item => pagePath(item.url.pathname) === pagePath(location.pathname));
   const sections = localLinks.map(item => ({...item,target:document.getElementById(item.url.hash.slice(1))})).filter(item => item.target);
   let navFrame = 0;
+  let sectionPositions = [], positionsDirty = true, sectionBoundary = 0, currentLink;
   function updateCurrentSection() {
     navFrame = 0;
-    const boundary = header.getBoundingClientRect().bottom + 80;
-    const active = sections.map(item => ({...item,top:item.target.getBoundingClientRect().top})).filter(item => item.top <= boundary).sort((a,b) => b.top-a.top)[0];
-    links.forEach(link => link.removeAttribute('aria-current'));
-    if (active) active.link.setAttribute('aria-current','location');
-    else localLinks.find(item => !item.url.hash)?.link.setAttribute('aria-current','page');
+    if (positionsDirty) {
+      positionsDirty = false;
+      sectionPositions = sections.map(item => ({ ...item, top: item.target.getBoundingClientRect().top + scrollY })).sort((a, b) => a.top - b.top);
+      sectionBoundary = parseFloat(getComputedStyle(header).top) + 80 + header.querySelector('.brand').getBoundingClientRect().height + (mobile.matches ? 22 : 0);
+    }
+    const active = sectionPositions.reduce((active, item) => item.top <= scrollY + sectionBoundary ? item : active, null);
+    const next = active?.link || localLinks.find(item => !item.url.hash)?.link;
+    if (currentLink === next) return;
+    currentLink?.removeAttribute('aria-current');
+    currentLink = next;
+    currentLink?.setAttribute('aria-current', active ? 'location' : 'page');
   }
-  window.addEventListener('scroll', () => { if (!navFrame) navFrame = requestAnimationFrame(updateCurrentSection); }, {passive:true});
-  window.addEventListener('resize', updateCurrentSection, {passive:true});
+  function queueCurrentSection() { if (!navFrame) navFrame = requestAnimationFrame(updateCurrentSection); }
+  function invalidatePositions() { positionsDirty = true; queueCurrentSection(); }
+  window.addEventListener('scroll', queueCurrentSection, {passive:true});
+  window.addEventListener('resize', invalidatePositions, {passive:true});
+  if (main && sections.length) {
+    const observer = new ResizeObserver(invalidatePositions);
+    observer.observe(main);
+    sections.forEach(item => observer.observe(item.target));
+  }
   updateCurrentSection();
   const closeIcon = toggle.querySelector('svg').cloneNode(true);
   closeIcon.classList.add('menu-close-icon');
   closeIcon.querySelector('path').setAttribute('d', 'M6 6l12 12M6 18L18 6');
   toggle.append(closeIcon);
   let menuAnimation;
-  let linkAnimations = [];
+  let navAnimation;
 
   function cancelMenuMotion() {
     menuAnimation?.cancel();
     menuAnimation = null;
-    linkAnimations.forEach(animation => animation.cancel());
-    linkAnimations = [];
+    navAnimation?.cancel();
+    navAnimation = null;
     header.classList.remove('is-menu-closing');
   }
   function syncNavAccess() {
     nav.inert = mobile.matches && !header.classList.contains('is-menu-open');
   }
   syncNavAccess();
-  function animateHeader(before, duration = 360) {
+  function animateHeader(before, duration = 240) {
     cancelMenuMotion();
     if (!mobile.matches || !Number.isFinite(before) || reducedMotion.matches) return;
     const after = header.getBoundingClientRect().height;
@@ -89,10 +103,8 @@
     if (header.classList.contains('is-menu-open') === open) return;
     const before = header.getBoundingClientRect().height;
     const wasVisible = getComputedStyle(nav).display !== 'none';
-    const previous = links.map(link => {
-      const style = getComputedStyle(link);
-      return { opacity: style.opacity, transform: style.transform };
-    });
+    const style = getComputedStyle(nav);
+    const previous = { opacity: style.opacity, transform: style.transform };
     cancelMenuMotion();
     header.classList.toggle('is-menu-open', open);
     toggle.setAttribute('aria-expanded', String(open));
@@ -104,17 +116,16 @@
     header.classList.toggle('is-menu-closing', !open);
     const animation = header.animate(
       [{ height: before + 'px', overflow: 'clip' }, { height: after + 'px', overflow: 'clip' }],
-      { duration: open ? 440 : 260, easing: 'cubic-bezier(.22, 1, .36, 1)' }
+      { duration: open ? 240 : 180, easing: 'cubic-bezier(.22, 1, .36, 1)' }
     );
     menuAnimation = animation;
-    linkAnimations = links.map((link, index) => link.animate([
-      open && !wasVisible ? { opacity: 0, transform: 'translateY(8px)' } : previous[index],
+    navAnimation = nav.animate([
+      open && !wasVisible ? { opacity: 0, transform: 'translateY(6px)' } : previous,
       { opacity: open ? 1 : 0, transform: open ? 'translateY(0)' : 'translateY(-4px)' }
     ], {
-      duration: open ? 260 : 140,
-      delay: open && !wasVisible ? 55 + index * 25 : 0,
+      duration: open ? 220 : 140,
       easing: 'cubic-bezier(.2, 0, 0, 1)', fill: 'both'
-    }));
+    });
     animation.onfinish = () => {
       if (menuAnimation === animation) cancelMenuMotion();
     };
@@ -123,6 +134,7 @@
     cancelMenuMotion();
     syncNavAccess();
   });
+  window.addEventListener('resize', () => { cancelMenuMotion(); syncNavAccess(); }, {passive: true});
 
   toggle.addEventListener("click", () => {
     closeAccount();

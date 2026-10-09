@@ -5828,7 +5828,3 @@ main {
   .event-gallery:not(.event-gallery-youth) {
     grid-template-rows: 230px 138px;
   }
-}
-late-rows: 230px 138px;
-  }
-}
