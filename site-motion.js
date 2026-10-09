@@ -1,7 +1,7 @@
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const seen = new WeakSet(), images = new WeakSet(), pending = new Set();
-  const selector = '.statement-copy,.section-head,.learn-aside,.partner,.article-note,.person-copy,.immersion-head,.section-heading,.library-copy,.event-cover-copy,.materials-copy,.gallery-heading,.footer-brand,.footer-nav,.sources-list>a,.quiz-surface,.upcoming-heading,.upcoming-copy,.report-heading,.files li';
+  const selector = '.statement-copy,.section-head,.learn-aside,.partner,.article-note,.person-copy,.immersion-head,.section-heading,.library-copy,.materials-copy,.gallery-heading,.footer-brand,.footer-nav,.sources-list>a,.quiz-surface,.upcoming-heading,.report-heading,.files li,.people-card,.upcoming-card,.event-card,.gallery-tile,.materials-preview,.event-photo,.story-heading,.people-story';
   const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -38,6 +38,11 @@
     candidates.forEach((node, i) => {
       seen.add(node);
       if (!positions[i].height || positions[i].top < innerHeight + 160) return;
+      // Reveal a row in reading order; nested elements share the parent's entrance.
+      if (node.parentElement.closest('.soft-enter')) return;
+      const siblings = [...node.parentElement.children].filter(child => child.matches(selector));
+      const columns = innerWidth <= 760 ? 2 : 4;
+      node.style.setProperty('--enter-delay', (siblings.indexOf(node) % columns) * 65 + 'ms');
       node.classList.add('soft-enter');
       pending.add(node);
       observer.observe(node);
@@ -110,4 +115,42 @@
     pending.forEach(node => node.classList.add('soft-entered'));
     pending.clear();
   });
+})();
+
+// Move only visible editorial images; preserve their independent hover transform.
+(() => {
+  if (!('IntersectionObserver' in window)) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const visible = new Set();
+  const images = [...document.querySelectorAll('.event-cover img,.materials-preview img,.people-story-image img')];
+  let frame = 0;
+  function draw() {
+    frame = 0;
+    if (reduced.matches || document.hidden) return;
+    const limit = innerWidth <= 760 ? 6 : 12;
+    visible.forEach(img => {
+      const rect = img.parentElement.closest('figure,summary,.materials-preview')?.getBoundingClientRect() || img.getBoundingClientRect();
+      const progress = Math.max(-1, Math.min(1, (rect.top + rect.height / 2 - innerHeight / 2) / innerHeight));
+      img.style.setProperty('--media-parallax-y', (progress * limit).toFixed(2) + 'px');
+    });
+  }
+  function schedule() { if (!frame && visible.size && !reduced.matches && !document.hidden) frame = requestAnimationFrame(draw); }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target));
+    schedule();
+  }, {rootMargin:'80px'});
+  function sync() {
+    cancelAnimationFrame(frame); frame = 0;
+    images.forEach(img => {
+      if (reduced.matches) { observer.unobserve(img); img.classList.remove('media-parallax'); img.style.removeProperty('--media-parallax-y'); }
+      else { img.classList.add('media-parallax'); observer.observe(img); }
+    });
+    if (reduced.matches) visible.clear();
+    schedule();
+  }
+  window.addEventListener('scroll', schedule, {passive:true});
+  window.addEventListener('resize', schedule, {passive:true});
+  document.addEventListener('visibilitychange', schedule);
+  reduced.addEventListener('change', sync);
+  sync();
 })();

@@ -1068,18 +1068,18 @@ body.home-page {
 .home-page picture.mobile-image { display: contents; }
 @media (max-width: 760px) {
   .home-page .hero {
-    background-image: linear-gradient(90deg, #0008, #0001 70%), url("assets/home-mobile-v1/hero-landscape-1280.webp");
+    background-image: linear-gradient(90deg, #0008, #0001 70%), url("assets/home-mobile-v3/hero-landscape-896.webp");
   }
   .home-page .atlas-quiz-cta {
     background-image: linear-gradient(90deg, #000b, #0005 65%, #0003);
   }
   .home-page .atlas-quiz-cta.is-media-near {
-    background-image: linear-gradient(90deg, #000b, #0005 65%, #0003), url("assets/home-mobile-v1/quiz-landscape-960.webp");
+    background-image: linear-gradient(90deg, #000b, #0005 65%, #0003), url("assets/home-mobile-v3/quiz-landscape-640.webp");
   }
   .home-page .events .event-cover::after {
     background-image: linear-gradient(180deg, #00000008 15%, #00000055 50%, #00000070 100%);
   }
   .home-page .events .event-card.is-media-near .event-cover::after {
-    background-image: linear-gradient(180deg, #00000008 15%, #00000055 50%, #00000070 100%), url("assets/home-mobile-v1/events/card-overlay-640.webp");
+    background-image: linear-gradient(180deg, #00000008 15%, #00000055 50%, #00000070 100%), url("assets/home-mobile-v3/events/card-overlay-384.webp");
   }
 }

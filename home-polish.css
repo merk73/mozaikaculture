@@ -1,4 +1,7 @@
 /* Shared rhythm for the homepage, including the new event programme. */
+.home-page main .people-card.soft-enter { opacity: 0; transform: translateY(12px); transition: opacity 520ms ease, transform 600ms cubic-bezier(.22,1,.36,1), border-color 220ms ease; transition-delay: var(--enter-delay,0ms); }
+.home-page main .people-card.soft-enter:is(.soft-entered,:focus-within) { opacity: 1; transform: none; }
+@media(prefers-reduced-motion:reduce) { .home-page main .people-card.soft-enter { opacity: 1; transform: none; } }
 .home-page { font-family: var(--font-body); }
 .home-page .atlas .card-title { position: relative; isolation: isolate; }
 .home-page .atlas .card-title h3 { position: relative; z-index: 1; }
@@ -22,6 +25,8 @@
   .home-page .atlas .people-card .card-number { font-size: clamp(64px, 16vw, 88px); }
 }
 .home-page .hero-landscape { display: none; }
+.home-page .cultural-light { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .8; }
+@media(max-width:1023px),(pointer:coarse),(prefers-reduced-motion:reduce) { .home-page .cultural-light { display: none; } }
 .home-page :is(.statement-copy h2, .section-head h2, .materials-copy h2, .partners h2, .upcoming-heading h2) {
   margin-top: 0; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.12;
   letter-spacing: -.04em; text-wrap: balance;
@@ -99,7 +104,7 @@
     -webkit-mask-image: linear-gradient(#000 64%, transparent 100%);
   }
   .home-page .hero-landscape-art {
-    position: absolute; inset: -48px 0; background: linear-gradient(180deg, #03030330, #03030350 65%, #030303a0), url('assets/home-mobile-v1/hero-landscape-1280.webp') 63% center / cover no-repeat;
+    position: absolute; inset: -48px 0; background: linear-gradient(180deg, #03030330, #03030350 65%, #030303a0), url('assets/home-mobile-v3/hero-landscape-896.webp') 63% center / cover no-repeat;
   }
   .home-page .hero-landscape-art.is-parallax-active { will-change: transform; }
   .home-page .hero-portrait {
@@ -141,7 +146,7 @@
   .home-page .hero-introduction .hero-links { margin-top: 0; gap: 12px; }
   .home-page .hero-introduction .button { width: 100%; }
   .home-page .atlas .people-card::before {
-    background-image: linear-gradient(180deg, transparent 25%, #03030355 48%, #030303f2 100%), url('assets/home-mobile-v1/events/card-overlay-640.webp');
+    background-image: linear-gradient(180deg, transparent 25%, #03030355 48%, #030303f2 100%), url('assets/home-mobile-v3/events/card-overlay-384.webp');
   }
   .home-page .upcoming-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .home-page .upcoming-card { border-radius: 20px; }
@@ -152,8 +157,8 @@
   .home-page .upcoming-date { flex-direction: column; align-items: flex-start; margin-bottom: 12px; font-size: 12px; }
   .home-page .upcoming-description { margin-top: 12px; font-size: 13px; line-height: 1.5; }
   .home-page .upcoming-place { margin-top: 16px; padding-top: 12px; font-size: 12px; overflow-wrap: anywhere; }
-  .home-page .atlas-quiz-cta.is-media-near { background-image: linear-gradient(90deg,#000b,#0005 65%,#0003),url('assets/home-mobile-v1/quiz-landscape-960.webp'); }
-  .home-page .events .event-card.is-media-near .event-cover::after { background-image: linear-gradient(180deg,#00000008 15%,#00000055 50%,#00000070 100%),url('assets/home-mobile-v1/events/card-overlay-640.webp'); }
+  .home-page .atlas-quiz-cta.is-media-near { background-image: linear-gradient(90deg,#000b,#0005 65%,#0003),url('assets/home-mobile-v3/quiz-landscape-640.webp'); }
+  .home-page .events .event-card.is-media-near .event-cover::after { background-image: linear-gradient(180deg,#00000008 15%,#00000055 50%,#00000070 100%),url('assets/home-mobile-v3/events/card-overlay-384.webp'); }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-page :is(.atlas .card-portrait, .event-cover, .event-photo, .materials-preview) img.media-image { transition: none; }

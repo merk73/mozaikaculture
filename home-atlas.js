@@ -14,13 +14,13 @@
     const nodes = visible.map((person, index) => {
       if (!cards.has(person.slug)) {
       const imageBase = person.image.replace(/-1024\.webp$/, '');
-      const mobileImage = imageBase.replace('assets/site-images-v1/people/', 'assets/home-mobile-v1/people/');
+      const mobileImage = imageBase.replace('assets/site-images-v1/people/', 'assets/home-mobile-v3/people/');
       const template = document.createElement('template');
       template.innerHTML = `
         <a class="people-card motion-reveal tilt-card" href="peoples/${person.slug}.html" style="--motion-delay: ${Math.min(index * 30, 210)}ms">
           <span class="card-hover-art" aria-hidden="true" data-card-background-mobile="${person.cardBackgroundMobile}" style="--card-background: url('${person.cardBackground}'); --card-background-mobile: url('${person.cardBackgroundMobile}')"></span><figure class="card-portrait" aria-hidden="true">
             <picture>
-              <source media="(max-width: 760px)" type="image/webp" srcset="${mobileImage}-320.webp 320w, ${mobileImage}-512.webp 512w, ${mobileImage}-768.webp 768w" sizes="calc(72vw - 36px)" />
+              <source media="(max-width: 760px)" type="image/webp" srcset="${mobileImage}-256.webp 256w, ${mobileImage}-384.webp 384w, ${mobileImage}-512.webp 512w" sizes="calc(50vw - 26px)" />
               <source type="image/webp" srcset="${imageBase}-320.webp 320w, ${imageBase}-512.webp 512w, ${imageBase}-768.webp 768w, ${imageBase}-1024.webp 1024w" sizes="(min-width: 1200px) 25vw, (min-width: 761px) 33vw, 72vw" />
               <img src="${person.image}" alt="" width="1254" height="1254" loading="${preloadPortraits ? 'eager' : 'lazy'}" decoding="async" />
             </picture>

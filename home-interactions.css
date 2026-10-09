@@ -3,11 +3,19 @@
 .home-page .atlas .card-portrait { z-index: 1; }
 .home-page .atlas .people-card::before { inset: 0; height: auto; z-index: 2; opacity: 1; background: linear-gradient(180deg, transparent 25%, #03030355 48%, #030303f2 100%); }
 .home-page .atlas .people-card::after { display: none; }
-.home-page .atlas .people-card .card-portrait img { transform: scale(1); transform-origin: center bottom; transition: transform 540ms cubic-bezier(.2, .7, .2, 1); }
+.home-page .atlas .card-hover-art::after {
+  content: ''; display: block; position: absolute; inset: 0; width: auto; height: auto; border-radius: 0;
+  background: linear-gradient(to top, #f11222f2 0%, #e00a22b8 38%, #b6002066 66%, transparent 100%);
+  opacity: 0; transform: translateY(48%); pointer-events: none;
+  transition: transform 720ms cubic-bezier(.22,1,.36,1), opacity 540ms ease;
+}
+.home-page .atlas .people-card .card-portrait img { transform: scale(1); transform-origin: center bottom; transition: transform 540ms cubic-bezier(.2, .7, .2, 1), opacity 380ms ease; }
 @media (hover: hover) and (pointer: fine) {
   .home-page .atlas .people-card:hover .card-portrait img { transform: scale(1.045); }
   .home-page .atlas .people-card:hover .card-hover-art { transform: scale(1.075); }
+  .home-page .atlas .people-card:hover .card-hover-art::after { opacity: 1; transform: translateY(0); }
 }
+.home-page .atlas .people-card:focus-visible .card-hover-art::after { opacity: 1; transform: translateY(0); }
 .home-page .atlas .people-card:focus-visible .card-hover-art { transform: scale(1.075); }
 .home-page .atlas .people-card:focus-visible .card-portrait img { transform: scale(1.045); }
 @media (max-width: 760px) {
