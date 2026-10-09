@@ -10,6 +10,7 @@ const files = [
   "index.html",
   "quiz.html",
   "gallery.html",
+  "site.webmanifest",
   "gallery.css",
   "gallery.js",
   "mobile-loader.js",

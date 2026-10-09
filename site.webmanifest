@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "Мозаика культур",
+  "short_name": "Мозаика культур",
+  "description": "Образовательный проект о коренных народах Дальнего Востока",
+  "lang": "ru",
+  "start_url": "./index.html#top",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#030303",
+  "theme_color": "#030303",
+  "icons": [
+    {"src": "assets/app-icons-v1/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "assets/app-icons-v1/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "assets/app-icons-v1/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
