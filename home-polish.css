@@ -25,8 +25,6 @@
   .home-page .atlas .people-card .card-number { font-size: clamp(64px, 16vw, 88px); }
 }
 .home-page .hero-landscape { display: none; }
-.home-page .cultural-light { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .8; }
-@media(max-width:1023px),(pointer:coarse),(prefers-reduced-motion:reduce) { .home-page .cultural-light { display: none; } }
 .home-page :is(.statement-copy h2, .section-head h2, .materials-copy h2, .partners h2, .upcoming-heading h2) {
   margin-top: 0; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.12;
   letter-spacing: -.04em; text-wrap: balance;

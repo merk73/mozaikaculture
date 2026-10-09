@@ -26,7 +26,6 @@ const files = [
   "site-shell.css",
   "site-motion.css",
   "site-motion.js",
-  "desktop-effects.js",
   "content.js",
   "far-east-peoples.js",
   "script.js",
