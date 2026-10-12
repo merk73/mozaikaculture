@@ -58,7 +58,10 @@ for (const file of optionalFiles) {
 }
 
 for (const directory of directories) {
-  await cp(path.join(root, directory), path.join(dist, directory), { recursive: true });
+  await cp(path.join(root, directory), path.join(dist, directory), {
+    recursive: true,
+    filter: source => !source.endsWith('.inspect.ndjson'),
+  });
 }
 
 const config = {
