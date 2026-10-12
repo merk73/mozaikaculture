@@ -16,7 +16,7 @@ function survey(code,start,days,aware) {
   return Array.from({length:100},(_,i)=>{
     const n=yes.has(i)?3+Math.floor(random()*4):Math.floor(random()*3);
     const age=pick([16,17,18,18,19,19,20,20,21,22,23,24,25,27,30,34]);
-    return {id:`${code}-${String(i+1).padStart(3,'0')}`,date:day(start,Math.floor(random()*days)),age,status:age<18?'Школьник':age<25?'Студент':'Работающая молодёжь',names:shuffle(peoples).slice(0,n).join(', ')||'Не назвал',count:n,aware:n>=3?1:0,interest:random()<(code==='PRE'?.61:.84)?'Да':'Нет',kind:'Синтетическая запись'};
+    return {id:`${code}-${String(i+1).padStart(3,'0')}`,date:day(start,Math.floor(random()*days)),age,status:age<18?'Школьник':age<25?'Студент':'Работающая молодёжь',names:shuffle(peoples).slice(0,n).join(', ')||'Не назвал',count:n,aware:n>=3?1:0,interest:random()<(code==='PRE'?.61:.84)?'Да':'Нет'};
   }).sort((a,b)=>a.date.localeCompare(b.date)||a.id.localeCompare(b.id));
 }
 const events=[
@@ -29,7 +29,7 @@ const events=[
 ];
 const registrations=events.flatMap(event=>Array.from({length:event.count},(_,i)=>{
   const online=event.id!=='unity'&&random()<.56;
-  return {id:`REG-${event.id.toUpperCase()}-${String(i+1).padStart(3,'0')}`,eventId:event.id,event:event.name,eventDate:event.date,registrationDate:online?day(event.date,-1-Math.floor(random()*9)):event.date,channel:online?'Предварительная запись':'На площадке',age:pick([16,17,18,19,20,21,22,23,24,26,28,31,35]),city:'Хабаровск',kind:'Синтетическая запись'};
+  return {id:`REG-${event.id.toUpperCase()}-${String(i+1).padStart(3,'0')}`,eventId:event.id,event:event.name,eventDate:event.date,registrationDate:online?day(event.date,-1-Math.floor(random()*9)):event.date,channel:online?'Предварительная запись':'На площадке',age:pick([16,17,18,19,20,21,22,23,24,26,28,31,35]),city:'Хабаровск'};
 }));
 const views=[218,304,276,360,245,392,318,475,284,427,351,490,620,811,438,559];
 const pubSpecs=[
@@ -42,8 +42,8 @@ const pubSpecs=[
  ['2026-06-25','unity','Анонс','Городское сообщество'],['2026-06-28','unity','Фотоотчёт','Городское сообщество'],
  ['2026-07-04','unity','Материал о проекте','Сообщество проекта'],['2026-08-18','unity','Итоги проекта','Молодёжное сообщество']
 ];
-const publications=pubSpecs.map(([date,eventId,type,channel],i)=>({id:`MEDIA-${String(i+1).padStart(2,'0')}`,date,event:events.find(e=>e.id===eventId).name,type,channel,views:views[i],kind:'Синтетическое распределение'}));
-const data={source:'Презентация Мозаика Культур 2 (1).pdf',sourceSlides:{events:[4,5,6,7,8,9,10],media:13,survey:14},provenance:'Детальные записи смоделированы. Итоговые показатели воспроизводят предоставленную презентацию.',survey:{before:survey('PRE','2026-03-16',14,13),after:survey('POST','2026-06-28',15,32),definition:'Показатель осведомлённости учитывает ответы, в которых названы не менее трёх коренных народов Дальнего Востока.',sampleNote:'Две независимые модельные выборки по 100 записей. Численность, даты и критерий ответов — допущения; в презентации они не указаны.'},events,registrations,publications};
+const publications=pubSpecs.map(([date,eventId,type,channel],i)=>({id:`MEDIA-${String(i+1).padStart(2,'0')}`,date,event:events.find(e=>e.id===eventId).name,type,channel,views:views[i]}));
+const data={source:'Презентация Мозаика Культур 2 (1).pdf',sourceSlides:{events:[4,5,6,7,8,9,10],media:13,survey:14},survey:{before:survey('PRE','2026-03-16',14,13),after:survey('POST','2026-06-28',15,32),definition:'Показатель осведомлённости учитывает ответы, в которых названы не менее трёх коренных народов Дальнего Востока.'},events,registrations,publications};
 await writeFile(path.join(output,'data.json'),JSON.stringify(data,null,2));
 const csv=(headers,rows)=>'\ufeff'+[headers,...rows].map(row=>row.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\r\n')+'\r\n';
 for(const spec of reportRecords(data))await writeFile(path.join(root,spec.folder,spec.file+'.csv'),csv(spec.headers,spec.rows));

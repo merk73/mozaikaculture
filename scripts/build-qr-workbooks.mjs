@@ -13,7 +13,6 @@ const data=JSON.parse(await fs.readFile(path.join(out,'data.json'),'utf8'));
 const palette={ink:'#191919',muted:'#666666',red:'#E72432',rule:'#D9D4CC'};
 const excelDate=value=>(Date.parse(value+'T00:00:00Z')-Date.UTC(1899,11,30))/86400000;
 const col=i=>String.fromCharCode(65+i);
-const origin='Детальные записи смоделированы. Итоговые показатели — из презентации проекта.';
 function header(s,range){
   s.getRange(range).format.fill=palette.ink;
   s.getRange(range).format.font={name:'Arial',size:11,bold:true,color:'#FFFFFF'};
@@ -72,7 +71,7 @@ for(const spec of reportRecords(data)){
     s.getRange('B17').values=[['Итого']];s.getRange('C17:D17').formulas=[['=SUM(C14:C16)','=SUM(D14:D16)']];s.getRange('D14:D17').setNumberFormat('0.0%');total(s,'B17:D17');
     s.getRange('B21:D23').values=[['Ответ','Количество','Доля'],['Осведомлены',null,null],['Не осведомлены',null,null]];header(s,'B21:D21');
     s.getRange('C22:D23').formulas=[['=C8','=C22/$C$7'],['=C7-C8','=C23/$C$7']];s.getRange('D22:D23').setNumberFormat('0.0%');chart(s,'bar','B21:C23','Осведомлённость респондентов','G7','N24');
-    note(s,27,origin);note(s,28,'Выборка: 100 ответов. Критерий: названы не менее трёх народов.');note(s,29,'Контрольная доля: презентация «Мозаика Культур 2 (1)», слайд 14.');
+    note(s,27,'Выборка: 100 ответов. Критерий: названы не менее трёх народов.');note(s,28,'Источник итогового показателя: «Мозаика Культур 2 (1)», слайд 14.');
     wb.recalculate();assert.equal(s.getRange('C8').values[0][0],expected);assert.equal(s.getRange('C17').values[0][0],100);
     const index=spec.rows.findIndex(row=>!row[6]),cell=r.getRange(`G${index+2}`);cell.values=[[true]];wb.recalculate();assert.equal(s.getRange('C8').values[0][0],expected+1);cell.values=[[false]];
     await finish(wb,spec,'A1:O31');
@@ -87,7 +86,7 @@ for(const spec of reportRecords(data)){
     s.getRange('C25:D26').formulas=[25,26].map(i=>[`=COUNTIFS('${spec.sheet}'!$F$2:$F$${last},B${i})`,`=C${i}/$C$7`]);s.getRange('D25:D26').setNumberFormat('0.0%');
     s.getRange('G28:G34').format.columnWidth=22;
     s.getRange('G28:H34').values=[['Мероприятие','Посещения'],...data.events.map(e=>[e.short,null])];s.getRange('H29:H34').formulas=data.events.map((_,i)=>[`=D${i+14}`]);chart(s,'bar','G28:H34','Посещения по мероприятиям','G7','O25');
-    note(s,37,origin);note(s,38,'Учёт посещений. Один человек мог посетить несколько мероприятий.');note(s,39,'На фестивале молодёжи 27 июня учтено 326 посещений.');
+    note(s,37,'Учёт посещений. Один человек мог посетить несколько мероприятий.');note(s,38,'На фестивале молодёжи 27 июня учтено 326 посещений.');
     wb.recalculate();assert.equal(s.getRange('D20').values[0][0],517);assert.equal(s.getRange('C25:C26').values.flat().reduce((a,b)=>a+b,0),517);
     const cell=r.getRange('C2'),original=cell.values[0][0];cell.values=[[data.events[1].name]];wb.recalculate();assert.equal(s.getRange('D14').values[0][0],24);assert.equal(s.getRange('D15').values[0][0],36);cell.values=[[original]];
     await finish(wb,spec,'A1:O41');
@@ -104,7 +103,7 @@ for(const spec of reportRecords(data)){
     });
     s.getRange('B30').values=[['Итого']];s.getRange('C30:E30').formulas=[['=SUM(C24:C29)','=SUM(D24:D29)','=E29']];total(s,'B30:E30');s.getRange('D14:D30').setNumberFormat('#,##0');s.getRange('E24:E30').setNumberFormat('#,##0');
     chart(s,'bar',['B13:B17','D13:D17'],'Просмотры по форматам','G7','O21');chart(s,'line',['B23:B29','D23:D29'],'Просмотры по месяцам','G23','O37');
-    note(s,40,origin);note(s,41,'16 публикаций и 6 568 просмотров: слайд 13. Даты и распределения заданы в модели.');
+    note(s,40,'Источник итоговых показателей: «Мозаика Культур 2 (1)», слайд 13.');
     wb.recalculate();assert.equal(s.getRange('C7').values[0][0],16);assert.equal(s.getRange('D30').values[0][0],6568);
     const cell=r.getRange('F2'),original=cell.values[0][0];cell.values=[[original+10]];wb.recalculate();assert.equal(s.getRange('C8').values[0][0],6578);assert.equal(s.getRange('D24').values[0][0],532);cell.values=[[original]];
     await finish(wb,spec,'A1:O43');
