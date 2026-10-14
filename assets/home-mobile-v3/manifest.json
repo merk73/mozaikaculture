@@ -1275,17 +1275,17 @@
     ]
   },
   "assets/events/upcoming/ethnocode-unity-397.webp": {
-    "quality": 55,
+    "quality": 80,
     "variants": [
       {
         "src": "assets/home-mobile-v3/upcoming/ethnocode-unity-240.webp",
         "width": 240,
-        "bytes": 18276
+        "bytes": 23392
       },
       {
         "src": "assets/home-mobile-v3/upcoming/ethnocode-unity-384.webp",
         "width": 384,
-        "bytes": 32560
+        "bytes": 37792
       }
     ]
   },
