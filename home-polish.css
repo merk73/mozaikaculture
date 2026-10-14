@@ -49,6 +49,7 @@
 .home-page .upcoming-card { min-width: 0; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
 .home-page .upcoming-poster { display: block; position: relative; overflow: hidden; background: #efeeea; }
 .home-page .upcoming-poster img { display: block; width: 100%; height: auto; aspect-ratio: 9/16; object-fit: contain; }
+.home-page #upcoming-ethnocode-unity .upcoming-poster img { aspect-ratio: auto; }
 .home-page .upcoming-poster-link {
   position: absolute; bottom: 14px; right: 14px; left: 14px; display: flex; align-items: center;
   justify-content: space-between; gap: 12px; min-height: 44px; padding: 10px 14px;
