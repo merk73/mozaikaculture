@@ -38,7 +38,7 @@ const files = [
   "quiz.js",
 ];
 
-const directories = ["assets", "peoples", "articles", "beta", "results", "forms", "events-results", "media", "Slides"];
+const directories = ["assets", "peoples", "articles", "beta", "results", "forms", "events-results", "media", "Slides", "slides"];
 const optionalFiles = ["_headers", "_redirects", ".nojekyll"];
 
 await generateHomeData();
