@@ -595,9 +595,7 @@ function setAuthMode(mode) {
   });
   if (authSubmit) authSubmit.textContent = mode === "register" ? "Создать аккаунт" : "Войти";
   const title = document.getElementById('auth-title');
-  if (title) title.textContent = mode === 'register' ? 'Создайте аккаунт' : 'Вход в Мозаику';
-  const note = authModal?.querySelector('.auth-note');
-  if (note) note.textContent = mode === 'register' ? 'Сохраняйте результат квиза и возвращайтесь к нему в личном кабинете.' : 'Войдите, чтобы результат квиза сохранился в вашем аккаунте.';
+  if (title) title.textContent = mode === 'register' ? 'Регистрация' : 'Вход в личный кабинет';
   if (authNameField) {
     const input = authNameField.querySelector("input");
     const isRegister = mode === "register";
@@ -634,19 +632,8 @@ function renderProfile() {
   if (profileName) profileName.textContent = currentUserName || getFallbackName(currentUserEmail);
   if (profileEmail) profileEmail.textContent = currentUserEmail;
   if (profileQuizResult) {
-    profileQuizResult.innerHTML = `
-      <strong>Загружаю...</strong>
-      <p>Проверяю сохраненный результат квиза.</p>
-    `;
+    profileQuizResult.textContent = 'Загружаем результат…';
   }
-}
-
-function renderProfileQuizEmpty(text = "После прохождения квиза здесь появятся баллы и процент.") {
-  if (!profileQuizResult) return;
-  profileQuizResult.innerHTML = `
-    <strong>Пока нет результата</strong>
-    <p>${text}</p>
-  `;
 }
 
 async function loadProfileQuizResult() {
@@ -659,12 +646,12 @@ async function loadProfileQuizResult() {
     .maybeSingle();
 
   if (error) {
-    renderProfileQuizEmpty("Результат появится здесь после прохождения квиза.");
+    profileQuizResult.textContent = 'Не удалось загрузить результат. Попробуйте позже.';
     return;
   }
 
   if (!data) {
-    renderProfileQuizEmpty();
+    profileQuizResult.textContent = 'Пока нет результата';
     return;
   }
 
@@ -675,9 +662,9 @@ async function loadProfileQuizResult() {
 
   profileQuizResult.style.setProperty("--profile-percent", `${Math.max(0, Math.min(percent, 100))}%`);
   profileQuizResult.innerHTML = `
-    <strong>${score} из ${total} · ${percent}%</strong>
+    <strong>${score} из ${total} правильно</strong>
     <div class="profile-result-meter" aria-hidden="true"><span></span></div>
-    <p>${date ? `Пройдено: ${date}. ` : ""}Повторное прохождение закрыто, результат сохранен в личном кабинете.</p>
+    <p>${date ? `Пройдено ${date}. ` : ""}В аккаунте доступна одна попытка.</p>
   `;
 }
 
