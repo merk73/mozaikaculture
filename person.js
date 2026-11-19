@@ -16,9 +16,8 @@
   const imageAttributes = (item, hero = false) => `width="${item.imageWidth || 1254}" height="${item.imageHeight || 1254}"${item.imageSrcset ? ` srcset="${escape(item.imageSrcset)}" sizes="${hero ? '(min-width: 1000px) 45vw, 100vw' : '(min-width: 1000px) 800px, 100vw'}"` : ''}`;
   const sections = research.sections.map(([title, text, source], i) => `
     <section class="people-chapter" id="chapter-${i + 1}" aria-labelledby="chapter-title-${i + 1}">
-      <span class="chapter-number" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
-      <div><h2 id="chapter-title-${i + 1}">${escape(title)}</h2><p>${escape(text)}</p>
-      <a class="chapter-source" href="#source-${source}">Источник ${sourceKeys.indexOf(source) + 1} ${arrow}</a></div>
+      <h2 id="chapter-title-${i + 1}">${escape(title)}</h2><p>${escape(text)}</p>
+      <a class="chapter-source" href="#source-${source}">Источник ${sourceKeys.indexOf(source) + 1} ${arrow}</a>
     </section>${illustrations[i] ? `<figure class="people-story-image"><img src="${escape(illustrations[i].image)}" ${imageAttributes(illustrations[i])} alt="${escape(illustrations[i].title)}" loading="lazy" decoding="async" /><figcaption><span>${escape(illustrations[i].title)}</span><span>Иллюстрация проекта</span></figcaption></figure>` : ''}`).join('');
   const next = people[(people.indexOf(person) + 1) % people.length];
   const words = research.sections.reduce((sum, [, text]) => sum + text.split(/\s+/).length, 0) + person.summary.split(/\s+/).length;
@@ -28,30 +27,29 @@
     <section class="people-intro" aria-labelledby="people-title">
       <div class="people-intro-copy">
         <a class="people-back" href="../index.html#atlas">${arrow} Все народы атласа</a>
-        <p class="overline">${escape(person.region)}</p>
         <h1 id="people-title">${escape(person.name)}</h1>
         <p class="people-lead">${escape(person.lead)}</p>
-        <div class="people-meta"><span>История · язык · культура</span><span>${Math.max(2, Math.ceil(words / 150))} мин чтения</span></div>
+        <p class="people-meta">${Math.max(2, Math.ceil(words / 150))} мин чтения</p>
       </div>
       <figure class="people-intro-art"><img src="${escape(person.image)}" ${imageAttributes(person, true)} alt="Иллюстрация к материалу: ${escape(person.name)}" decoding="async" /><figcaption>Иллюстрация проекта</figcaption></figure>
     </section>
     <div class="people-reading">
-      <aside class="people-index"><nav aria-label="Содержание статьи"><p class="overline">В этой истории</p>
+      <aside class="people-index"><nav aria-label="Содержание статьи">
         <a href="#overview">Коротко о народе</a>
-        ${research.sections.map(([title], i) => `<a href="#chapter-${i + 1}"><span aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>${escape(title)}</a>`).join('')}
+        ${research.sections.map(([title], i) => `<a href="#chapter-${i + 1}">${escape(title)}</a>`).join('')}
         <a href="#people-sources">Источники</a>
       </nav></aside>
       <div class="people-article">
-        <section class="people-overview" id="overview" aria-labelledby="overview-title"><p class="overline">Знакомство</p><h2 id="overview-title">Коротко о народе</h2><p>${escape(person.summary)}</p>
+        <section class="people-overview" id="overview" aria-labelledby="overview-title"><h2 id="overview-title">Коротко о народе</h2><p>${escape(person.summary)}</p>
           <dl><div><dt>Территория</dt><dd>${escape(person.region)}</dd></div><div><dt>Язык</dt><dd>${escape(person.language)}</dd></div></dl>
         </section>
         ${sections}
-        <section class="people-references" id="people-sources" aria-labelledby="sources-title"><p class="overline">Читать дальше</p><h2 id="sources-title">Источники и материалы</h2>
+        <section class="people-references" id="people-sources" aria-labelledby="sources-title"><h2 id="sources-title">Источники и материалы</h2>
           <p class="people-source-note">Исторические описания относятся к указанным в источниках эпохам. Переписная численность народа и число говорящих на его языке - разные показатели.</p>
           <ol>${sourceKeys.map(key => `<li id="source-${key}"><a href="${sources[key].url}" target="_blank" rel="noopener noreferrer"><span><strong>${escape(sources[key].title)}</strong><small>${escape(sources[key].publisher)}</small></span>${arrow}<span class="visually-hidden"> (в новой вкладке)</span></a></li>`).join('')}</ol>
-          <p class="people-reviewed">Сверено по указанным материалам · 20 сентября 2026</p>
+          <p class="people-reviewed">Сверено по источникам 20 сентября 2026 года.</p>
         </section>
       </div>
     </div>
-    <footer class="people-next"><div><p class="overline">Продолжить знакомство</p><h2>${escape(next.name)}</h2><p>${escape(next.region)}</p></div><a class="button" href="${escape(next.slug)}.html">Следующая история ${arrow}</a><a class="people-return" href="../index.html#atlas">Вернуться в атлас</a></footer>`;
+    <footer class="people-next"><div><h2>${escape(next.name)}</h2><p>${escape(next.region)}</p></div><a class="button" href="${escape(next.slug)}.html">Следующая статья ${arrow}</a><a class="people-return" href="../index.html#atlas">Вернуться в атлас</a></footer>`;
 })();

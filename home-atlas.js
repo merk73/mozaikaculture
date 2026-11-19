@@ -27,8 +27,7 @@
           </figure>
           <div class="card-meta"><span>${person.areaLabel}</span><span>${person.region}</span></div>
           <div class="card-body">
-            <div class="card-title"><span class="card-number" aria-hidden="true">${String(peoples.indexOf(person) + 1).padStart(2, '0')}</span>
-            <h3>${person.name}</h3></div><p>${person.cardText || person.summary}</p>
+            <h3>${person.name}</h3><p>${person.cardText || person.summary}</p>
           </div>
           <span class="card-link">Открыть страницу</span>
         </a>`;

@@ -14,7 +14,6 @@ const mapRegion = document.querySelector("[data-map-region]");
 const mapText = document.querySelector("[data-map-text]");
 const mapLink = document.querySelector("[data-map-link]");
 const mapImage = document.querySelector("[data-map-image]");
-const detailNumber = document.querySelector(".detail-number");
 const peopleGrid = document.querySelector("[data-people-grid]");
 const peopleSearch = document.querySelector("[data-people-search]");
 const emptyState = document.querySelector("[data-empty-state]");
@@ -25,15 +24,14 @@ function pageLink(slug) {
   return `../peoples/${slug}.html`;
 }
 
-function renderMapDetail(person, index) {
+function renderMapDetail(person) {
   if (!person) return;
   mapName.textContent = person.name;
   mapRegion.textContent = person.region || person.areaLabel || "Дальний Восток";
-  mapText.textContent = person.cardText || person.summary || "Откройте страницу народа, чтобы узнать больше.";
+  mapText.textContent = person.cardText || person.summary || "";
   mapLink.href = pageLink(person.slug);
   mapImage.src = person.image;
   mapImage.alt = `Иллюстрация: ${person.name}`;
-  detailNumber.textContent = String(index + 1).padStart(2, "0");
   mapAnimation?.cancel();
   if (!reducedMotion.matches) mapAnimation = mapDetail.animate(
     [{ opacity: 0.55, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }],
@@ -42,7 +40,7 @@ function renderMapDetail(person, index) {
 }
 
 function renderMap() {
-  people.forEach((person, index) => {
+  people.forEach(person => {
     const position = locations[person.slug] || [50, 50];
     const button = document.createElement("button");
     button.className = "map-point";
@@ -54,7 +52,7 @@ function renderMap() {
       mapPoints.querySelectorAll(".map-point").forEach((point) => { point.classList.remove("is-active"); point.setAttribute('aria-pressed','false'); });
       button.classList.add("is-active");
       button.setAttribute('aria-pressed','true');
-      renderMapDetail(person, index);
+      renderMapDetail(person);
     });
     mapPoints.append(button);
     button.setAttribute('aria-pressed','false');
@@ -64,7 +62,7 @@ function renderMap() {
   const firstPoint = mapPoints.querySelector(".map-point");
   firstPoint?.classList.add("is-active");
   firstPoint?.setAttribute('aria-pressed','true');
-  renderMapDetail(first, 0);
+  renderMapDetail(first);
 }
 
 function createPeopleCard(person, index) {
@@ -75,10 +73,10 @@ function createPeopleCard(person, index) {
   card.dataset.search = `${person.name} ${person.region || ""} ${person.areaLabel || ""}`.toLowerCase();
   card.style.setProperty("--reveal-index", String(index % 5));
   card.innerHTML = `
-    <div class="card-meta"><span>${String(index + 1).padStart(2, "0")}</span><span>${person.areaLabel || "Дальний Восток"}</span></div>
+    <div class="card-meta">${person.areaLabel || "Дальний Восток"}</div>
     <img src="${person.image}" alt="" loading="lazy" />
     <h3>${person.name}</h3>
-    <p>${person.cardText || person.summary || "Открыть материал о народе."}</p>
+    <p>${person.cardText || person.summary || ""}</p>
   `;
   return card;
 }

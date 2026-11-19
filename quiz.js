@@ -176,20 +176,18 @@ const root = document.querySelector('[data-online-quiz]');
 const stepNode = document.querySelector('[data-quiz-step]');
 const scoreNode = document.querySelector('[data-quiz-score]');
 const progressNode = document.querySelector('[data-quiz-progress]');
-const kickerNode = document.querySelector('[data-quiz-kicker]');
+const topicNode = document.querySelector('[data-quiz-topic]');
 const questionNode = document.querySelector('[data-quiz-question]');
 const optionsNode = document.querySelector('[data-quiz-options]');
 const prevButton = document.querySelector('[data-quiz-prev]');
 const nextButton = document.querySelector('[data-quiz-next]');
 const resultsNode = document.querySelector('[data-quiz-results]');
 const resultTitle = document.querySelector('[data-result-title]');
-const resultSummary = document.querySelector('[data-result-summary]');
 const resultList = document.querySelector('[data-result-list]');
 const restartButton = document.querySelector('[data-quiz-restart]');
 const quizSurface = document.querySelector('.quiz-surface');
 const quizLock = document.querySelector('[data-quiz-lock]');
 const storageNotice = document.querySelector('[data-quiz-storage]');
-const modeNode = document.querySelector('[data-quiz-mode]');
 const resultStorage = document.querySelector('[data-result-storage]');
 const config = window.MOZAIKA_CONFIG || {};
 let supabaseClient = window.supabase?.createClient && config.SUPABASE_URL && config.SUPABASE_ANON_KEY
@@ -239,27 +237,24 @@ function restoreGuestProgress() {
   } catch {}
 }
 function updateMode() {
-  modeNode.textContent = currentUser ? 'В аккаунте' : 'Без регистрации';
   storageNotice.textContent = currentUser
-    ? 'Результат этой попытки сохранится в вашем аккаунте.'
-    : 'Прогресс и результат сохранятся в этом браузере. При очистке данных сайта они удалятся.';
+    ? 'Результат сохранится в вашем аккаунте.'
+    : 'Без аккаунта прогресс и результат сохраняются в этом браузере.';
 }
 function renderQuestion(moveFocus = false) {
   const item = questions[state.index];
   stepNode.textContent = `Вопрос ${state.index + 1} из ${questions.length}`;
   scoreNode.textContent = `Отвечено: ${state.answers.filter(Boolean).length}`;
   progressNode.style.width = `${((state.index + 1) / questions.length) * 100}%`;
-  kickerNode.textContent = item.topic;
+  topicNode.textContent = item.topic;
   questionNode.textContent = item.question;
-  optionsNode.replaceChildren(...state.optionOrders[state.index].map((option, index) => {
+  optionsNode.replaceChildren(...state.optionOrders[state.index].map(option => {
     const button = document.createElement('button');
     button.type = 'button';
     button.dataset.answer = option;
     button.setAttribute('aria-pressed', String(state.answers[state.index] === option));
     button.classList.toggle('is-selected', state.answers[state.index] === option);
-    const number = document.createElement('span'); number.className = 'answer-number'; number.textContent = String(index + 1).padStart(2,'0'); number.setAttribute('aria-hidden','true');
-    const text = document.createElement('span'); text.textContent = option;
-    button.append(number, text);
+    button.textContent = option;
     return button;
   }));
   prevButton.disabled = state.index === 0;
@@ -276,16 +271,17 @@ function buildResultDetails() {
   const correct = details.filter(item=>item.isCorrect).length;
   return { correct, percent: Math.round(correct/questions.length*100), details };
 }
-function renderSavedResults({correct,percent,details,savedAt,alreadyPassed=false}, storage='guest') {
+function renderSavedResults({correct,details,savedAt}, storage='guest') {
   quizSurface.hidden = true; quizLock.hidden = true; resultsNode.hidden = false;
-  resultTitle.textContent = `${correct} из ${questions.length}`;
-  resultSummary.textContent = alreadyPassed ? 'Ваш сохранённый результат. Откройте любой вопрос, чтобы посмотреть разбор.'
-    : percent>=80 ? 'Вы хорошо знаете народы Дальнего Востока. Посмотрите, какие темы удалось разобрать точнее всего.'
-    : percent>=55 ? 'Хорошее начало. Разбор ответов поможет закрепить знания.' : 'Каждый вопрос - повод узнать больше. Посмотрите объяснения и вернитесь к атласу.';
-  resultStorage.textContent = savedAt ? `${storage==='account'?'Сохранено в аккаунте':'Сохранено только в этом браузере'} · ${new Date(savedAt).toLocaleDateString('ru-RU')}` : 'Сохраняем результат…';
+  resultTitle.textContent = `${correct} из ${questions.length} верно`;
+  const destination = storage === 'account' ? 'в аккаунте' : 'в этом браузере';
+  resultStorage.textContent = savedAt
+    ? `Результат от ${new Date(savedAt).toLocaleDateString('ru-RU')} сохранён ${destination}.`
+    : 'Сохраняем результат…';
   resultList.innerHTML = questions.map((item,index)=>{
     const detail=details[index] || {};
-    return `<details class="quiz-review-item ${detail.isCorrect?'is-correct':'is-wrong'}"><summary><span class="review-number">${String(index+1).padStart(2,'0')}</span><span>${escapeHtml(item.topic)}<strong>${escapeHtml(item.question)}</strong></span><span class="review-status">${detail.isCorrect?'Верно':'Разобрать'}</span></summary><div class="review-explanation"><p><strong>Ваш ответ:</strong> ${escapeHtml(detail.answer || 'Нет ответа')}</p><p><strong>Правильный ответ:</strong> ${escapeHtml(item.answer)}</p><p>${escapeHtml(item.note)}</p></div></details>`;
+    const userAnswer = detail.isCorrect ? '' : `<p><strong>Ваш ответ:</strong> ${escapeHtml(detail.answer || 'Нет ответа')}</p>`;
+    return `<details class="quiz-review-item ${detail.isCorrect?'is-correct':'is-wrong'}"><summary><span class="review-number">${String(index+1)}</span><span>${escapeHtml(item.topic)}<strong>${escapeHtml(item.question)}</strong></span><span class="review-status">${detail.isCorrect?'Верно':'Ошибка'}</span></summary><div class="review-explanation">${userAnswer}<p><strong>Правильный ответ:</strong> ${escapeHtml(item.answer)}</p><p>${escapeHtml(item.note)}</p></div></details>`;
   }).join('');
   restartButton.hidden = Boolean(currentUser);
   resultTitle.focus({preventScroll:true});
@@ -305,7 +301,7 @@ async function showResults() {
   renderSavedResults(result);
   try {
     const saved=await saveQuizResult(result);
-    resultStorage.textContent = saved.savedAt ? (saved.storage==='guest'?'Сохранено только в этом браузере. В аккаунт результат не отправлялся.':'Результат сохранён в аккаунте.') : 'Браузер не разрешил сохранить данные. Результат доступен до закрытия страницы.';
+    resultStorage.textContent = saved.savedAt ? (saved.storage==='guest'?'Результат сохранён в этом браузере.':'Результат сохранён в аккаунте.') : 'Браузер не разрешил сохранить данные. Результат доступен до закрытия страницы.';
   } catch(error) {
     resultStorage.textContent = String(error?.code)==='23505' ? 'В аккаунте уже есть результат. Эта попытка его не заменяет.' : 'Результат показан, но сохранить его в аккаунте не удалось. Проверьте соединение и вход в аккаунт.';
   }
@@ -315,7 +311,7 @@ function startGuest() {
   const saved=readGuestResult();
   if(saved) {
     state.answers=saved.answers;
-    renderSavedResults({...buildResultDetails(),savedAt:saved.savedAt,alreadyPassed:true});
+    renderSavedResults({...buildResultDetails(),savedAt:saved.savedAt});
   } else { restoreGuestProgress(); quizSurface.hidden=false; resultsNode.hidden=true; renderQuestion(); }
 }
 async function initQuiz() {
@@ -341,12 +337,12 @@ async function initQuiz() {
     if(loadError) {
       quizLock.hidden=false;
       document.querySelector('[data-quiz-lock-title]').textContent='Не удалось загрузить результат аккаунта';
-      document.querySelector('[data-quiz-lock-text]').textContent='Можно пройти квиз в гостевом режиме - результат останется в этом браузере.';
+      document.querySelector('[data-quiz-lock-text]').textContent='Можно пройти квиз без аккаунта. Результат сохранится в этом браузере.';
       return;
     }
     if(existing) {
       const details=Array.isArray(existing.details)?existing.details:[];
-      renderSavedResults({correct:existing.score,percent:existing.percent,details,savedAt:existing.created_at,alreadyPassed:true},'account');
+      renderSavedResults({correct:existing.score,details,savedAt:existing.created_at},'account');
     } else { quizLock.hidden=true; quizSurface.hidden=false; renderQuestion(); }
   } catch { if (!guestChosen) startGuest(); }
 }

@@ -28,7 +28,7 @@
       </a>
       <nav class="main-nav" id="site-navigation" aria-label="Навигация">
         <a href="#catalog">Атлас</a>
-        <a href="#map">Изучение</a>
+        <a href="#map">Карта</a>
         <a href="../articles/origins-far-east.html">Статьи</a>
         <a href="../index.html#events">Мероприятия</a>
         <a href="../gallery.html">Галерея</a>
@@ -50,46 +50,36 @@
       <section class="beta-hero" aria-labelledby="beta-title">
         <div class="hero-grid" aria-hidden="true"></div>
         <div class="hero-copy">
-          <p class="eyebrow">Цифровая библиотека Дальнего Востока</p>
-          <h1 id="beta-title">Территория.<br /><span>Память.</span> Люди.</h1>
-          <p class="hero-intro">
-            Исследуйте двадцать народов через места расселения, языки, культурные практики и живые маршруты.
-          </p>
+          <h1 id="beta-title">Народы Дальнего Востока</h1>
+          <p class="hero-intro">Карта расселения и материалы о 20 коренных народах.</p>
           <div class="hero-actions">
             <a class="primary-action" href="#map">Открыть карту <span aria-hidden="true">↓</span></a>
-            <a class="text-action" href="#catalog">Смотреть каталог</a>
+            <a class="text-action" href="#catalog">Открыть атлас</a>
           </div>
         </div>
         <div class="hero-visual" aria-hidden="true">
           <img src="../assets/hero-people.png" alt="" />
-          <span class="visual-index">20 / народов</span>
-        </div>
-        <div class="hero-ticker" aria-hidden="true">
-          <span>Амур</span><span>Тайга</span><span>Побережье</span><span>Тундра</span><span>Острова</span>
         </div>
       </section>
 
       <section class="map-section" id="map" aria-labelledby="map-title">
         <div class="section-heading">
-          <p class="eyebrow">Интерактивная география</p>
-          <h2 id="map-title">Карта культурных территорий</h2>
-          <p>Выберите точку, чтобы увидеть народ, его регион и перейти к подробному материалу.</p>
+          <h2 id="map-title">Карта расселения</h2>
         </div>
 
         <div class="map-layout">
           <div class="map-stage" data-map-stage>
             <img src="../assets/far-east-outline.svg" alt="Силуэт Дальнего Востока" />
             <div class="map-points" data-map-points></div>
-            <p class="map-caption">Точки показывают ключевые территории, а не точные границы расселения.</p>
+            <p class="map-caption">Точки отмечают места расселения приблизительно.</p>
           </div>
           <aside class="map-detail" data-map-detail aria-live="polite">
             <img class="map-detail-image" data-map-image src="../assets/site-images-v1/people/nanai-1024.webp" alt="" />
-            <span class="detail-number">01</span>
             <div>
-              <p class="eyebrow" data-map-region>Амур</p>
               <h3 data-map-name>Нанайцы</h3>
-              <p data-map-text>Выберите отметку на карте, чтобы начать исследование.</p>
-              <a data-map-link href="../peoples/nanai.html">Открыть страницу <span aria-hidden="true">↗</span></a>
+              <p class="map-region" data-map-region>Амур</p>
+              <p data-map-text></p>
+              <a data-map-link href="../peoples/nanai.html">Читать о народе <span aria-hidden="true">↗</span></a>
             </div>
           </aside>
         </div>
@@ -98,8 +88,7 @@
       <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
         <div class="catalog-head">
           <div class="section-heading">
-            <p class="eyebrow">Атлас</p>
-            <h2 id="catalog-title">20 народов.<br />20 точек входа.</h2>
+            <h2 id="catalog-title">Атлас народов</h2>
           </div>
           <label class="search-field">
             <span>Найти народ</span>
@@ -107,29 +96,24 @@
           </label>
         </div>
         <div class="people-grid" data-people-grid></div>
-        <p class="empty-state" data-empty-state role="status" hidden>По вашему запросу ничего не найдено. Попробуйте другое название или очистите поиск.</p>
+        <p class="empty-state" data-empty-state role="status" hidden>Ничего не найдено. Попробуйте другое название.</p>
       </section>
 
       <section class="library-section" id="library" aria-labelledby="library-title">
         <div class="library-copy">
-          <p class="eyebrow">Как читать атлас</p>
-          <h2 id="library-title">Не список фактов, а система связей.</h2>
-          <p>
-            У каждой страницы есть четыре оптики: территория, язык, культурные практики и современная жизнь.
-            Вместе они помогают увидеть народ не как музейный образ, а как живое сообщество.
-          </p>
+          <h2 id="library-title">Что есть в атласе</h2>
         </div>
-        <ol class="library-route">
-          <li><span>01</span><strong>Найдите место</strong><p>Начните с карты и природной среды.</p></li>
-          <li><span>02</span><strong>Услышьте язык</strong><p>Посмотрите, к какой языковой семье он относится.</p></li>
-          <li><span>03</span><strong>Соберите контекст</strong><p>Свяжите историю, практики и настоящее.</p></li>
-        </ol>
+        <ul class="library-route">
+          <li><strong>Территория</strong><p>Места расселения и природная среда.</p></li>
+          <li><strong>Язык</strong><p>Языковая семья и современное употребление.</p></li>
+          <li><strong>Культура</strong><p>История, промыслы и традиции.</p></li>
+        </ul>
       </section>
     </main>
 
     <footer class="beta-footer">
       <img src="../assets/logo-mozaika.svg" alt="Мозаика культур" />
-      <p>Экспериментальная версия цифровой библиотеки</p>
+      <p>Бета-версия атласа</p>
       <a href="../">Вернуться на основной сайт</a>
     </footer>
 

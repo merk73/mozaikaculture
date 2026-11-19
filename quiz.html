@@ -53,24 +53,15 @@
 
     <main class="online-quiz" data-online-quiz>
       <section class="online-quiz-hero" aria-labelledby="quiz-title">
-        <div>
-          <p class="overline">онлайн квиз</p>
-          <h1 id="quiz-title">Соберите свою<br />мозаику знаний.</h1>
-        </div>
-        <p>
-          15 вопросов по территориям, языкам, промыслам и культурным связям
-          народов атласа.
-        </p>
+        <h1 id="quiz-title">Квиз о народах Дальнего Востока</h1>
+        <p>15 вопросов о расселении, языках и традициях народов атласа.</p>
       </section>
 
-      <div class="quiz-mode"><span data-quiz-mode>Подготовка квиза</span><p data-quiz-storage>Результат гостя сохраняется в этом браузере.</p></div>
+      <p class="quiz-storage" data-quiz-storage></p>
       <section class="quiz-lock" data-quiz-lock hidden>
-        <p class="overline">сохранение результата</p>
-        <h2 data-quiz-lock-title>Квиз доступен без регистрации</h2>
-        <p data-quiz-lock-text>
-          Можно пройти квиз без аккаунта. Результат сохранится только в этом браузере.
-        </p>
-        <button class="quiz-primary" type="button" data-start-guest>Продолжить без аккаунта</button>
+        <h2 data-quiz-lock-title>Пройти без аккаунта</h2>
+        <p data-quiz-lock-text>Результат сохранится в этом браузере.</p>
+        <button class="quiz-primary" type="button" data-start-guest>Начать квиз</button>
       </section>
 
       <section class="quiz-surface" hidden aria-labelledby="quiz-current-question">
@@ -83,7 +74,7 @@
         </div>
 
         <article class="quiz-question-card">
-          <p class="quiz-kicker" data-quiz-kicker></p>
+          <p class="quiz-topic" data-quiz-topic></p>
           <h2 id="quiz-current-question" data-quiz-question tabindex="-1"></h2>
           <div class="quiz-answer-grid" data-quiz-options role="group" aria-labelledby="quiz-current-question"></div>
         </article>
@@ -96,9 +87,8 @@
 
       <section class="quiz-results" data-quiz-results hidden>
         <div class="quiz-result-head">
-          <p class="overline">результат</p>
           <h2 data-result-title tabindex="-1"></h2>
-          <p data-result-summary></p><p class="result-storage" data-result-storage role="status"></p>
+          <p class="result-storage" data-result-storage role="status"></p>
         </div>
         <div class="quiz-review" data-result-list></div>
         <div class="quiz-actions">

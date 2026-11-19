@@ -3715,10 +3715,6 @@ html.profile-open body {
   display: none;
 }
 
-.profile-head .overline {
-  margin-bottom: 6px;
-}
-
 .profile-head h2 {
   margin: 0;
   font-size: 32px;
@@ -3865,26 +3861,9 @@ html.profile-open body {
   display: none;
 }
 
-.profile-beta-link > span:first-child {
-  color: var(--red);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .profile-beta-link > strong {
   grid-column: 1;
   font-size: 16px;
-}
-
-.profile-beta-link > span:last-child {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-size: 24px;
 }
 
 .profile-beta-link:hover {
@@ -4170,18 +4149,6 @@ html.profile-open body {
   display: grid;
   gap: 28px;
   margin-top: 34px;
-}
-
-.quiz-kicker {
-  width: fit-content;
-  margin: 0;
-  padding: 8px 12px;
-  color: var(--white);
-  background: var(--red);
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 900;
-  text-transform: uppercase;
 }
 
 .quiz-question-card h2 {
@@ -4636,10 +4603,6 @@ html.profile-open body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  .profile-head .overline {
-    margin-bottom: 8px;
   }
 
   .profile-head p:last-child {

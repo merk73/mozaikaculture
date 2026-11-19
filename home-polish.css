@@ -3,27 +3,6 @@
 .home-page main .people-card.soft-enter:is(.soft-entered,:focus-within) { opacity: 1; transform: none; }
 @media(prefers-reduced-motion:reduce) { .home-page main .people-card.soft-enter { opacity: 1; transform: none; } }
 .home-page { font-family: var(--font-body); }
-.home-page .atlas .card-title { position: relative; isolation: isolate; }
-.home-page .atlas .card-title h3 { position: relative; z-index: 1; }
-.home-page .atlas .people-card .card-number {
-  position: absolute;
-  top: -.78em;
-  left: -.025em;
-  z-index: 0;
-  color: var(--red);
-  font-family: "Leporid", sans-serif;
-  font-size: clamp(72px, 7vw, 112px);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -.025em;
-  opacity: .72;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 35%, #0009 64%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 35%, #0009 64%, transparent 100%);
-}
-@media (max-width: 760px) {
-  .home-page .atlas .people-card .card-number { font-size: clamp(64px, 16vw, 88px); }
-}
 .home-page .hero-landscape { display: none; }
 .home-page :is(.statement-copy h2, .section-head h2, .materials-copy h2, .partners h2, .upcoming-heading h2) {
   margin-top: 0; font-size: clamp(32px, 4.4vw, 60px); line-height: 1.12;
@@ -37,12 +16,12 @@
 .home-page :is(.people-card, .event-card, .upcoming-card, .materials-preview) { border-radius: var(--radius-card); }
 .home-page :is(a,button,input,textarea):focus-visible { outline: 2px solid #ff7882; outline-offset: 4px; }
 .home-page :is(.statement, .atlas, .events, .partners, .upcoming-events) { padding-block: clamp(56px, 6.6vw, 96px); }
-.home-page .atlas .section-head { gap: 20px 48px; }
+.home-page .atlas .section-head { display: block; }
 .home-page .statement-copy { gap: 24px 48px; }
 .home-page .events-intro { margin-bottom: 32px; }
 .home-page .upcoming-events { padding-inline: clamp(20px, 4.4vw, 64px); background: var(--near); }
 .home-page .upcoming-heading { margin-bottom: 36px; }
-.home-page .upcoming-heading h2 { max-width: 18ch; margin-bottom: 20px; }
+.home-page .upcoming-heading h2 { margin-bottom: 0; }
 .home-page .upcoming-archive { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 12px; color: var(--text); text-decoration: none; font-size: 14px; }
 .home-page .upcoming-archive:hover { text-decoration: underline; text-underline-offset: 4px; }
 .home-page .upcoming-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
@@ -123,7 +102,6 @@
     display: flex; flex-direction: column; justify-content: flex-end; min-width: 0;
     padding: max(112px, calc(var(--home-safe-top) + 90px)) 20px max(28px, calc(var(--home-safe-bottom) + 20px));
   }
-  .home-page .hero-heading .overline { margin-bottom: 16px; font-size: 11px; }
   .home-page .hero-heading-content { position: relative; isolation: isolate; }
   .home-page .hero-heading-content::before {
     content: ''; position: absolute; z-index: -1; pointer-events: none;
@@ -166,7 +144,6 @@
 @media (max-width: 760px) and (max-height: 520px) {
   .home-page .hero-heading { padding-bottom: max(24px, var(--home-safe-bottom)); }
   .home-page .hero-heading h1 { font-size: clamp(44px, 16svh, 64px); }
-  .home-page .hero-heading .overline { margin-bottom: 12px; }
   .home-page .hero-copy .hero-description { max-width: 62ch; margin-top: 16px; font-size: 15px; }
   .home-page .hero-portrait img { object-fit: contain; object-position: 75% top; }
 }
