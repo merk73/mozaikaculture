@@ -65,18 +65,15 @@
     sections.forEach(item => observer.observe(item.target));
   }
   updateCurrentSection();
-  const closeIcon = toggle.querySelector('svg').cloneNode(true);
-  closeIcon.classList.add('menu-close-icon');
-  closeIcon.querySelector('path').setAttribute('d', 'M6 6l12 12M6 18L18 6');
-  toggle.append(closeIcon);
+  toggle.querySelector('svg').innerHTML = '<path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" />';
   let menuAnimation;
-  let navAnimation;
+  let menuContentAnimations = [];
 
   function cancelMenuMotion() {
     menuAnimation?.cancel();
     menuAnimation = null;
-    navAnimation?.cancel();
-    navAnimation = null;
+    menuContentAnimations.forEach(animation => animation.cancel());
+    menuContentAnimations = [];
     header.classList.remove('is-menu-closing');
   }
   function syncNavAccess() {
@@ -103,8 +100,11 @@
     if (header.classList.contains('is-menu-open') === open) return;
     const before = header.getBoundingClientRect().height;
     const wasVisible = getComputedStyle(nav).display !== 'none';
-    const style = getComputedStyle(nav);
-    const previous = { opacity: style.opacity, transform: style.transform };
+    const content = [nav, ...links];
+    const previous = wasVisible ? content.map(element => {
+      const { opacity, translate } = getComputedStyle(element);
+      return { opacity, translate };
+    }) : [];
     cancelMenuMotion();
     header.classList.toggle('is-menu-open', open);
     toggle.setAttribute('aria-expanded', String(open));
@@ -114,17 +114,21 @@
     const after = header.getBoundingClientRect().height;
     // Retain the closing content for its exit; inert removes it from interaction immediately.
     header.classList.toggle('is-menu-closing', !open);
+    const easing = open ? 'cubic-bezier(.22, 1, .36, 1)' : 'cubic-bezier(.4, 0, .2, 1)';
     const animation = header.animate(
       [{ height: before + 'px', overflow: 'clip' }, { height: after + 'px', overflow: 'clip' }],
-      { duration: open ? 240 : 180, easing: 'cubic-bezier(.22, 1, .36, 1)' }
+      { duration: open ? 340 : 220, easing }
     );
     menuAnimation = animation;
-    navAnimation = nav.animate([
-      open && !wasVisible ? { opacity: 0, transform: 'translateY(6px)' } : previous,
-      { opacity: open ? 1 : 0, transform: open ? 'translateY(0)' : 'translateY(-4px)' }
-    ], {
-      duration: open ? 220 : 140,
-      easing: 'cubic-bezier(.2, 0, 0, 1)', fill: 'both'
+    menuContentAnimations = content.map((element, index) => {
+      const initial = previous[index] ?? { opacity: 0, translate: element === nav ? 'none' : '0 -8px' };
+      const end = { opacity: open ? 1 : 0, translate: open || element === nav ? 'none' : '0 -4px' };
+      return element.animate([initial, end], {
+        duration: open ? 220 : 150,
+        delay: open && !wasVisible ? Math.min(index, 8) * 14 : 0,
+        easing,
+        fill: 'both',
+      });
     });
     animation.onfinish = () => {
       if (menuAnimation === animation) cancelMenuMotion();
@@ -148,6 +152,7 @@
       if (mobile.matches) toggle.focus({ preventScroll: true });
     }
   });
+  nav.addEventListener("focusin", cancelMenuMotion);
 
   header.querySelector(".brand").addEventListener("click", () => { closeAccount(); setMenu(false); });
 
